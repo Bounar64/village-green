@@ -1,0 +1,185 @@
+Dictionnaire de données Village_Green
+
+-Client:
+	-client id
+	-client email 
+ 	-client password 
+ 	-client réference
+ 	-client denomination (nom prenom ou societe)
+	-client VTA code (NULL ou Valeur)
+	-client numéro RCS (NULL ou Valeur)
+	-client type
+ 	-client email
+ 	-client sexe
+ 	-client adresse
+ 	-client ville
+ 	-client code postale
+ 	-client pays
+ 	-client téléphone
+ 	-client date d'enregistrement
+
+-Pays:
+ 	-pays id
+	-pays nom
+
+-Commande:
+ 	-commande id
+	-commande référence
+	-commande type (part ou pro)
+ 	-commande date
+ 	-commande date paiement
+	-commande date d'envoi
+	-commande status
+ 	-commande reference produit
+ 	-commande quantité
+	-commande total TTC
+
+-Detail commande:
+ 	-detail com id
+	-detail com numéro
+ 	-detail com date
+ 	-detail com moyen de paiement 
+ 	-detail com type de paiement
+ 	-detail com prix unitaire HT
+ 	-detail com quantité
+ 	-detail com remise
+ 	-detail com total HT
+ 	-detail com TVA
+ 	-detail com total TTC
+
+-Facture:
+ 	-facture id
+ 
+-Produit:
+	-produit id
+	-produit libellé
+	-produit couleur
+	-produit matériaux
+	-produit classe (service) 
+	-produit photo
+	-produit réference
+	-produit libellé court
+	-produit libellé long // description
+	-produit prix TTC
+	-produit stock
+	-produit sotck alert
+	-produit date d'enregistrement
+	-produit date de modification
+
+-Categorie:
+	-categorie id
+	-categorie libellé
+	(-sous categorie)
+
+-Fournisseur:
+	_fournisseur id
+	-fournisseur société
+	-fournisseur produit nom
+	-fournisseur contact nom
+	-founisseur contact prenom
+ 	-fournisseur contact téléphone 
+ 	-(fournisseur VTA code)
+ 	-(fournisseur numéro RCS)
+ 	-fournisseur email
+ 	-fournisseur adresse
+ 	-fournisseur ville
+ 	-fournisseur code postale
+ 	-fournisseur pays
+ 	-fournisseur téléphone
+ 	-fournisseur date d'enregistrement
+	
+-Employe:
+	-employe id
+ 	-employe numéro sécurité sociale
+ 	-employe nom
+ 	-employe prenom
+ 	-employe email
+ 	-employe sexe
+	-employe situation matrimoniale
+	-employe enfant à charge
+	-employe diplome
+ 	-employe adresse
+ 	-employe ville
+ 	-employe code postale
+ 	-employe pays
+ 	-employe téléphone
+	-employe salaire
+	-employe RIB
+	-employe nom personne contact
+	-employe prenom personne contact
+	-employe adresse personne contact
+	-employe code postal personne contact
+	-employe ville personne contact
+	-employe pays personne contact
+	-employe telephone personne contact
+ 	-employe date d'enregistrement
+
+-Post
+	-post id
+	-post libellé
+	-post fonction 
+
+-Departement
+	-departement id
+	-departement libellé
+ 
+-Status:
+	-status id 
+	-status libellé
+
+-Promotion:
+	-promo id
+	-promo réduction // en pourcentage
+	-promo prix réduit TTC
+	-promo prod date d'enregistrement
+	-promo prod date de modification
+
+-Mot clés:
+	-mot_id
+	-mot_libelle(
+		-guitare(s)
+ 		-guitare(s) Electrique(s)
+ 		-guitare(s) classique(s)
+ 		-guitare(s) acoustique(s)
+ 		-guitare(s) electro-acoustique(s)
+ 		-basse(s)
+ 		-basse(s) electrique(s)
+ 		-basse(s) acoutsique(s)
+ 		-basse(s) semi-acoustique(s)
+ 		-ukulele(s)
+ 		-ukulélé(s)
+ 		-Ect..)
+
+-Retour FAQ:
+	-message_id
+ 	-message client
+
+-Trustpilot(Note 0 à 5):
+ 	-note id
+ 	-note client
+ 
+-Mode de paiement:
+	-paie id
+ 	-type paie (BOOL 0: comptant 1: credit) 
+
+-moyen de paiement:
+	-moy paie id
+	- moy paie libelle(
+ 			-carte bleue
+ 			-mastercard
+			-visa
+ 			-paypal
+ 			-american express
+ 			-virement bancaire)
+ 
+-Service:
+	-service id
+	-service libelle (0:location 1:reparation)
+	
+
+-(Concours):
+
+
+
+
+
