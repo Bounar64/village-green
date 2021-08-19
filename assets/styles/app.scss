@@ -1,2 +1,355 @@
-@import "custom";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap');
+@import "_custom";
 @import "~bootstrap/scss/bootstrap";
+
+$bleu: #00093D;
+$blanc: #FFFFFF;
+$gris-muted: #bdc0c2; 
+
+/* Police Montserrat*/
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Mise du background */
+body {
+    background-image: url("../images/background_village.png");
+    background-color: #4D4D4D;
+    height: 100vh; /* viewport height */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    .container {
+        max-width: 1200px;
+        min-height: 1850px;
+        background-color: #E6E6E6;
+        height: 100vh;
+        box-shadow: -7px 5px 7px rgba(0, 0, 0, 0.5);
+        padding: 0;
+
+            p {
+                color: $bleu;
+                font-size: 28px;
+                font-weight: 700;
+                
+                    &.titre-categorie {
+                        margin-top: 20px;
+                        margin-left: 40px;
+                    }
+                    
+            }
+        
+            .logo {
+                position: absolute;
+                z-index: 9999;
+
+                    img {
+                        height: auto;
+                        width: 18vw;
+                    }
+            }
+
+            .nav-info {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+
+                background-image: url("../images/1_bandes.png");
+                background-size: cover;
+                padding: 9px;
+                
+                    a {
+                        text-decoration: none;
+                        margin-right: 40px;
+                        color: $bleu;
+                        font-weight: 500;
+                        font-size: 18px;
+
+                            &.panier {
+                                margin-right: 60px;
+                            }
+                            
+                            &.langue {
+                                margin-right: 20px;
+                                font-weight: 600;
+                            }
+
+                    }
+                
+            }
+
+            .nav-service {
+
+                .navbar-collapse {
+                        justify-content: flex-end;
+                }
+
+                    a {
+                        font-weight: 500;
+                        font-size: 25px;
+                        padding-top: 0;
+                        padding-bottom: 0;
+                        margin-right: 80px;
+                    }
+
+            }
+
+            .nav-produit {
+                background-color: #333333;
+                padding: 13px;
+                text-align: end;
+
+                :hover {
+                    color: rgb(181,84,0);
+                    transition-duration: 200ms;
+                }
+
+                    a {
+                        color: $blanc;
+                        font-weight: 400;
+                        font-size: 20px;
+                        padding-top: 0;
+                        padding-bottom: 0;
+                        text-decoration: none;
+                        margin-right: 15px;
+                    }
+            }
+
+            .banniere-top {
+                display: flex;
+                justify-content: space-evenly;
+                margin-top: 60px;    
+            }
+
+            .banniere-middle {
+                margin-top: 30px;
+            }
+
+            .banniere-produits {
+                display: flex;
+                flex-wrap: wrap;
+
+                .image {
+                    position: relative;
+                   
+                    .img-fluid {
+                        width: 300px;
+                        height: 182px; 
+                    }
+
+                        .image_overlay {  
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            opacity: 0;
+                            transition: opacity 0.6s;
+
+                                &:hover {
+                                    opacity: 1;
+                                }
+                        }
+                }
+                    
+            }
+
+            .last-block {
+                display: flex;
+                justify-content: space-evenly;
+                padding-top: 30px;
+
+                    .ventes {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .image {
+                            position: relative;
+
+                                .image_overlay {  
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    opacity: 0;
+                                    transition: opacity 0.6s;
+        
+                                        &:hover {
+                                            opacity: 1;
+                                        }
+                                }
+                        }
+                    }
+
+            }
+
+
+        footer {
+            box-shadow: -7px -5px 7px rgba(0, 0, 0, 0.5);
+            color: $blanc; 
+
+            span {
+                color: #B55400;
+            }
+
+                #footer {
+                    background-image: url('../images/background_footer_perso.png');
+                    background-size: cover;
+                    margin-top: 50px;
+                    min-height: 630px;
+
+                        .text-offres { 
+                            color: $blanc;
+                            font-size: 18px;
+                            font-weight: 600;  
+                            margin: 20px 0 0 30px
+                        }
+
+                        .form-footer {
+                            display: flex;
+                            align-items: center;
+                            padding-left: 30px;
+                            font-weight: 600;
+
+                                #email {
+                                    height: 30px;
+                                    width: 300px;
+                                    margin-right: 5px;
+                                }
+
+                                input::placeholder {
+                                    color: #808080;
+                                    font-weight: 500;
+                                  }
+
+                                button {
+                                    background: rgb(181,84,0);
+                                    background: linear-gradient(0deg, rgba(181,84,0,1) 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
+                                    border: none; 
+                                    font-weight: 500;        
+                                }
+                        }
+
+                        .suivez-nous {
+
+                            .text-suivez {
+                                text-align: center;
+                                color: $blanc;
+                                font-size: 18px;
+                                font-weight: 600;  
+                                margin: 20px 0 5px 0;
+                            }
+
+                            .logo-reseaux {
+                                display: flex;
+                                justify-content: center;
+                                
+                                img {
+                                    margin: 0 10px 0 10px;
+                                }
+
+                            }
+                        }
+
+                        .logos-footer {
+
+                            img {
+                                padding: 30px 20px 0 0;
+                                transform: scale(120%) translateX(-8%);
+                            }
+                        }
+
+                        .contenu-footer {
+   
+                                .text-contact, .text-stores, .text-utile {
+                                    padding: 20px 0 0 30px;
+
+                                    .titre {
+                                        font-size: 18px;
+                                        font-weight: 600;
+                                        margin-bottom: 5px;
+                                    }
+
+                                    .sous-titre {
+                                        font-size: 15px;
+                                        font-weight: 500;
+                                        margin-bottom: 0;
+                                    }
+
+                                    .corps-texte {
+                                        font-size: 11px;
+                                        font-weight: 400;
+                                        color: $gris-muted;
+                                    }
+                                
+                                    p {
+                                        color: $blanc;
+
+                                            .text-italic {
+                                                color: $gris-muted;
+                                                font-style: italic;
+                                            }
+                                    }   
+                                }
+
+                                .text-society {
+                                    padding: 20px 0 0 10px;
+
+                                    .titre {
+                                        font-size: 18px;
+                                        font-weight: 600;
+                                        margin-bottom: 5px;
+                                        color: $blanc;
+                                    }
+                                    .corps-texte {
+                                        font-size: 11px;
+                                        font-weight: 400;
+                                        color: $gris-muted;
+                                    }
+
+                                }
+
+                                .text-copyright {
+                                    text-align: center;
+
+                                    .corps-texte {
+                                        font-size: 11px;
+                                        font-weight: 400;
+                                        color: $gris-muted;
+                                    }
+                                }
+                        }
+                       
+                            
+                }
+
+                #pied-page {
+                    background-color: #000000;
+                    min-height: 100px;
+                    margin-bottom: 100px;
+
+                        .pied-page {
+                            text-align: center;
+
+                                .categorie-footer {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: $blanc;
+                                }
+
+                                .mots-clé-footer {
+                                    font-size: 10px;
+                                    font-weight: 400;
+                                    color: $gris-muted;
+                                }
+                        }
+                }
+
+        }
+       
+    }//fermeture du container
+
+
+    
+}

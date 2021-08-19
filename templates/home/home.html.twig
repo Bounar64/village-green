@@ -3,5 +3,259 @@
 {% block title 'Village green' %}
 
 {% block body %}
-   {% include 'layouts/navigation.html.twig' %}
+    <header id="background">
+        <div class="container">
+            <div class="home">   
+                <div class="logo">
+                    <img class="img-fluid img-logo" src="{{ asset('build/images/logo_village_green.png') }}" alt="logo village green">
+                </div>
+
+                <div class="nav-info">
+                    <a href="#">Infos</a>
+                    <a href="#">Espace client</a>
+                    <a class="panier" href="#"><img src="{{ asset('build/images/picto_panier.png') }}" alt="pictogramme panier"></a>
+                    <a class="langue" href="#"><img src="{{ asset('build/images/picto_pays.png') }}" alt="pictogramme langue">&nbsp;FR</a>
+                </div>
+
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-service">
+                    <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <a class="nav-link" href="#">Produits</a>
+                                <a class="nav-link" href="#">Service</a>
+                                <a class="nav-link" href="#">Aide</a>
+                                <a class="nav-link" href="#">A propos</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav> 
+
+                <div class="nav-produit">
+                    <a href="#">Guit/Bass</a>
+                    <a href="#">Batterie</a>
+                    <a href="#">Clavier</a>
+                    <a href="#">Studio</a>
+                    <a href="#">Sono</a>
+                    <a href="#">Eclairage</a>
+                    <a href="#">Dj</a>
+                    <a href="#">Cases</a>
+                    <a href="#">Accessoires</a>
+                </div>
+
+                <div class="banniere-top">
+                    <div class="div-img-pub">
+                        <img class="img-fluid img-pub" src="{{ asset('build/images/pub_guitare.png') }}" alt="pub guitare">
+                    </div>
+                    <div class="div-img-prix">
+                        <img class="img-fluid img-prix" src="{{ asset('build/images/banniere_droite_prix.png') }}" alt="prix livraison">
+                    </div>
+                </div>
+
+                <div class="row banniere-middle">
+                    <img class="img-fluid img-banniere-middle" src="{{ asset('build/images/banniere_centre_4_pictos.png') }}" alt="infos livraison">
+                </div>
+
+                <div class="nos-categories">
+                    <p class="titre-categorie">Nos catégories</p>
+                    <div class="banniere-produits">
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/CATEGORIES_guitare.png') }}" alt="image guitare">
+                            <div class="image_overlay">
+                                <img src="{{ asset('build/images/CATEGORIES_ROLL_OVER_guitare.png')}}" alt="categorie guitare">  
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/CATEGORIES_batterie.png') }}" alt="image batterie">
+                            <div class="image_overlay">
+                                <img src="{{ asset('build/images/CATEGORIES_ROLL_OVER_batterie.png')}}" alt="categorie batterie">  
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/CATEGORIES_piano.png') }}" alt="image piano">
+                            <div class="image_overlay">
+                                <img src="{{ asset('build/images/CATEGORIES_ROLL_OVER_piano.png')}}" alt="categorie piano">  
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/CATEGORIES_micro.png') }}" alt="image micro">
+                            <div class="image_overlay">
+                                <img src="{{ asset('build/images/CATEGORIES_ROLL_OVER_micro.png')}}" alt="categorie micro">  
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/CATEGORIES_sono.png') }}" alt="image sono">
+                            <div class="image_overlay">
+                                <img src="{{ asset('build/images/CATEGORIES_ROLL_OVER_sono.png')}}" alt="categorie sono">  
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/CATEGORIES_cases.png') }}" alt="image cases">
+                            <div class="image_overlay">
+                                <img src="{{ asset('build/images/CATEGORIES_ROLL_OVER_cases.png')}}" alt="categorie cases">  
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/CATEGORIES_cable.png') }}" alt="image cable">
+                            <div class="image_overlay">
+                                <img src="{{ asset('build/images/CATEGORIES_ROLL_OVER_access.png')}}" alt="categorie accessoire">  
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/CATEGORIES_saxo.png') }}" alt="image saxo">
+                            <div class="image_overlay">
+                                <img src="{{ asset('build/images/CATEGORIES_ROLL_OVER_saxo.png')}}" alt="categorie saxo">  
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+
+                <div class="row last-block">
+                    <div class="col-6 ml-3">
+                    <p>Nos meilleurs ventes</p>
+                    <div class="ventes">
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/TOP_VENTES_guitare.png') }}" alt="top vente guitare">
+                             <div class="image_overlay">
+                                <img src="{{ asset('build/images/TOP_VENTES_ROLL_OVER_guitare.png')}}" alt="top vente guitare details">  
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/TOP_VENTES_saxo.png') }}" alt="top vente saxo">
+                             <div class="image_overlay">
+                                <img src="{{ asset('build/images/TOP_VENTES_ROLL_OVER_saxo.png')}}" alt="top vente saxo details">  
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img class="img-fluid" src="{{ asset('build/images/TOP_VENTES_piano.png') }}" alt="top vente piano">
+                             <div class="image_overlay">
+                                <img src="{{ asset('build/images/TOP_VENTES_ROLL_OVER_piano.png')}}" alt="top vente piano details">  
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="col-5 partenaires">
+                    <p>Nos partenaires</p>
+                        <div>
+                            <img class="img-fluid" src="{{ asset('build/images/partenaires_4_logos.png') }}" alt="top vente guitare">
+                        </div>
+                    </div>
+                </div>    
+            </div>
+             
+            <footer>
+                <div id="footer">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-4 p-0">
+                            <p class="text-offres">Recevez <span>nos offres exclusives</span></p>
+                            <form class="form-footer">
+                                <input type="email" class="form-control fst-italic" id="email" aria-describedby="emailHelp" placeholder="Votre adresse e-mail">
+                                <button type="submit" class="btn btn-primary py-1">Valider</button>
+                            </form>
+                        </div>
+
+                        <div class="col-2 p-0 suivez-nous">
+                            <p class="text-suivez"><span>Suivez-nous </span>par ici !</p>
+                            <div class="logo-reseaux">
+                                <div>
+                                    <a href="#"><img class="img-fluid" src="{{ asset('build/images/picto_facebook.png') }}" alt="logo facebook"></a>
+                                </div>
+                                <div>
+                                    <a href="#"><img class="img-fluid" src="{{ asset('build/images/picto_twitter.png') }}" alt="logo twitter"></a>
+                                </div>
+                            </div>  
+                        </div>
+
+                        <div class="col-4 p-0 logos-footer">
+                             <div>
+                                <img class="img-fluid" src="{{ asset('build/images/logo_footer.png') }}" alt="logo d'enseigne">
+                            </div>
+                        </div>  
+                    </div>  
+
+                     <div class="contenu-footer">
+                        <div class="row">
+                            <div class="col-3 text-contact">
+                                <p class="titre">Contacter nous !</p>
+                                <p class="sous-titre">Conseil / Commande téléphone</p>
+                                <p class="corps-texte">du lundi au vendredi de 8h à 19h,<br> le samedi de 10h à 18h.</p>
+
+                                <p class="corps-texte mb-0">Depuis la France :</p>
+                                <p class="titre mb-3">02 40 38 50 50</p>
+
+                                <p class="corps-texte mb-0">Belgique, Suisse, International :</p>
+                                <p class="titre mb-3">0033 2 40 38 50 50</p>
+
+                                <p class="sous-titre">Service après vente :</p>
+                                <p class="titre mb-0">02 51 80 68 76</p>
+                                <p class="corps-texte">Contactez-nous part téléphone<br>du lundi au samedi de 9h à 18h<br>ou depuis votre compte client.</p>
+
+                                <p class="sous-titre">Conseils pour choisir<br>un instrument :</p>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">infovg@villagegreen.com</p></a>
+
+                                <p class="sous-titre">Service Presse :</p>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">contact@villagegreen.com</p></a>
+
+                                <p class="sous-titre">Village Green Recrute !</p>
+                            </div>
+
+                            <div class="col-3 text-stores">
+                                <p class="titre">Village Green Stores</p>
+                                <p class="sous-titre mb-2">Ouverts de 10h à 19h30 non-stop.</p>
+
+                                <p class="corps-texte">Guitares-Amplificateurs-Effets :<br><span class="text-italic"> 182 avenue Jean Jaurès<br>75019 Paris</span></p>
+                                <p class="corps-texte">Clavier-Home-Studio-Sonorisation<br>Equipement DJ-Eclairage :<br><span class="text-italic">182 avenue Jean Jaurès<br>75019 Paris</span></p>
+                                <p class="corps-texte">Librairie Musicale :<br><span class="text-italic">7 av. du Nouveau Conservatoire<br>75019 Paris</span></p>
+                                <p class="corps-texte">Instruments à vent :<br><span class="text-italic">9/11 av. du Nouveau Conservatoire<br>75019 Paris</span></p>
+                                <p class="corps-texte">Percussions :<br><span class="text-italic">13/15 av. du Nouveau Conservatoire<br>75019 Paris</span></p>
+                                <p class="corps-texte">Métro Ligne 5, station Porte de Pantin.</p>
+                                <p class="corps-texte">Plan d'accès / Visite virtuelle</p>   
+                            </div>
+
+                            <div class="col-3 text-utile">
+                                <p class="titre">Utile !</p>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Qui somme nous ?</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">F.A.Q.</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">le blog Village Green</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Vous avez un site Internet ?<br>Devenez partenaire Village Green</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Conditions générales de vente</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Mentions légales</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Plan du site</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Parrainage</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Nouveautés</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Assurance Woodbrass.com</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Location d'instruments de musique</p></a>
+                            </div>
+
+                            <div class="col-3 text-society">
+                                <p class="titre">Village Green<br>Preservation Society</p>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Toute l'actualité musicale</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Voir l'avis des musiciens</p></a>
+                                <a href="#" class="text-decoration-none"><p class="corps-texte">Concours : inscription et résultat.. à vous de<br> jouer !</p></a>
+                            </div>
+                        </div>
+
+                        <div class="row text-copyright">
+                            <p class="corps-texte mt-2 mb-0">Village Green est une entreprise 100% Made in France !</p>
+                            <p class="corps-texte mb-0">Magasin de musique - Achat / Vente instruments de musique - Location instruments de musique - Atelier de réparation - Vente accessoires de musique au meilleur prix.</p>
+                            <p class="corps-texte mb-1">1989-2021-RCS Paris B 222 333 444 Déclaration CNIL : 12345678.</p>
+                        </div>
+                    </div>     
+                </div> {# fermeture du footer #}
+
+                <div id="pied-page">
+                    <div class="row pied-page">
+                        <p class="categorie-footer mt-3 mb-3">Guitares - Amplis / Effets - Clavier / Pianos - Synthés - Batteries / Percussions - Vents - Violons - Home Studio - Sonorisation - Deejay - Éclairage - Micros - Casques - Enregistreurs - Lifestyle - Déstockage - Ecoles & Pros</p>
+                        <p class="mots-clé-footer mb-3">Behringer - Bose - Conservatoire de musique de Paris - Fender - Focusrite - Gibson 2021 - Gibson - Guitar Shop - Guitare Martin - Guitare Taylor - Guitare classique - Guitare folk - Guitare éléctrique
+                        <br>IK Multimédia - Luthier Paris - Magasin DJ Paris - Magasin instruments de musique Paris - Magasin sonorisation Paris - Microphone USB - Musique - Namm - Partition alto - Partition clarinette - Partition flute - Partition Guitare
+                        <br>Partition harmonica - Partition musique - Partition piano - Partition saxophone - Partiton trombone - Partition trompette - Partition vibraphone - Partition violon - Partiton xylophone - Piano pas cher - Pioneer DJ - Platine vinyle
+                        <br>Site internet DJ - Site internet Deejay - Site internet Violon - Sono Behringer - Tablature guitare - Tablatures - Ukulele - Vente sono - Yamaha RS - batterie débutant</br>
+                    </div>      
+                </div>    
+            </footer>
+        </div> {# fermeture du container #}
+    </header>
 {% endblock %}
