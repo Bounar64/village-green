@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap');
 @import "_custom";
 @import "~bootstrap/scss/bootstrap";
+@import "_cat_popover_triangle";
 
 $bleu: #00093D;
 $blanc: #FFFFFF;
 $gris-muted: #bdc0c2; 
 
-/* Police Montserrat*/
+/* Règle Générale */
 *, ::before, ::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    list-style: none;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -99,14 +101,11 @@ body {
             }
 
             .nav-produit {
+                display: flex;
+                justify-content: flex-end;
                 background-color: #333333;
                 padding: 13px;
                 text-align: end;
-
-                :hover {
-                    color: rgb(181,84,0);
-                    transition-duration: 200ms;
-                }
 
                     a {
                         color: $blanc;
@@ -115,8 +114,307 @@ body {
                         padding-top: 0;
                         padding-bottom: 0;
                         text-decoration: none;
-                        margin-right: 15px;
+                        margin-right: 18px;
+
+                        &:hover {
+                            color: rgb(181,84,0);
+                            transition-duration: 200ms;
+                        }
                     }
+
+                    .contenu-guitare {
+                        position: absolute;
+                        background-color: gainsboro;
+                        transform: translateX(-30%);
+                        transition: all 0.3s linear;
+                        margin-top: 13px;
+                        border-radius: 3%;
+                        box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+                        opacity: 0;
+                    
+                        .texte-popover {
+                            text-align: left;
+                            padding-left: 20px;
+                    
+                                a {
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    color: #333333;
+                    
+                                    &:hover {
+                                        color: rgb(181,84,0);
+                                        transition-duration: 200ms;
+                                    }
+                                }
+                    
+                                .line-height {
+                                    margin-bottom: 10px;
+                                }
+                        }
+                    }
+
+                    .contenu-batterie {
+                        position: absolute;
+                        background-color: gainsboro;
+                        transform: translateX(-33%);
+                        transition: all 0.3s linear;
+                        margin-top: 13px;
+                        border-radius: 3%;
+                        box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+                        opacity: 0;
+
+                        .texte-popover {
+                            text-align: left;
+                            padding-left: 20px;
+                    
+                                a {
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                    color: #333333;
+                    
+                                    &:hover {
+                                        color: rgb(181,84,0);
+                                        transition-duration: 200ms;
+                                    }
+                                }
+                    
+                                .line-height {
+                                    margin-bottom: 10px;
+                                }
+                        }
+                    }
+
+                        .contenu-clavier {      
+                            position: absolute;
+                            background-color: gainsboro;
+                            transform: translateX(-30%);
+                            transition: all 0.3s linear;
+                            margin-top: 13px;
+                            border-radius: 3%;
+                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+                            opacity: 0;
+
+                            .texte-popover {
+                                text-align: left;
+                                padding-left: 20px;
+                        
+                                    a {
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        color: #333333;
+                        
+                                        &:hover {
+                                            color: rgb(181,84,0);
+                                            transition-duration: 200ms;
+                                        }
+                                    }
+                        
+                                    .line-height {
+                                        margin-bottom: 10px;
+                                    }
+                            }
+
+                        }
+
+                        .contenu-studio {
+                            position: absolute;
+                            background-color: gainsboro;
+                            transform: translateX(-35%);
+                            transition: all 0.3s linear;
+                            margin-top: 13px;
+                            border-radius: 3%;
+                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+                            opacity: 0;
+
+                            .texte-popover {
+                                text-align: left;
+                                padding-left: 20px;
+                        
+                                    a {
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        color: #333333;
+                        
+                                        &:hover {
+                                            color: rgb(181,84,0);
+                                            transition-duration: 200ms;
+                                        }
+                                    }
+                        
+                                    .line-height {
+                                        margin-bottom: 10px;
+                                    }
+                            }
+
+                        }
+
+                        .contenu-sono {
+                            position: absolute;
+                            background-color: gainsboro;
+                            transform: translateX(-40%);
+                            transition: all 0.3s linear;
+                            margin-top: 13px;
+                            border-radius: 3%;
+                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+                            opacity: 0;
+
+                            .texte-popover {
+                                text-align: left;
+                                padding-left: 20px;
+                        
+                                    a {
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        color: #333333;
+                        
+                                        &:hover {
+                                            color: rgb(181,84,0);
+                                            transition-duration: 200ms;
+                                        }
+                                    }
+                        
+                                    .line-height {
+                                        margin-bottom: 10px;
+                                    }
+                            }
+                        }
+
+                        .contenu-eclairage {
+                            position: absolute;
+                            background-color: gainsboro;
+                            transform: translateX(-25%);
+                            transition: all 0.3s linear;
+                            margin-top: 13px;
+                            border-radius: 3%;
+                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+                            opacity: 0;
+
+                            .texte-popover {
+                                text-align: left;
+                                padding-left: 20px;
+                        
+                                    a {
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        color: #333333;
+                        
+                                        &:hover {
+                                            color: rgb(181,84,0);
+                                            transition-duration: 200ms;
+                                        }
+                                    }
+                        
+                                    .line-height {
+                                        margin-bottom: 10px;
+                                    }
+                            }
+                        }
+
+                        .contenu-dj {
+                            position: absolute;
+                            background-color: gainsboro;
+                            transform: translateX(-45%);
+                            transition: all 0.3s linear;
+                            margin-top: 13px;
+                            border-radius: 3%;
+                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+                            opacity: 0;
+
+                            .texte-popover {
+                                text-align: left;
+                                padding-left: 20px;
+                        
+                                    a {
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        color: #333333;
+                        
+                                        &:hover {
+                                            color: rgb(181,84,0);
+                                            transition-duration: 200ms;
+                                        }
+                                    }
+                        
+                                    .line-height {
+                                        margin-bottom: 10px;
+                                    }
+                            }
+                        }
+
+                        .contenu-cases {
+                            position: absolute;
+                            background-color: gainsboro;
+                            transform: translateX(-38%);
+                            transition: all 0.3s linear;
+                            margin-top: 13px;
+                            border-radius: 3%;
+                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+                            opacity: 0;
+
+                            .texte-popover {
+                                text-align: left;
+                                padding-left: 20px;
+                        
+                                    a {
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        color: #333333;
+                        
+                                        &:hover {
+                                            color: rgb(181,84,0);
+                                            transition-duration: 200ms;
+                                        }
+                                    }
+                        
+                                    .line-height {
+                                        margin-bottom: 10px;
+                                    }
+                            }
+                        }
+                        
+                        .contenu-access {
+                            position: absolute;
+                            background-color: gainsboro;
+                            transform: translateX(-25%);
+                            transition: all 0.3s linear;
+                            margin-top: 13px;
+                            border-radius: 3%;
+                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+                            opacity: 0;
+
+                            .texte-popover {
+                                text-align: left;
+                                padding-left: 20px;
+                        
+                                    a {
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        color: #333333;
+                        
+                                        &:hover {
+                                            color: rgb(181,84,0);
+                                            transition-duration: 200ms;
+                                        }
+                                    }
+                        
+                                    .line-height {
+                                        margin-bottom: 10px;
+                                    }
+                            }
+                        }
+
+                        .contenu-guitare.active, 
+                        .contenu-batterie.active, 
+                        .contenu-clavier.active,
+                        .contenu-studio.active,  
+                        .contenu-sono.active,
+                        .contenu-eclairage.active,
+                        .contenu-dj.active,
+                        .contenu-cases.active,
+                        .contenu-access.active
+                        {
+                            opacity: 1;
+                        }
             }
 
             .banniere-top {

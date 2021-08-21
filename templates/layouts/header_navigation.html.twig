@@ -3,6 +3,7 @@
 {% block title 'Village green' %}
 
 {% block body %}
+
     <div class="logo">
         <img class="img-fluid img-logo" src="{{ asset('build/images/logo_village_green.png') }}" alt="logo village green">
     </div>
@@ -31,14 +32,136 @@
     </nav> 
     {# navbar produits #}
     <div class="nav-produit">
-        <a href="#">Guit/Bass</a>
-        <a href="#">Batterie</a>
-        <a href="#">Clavier</a>
-        <a href="#">Studio</a>
-        <a href="#">Sono</a>
-        <a href="#">Eclairage</a>
-        <a href="#">Dj</a>
-        <a href="#">Cases</a>
-        <a href="#">Accessoires</a>
+        <div class="cat-popover">
+            <a href="#" class="cat-guitare">Guit/Bass</a>
+            <div class="contenu-guitare">
+                <ul class="texte-popover">
+                    <li class="pt-3 line-height"><a href="#">Guitare Electriques</a></li>
+                    <li class="line-height"><a href="#">Guitare Classiques</a></li>
+                    <li class="line-height"><a href="#">Guitare Acoustiques &<br>Electro-Acoustiques</a></li>
+                    <li class="line-height"><a href="#">Basse Electriques</a></li>
+                    <li class="line-height"><a href="#">Basse Acoustiques</a></li>
+                    <li class="line-height"><a href="#">Basse Semi-Acoustiques</a></li>
+                    <li class="line-height"><a href="#">Ukulélés</a></li>
+                    <li class=""><a href="#">Autres instruments à<br>cordes pincées</a></li>
+                </ul>
+            </div> 
+        </div>
+        <div class="cat-popover">
+            <a href="#" class="cat-batterie">Batterie</a>
+            <div class="contenu-batterie">
+                <ul class="texte-popover">
+                    <li class="pt-3 line-height"><a href="#">Batterie Electriques</a></li>
+                    <li class="line-height"><a href="#">Batterie Acoustiques</a></li>
+                    <li class="line-height"><a href="#">Batterie Electroniques</a></li>
+                    <li class="line-height"><a href="#">Caisses claire</a></li>
+                    <li class="line-height"><a href="#">Cymbales</a></li>
+                    <li class="line-height"><a href="#">Marching & fanfare</a></li>
+                    <li class="line-height"><a href="#">Percussions Africaines</a></li>
+                    <li class="line-height"><a href="#">Percussions Brésiliennes</a></li>
+                    <li class="line-height"><a href="#">Percussions orchestre</a></li>
+                    <li class="line-height"><a href="#">Xylophones-carillons</a></li>
+                </ul>
+            </div> 
+        </div>
+        <div class="cat-popover">
+            <a href="#" class="cat-clavier">Clavier</a>
+            <div class="contenu-clavier">
+                <ul class="texte-popover">
+                    <li class="pt-3 line-height"><a href="#">Piano Numériques</a></li>
+                    <li class="line-height"><a href="#">Clavier Arrangeurs</a></li>
+                    <li class="line-height"><a href="#">Clavier Maîtres</a></li>
+                    <li class="line-height"><a href="#">Orgues</a></li>
+                    <li class="line-height"><a href="#">Arccodéons</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cat-popover">
+            <a href="#" class="cat-studio">Studio</a>
+            <div class="contenu-studio">
+                <ul class="texte-popover">
+                    <li class="pt-3 line-height"><a href="#">Microphones</a></li>
+                    <li class="line-height"><a href="#">Péamplificateurs Studio</a></li>
+                    <li class="line-height"><a href="#">Controleur daw</a></li>
+                    <li class="line-height"><a href="#">Enceintes Monitoring</a></li>
+                    <li class="line-height"><a href="#">Enregisteurs</a></li>
+                    <li class="line-height"><a href="#">Interfaces Audio</a></li>
+                    <li class="line-height"><a href="#">Matériaux de<br>traitement acoustique</a></li>
+                    <li class="line-height"><a href="#">Mobilier de studio</a></li>
+                </ul>
+            </div>   
+        </div>
+        <div class="cat-popover">
+            <a href="#" class="cat-sono">Sono</a>
+            <div class="contenu-sono">
+                <ul class="texte-popover">
+                    <li class="pt-3 line-height"><a href="#">Ampli de puissance</a></li>
+                    <li class="line-height"><a href="#">Ampli base</a></li>
+                    <li class="line-height"><a href="#">Ampli Electro-Acoustiques</a></li>
+                    <li class="line-height"><a href="#">Ampli Guitare Electriques</a></li>
+                    <li class="line-height"><a href="#">Diffusion</a></li>
+                    <li class="line-height"><a href="#">Enceintes Actives</a></li>
+                    <li class="line-height"><a href="#">Enceintes Passives</a></li>
+                    <li class="line-height"><a href="#">Mixage & production</a></li>
+                    <li class="line-height"><a href="#">Sonorisations Portables</a></li>
+                    <li class="line-height"><a href="#">Périphériques Analogiques</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cat-popover">
+            <a href="#" class="cat-eclairage">Eclairage</a>
+            <div class="contenu-eclairage">
+                <ul class="texte-popover">
+                    <li class="pt-3 line-height"><a href="#">Dmx</a></li>
+                    <li class="line-height"><a href="#">Lasers</a></li>
+                    <li class="line-height"><a href="#">Lumières de soirées</a></li>
+                    <li class="line-height"><a href="#">Lumière Noire</a></li>
+                    <li class="line-height"><a href="#">Machine & liquides</a></li>
+                    <li class="line-height"><a href="#">Projecteurs</a></li>
+                    <li class="line-height"><a href="#">Scan & lyres</a></li>
+                    <li class="line-height"><a href="#">Stroboscopes</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cat-popover">
+            <a href="#" class="cat-dj">Dj</a>
+            <div class="contenu-dj">
+                <ul class="texte-popover">
+                    <li class="pt-3 line-height"><a href="#">Casque</a></li>
+                    <li class="line-height"><a href="#">Effets Dj</a></li>
+                    <li class="line-height"><a href="#">Groovebox / Samplers</a></li>
+                    <li class="line-height"><a href="#">Interface pour<br>vinyles timecodés</a></li>
+                    <li class="line-height"><a href="#">Karaoke</a></li>
+                    <li class="line-height"><a href="#">Cellules & Diamants</a></li>
+                    <li class="line-height"><a href="#">Mixeurs Numériques</a></li>
+                    <li class="line-height"><a href="#">Platines CD</a></li>
+                    <li class="line-height"><a href="#">Platines vinyles</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cat-popover">
+            <a href="#" class="cat-cases">Cases</a>
+            <div class="contenu-cases">
+                <ul class="texte-popover">
+                    <li class="pt-3 line-height"><a href="#">Cases Batterie / Percusions</a></li>
+                    <li class="line-height"><a href="#">Case Dj</a></li>
+                    <li class="line-height"><a href="#">Case Lumières</a></li>
+                    <li class="line-height"><a href="#">Case Sono</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cat-popover">
+            <a href="#" class="cat-access">Accessoires</a>
+            <div class="contenu-access">
+                <ul class="texte-popover">
+                    <li class="pt-3 line-height"><a href="#">Accessoires Guitares</a></li>
+                    <li class="line-height"><a href="#">Accessoires Batteries</a></li>
+                    <li class="line-height"><a href="#">Accessoires Claviers</a></li>
+                    <li class="line-height"><a href="#">Accessoires Vents</a></li>
+                    <li class="line-height"><a href="#">Accessoires<br>dj-sono-home-studio</a></li>
+                    <li class="line-height"><a href="#">Accessoires gérériques</a></li>   
+                </ul>
+            </div>
+        </div>  
     </div>
 {% endblock %}
