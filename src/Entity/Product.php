@@ -93,6 +93,18 @@ class Product
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Subcategory::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $subCategory;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -274,6 +286,30 @@ class Product
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSubCategory(): ?Subcategory
+    {
+        return $this->subCategory;
+    }
+
+    public function setSubCategory(?Subcategory $subCategory): self
+    {
+        $this->subCategory = $subCategory;
 
         return $this;
     }
