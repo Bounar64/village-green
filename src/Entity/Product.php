@@ -6,9 +6,9 @@ use App\Repository\ProductsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProductsRepository::class)
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-class Products
+class Product
 {
     /**
      * @ORM\Id
@@ -68,19 +68,14 @@ class Products
     private $price;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="smallint")
      */
     private $stock;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $quantity;
-
-    /**
-     * @ORM\Column(type="smallint")
-     */
-    private $stock_alert;
+    private $stockAlert;
 
     /**
      * @ORM\Column(type="boolean")
@@ -96,12 +91,6 @@ class Products
      * @ORM\Column(type="datetime_immutable")
      */
     private $updatedAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
 
     public function getId(): ?int
     {
@@ -122,12 +111,12 @@ class Products
 
     public function getShortLabel(): ?string
     {
-        return $this->shortLabel;
+        return $this->short_label;
     }
 
-    public function setShortLabel(string $shortLabel): self
+    public function setShortLabel(string $short_label): self
     {
-        $this->shortLabel = $shortLabel;
+        $this->short_label = $short_label;
 
         return $this;
     }
@@ -228,38 +217,26 @@ class Products
         return $this;
     }
 
-    public function getStock(): ?bool
+    public function getStock(): ?int
     {
         return $this->stock;
     }
 
-    public function setStock(bool $stock): self
+    public function setStock(int $stock): self
     {
         $this->stock = $stock;
 
         return $this;
     }
 
-    public function getQuantity(): ?int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): self
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
     public function getStockAlert(): ?int
     {
-        return $this->stock_alert;
+        return $this->stockAlert;
     }
 
-    public function setStockAlert(int $stock_alert): self
+    public function setStockAlert(int $stockAlert): self
     {
-        $this->stock_alert = $stock_alert;
+        $this->stockAlert = $stockAlert;
 
         return $this;
     }
@@ -296,18 +273,6 @@ class Products
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
 
         return $this;
     }
