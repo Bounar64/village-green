@@ -2,10 +2,13 @@
 @import "_custom";
 @import "~bootstrap/scss/bootstrap";
 @import "_cat_popover_triangle";
+@import "_mixins";
 
 $bleu: #00093D;
 $blanc: #FFFFFF;
-$gris-muted: #bdc0c2; 
+$gris-muted: #CCCCCC; 
+$gris-back: #E6E6E6;
+$orange: rgb(181,84,0);
 
 /* Règle Générale */
 *, ::before, ::after {
@@ -28,7 +31,7 @@ body {
     .container {
         max-width: 1200px;
         min-height: 1850px;
-        background-color: #E6E6E6;
+        background-color: $gris-back;
         height: 100vh;
         box-shadow: -7px 5px 7px rgba(0, 0, 0, 0.5);
         padding: 0;
@@ -117,304 +120,80 @@ body {
                         margin-right: 18px;
 
                         &:hover {
-                            color: rgb(181,84,0);
+                            color: $orange;
                             transition-duration: 200ms;
                         }
                     }
 
-                    .contenu-guitare {
-                        position: absolute;
-                        background-color: gainsboro;
+                    .contenu-guitare {  
                         transform: translateX(-30%);
-                        transition: all 0.3s linear;
-                        margin-top: 13px;
-                        border-radius: 3%;
-                        box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
-                        opacity: 0;
-                    
-                        .texte-popover {
-                            text-align: left;
-                            padding-left: 20px;
-                    
-                                a {
-                                    font-size: 14px;
-                                    font-weight: 500;
-                                    color: #333333;
-                    
-                                    &:hover {
-                                        color: rgb(181,84,0);
-                                        transition-duration: 200ms;
-                                    }
-                                }
-                    
-                                .line-height {
-                                    margin-bottom: 10px;
-                                }
-                        }
+                        @include apparencePopover;
+                        @include apparenceTextPopover;
                     }
 
                     .contenu-batterie {
-                        position: absolute;
-                        background-color: gainsboro;
                         transform: translateX(-33%);
-                        transition: all 0.3s linear;
-                        margin-top: 13px;
-                        border-radius: 3%;
-                        box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
-                        opacity: 0;
-
-                        .texte-popover {
-                            text-align: left;
-                            padding-left: 20px;
-                    
-                                a {
-                                    font-size: 14px;
-                                    font-weight: 500;
-                                    color: #333333;
-                    
-                                    &:hover {
-                                        color: rgb(181,84,0);
-                                        transition-duration: 200ms;
-                                    }
-                                }
-                    
-                                .line-height {
-                                    margin-bottom: 10px;
-                                }
-                        }
+                        @include apparencePopover;
+                        @include apparenceTextPopover;
                     }
 
-                        .contenu-clavier {      
-                            position: absolute;
-                            background-color: gainsboro;
-                            transform: translateX(-30%);
-                            transition: all 0.3s linear;
-                            margin-top: 13px;
-                            border-radius: 3%;
-                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
-                            opacity: 0;
+                    .contenu-clavier {      
+                        transform: translateX(-30%);
+                        @include apparencePopover;
+                        @include apparenceTextPopover;
 
-                            .texte-popover {
-                                text-align: left;
-                                padding-left: 20px;
-                        
-                                    a {
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: #333333;
-                        
-                                        &:hover {
-                                            color: rgb(181,84,0);
-                                            transition-duration: 200ms;
-                                        }
-                                    }
-                        
-                                    .line-height {
-                                        margin-bottom: 10px;
-                                    }
-                            }
+                    }
 
-                        }
+                    .contenu-studio {
+                        transform: translateX(-35%);
+                        @include apparencePopover;
+                        @include apparenceTextPopover;
+                    }
 
-                        .contenu-studio {
-                            position: absolute;
-                            background-color: gainsboro;
-                            transform: translateX(-35%);
-                            transition: all 0.3s linear;
-                            margin-top: 13px;
-                            border-radius: 3%;
-                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
-                            opacity: 0;
+                    .contenu-sono {
+                        transform: translateX(-40%);
+                        @include apparencePopover;
+                        @include apparenceTextPopover;
+                    }
 
-                            .texte-popover {
-                                text-align: left;
-                                padding-left: 20px;
-                        
-                                    a {
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: #333333;
-                        
-                                        &:hover {
-                                            color: rgb(181,84,0);
-                                            transition-duration: 200ms;
-                                        }
-                                    }
-                        
-                                    .line-height {
-                                        margin-bottom: 10px;
-                                    }
-                            }
+                    .contenu-eclairage {
+                        transform: translateX(-25%);
+                        @include apparencePopover;
+                        @include apparenceTextPopover;
+                    }
 
-                        }
+                    .contenu-dj {
+                        transform: translateX(-45%);
+                        transition: all 0.3s linear;
+                        @include apparencePopover;
+                        @include apparenceTextPopover;
+                    }
 
-                        .contenu-sono {
-                            position: absolute;
-                            background-color: gainsboro;
-                            transform: translateX(-40%);
-                            transition: all 0.3s linear;
-                            margin-top: 13px;
-                            border-radius: 3%;
-                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
-                            opacity: 0;
+                    .contenu-cases {
+                        transform: translateX(-38%);
+                        transition: all 0.3s linear;
+                        @include apparencePopover;
+                        @include apparenceTextPopover;
+                    }
+                    
+                    .contenu-access {
+                        transform: translateX(-25%);
+                        @include apparencePopover;
+                        @include apparenceTextPopover;
+                    }
 
-                            .texte-popover {
-                                text-align: left;
-                                padding-left: 20px;
-                        
-                                    a {
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: #333333;
-                        
-                                        &:hover {
-                                            color: rgb(181,84,0);
-                                            transition-duration: 200ms;
-                                        }
-                                    }
-                        
-                                    .line-height {
-                                        margin-bottom: 10px;
-                                    }
-                            }
-                        }
-
-                        .contenu-eclairage {
-                            position: absolute;
-                            background-color: gainsboro;
-                            transform: translateX(-25%);
-                            transition: all 0.3s linear;
-                            margin-top: 13px;
-                            border-radius: 3%;
-                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
-                            opacity: 0;
-
-                            .texte-popover {
-                                text-align: left;
-                                padding-left: 20px;
-                        
-                                    a {
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: #333333;
-                        
-                                        &:hover {
-                                            color: rgb(181,84,0);
-                                            transition-duration: 200ms;
-                                        }
-                                    }
-                        
-                                    .line-height {
-                                        margin-bottom: 10px;
-                                    }
-                            }
-                        }
-
-                        .contenu-dj {
-                            position: absolute;
-                            background-color: gainsboro;
-                            transform: translateX(-45%);
-                            transition: all 0.3s linear;
-                            margin-top: 13px;
-                            border-radius: 3%;
-                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
-                            opacity: 0;
-
-                            .texte-popover {
-                                text-align: left;
-                                padding-left: 20px;
-                        
-                                    a {
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: #333333;
-                        
-                                        &:hover {
-                                            color: rgb(181,84,0);
-                                            transition-duration: 200ms;
-                                        }
-                                    }
-                        
-                                    .line-height {
-                                        margin-bottom: 10px;
-                                    }
-                            }
-                        }
-
-                        .contenu-cases {
-                            position: absolute;
-                            background-color: gainsboro;
-                            transform: translateX(-38%);
-                            transition: all 0.3s linear;
-                            margin-top: 13px;
-                            border-radius: 3%;
-                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
-                            opacity: 0;
-
-                            .texte-popover {
-                                text-align: left;
-                                padding-left: 20px;
-                        
-                                    a {
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: #333333;
-                        
-                                        &:hover {
-                                            color: rgb(181,84,0);
-                                            transition-duration: 200ms;
-                                        }
-                                    }
-                        
-                                    .line-height {
-                                        margin-bottom: 10px;
-                                    }
-                            }
-                        }
-                        
-                        .contenu-access {
-                            position: absolute;
-                            background-color: gainsboro;
-                            transform: translateX(-25%);
-                            transition: all 0.3s linear;
-                            margin-top: 13px;
-                            border-radius: 3%;
-                            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
-                            opacity: 0;
-
-                            .texte-popover {
-                                text-align: left;
-                                padding-left: 20px;
-                        
-                                    a {
-                                        font-size: 14px;
-                                        font-weight: 500;
-                                        color: #333333;
-                        
-                                        &:hover {
-                                            color: rgb(181,84,0);
-                                            transition-duration: 200ms;
-                                        }
-                                    }
-                        
-                                    .line-height {
-                                        margin-bottom: 10px;
-                                    }
-                            }
-                        }
-
-                        .contenu-guitare.active, 
-                        .contenu-batterie.active, 
-                        .contenu-clavier.active,
-                        .contenu-studio.active,  
-                        .contenu-sono.active,
-                        .contenu-eclairage.active,
-                        .contenu-dj.active,
-                        .contenu-cases.active,
-                        .contenu-access.active
-                        {
-                            opacity: 1;
-                        }
+                    .contenu-guitare.active, 
+                    .contenu-batterie.active, 
+                    .contenu-clavier.active,
+                    .contenu-studio.active,  
+                    .contenu-sono.active,
+                    .contenu-eclairage.active,
+                    .contenu-dj.active,
+                    .contenu-cases.active,
+                    .contenu-access.active
+                    {
+                        opacity: 1;
+                    }
             }
 
             .banniere-top {
@@ -522,8 +301,8 @@ body {
                                   }
 
                                 button {
-                                    background: rgb(181,84,0);
-                                    background: linear-gradient(0deg, rgba(181,84,0,1) 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
+                                    background: $orange;
+                                    background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
                                     border: none; 
                                     font-weight: 500;        
                                 }

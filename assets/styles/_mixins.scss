@@ -1,0 +1,50 @@
+/************************** Apparence du popoverde catégorie **************************/
+
+@mixin apparencePopover {
+    position: absolute;
+    background-color: $gris-back;
+    transition: all 0.3s linear;
+    margin-top: 13px;
+    border-radius: 3%;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+    opacity: 0;
+}
+
+
+
+/************************** Apparence du texte du popover de catégorie **************************/
+@mixin apparenceTextPopover {
+    .texte-popover {
+        text-align: left;
+        padding-left: 20px;
+
+            a {
+                font-size: 14px;
+                font-weight: 500;
+                color: #333333;
+
+                &:hover {
+                    color: $orange;
+                    transition-duration: 200ms;
+                }
+            }
+
+            .line-height {
+                margin-bottom: 10px;
+            }
+    }
+
+}
+
+/************************** Apparence du triangle au dessus du popover **************************/
+@mixin apparenceTriangle {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid gainsboro;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}

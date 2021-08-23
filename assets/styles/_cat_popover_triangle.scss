@@ -1,108 +1,38 @@
-/**************************Popover triangle*************************/
+@import "_mixins";
+
+/************************** Triangle dessus popover **************************/
 .contenu-guitare:before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid gainsboro;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    @include apparenceTriangle;
 }
 
 .contenu-batterie:before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid gainsboro;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    @include apparenceTriangle;
 }
 
 .contenu-clavier:before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid gainsboro;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    @include apparenceTriangle;
 }
 
 .contenu-studio:before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid gainsboro;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    @include apparenceTriangle;
 }
 
 .contenu-sono:before {
-    content: "";
-    position: absolute;
-    top:-20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid gainsboro;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    @include apparenceTriangle;
 }
 
 .contenu-eclairage:before {
-    content: "";
-    position: absolute;
-    top:-20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid gainsboro;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    @include apparenceTriangle;
 }
 
 .contenu-dj:before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid gainsboro;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    @include apparenceTriangle;
 }
 
 .contenu-cases:before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid gainsboro;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    @include apparenceTriangle;
 }
 
 .contenu-access:before {
-    content: "";
-    position: absolute;
-    top:-20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid gainsboro;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    @include apparenceTriangle;
 }
