@@ -30,7 +30,7 @@ class Category
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity=Subcategory::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=SubCategory::class, mappedBy="category")
      */
     private $subCategory;
 

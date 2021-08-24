@@ -15,8 +15,6 @@ import { Tooltip, Toast, Popover } from 'bootstrap';
 import './bootstrap';
 
 
-
-
 // ************************************************************************************************************************************************************************** //
 
 // Activation des popovers des catégories //
@@ -34,35 +32,35 @@ $(document).ready(function(){
         $(".contenu-guitare").focusout(function(){
             $(".contenu-guitare").hide();
         })    
-        $(".cat-batterie").hover(function(){
+        $(".cat-batterie").click(function(){
             $(this).toggleClass("active");
             $(".contenu-batterie").toggleClass("active");
         })     
-        $(".cat-clavier").hover(function(){
+        $(".cat-clavier").click(function(){
             $(this).toggleClass("active");
             $(".contenu-clavier").toggleClass("active");
         })
-        $(".cat-studio").hover(function(){
+        $(".cat-studio").click(function(){
             $(this).toggleClass("active");
             $(".contenu-studio").toggleClass("active");
         })
-        $(".cat-sono").hover(function(){
+        $(".cat-sono").click(function(){
             $(this).toggleClass("active");
             $(".contenu-sono").toggleClass("active");
         })
-        $(".cat-eclairage").hover(function(){
+        $(".cat-eclairage").click(function(){
             $(this).toggleClass("active");
             $(".contenu-eclairage").toggleClass("active");
         })
-        $(".cat-dj").hover(function(){
+        $(".cat-dj").click(function(){
             $(this).toggleClass("active");
             $(".contenu-dj").toggleClass("active");
         })
-        $(".cat-cases").hover(function(){
+        $(".cat-cases").click(function(){
             $(this).toggleClass("active");
             $(".contenu-cases").toggleClass("active");
         })
-        $(".cat-access").hover(function(){
+        $(".cat-access").click(function(){
             $(this).toggleClass("active");
             $(".contenu-access").toggleClass("active");
         })

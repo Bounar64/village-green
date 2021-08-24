@@ -22,14 +22,12 @@ final class Version20210823124821 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE sub_category ADD category_id INT NOT NULL');
         $this->addSql('ALTER TABLE sub_category ADD CONSTRAINT FK_BCE3F79812469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
-        $this->addSql('CREATE INDEX IDX_BCE3F79812469DE2 ON sub_category (category_id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE sub_category DROP FOREIGN KEY FK_BCE3F79812469DE2');
-        $this->addSql('DROP INDEX IDX_BCE3F79812469DE2 ON sub_category');
         $this->addSql('ALTER TABLE sub_category DROP category_id');
     }
 }

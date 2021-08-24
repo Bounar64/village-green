@@ -105,6 +105,11 @@ class Product
      */
     private $subCategory;
 
+    /**
+     * @ORM\Column(type="string", length=80)
+     */
+    private $brand;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -310,6 +315,18 @@ class Product
     public function setSubCategory(?Subcategory $subCategory): self
     {
         $this->subCategory = $subCategory;
+
+        return $this;
+    }
+
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): self
+    {
+        $this->brand = $brand;
 
         return $this;
     }

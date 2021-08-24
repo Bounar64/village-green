@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+    <header id="background">
+        <div class="container"> 
+            {# header navigation #} 
+            {{ include('/layouts/header_navigation.html.twig') }} 
+
+            <div class="row mt-5">
+                <div class="col-5">
+                    <p>{{ pluralize(products|length, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                {% for product in products %}
+                    <h1>{{ product.brand }}</h1>
+                </div>
+                {% endfor %}
+            </div>
+             
+            {# footer #} 
+            {{ include('/layouts/footer.html.twig') }}
+        </div> {# fermeture du container #}   
+    </header>
+{% endblock %}

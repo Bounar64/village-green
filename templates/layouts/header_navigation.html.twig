@@ -3,7 +3,6 @@
 {% block title 'Village green' %}
 
 {% block body %}
-
     <div class="logo">
         <img class="img-fluid img-logo" src="{{ asset('build/images/logo_village_green.png') }}" alt="logo village green">
     </div>
@@ -22,7 +21,7 @@
         </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="#">Produits</a>
+                    <a class="nav-link" href="{{ path('app_products')}}">Produits</a>
                     <a class="nav-link" href="#">Service</a>
                     <a class="nav-link" href="#">Aide</a>
                     <a class="nav-link" href="#">A propos</a>
@@ -32,6 +31,20 @@
     </nav> 
     {# navbar produits "catégories" #}
     <div class="nav-produit">
+         <div class="cat-popover">
+            {% for category in categories %}
+                <a href="#" class="cat-guitare" id="cat-guitare" value="{{ category.id }}">{{ category.label }}</a>
+            {% endfor %}
+            <div class="contenu-guitare">
+                <ul class="texte-popover">
+                    {% for subcategory in subcategory %}
+                    <li class="line-height"><a href="#" value="{{ subcategory.category.id }}">{{ subcategory.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div> 
+        </div> 
+
+        {#  <div class="nav-produit">
         <div class="cat-popover">
             <a href="#" class="cat-guitare">Guit/Bass</a>
             <div class="contenu-guitare">
@@ -89,7 +102,8 @@
                     <li class="line-height"><a href="#">Matériaux de<br>traitement acoustique</a></li>
                     <li class="line-height"><a href="#">Mobilier de studio</a></li>
                 </ul>
-            </div>   
+            </div>
+            
         </div>
         <div class="cat-popover">
             <a href="#" class="cat-sono">Sono</a>
@@ -163,5 +177,6 @@
                 </ul>
             </div>
         </div>  
+    </div>#}
     </div>
 {% endblock %}
