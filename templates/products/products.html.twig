@@ -4,22 +4,18 @@
 
 {% block body %}
     <header id="background">
-        <div class="container"> 
+        <div class="container products"> 
             {# header navigation #} 
             {{ include('/layouts/header_navigation.html.twig') }} 
 
-            <div class="row mt-5">
+            {#<div class="row mt-5">
                 <div class="col-5">
-                    <p>{{ pluralize(products|length, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
+                    <p>{{ pluralize(products|length, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension 
                 </div>
-            </div>
+            </div>#}
 
-            <div class="row">
-                <div class="col-3">
-                {% for product in products %}
-                    <h1>{{ product.brand }}</h1>
-                </div>
-                {% endfor %}
+            <div class="row contenant-page">
+                  
             </div>
              
             {# footer #} 

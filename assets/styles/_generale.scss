@@ -1,0 +1,14 @@
+$bleu: #00093D;
+$blanc: #FFFFFF;
+$gris-muted: #CCCCCC; 
+$gris-back: #E6E6E6;
+$orange: rgb(181,84,0);
+
+/* Généralité */
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Montserrat', sans-serif;
+}

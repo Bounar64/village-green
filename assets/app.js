@@ -17,52 +17,8 @@ import './bootstrap';
 
 // ************************************************************************************************************************************************************************** //
 
-// Activation des popovers des catégories //
-$(document).ready(function(){
-    
-    /* $('.contenu-guitare').hide();
-    $('.cat-guitare').click(function(){
-        $('.contenu-guitare').toggle();
-    });*/
+$(function(){ // équivaut à $(document).ready()
 
-        $(".cat-guitare").click(function(){
-            $(this).toggleClass("active");
-            $(".contenu-guitare").toggleClass("active");
-        })
-        $(".contenu-guitare").focusout(function(){
-            $(".contenu-guitare").hide();
-        })    
-        $(".cat-batterie").click(function(){
-            $(this).toggleClass("active");
-            $(".contenu-batterie").toggleClass("active");
-        })     
-        $(".cat-clavier").click(function(){
-            $(this).toggleClass("active");
-            $(".contenu-clavier").toggleClass("active");
-        })
-        $(".cat-studio").click(function(){
-            $(this).toggleClass("active");
-            $(".contenu-studio").toggleClass("active");
-        })
-        $(".cat-sono").click(function(){
-            $(this).toggleClass("active");
-            $(".contenu-sono").toggleClass("active");
-        })
-        $(".cat-eclairage").click(function(){
-            $(this).toggleClass("active");
-            $(".contenu-eclairage").toggleClass("active");
-        })
-        $(".cat-dj").click(function(){
-            $(this).toggleClass("active");
-            $(".contenu-dj").toggleClass("active");
-        })
-        $(".cat-cases").click(function(){
-            $(this).toggleClass("active");
-            $(".contenu-cases").toggleClass("active");
-        })
-        $(".cat-access").click(function(){
-            $(this).toggleClass("active");
-            $(".contenu-access").toggleClass("active");
-        })
+   
    });
 
