@@ -14,12 +14,33 @@
                 </div>
             </div>#}
 
-            <div class="row contenant-page">
-                  
-            </div>
+            <div class="contenant-page">
+            {% for category in categories %}
+                <div class="title-cat">
+                    <h1>Nos {{ category.label|replace({ 'Guit/Bass': "Guitare", 'DJ': "Deejay", 'Accessoires': "Accessoire" }) }}s</h1> 
+                </div>
+                <!-- Swiper des sous-catégories -->
+                <div class="swiper mySwiper"> 
+                        <div class="swiper-wrapper d-flex">
+                        {% for subcategory in subcategory %}
+                                {% if subcategory.category.id is same as (category.id) %} 
+                            <div class="swiper-slide">
+                                <div class="img-slide">
+                                    <img src="{{ subcategory.background }}" alt="background sous-catégories">
+                                </div>
+                                <div class="details-sous-cat">
+                                    <h2>{{ subcategory.label|nl2br }}</h2> 
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}  
+                    </div>     
+                </div>
+            {% endfor %}
+            </div> {# fermeture contentant-page #}
              
             {# footer #} 
             {{ include('/layouts/footer.html.twig') }}
-        </div> {# fermeture du container #}   
+        </div> {# fermeture du container products #}   
     </header>
 {% endblock %}

@@ -20,7 +20,12 @@ body {
 
     .container {
         @include apparenceContainer;
+
+        &.products {
+            min-height: 4550px;
+        }
     }   
+    
 
     p.titre-gras {
         color: $bleu;
@@ -98,7 +103,7 @@ body {
     .nav-produit {
         display: flex;
         justify-content: flex-end;
-        background-color: #333333;
+        background-color: $gris-foncé;
         padding: 0;
         text-align: end;
 
@@ -128,7 +133,7 @@ body {
                 @include apparenceTextPopover;
             }
 
-            .contenu-batteries {
+            .contenu-batterie {
                 transform: translateX(-33%);
                 @include apparencePopover;
                 @include apparenceTextPopover;
@@ -166,7 +171,7 @@ body {
                 @include apparenceTextPopover;
             }
 
-            .contenu-cases {
+            .contenu-case {
                 transform: translateX(-38%);
                 transition: all 0.3s linear;
                 @include apparencePopover;
@@ -181,26 +186,26 @@ body {
 
             //______Triangle dessus popover______//
             .contenu-guitbass:before,
-            .contenu-batteries:before,
+            .contenu-batterie:before,
             .contenu-clavier:before,
             .contenu-studio:before,
             .contenu-sono:before,
             .contenu-eclairage:before,
             .contenu-dj:before,
-            .contenu-cases:before,
+            .contenu-case:before,
             .contenu-accessoires:before {
                 @include apparenceTriangle;
             }
 
             //______Affichage du popover au click de la catégorie______//
             .cat-guitbass:focus + .contenu-guitbass, 
-            .cat-batteries:focus + .contenu-batteries,  
+            .cat-batterie:focus + .contenu-batterie,  
             .cat-clavier:focus + .contenu-clavier,
             .cat-studio:focus + .contenu-studio,  
             .cat-sono:focus + .contenu-sono,
             .cat-eclairage:focus + .contenu-eclairage,
             .cat-dj:focus + .contenu-dj,
-            .cat-cases:focus + .contenu-cases,
+            .cat-case:focus + .contenu-case,
             .cat-accessoires:focus + .contenu-accessoires
             {
                 opacity: 1;
@@ -453,7 +458,61 @@ body {
     //************************************************---------------------- PAGE PRODUITS ----------------------***********************************************//
     //**********************************************************************************************************************************************************//
 
-    .container.products {
-        @include apparenceContainer;
+    
+
+    .contenant-page {
+        font-size: 14px;
+        color: #000;
+    
+        .title-cat {
+            color: $bleu;
+            font-size: 20px;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .swiper {
+        width: 100%;
+        padding: 30px 0 0 10px;
+        } 
+        
+            .swiper-slide {
+                background: $gris-foncé;
+                background-position: center;
+                background-size: cover;
+                width: 300px;
+                height: 350px;
+                border-radius: 4px;
+                -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, #0006);
+            
+                    a {
+                     text-decoration: none;
+                    }
+                    
+                    img {
+                        border-radius: 3px 3px 0 0;
+                        display: block;
+                        width: 100%;
+                        height: auto;
+                    }
+
+                    h2 {
+                        text-align: center;
+                        margin: 13px 0 0 0;
+                        font-size: 20px;
+                        font-weight: 400;
+                        color: $blanc;
+
+                        &.small {
+                            margin: 5px 0 0 0;
+                            font-size: 18px;
+                        }
+
+                        &:hover {
+                            color: $orange;
+                        }
+                    }
+            }
+        }
+
     }
-}

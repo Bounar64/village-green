@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\CategoryRepository;
-use App\Repository\ProductRepository;
 use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,10 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-
-    public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository)
-    {
-    }
     /**
      * @Route("/", name="app_home")
      */
@@ -24,16 +19,5 @@ class HomeController extends AbstractController
         $subcategory = $subcategoryRepository->findAll('category');
 
         return $this->render('home/home.html.twig', compact('categories', 'subcategory')); // ['category' => $category ] si la clé correspond à la valeur on peut utiliser compact
-    }
-
-    /**
-     * @Route("/products", name="app_products")
-     */
-    public function showProducts(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
-    {
-        $categories = $categoryRepository->findBy(array(), array(), 9, null); // findBy($where, $orderBy, $limit, $offset);
-        $subcategory = $subcategoryRepository->findAll('category');
-        $products = $productRepository->findAll();
-        return $this->render('products/products.html.twig', compact('categories', 'subcategory', 'products'));
     }
 }
