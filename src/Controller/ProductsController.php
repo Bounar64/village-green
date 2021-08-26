@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\SubCategory;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
@@ -24,10 +25,10 @@ class ProductsController extends AbstractController
     }
 
     /**
-     * @Route("/products/", name="app_sub_category")
+     * @Route("/products/{label}", name="app_sub_category_show") // on passe le label de la sous-catégories dans l'url pour y accéder 
      */
-    public function showSubCategory () {
-        
-        return $this->render('products/subcategory.html.twig');
+    public function showSubCategory(SubCategory $subcategory): Response
+    {
+        return $this->render('products/subcategory_show.html.twig');
     }
 }
