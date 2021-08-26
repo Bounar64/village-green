@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductsRepository;
+use App\Repository\ProductRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  * @ORM\Table(name="products")
+ * @ORM\HasLifecycleCallbacks
  */
 class Product
 {
@@ -84,12 +86,12 @@ class Product
     private $actived;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable" option={"default"}: "CURRENT_TIMESTAMP")
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable" option={"default"}: "CURRENT_TIMESTAMP")
      */
     private $updatedAt;
 
@@ -329,5 +331,20 @@ class Product
         $this->brand = $brand;
 
         return $this;
+    }
+
+    
+    /**
+     * //_____Methode qui permet de mettre à jour nos Timestamp automatiquement_____//
+     *@ORM\PrePersist // appel avant un prePersist
+     *@ORM\PreUpdate // appel avant un PreUpdate
+     */
+    public function updateTimestamps()
+    {
+        if($this->getCreatedAt() === null) {
+
+             $this->setCreatedAt(new \DateTimeImmutable);
+        }
+        $this->setUpdatedAt(new \DateTimeImmutable);
     }
 }
