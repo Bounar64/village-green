@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProductRepository;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -13,6 +13,9 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
  */
 class Product
 {
+
+    Use Timestampable;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -84,16 +87,6 @@ class Product
      * @ORM\Column(type="boolean")
      */
     private $actived;
-
-    /**
-     * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
-     */
-    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
@@ -273,30 +266,6 @@ class Product
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -333,17 +302,5 @@ class Product
         return $this;
     }
     
-    /**
-     * //_____Methode qui permet de mettre à jour nos Timestamp automatiquement_____//
-     *@ORM\PrePersist // appel avant un prePersist
-     *@ORM\PreUpdate // appel avant un PreUpdate
-     */
-    public function updateTimestamps()
-    {
-        if($this->getCreatedAt() === null) {
-
-             $this->setCreatedAt(new \DateTimeImmutable);
-        }
-        $this->setUpdatedAt(new \DateTimeImmutable);
-    }
+    
 }
