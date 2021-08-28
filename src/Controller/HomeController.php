@@ -15,7 +15,7 @@ class HomeController extends AbstractController
      */
     public function index(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository): Response
     {
-        $categories =  $categoryRepository->findBy(array(), array(), 9, null); // findBy($where, $orderBy, $limit, $offset);
+        $categories =  $categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $subcategoryRepository->findAll('category');
 
         return $this->render('home/home.html.twig', compact('categories', 'subcategory')); // ['category' => $category ] si la clé correspond à la valeur on peut utiliser compact

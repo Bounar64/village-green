@@ -19,9 +19,9 @@
                     {% for subcategory in subcategory %}
                         {% if subcategory.category.id is same as (category.id) %} 
                         <div class="swiper-slide">
-                            <a href="{{ path('app_sub_category_show', {label: subcategory.label}) }}">
+                            <a href="{{ path('app_sub_category_show', {label: subcategory.label, id: subcategory.id}) }}">
                                 <div class="img-slide">
-                                    <img src="{{ subcategory.background }}" alt="background sous-catégories">
+                                    <img src="{{ asset(subcategory.background) }}" alt="background sous-catégories">
                                 </div>
                                 <div class="details-sous-cat">
                                     {% if subcategory.label|length > 25 %} {# pour l'affichage des labels de sous-cat au bon format quand le label et trop long #}

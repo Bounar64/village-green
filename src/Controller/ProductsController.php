@@ -16,7 +16,7 @@ class ProductsController extends AbstractController
      */
     public function showProducts(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
     {
-        $categories = $categoryRepository->findBy(array(), array(), 9, null); // findBy($where, $orderBy, $limit, $offset);
+        $categories = $categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $subcategoryRepository->findAll('category');
         $products = $productRepository->findAll();
 
@@ -24,11 +24,11 @@ class ProductsController extends AbstractController
     }
 
     /**
-     * @Route("/products/{label}", name="app_sub_category_show") // on passe le label de la sous-catégories dans l'url pour y accéder 
+     * @Route("/products/{id}{label}", name="app_sub_category_show") // on passe le label de la sous-catégories dans l'url pour y accéder 
      */
     public function showSubCategory(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
     {
-        $categories = $categoryRepository->findBy(array(), array(), 9, null);
+        $categories = $categoryRepository->findBy([], [], 9, null);
         $subcategory = $subcategoryRepository->findAll('category');
         $products = $productRepository->findAll();
 

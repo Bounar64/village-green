@@ -15,13 +15,12 @@
             </div> 
 
             <div class="contenant-page">
-                {% for subcategory in subcategory %}
-                    {% for products in products %}
-                        {% if products.subcategory.id is same as (subcategory.id) %}
-                            <h1>{{ products.label }}</h1>
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}       
+                {% for products in products %}  
+                    {% if products.subcategory.id is same as (app.request.get('id')|abs) %} {# abs renvoie la valeur absolue donc convertie id type string en id int #}
+                        <h1>{{ products.label }}</h1>    
+                    {% endif %}
+                {% endfor %}
+                 {{ dump(app.request.get('id')|abs) }}
             </div> {# fermeture contentant-page #}
              
             {# footer #} 
