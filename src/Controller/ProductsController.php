@@ -30,7 +30,7 @@ class ProductsController extends AbstractController
     {
         $categories = $categoryRepository->findBy([], [], 9, null);
         $subcategory = $subcategoryRepository->findAll('category');
-        $products = $productRepository->findAll();
+        $products = $productRepository->findSearch();
 
         return $this->render('products/subcategory_show.html.twig', compact('categories', 'subcategory', 'products'));
     }

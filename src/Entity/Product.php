@@ -13,7 +13,6 @@ use App\Repository\ProductRepository;
  */
 class Product
 {
-
     Use Timestampable;
 
     /**
