@@ -24,7 +24,7 @@ class ProductsController extends AbstractController
     }
 
     /**
-     * @Route("/products/{id}{label}", name="app_sub_category_show") // on passe le label de la sous-catégories dans l'url pour y accéder 
+     * @Route("/products/{label}_{id}", name="app_sub_category_show") // on passe le label de la sous-catégories dans l'url pour y accéder 
      */
     public function showSubCategory(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
     {

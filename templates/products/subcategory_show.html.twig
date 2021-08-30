@@ -8,18 +8,34 @@
             {# header navigation #} 
             {{ include('/layouts/header_navigation.html.twig') }}
 
-            <div class="row mt-5">
-                <div class="col-5">
-                    <p>{{ pluralize(products|length, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
-                </div>
-            </div> 
-
+           
+                    <div class="row mt-5">
+                        <div class="col-5">
+                            <p>{{ pluralize(products|length, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
+                        </div>
+                    </div> 
+             
+            
             <div class="contenant-page">
-                {% for products in products %}  
-                    {% if products.subcategory.id is same as (app.request.get('id')|abs) %} {# abs renvoie la valeur absolue donc convertie id type string en id int #}
-                        <h1>{{ products.label }}</h1>    
-                    {% endif %}
-                {% endfor %}
+                <div class="grid">
+                    {% for products in products %}
+                        {% if products.subcategory.id == (app.request.get('id')) %}  
+                            <div class="card">
+                                <img src="{{ asset(products.image)}}" alt="{{ products.label }}" class="card-img-top">
+                                <div class="card-body">
+                                    <h2 class="h5">{{ products.brand }}{{ products.label }}</h2>
+                                    <div class="card-title">
+                                        {{ products.price }}
+                                        {% if products.discount is not null %}
+                                            <small class="text text-warning">-{{ products.discount }}%</small>
+                                        {% endif %}
+                                    </div>
+                                    <p class="text text-muted">{{ products.reference }}</p>
+                                </div>
+                            </div> 
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div> {# fermeture contentant-page #}
              
             {# footer #} 

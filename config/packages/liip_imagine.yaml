@@ -1,0 +1,21 @@
+# See dos how to configure the bundle: https://symfony.com/doc/current/bundles/LiipImagineBundle/basic-usage.html
+liip_imagine:
+    # valid drivers options include "gd" or "gmagick" or "imagick"
+    driver: "gd"
+
+    filter_sets:
+        thumbnail_small:
+            filters:
+                thumbnail: 
+                    size: [400, 400]
+                    mode: outband # pour croper l'image
+                    allow_upscale: true # pour garder le bonne taille même si l'image est plus petite
+                    quality: 90%
+
+        thumbnail_medium:
+            filters:
+                thumbnail:
+                    size: [300, 300]
+                    mode: outband
+                    allow_upscale: true
+                    quality: 90%
