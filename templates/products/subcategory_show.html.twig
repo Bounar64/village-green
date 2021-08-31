@@ -16,26 +16,64 @@
                     </div> 
              
             
-            <div class="contenant-page">
-                <div class="grid">
-                    {% for products in products %}
-                        {% if products.subcategory.id == (app.request.get('id')) %}  
-                            <div class="card">
-                                <img src="{{ asset(products.image)}}" alt="{{ products.label }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h2 class="h5">{{ products.brand }}{{ products.label }}</h2>
-                                    <div class="card-title">
-                                        {{ products.price }}
-                                        {% if products.discount is not null %}
-                                            <small class="text text-warning">-{{ products.discount }}%</small>
-                                        {% endif %}
+            <div class="contenant-page-s-cat">
+                <div class="col-11">
+                    <div class="grid">
+                        {% for products in products %}
+                            {% if products.subcategory.id == (app.request.get('id')) %}      
+                                <div class="card">
+                                     {% if products.discount is not null %}
+                                        <p class="text-end discount">-{{ products.discount }}%</p>
+                                        {% else %}
+                                        <p class="text-end discount">&emsp;</p>
+                                    {% endif %}        
+                                    <img src="{{ asset(products.image) }}" alt="{{ products.label }}" class="card-img-top mb-3">
+
+                                    <hr>
+
+                                    <div class="card-body">
+                                        <h2 class="text-brand">{{ products.brand }}</h2>
+                                        <h3 class="text-label">{{ products.label }}</h3>
+                                        <h3 class="text-s-cat mb-3">{{ products.subcategory.label|lower }}</h3>
+
+                                        <div class="card-title price mb-0">
+                                            {% set DiscountPrice = products.price - (products.discount / 100 * products.price) %} {# varible qui stock le prix après réduction #}
+                                            {{ DiscountPrice|format_currency('EUR', locale='fr') }} 
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-8">
+                                                {% if products.discount is not null %}
+                                                    <div class="card-title text-small mb-0">
+                                                        au lieu de {{ products.price|abs|format_currency('EUR', locale='fr') }}
+                                                    </div>
+                                                {% endif %}
+                                                <div class="text-small mb-0 x-fois">
+                                                     ou <span>4X {{ (DiscountPrice / 4)|format_currency('EUR', locale='fr') }}</span> 
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="card-title mb-0">
+                                                    <p class="text-small m-0">
+                                                    {% if products.stock <= products.stockAlert %}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle-fill red" viewBox="0 0 16 20"><circle cx="8" cy="8" r="8"/></svg>
+                                                    {% else %}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle-fill green" viewBox="0 0 16 20"><circle cx="8" cy="8" r="8"/></svg>
+                                                    {% endif %}
+                                                        Stock
+                                                    </p>
+                                                </div>
+                                                <div class="card-title">
+                                                    <p class="text-small m-0">Réf: {{ products.reference }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="text text-muted">{{ products.reference }}</p>
-                                </div>
-                            </div> 
-                        {% endif %}
-                    {% endfor %}
-                </div>
+                                </div> 
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>         
             </div> {# fermeture contentant-page #}
              
             {# footer #} 

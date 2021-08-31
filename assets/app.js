@@ -9,7 +9,7 @@
 import './styles/app.scss';
 
 // You can specify which plugins you need
-//import { Tooltip, Toast, Popover } from 'bootstrap';
+import { Tooltip, Toast, Popover } from 'bootstrap';
 
 // start the Stimulus application
 import './bootstrap';
@@ -19,7 +19,7 @@ import './bootstrap';
 
 $(function(){ // équivaut à $(document).ready()
 
-   //__Swiper de catégorie__//
+   //__Swiper de sous-catégorie__//
    var swiper = new Swiper(".mySwiper", {
       effect: "coverflow",
       grabCursor: true,

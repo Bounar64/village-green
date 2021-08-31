@@ -520,12 +520,84 @@ body {
     //**********************************************************************************************************************************************************//
 
 
-    .contenant-page {
+    //***********************************************************************//
+    //******************* Mise en page des produits (grid) ******************//
+    //***********************************************************************//
+    .contenant-page-s-cat {
+        display: flex;
+        justify-content: space-around;
 
             .grid {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
                 grid-gap: 20px;
+
+                .card {
+
+                    hr {
+                        width: 90%;
+                        margin:auto;
+                    }
+                
+                    .discount {
+                        font-weight: 700;
+                        margin: 5px 10px 0 0;
+                    }
+
+                    .card-body {
+                        padding: 10px 0 5px 10px;
+                        
+                            .text-brand {
+                                margin-bottom: 0;
+                                font-size: 15px;
+                                font-weight: 600;
+                            }
+
+                            .text-label {
+                                margin-bottom: 0;
+                                font-size: 15px;
+                                font-weight: 400;
+                            }
+
+                            .text-s-cat {
+                                font-size: 13px;
+                                font-weight: 400;
+
+                            }
+
+                            .price {
+                                color: $orange;
+                                font-weight: 600;
+                                font-size: 20px;
+                            }
+
+                            .text-small {
+                                font-weight: 400;
+                                font-size: 10px;
+                            }
+
+                            .x-fois {
+
+                                span {
+                                    color: $orange;
+                                    font-weight: 700;
+                                    font-size: 10px; 
+                                }
+                            }
+                            //_____chagement de couleur produit en stock ou non_____//
+                            .bi-circle-fill {
+
+                                &.green {
+                                    color: rgb(0, 177, 0);
+                                }
+                                &.red {
+                                    color: rgb(218, 9, 9);
+                                }
+
+                            }
+                    }
+                }
+                
             }
     }
 }

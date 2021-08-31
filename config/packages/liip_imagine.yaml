@@ -5,17 +5,18 @@ liip_imagine:
 
     filter_sets:
         thumbnail_small:
-            filters:
-                thumbnail: 
-                    size: [400, 400]
-                    mode: outband # pour croper l'image
-                    allow_upscale: true # pour garder le bonne taille même si l'image est plus petite
-                    quality: 90%
+                filters:
+                    thumbnail: 
+                        size: [300, 300]
+                        mode:  outbound # pour croper l'image
+                        allow_upscale: true # pour garder le bonne taille même si l'image est plus petite
+                        quality : 75
 
         thumbnail_medium:
-            filters:
-                thumbnail:
-                    size: [300, 300]
-                    mode: outband
-                    allow_upscale: true
-                    quality: 90%
+                filters:
+                    thumbnail:
+                        size: [400, 400]
+                        mode: outbound
+                        allow_upscale: true
+                        quality : 75
+                    
