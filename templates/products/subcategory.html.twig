@@ -4,7 +4,7 @@
 
 {% block body %}
     <header id="background">
-        <div class="container products"> 
+        <div class="container subcategory"> 
             {# header navigation #} 
             {{ include('/layouts/header_navigation.html.twig') }} 
 
@@ -19,7 +19,7 @@
                     {% for subcategory in subcategory %}
                         {% if subcategory.category.id is same as (category.id) %} 
                         <div class="swiper-slide">
-                            <a href="{{ path('app_sub_category_show', {label: subcategory.label, id: subcategory.id}) }}">
+                            <a href="{{ path('app_products_show', {label: subcategory.label}) }}">
                                 <div class="img-slide">
                                     <img src="{{ asset(subcategory.background) }}" alt="{{ subcategory.label }}">
                                 </div>

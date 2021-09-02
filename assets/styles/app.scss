@@ -23,9 +23,10 @@ body {
     .container {
         @include apparenceContainer;
 
-        &.products {
+        &.subcategory {
             min-height: 4550px;
         }
+
     }   
     
 
@@ -456,10 +457,10 @@ body {
     }
        
     //**********************************************************************************************************************************************************//
-    //*******************************************---------------------- PAGE PRODUITS (products) ----------------------*****************************************//
+    //*************************************---------------------- PAGE SOUS-CATEGORIES (subcategory) ----------------------*************************************//
     //**********************************************************************************************************************************************************//
 
-    // ********************* Configuration du swiper ********************* //
+    // ********************* CONFIGURATION SWIPER ********************* //
     .contenant-page {
         font-size: 14px;
         color: #000;
@@ -516,12 +517,12 @@ body {
         }
 
     //**********************************************************************************************************************************************************//
-    //************************************---------------------- PAGE SOUS-CATEGORIE (subcategory_show) ----------------------**********************************//
+    //**************************************---------------------- PAGE DES PRODUITS (products_show) ----------------------*************************************//
     //**********************************************************************************************************************************************************//
 
 
     //***********************************************************************//
-    //******************* Mise en page des produits (grid) ******************//
+    //******************* MISE EN PAGES DES PRODUITS (GRID) ******************//
     //***********************************************************************//
     .contenant-page-s-cat {
         display: flex;
@@ -532,72 +533,303 @@ body {
                 grid-template-columns: repeat(4, 1fr);
                 grid-gap: 20px;
 
-                .card {
+                //_____ensemble de la card_____//
+                a {
+                    text-decoration: none;
+                    color: inherit; // fait prendre la couleur de son parent
 
-                    hr {
-                        width: 90%;
-                        margin:auto;
-                    }
-                
-                    .discount {
-                        font-weight: 700;
-                        margin: 5px 10px 0 0;
-                    }
-
-                    .card-body {
-                        padding: 10px 0 5px 10px;
-                        
-                            .text-brand {
-                                margin-bottom: 0;
-                                font-size: 15px;
-                                font-weight: 600;
-                            }
-
-                            .text-label {
-                                margin-bottom: 0;
-                                font-size: 15px;
-                                font-weight: 400;
-                            }
-
-                            .text-s-cat {
-                                font-size: 13px;
-                                font-weight: 400;
-
-                            }
-
-                            .price {
-                                color: $orange;
-                                font-weight: 600;
-                                font-size: 20px;
-                            }
-
-                            .text-small {
-                                font-weight: 400;
-                                font-size: 10px;
-                            }
-
-                            .x-fois {
-
-                                span {
+                    .card {
+                        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    
+                        hr {
+                            width: 90%;
+                            margin:auto;
+                        }
+                    
+                        .discount {
+                            font-weight: 500;
+                            margin-top: 5px;
+                            background-color: $orange;
+                            color: $blanc;
+    
+                                &.back {
+                                    background-color: $blanc;
+    
+                                }
+                        }
+    
+                        .card-body {
+                            padding: 10px 0 5px 10px;
+                            
+                                .text-brand {
+                                    margin-bottom: 0;
+                                    font-size: 15px;
+                                    font-weight: 600;
+                                }
+    
+                                .text-label {
+                                    margin-bottom: 0;
+                                    font-size: 15px;
+                                    font-weight: 400;
+                                }
+    
+                                .text-s-cat {
+                                    font-size: 13px;
+                                    font-weight: 400;
+    
+                                }
+    
+                                .price {
                                     color: $orange;
-                                    font-weight: 700;
-                                    font-size: 10px; 
+                                    font-weight: 600;
+                                    font-size: 20px;
                                 }
-                            }
-                            //_____chagement de couleur produit en stock ou non_____//
-                            .bi-circle-fill {
-
-                                &.green {
-                                    color: rgb(0, 177, 0);
+    
+                                .text-small {
+                                    font-weight: 400;
+                                    font-size: 10px;
                                 }
-                                &.red {
-                                    color: rgb(218, 9, 9);
+    
+                                .X4 {
+    
+                                    span {
+                                        color: $orange;
+                                        font-weight: 700;
+                                        font-size: 11px; 
+                                    }
                                 }
-
-                            }
+                                //_____chagement de couleur produit en stock ou non_____//
+                                .bi-circle-fill {
+    
+                                    &.green {
+                                        color: rgb(0, 177, 0);
+                                    }
+                                    &.red {
+                                        color: rgb(218, 9, 9);
+                                    }
+    
+                                }
+                        }
                     }
-                }
+
+                }              
                 
             }
     }
+
+
+     //**********************************************************************************************************************************************************//
+    //************************************---------------------- PAGE DETAILS PRODUITS (products_details) ----------------------*********************************//
+    //**********************************************************************************************************************************************************//
+
+
+    //***********************************************************************//
+    //************************ CARD PRODUITS DETAILS *************************//
+    //***********************************************************************//
+    .content-big-cards {
+        display:flex;
+        justify-content: space-around;
+        margin-top: 10%;
+        
+            .big-card {
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+                
+                // ********************* CONTENU CARD DROITE ********************* //
+                .discount {
+                    font-size: 12px;
+                    font-weight: 600;
+                    margin-top: 7px;
+                    background-color: $orange;
+                    color: $blanc;
+
+                        &.back {
+                            background-color: $blanc;
+                        }
+                }
+
+                // ********************* CONTENU CARD GAUCHE ********************* //
+
+                //______Contenu en-tête______//
+                .card-body.entete {
+                    padding-top: 8px;
+
+                        hr {
+                            margin: 8px 5px 5px 0;
+                        }
+
+                        .economie {
+                            text-align: center;
+                            font-size: 12px;
+                            color: $blanc;
+                            background-color: #000;
+                            padding: 0px;
+                        }
+                        .ref {
+                            margin-top: 5px;
+                            padding-left: 0px;
+                            font-size: 10px;
+                        }
+                }
+
+                //______Contenu corps______//
+                .card-body.contenu {
+                    padding-top: 8px;
+
+                        // Contenu gauche
+                       .contenu-gauche {
+                           display: block;
+
+                           a {
+                               color: inherit;
+                           } 
+
+                           .encart-description {
+                                text-align: center;
+                                border: 1px solid $gris-foncé;
+                                margin-top: 85px;
+                                padding-bottom: 5px;
+                                transition: 0.3s linear;
+
+                                    &:hover {
+                                        background-color: $gris-foncé;
+                                        color: $blanc;
+                                    }
+                            }
+
+                            }
+
+                           .bi-circle-fill.green {
+                               transform: translateY(-3px);
+                               color: rgb(0, 177, 0);
+                           }
+
+                           .bi-circle-fill.red {
+                               transform: translateY(-3px);
+                               color: rgb(218, 9, 9);
+                           }
+
+                               p {
+                                font-size: 10px;
+                                margin-bottom: 0;
+
+                                    &.title {
+                                        margin-top: 10px;
+                                    }
+
+                                    span {
+                                        margin-top: 10px;
+                                        font-size: 10px;
+                                        font-weight: 700;
+
+                                            &.title {
+                                                font-size: 11px;
+                                            }
+                                    }
+
+                                    .bi-star {
+                                        color: #FFCE00;
+                                    }
+
+                                    .star {
+                                        color: #FFCE00;
+                                    }
+                               }
+                       }
+
+                       // Contenu droite
+                       .contenu-droite {
+                            display: block;
+
+                                button {
+                                    font-size: 15px;
+                                    font-weight: 600;
+
+                                        .icone-caddie {
+                                            margin-right: 10px;
+                                        }
+                                }
+
+                                .encart-financement {
+                                    border: 1px solid $orange;
+                                    margin-top: 15px;
+                                    padding-bottom: 13px;
+                                }
+                            
+                                p {
+                                    font-size: 10px;
+                                    margin-bottom: 0;
+
+                                        &.title {
+                                            margin-top: 10px;
+                                        }
+
+                                        span {
+                                            margin-top: 10px;
+                                            font-size: 10px;
+                                            font-weight: 700;
+
+                                                &.title {
+                                                    font-size: 11px;
+                                                }
+                                        }
+
+                                        &.price {
+                                            color: $orange;
+                                        font-weight: 600;
+                                        font-size: 20px;
+                                        }
+
+                                        .X4 {
+                                            color: $orange;
+                                            font-weight: 700;
+                                            font-size: 13px;    
+                                        }
+                                } 
+                       }
+
+                }
+
+                // ********************* CONTENU DESCRIPTION ********************* //
+
+                .card-desc {
+                    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+                
+                        hr {
+                            width: auto;
+                            margin: 0 20px 0 20px;
+                        }
+
+                        .title {
+                            margin: 20px 0 10px 0px;
+                            font-size: 13px;
+                            font-weight: 700;
+                        }
+
+                        .ref {
+                            margin: 20px 0 20px 20px;
+                            font-size: 11px;
+                            font-weight: 600;
+
+                            span {
+                                font-weight: 400;
+                            }
+                        }
+
+                        p {
+                            font-size: 10px;
+                        }  
+                
+                    }
+                
+    }
+    
 }
+
+
+
+
+
+
+
+
+

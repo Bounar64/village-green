@@ -1,0 +1,184 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+<header id="background">
+    <div class="container products-details"> 
+        {# header navigation #} 
+        {{ include('/layouts/header_navigation.html.twig') }} 
+
+        <div class="contenant-page">
+        {% for products in products %}
+            {% if products.reference == (app.request.get('ref')) %}    
+                {# big-card #}
+            <div class="row content-big-cards">                 
+                <div class="col-10">
+                    <div class="card big-card mb-3">  
+                        <div class="row g-0">
+                            {# image big-card #}
+                            <div class="col-md-5">
+                                <div class="row d-flex justify-content-end">
+                                    <div class="col-2">                                      
+                                        <p class="text-end text-center discount">
+                                            {% if products.discount is not null %}
+                                                -{{ products.discount }}%
+                                            {% endif %}
+                                        </p>                                        
+                                    </div>
+                                </div> 
+                                <img src="{{ asset(products.image) }}" class="img-fluid rounded-start" alt="{{ products.label }}">
+                            </div>
+                            {# contenu big-card #}
+                            <div class="col-md-7"> 
+                                {# card-body en-tête #} 
+                                <div class="card-body entete"> 
+                                    <div class="row">
+                                        {% if products.discount is not null %}
+                                            <div class="col-4">                                       
+                                                <p class="economie m-0"><span class="fw-bold">ÉCONOMISEZ </span>{{ (10 * products.price / 100)|round|format_currency('EUR', locale='fr') }}</p>                                         
+                                            </div>
+                                        {% endif %}
+                                        <div class="col-2 d-flex align-items-center">
+                                            <p class="ref m-0"><span class="fw-bold">RÉF: </span>{{ products.reference }}</p>      
+                                        </div>
+                                    </div>
+                                    <h2 class="card-title mt-2 mb-0 h5">{{ products.brand ~ ' ' ~ products.label }}</h2>
+                                    <hr> 
+                                </div>
+                                {# card-body contenu #}
+                                <div class="card-body contenu">
+                                    <div class="row">
+                                        {# card-body contenu gauche #}
+                                        <div class="col-6">
+                                            <div class="row contenu-gauche">
+                                                <div class="col">
+                                                    <p class="title"><span class="title">DISPONIBILITÉ</span></p>
+                                                    <div class="row">
+                                                        <div class="col-1">
+                                                        {% if products.stock <= products.stockAlert %}
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle-fill red" viewBox="0 0 16 20"><circle cx="8" cy="8" r="8"/></svg>
+                                                        </div>                                               
+                                                        <div class="col p-0">
+                                                            <p>Stock Internet: <span>disponible prochainement !</span> </p>
+                                                        {% else %}
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle-fill green " viewBox="0 0 16 20"><circle cx="8" cy="8" r="8"/></svg>
+                                                        </div>                                               
+                                                        <div class="col p-0">
+                                                            <p>Stock Internet: <span>disponible immédiatement !</span> </p>
+                                                        {% endif %}
+                                                            <p>Commandé avant 12h, expédié aujourd'hui. <span>(+)</span></p>
+                                                        </div>  
+                                                    </div>                                                         
+                                                </div>
+                                                <div class="col">
+                                                    <p class="title"><span class="title">LIVRAISON</span></p>
+                                                    <p>Livraison: <span>gratuite</span> </p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="title"><span class="title">GARANTIE</span></p>
+                                                    <p>Cet article est garanti <span>3 ans</span></p>
+                                                    <p>Satisfait ou remboursé <span>30 jours d'essai</span></p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="text-muted mt-3 d-flex align-items-end lh-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>                                                           
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>                                                            
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>                                                            
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-half star" viewBox="0 0 16 16"><path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z"/></svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/></svg>
+                                                        &ensp;28 avis 
+                                                    </p>
+                                                </div>
+                                                <a href="#" class="text-decoration-none">
+                                                    <div class="col-5 encart-description">
+                                                        <p class="title mt-1"><span class="title">DESCRIPTION</span></p>                                                      
+                                                    </div>
+                                                </a>                                                  
+                                            </div>  
+                                        </div>
+                                        {# card-body contenu droite #}
+                                        <div class="col-6">
+                                                <div class="row contenu-droite">
+                                                <div class="col pl-0">
+                                                    <div class="d-grid gap-2">
+                                                        {% if  products.stock <= products.stockAlert %}
+                                                            <button class="btn btn-secondary" type="button" disabled>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart2 icon-caddie" viewBox="0 0 18 18"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg>
+                                                                AJOUTER
+                                                            </button>
+                                                        {% else %}
+                                                            <button class="btn btn-success" type="button">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart2 icon-caddie" viewBox="0 0 18 18"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg>
+                                                                AJOUTER
+                                                            </button>
+                                                        {% endif %}                                                       
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="title"><span class="title">PRIX VILLAGE GREEN</span></p>
+                                                    <p class="price">
+                                                        {% set DiscountPrice = products.price - (products.discount / 100 * products.price) %} {# varible qui stock le prix après réduction #}
+                                                        {{ DiscountPrice|format_currency('EUR', locale='fr') }} 
+                                                    </p>
+                                                </div>
+                                                {% if products.discount is not null %}
+                                                    <div class="col">
+                                                        <p class="title"><span class="title">PRIX CONSEILLÉ</span></p>
+                                                        <p>{{ products.price|abs|format_currency('EUR', locale='fr') }}</p>                                                       
+                                                    </div>
+                                                    <div class="col">
+                                                        <p class="title"><span class="title">ÉCONOMISEZ</span></p>
+                                                        <p>{{ (10 * products.price / 100)|round|format_currency('EUR', locale='fr') }}</p>                                                       
+                                                    </div>
+                                                {% endif %}
+                                                <div class="col">
+                                                    <p class="title"><span class="title">ÉCO-PARTICIPATION</span></p>
+                                                    <p>{{ 0.5 |format_currency('EUR', locale='fr') }}</p>                                                       
+                                                </div>
+                                                <div class="col-11 encart-financement">
+                                                    <p class="title mt-3"><span class="title">FINANCEZ À VOTRE RYTHME:</span></p>
+                                                    <p><span class="X4">4X {{ (DiscountPrice / 4)|format_currency('EUR', locale='fr') }}</span> sans frais par CB</p>                                                       
+                                                </div>
+                                            </div>        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                               
+                    </div> 
+                </div> {# fermeture de big-card #}              
+                
+                {# card description #}
+                <div class="col-10">
+                    <div class="card card-desc mb-3">  
+                        <div class="row g-0">
+                            {# contenu card desc#}
+                            <div class="col-md-7"> 
+                                {# card-body contenu #}
+                                <div class="card-body contenu">
+                                    <section>
+                                        <h2 class="title description">DESCRIPTION</h2>
+                                        <p>{{ products.description|nl2br }}</p>
+                                    </section>                                                                               
+                                </div>                                               
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <h2 class="ref">RÉFÉRENCE MARQUE: <span>{{ products.shortLabel }}</span></h2>
+                        </div>                                                 
+                    </div> 
+                </div> {# fermeture de card description #}
+            
+            </div>  {# fermeture de content-big-card #}
+            {% endif %}
+        {% endfor %}     
+        </div> {# fermeture contenant-page #}
+            
+        {# footer #} 
+        {{ include('/layouts/footer.html.twig') }}
+    </div> {# fermeture du container products #}   
+</header>
+{% endblock %}
+

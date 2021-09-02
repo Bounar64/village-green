@@ -123,12 +123,12 @@ class Product
 
     public function getShortLabel(): ?string
     {
-        return $this->short_label;
+        return $this->shortLabel;
     }
 
-    public function setShortLabel(string $short_label): self
+    public function setShortLabel(string $shortLabel): self
     {
-        $this->short_label = $short_label;
+        $this->shortLabel = $shortLabel;
 
         return $this;
     }

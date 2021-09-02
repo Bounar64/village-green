@@ -14,24 +14,36 @@ class ProductsController extends AbstractController
     /**
      * @Route("/products", name="app_products")
      */
-    public function showProducts(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
+    public function subCategoryShow(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
     {
         $categories = $categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $subcategoryRepository->findAll('category');
         $products = $productRepository->findAll();
 
-        return $this->render('products/products.html.twig', compact('categories', 'subcategory', 'products'));
+        return $this->render('products/subcategory.html.twig', compact('categories', 'subcategory', 'products'));
     }
 
     /**
-     * @Route("/products/{label}_{id}", name="app_sub_category_show") // on passe le label de la sous-catégories dans l'url pour y accéder 
+     * @Route("/products/{label}", name="app_products_show") // on passe le label de la sous-catégories dans l'url pour y accéder 
      */
-    public function showSubCategory(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
+    public function productsShow(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
     {
         $categories = $categoryRepository->findBy([], [], 9, null);
         $subcategory = $subcategoryRepository->findAll('category');
         $products = $productRepository->findSearch();
 
-        return $this->render('products/subcategory_show.html.twig', compact('categories', 'subcategory', 'products'));
+        return $this->render('products/products_show.html.twig', compact('categories', 'subcategory', 'products'));
+    }
+
+     /**
+     * @Route("/products/{label}/{label_products}-{ref}", name="app_products_details", requirements={"label_products"=".+"}) 
+     */
+    public function productsDetails(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response 
+    {
+        $categories = $categoryRepository->findBy([], [], 9, null);
+        $subcategory = $subcategoryRepository->findAll('category');
+        $products = $productRepository->findSearch();
+
+        return $this->render('products/products_details.html.twig', compact('categories', 'subcategory', 'products'));
     }
 }
