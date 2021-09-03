@@ -38,7 +38,7 @@
                         <ul class="texte-popover">
                             {% for subcategory in subcategory %} 
                                 {% if subcategory.category.id is same as (category.id) %}            
-                                    <li class="line-height "><a href="#">{{ subcategory.label|nl2br }}</a></li>
+                                    <li class="line-height "><a href="{{ path('app_products_show', {label: subcategory.label}) }}">{{ subcategory.label|nl2br }}</a></li>
                                 {% endif %}
                             {% endfor %}
                         </ul>

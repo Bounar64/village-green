@@ -10,8 +10,11 @@
 
                     {# nombre de produit #}
                     <div class="row mt-5">
+                        <div class="col-2">
+                            <p> {{ pluralize(products|length, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
+                        </div>
                         <div class="col-5">
-                            <p>{{ pluralize(products|length, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
+                            {% include 'products/_filter.html.twig' with {form : form}  only %}
                         </div>
                     </div> 
              

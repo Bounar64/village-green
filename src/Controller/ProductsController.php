@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
+use App\Form\SearchForm;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
@@ -28,11 +30,18 @@ class ProductsController extends AbstractController
      */
     public function productsShow(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
     {
+        $data = new SearchData();
+        $form = $this->createForm(SearchForm::class, $data);
         $categories = $categoryRepository->findBy([], [], 9, null);
         $subcategory = $subcategoryRepository->findAll('category');
         $products = $productRepository->findSearch();
 
-        return $this->render('products/products_show.html.twig', compact('categories', 'subcategory', 'products'));
+        return $this->render('products/products_show.html.twig', [
+            'categories' => $categories,
+            'subcategory' => $subcategory,
+            'products' => $products,
+            'form' => $form->createView()
+        ]);
     }
 
      /**
@@ -44,6 +53,6 @@ class ProductsController extends AbstractController
         $subcategory = $subcategoryRepository->findAll('category');
         $products = $productRepository->findSearch();
 
-        return $this->render('products/products_details.html.twig', compact('categories', 'subcategory', 'products'));
+        return $this->render('products/products_details.html.twig',  compact('categories', 'subcategory', 'products'));
     }
 }
