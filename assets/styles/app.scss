@@ -211,7 +211,7 @@ body {
             .cat-case:focus + .contenu-case,
             .cat-accessoires:focus + .contenu-accessoires
             {
-                opacity: 1;
+                visibility: visible;
             }
     }
 
