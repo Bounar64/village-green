@@ -2,19 +2,12 @@
 
 namespace App\Data;
 
-use App\Entity\Category;
-
 class SearchData 
 {
     /**
-     * @var string
+     * @var null|string
      */
-    private $motCle = '';
-
-    /**
-     * @var Category[] 
-     */
-    private $categories = [];
+    private $kw;
 
     /**
      * @var null|integer
@@ -32,34 +25,14 @@ class SearchData
     private $discount = false;
 
 
-    public function getMotCle(): ?string
+    public function getKw(): ?string
     {
-        return $this->motCle;
+        return $this->kw;
     }
 
-    public function setMotCle(string $motCle): self
+    public function setKw(string $kw): self
     {
-        $this->motCle = $motCle;
-
-        return $this;
-    }
-
-    /**
-     * @return  Category[]
-     */ 
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * @param  Category[]  $categories
-     * 
-     * @return  self
-     */ 
-    public function setCategories(Category $categories)
-    {
-        $this->categories = $categories;
+        $this->kw = $kw;
 
         return $this;
     }
@@ -135,4 +108,5 @@ class SearchData
 
         return $this;
     }
+
 }

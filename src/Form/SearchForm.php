@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Data\SearchData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,13 +16,32 @@ class SearchForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('motCle', TextType::class, [
+            ->add('kw', TextType::class, [
                 'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Rechercher'
                 ]
-            ]);
+            ])
+            ->add('min', NumberType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Prix min'
+                ]
+            ])
+            ->add('max', NumberType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Prix max'
+                ]
+            ])
+            ->add('discount', CheckboxType::class, [
+                'label' => 'Promotion',
+                'required' => false
+            ])     
+        ;
     }
 
     // Pour configurer les différentes options liées à ce formulaire

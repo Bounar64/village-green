@@ -8,15 +8,17 @@
             {# header navigation #} 
             {{ include('/layouts/header_navigation.html.twig') }}
 
-                    {# nombre de produit #}
-                    <div class="row mt-5">
-                        <div class="col-2">
-                            <p> {{ pluralize(products|length, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
-                        </div>
-                        <div class="col-5">
-                            {% include 'products/_filter.html.twig' with {form : form}  only %}
-                        </div>
-                    </div> 
+            {# filtre recherche #}
+            <div class="row result-filtre">
+                <div class="col-2">
+                    <p> {{ pluralize(products|length, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
+                </div>
+            </div> 
+            <div class="row form-filtre">
+                <div class="col d-flex justify-content-around">
+                    {% include 'products/_filter.html.twig' with {form : form}  only %}
+                </div>
+            </div> 
              
             {# card produit #}
             <div class="contenant-page-s-cat">

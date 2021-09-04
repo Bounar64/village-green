@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -23,8 +24,34 @@ class ProductRepository extends ServiceEntityRepository
      * Récupère les produits en lien avec une recherche
      * @return Product[]
      */
-    public function findSearch(): array
+    public function findSearch(SearchData $search): array
     {
-        return $this->findAll();
+       $query = $this
+        ->createQueryBuilder('p');
+
+        if(!empty($search->getKw())) {
+            $query = $query
+                ->andWhere('p.brand LIKE :kw')
+                ->setParameter('kw', "%{$search->getKw()}%");
+        }
+
+        if(!empty($search->getMin())) {
+            $query = $query
+                ->andWhere('p.price >= :min')
+                ->setParameter('min', $search->getMin());
+        }
+
+        if(!empty($search->getMax())) {
+            $query = $query
+                ->andWhere('p.price <= :max')
+                ->setParameter('max', $search->getMax());
+        }
+
+        if(!empty($search->getDiscount())) {
+            $query = $query
+                ->andWhere('p.discount is not null');
+        }
+       
+        return $query->getQuery()->getResult();
     }
 }

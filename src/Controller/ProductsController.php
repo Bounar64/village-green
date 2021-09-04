@@ -7,6 +7,7 @@ use App\Form\SearchForm;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,13 +29,16 @@ class ProductsController extends AbstractController
     /**
      * @Route("/products/{label}", name="app_products_show") // on passe le label de la sous-catégories dans l'url pour y accéder 
      */
-    public function productsShow(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
+    public function productsShow(Request $request, CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
     {
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+        $products = $productRepository->findSearch($data);
+
         $categories = $categoryRepository->findBy([], [], 9, null);
         $subcategory = $subcategoryRepository->findAll('category');
-        $products = $productRepository->findSearch();
+        
 
         return $this->render('products/products_show.html.twig', [
             'categories' => $categories,
@@ -51,7 +55,7 @@ class ProductsController extends AbstractController
     {
         $categories = $categoryRepository->findBy([], [], 9, null);
         $subcategory = $subcategoryRepository->findAll('category');
-        $products = $productRepository->findSearch();
+        $products = $productRepository->findAll();
 
         return $this->render('products/products_details.html.twig',  compact('categories', 'subcategory', 'products'));
     }
