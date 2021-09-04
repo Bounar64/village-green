@@ -84,6 +84,11 @@
                     </div>
                 </div>         
             </div> {# fermeture card produit #}
+
+            {# display navigation #}
+            <div class="navigation">
+                {{ knp_pagination_render(products) }}
+            </div>
              
             {# footer #} 
             {{ include('/layouts/footer.html.twig') }}

@@ -2,10 +2,11 @@
 
 namespace App\Repository;
 
-use App\Data\SearchData;
 use App\Entity\Product;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Data\SearchData;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,16 +16,17 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Product::class);
+        $this->paginator = $paginator;
     }
 
     /**
      * Récupère les produits en lien avec une recherche
-     * @return Product[]
+     * @return PaginationInterface
      */
-    public function findSearch(SearchData $search): array
+    public function findSearch(SearchData $search)
     {
        $query = $this
         ->createQueryBuilder('p');
@@ -51,7 +53,12 @@ class ProductRepository extends ServiceEntityRepository
             $query = $query
                 ->andWhere('p.discount is not null');
         }
-       
-        return $query->getQuery()->getResult();
+
+        $query = $query->getQuery(); // récupère la requête
+        return $this->paginator->paginate(
+            $query, 
+            1, /*page number*/
+            3/*limit per page*/
+        );
     }
 }

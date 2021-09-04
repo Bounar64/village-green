@@ -109,4 +109,28 @@ class SearchData
         return $this;
     }
 
+
+    /**
+     * Get the value of count
+     *
+     * @return  integer
+     */ 
+    public function getCount()
+    {
+        return $this->count;
+    }
+
+    /**
+     * Set the value of count
+     *
+     * @param  integer  $count
+     *
+     * @return  self
+     */ 
+    public function setCount($count)
+    {
+        $this->count = $count;
+
+        return $this;
+    }
 }
