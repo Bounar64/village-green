@@ -8,13 +8,20 @@
             {# header navigation #} 
             {{ include('/layouts/header_navigation.html.twig') }}
 
-            
-           {# filtre de recherche #}
-            <div class="row form-filtre">
-                <div class="col d-flex justify-content-center">
-                    {% include 'products/_filter.html.twig' with {form : form}  only %}
+            {# card filtre de recherche #}
+            <div class=" d-flex justify-content-center mt-5">
+                <div class="col-11 card card-filtre">
+                    <div class="card-body">
+                        {# filtre de recherche #}
+                        <div class="row form-filtre">
+                            <div class="col d-flex justify-content-center">
+                                {% include 'products/_filter.html.twig' with {form : form}  only %}
+                            </div>
+                        </div> 
+                    </div>
                 </div>
-            </div> 
+            </div>
+            
 
             {# filtre pour le compte de résultat #}
             {% set count = 0 %} 

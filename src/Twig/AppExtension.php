@@ -28,6 +28,11 @@ class AppExtension extends AbstractExtension
     public function doSomething(int $count, string $singular, string $plural): string // On passe dans les param le compte le singulier & le pluriel 
     {
         $result = $count === 1 ? $singular : $plural; // On utilise un terner on met la condition si 1 vaut 1 singulier (true) dans le cas contraire on met le pluriel (false)
+        
+        if($count === 0) {
+
+            return $result= 'Aucun résultat :(';  
+        } 
         return "$count $result";
     }
 }

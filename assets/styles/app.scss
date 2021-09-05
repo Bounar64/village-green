@@ -546,8 +546,14 @@ body {
         }
     }
 
+    .card-filtre {
+        // background: none;
+        margin-top: 10px;
+        border-radius: 0.25rem;
+        box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+    }
+
     .form-filtre {
-        margin-top: 100px;
         
         form {
             display: flex;
@@ -555,7 +561,7 @@ body {
 
         .form-input {
             height:30px;
-            font-size: 15px;
+            font-size: 12px;
             font-style: italic;
         }
 
@@ -563,6 +569,11 @@ body {
             outline: none !important;
             border: 2px solid $orange;
             box-shadow: none;
+        }
+
+        label.form-check-label {
+            font-size: 15px;
+            font-weight: 500;
         }
 
         .form-checked {
