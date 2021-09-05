@@ -32,6 +32,7 @@ class ProductsController extends AbstractController
     public function productsShow(Request $request, CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
     {
         $data = new SearchData();
+        $data->page = $request->get('page', 1);
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);

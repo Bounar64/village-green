@@ -5,6 +5,11 @@ namespace App\Data;
 class SearchData 
 {
     /**
+     * @var integer
+     */
+    public $page = 1;
+
+    /**
      * @var null|string
      */
     private $kw;

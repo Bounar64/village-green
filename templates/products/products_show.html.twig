@@ -8,18 +8,28 @@
             {# header navigation #} 
             {{ include('/layouts/header_navigation.html.twig') }}
 
-            {# filtre recherche #}
-            <div class="row result-filtre">
-                <div class="col-2">
-                    <p> {{ pluralize(products|length, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
-                </div>
-            </div> 
+            
+           {# filtre de recherche #}
             <div class="row form-filtre">
-                <div class="col d-flex justify-content-around">
+                <div class="col d-flex justify-content-center">
                     {% include 'products/_filter.html.twig' with {form : form}  only %}
                 </div>
             </div> 
-             
+
+            {# filtre pour le compte de résultat #}
+            {% set count = 0 %} 
+            {% for products in products %}
+                {% if products.subcategory.label == (app.request.get('label')) %}
+                    {% set count = count + 1 %}   
+                {% endif %}
+            {% endfor %}
+            {# filtre de resutlat #}
+            <div class="row resultat-filtre d-flex justify-content-start">
+                <div class="col-2 text-end">
+                    <p class="resultat-text">{{ pluralize(count, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
+                </div>
+            </div>
+    
             {# card produit #}
             <div class="contenant-page-s-cat">
                 <div class="col-11">
@@ -78,18 +88,21 @@
                                             </div>
                                         </div>
                                     </div> 
-                                </a>   
-                            {% endif %}
+                                </a>                               
+                            {% endif %}      
                         {% endfor %}
                     </div>
-                </div>         
+                    
+                    {# display navigation #}
+                    <div class="row d-flex justify-content-start mt-5">
+                         <div class="col-4 paginator">
+                        {{ knp_pagination_render(products) }}
+                        </div>
+                    </div>
+                   
+                </div> 
             </div> {# fermeture card produit #}
-
-            {# display navigation #}
-            <div class="navigation">
-                {{ knp_pagination_render(products) }}
-            </div>
-             
+ 
             {# footer #} 
             {{ include('/layouts/footer.html.twig') }}
         </div> {# fermeture du container products #}   

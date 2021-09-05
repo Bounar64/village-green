@@ -5,8 +5,9 @@ namespace App\Repository;
 use App\Entity\Product;
 use App\Data\SearchData;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -26,27 +27,42 @@ class ProductRepository extends ServiceEntityRepository
      * Récupère les produits en lien avec une recherche
      * @return PaginationInterface
      */
-    public function findSearch(SearchData $search)
+    public function findSearch(SearchData $search): PaginationInterface
     {
        $query = $this
         ->createQueryBuilder('p');
 
         if(!empty($search->getKw())) {
             $query = $query
-                ->andWhere('p.brand LIKE :kw')
+                ->andWhere('p.brand LIKE :kw or p.label LIKE :kw') // recherche par marque ou modèle
                 ->setParameter('kw', "%{$search->getKw()}%");
         }
 
-        if(!empty($search->getMin())) {
-            $query = $query
+        if(!empty($search->getMin())) {   
+            if('p.discount' != NULL) {
+                 $query = $query
+                 ->andWhere('p.price - p.discount / 100 * p.price >= :min')
+                ->setParameter('min', $search->getMin());
+            }
+            else {
+                $query = $query
                 ->andWhere('p.price >= :min')
                 ->setParameter('min', $search->getMin());
+            }
+                
         }
 
         if(!empty($search->getMax())) {
-            $query = $query
-                ->andWhere('p.price <= :max')
-                ->setParameter('max', $search->getMax());
+            if('p.disount' != NULL) {
+                $query = $query
+                ->andWhere('p.price - p.discount / 100 * p.price <= :max')
+               ->setParameter('max', $search->getMax());
+           }
+           else {
+               $query = $query
+               ->andWhere('p.price <= :max')
+               ->setParameter('max', $search->getMax());
+           }
         }
 
         if(!empty($search->getDiscount())) {
@@ -57,8 +73,8 @@ class ProductRepository extends ServiceEntityRepository
         $query = $query->getQuery(); // récupère la requête
         return $this->paginator->paginate(
             $query, 
-            1, /*page number*/
-            3/*limit per page*/
+            $search->page, /*page number*/
+            12/*limit per page*/
         );
     }
 }

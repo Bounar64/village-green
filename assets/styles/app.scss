@@ -521,25 +521,73 @@ body {
     //**********************************************************************************************************************************************************//
 
     //***********************************************************************//
-    //************************ FILTRAGE DES PRODUITS ************************//
+    //************* FILTRAGE DES PRODUITS + COMPTE DE RESULTAT **************//
     //***********************************************************************//
-    .result-filtre {
-        @extend .mt-5;
+    #priceSlider {
+        height: 15px;
+        transform: translateY(5px);
+
+            .noUi-connect {
+               background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);   
+            }
+
+            .noUi-handle {
+              transform: scale(80%);  
+            } 
+    }
+    
+    .resultat-filtre {
+        margin-top: 50px;
+        
+        .resultat-text {
+            color: $bleu;
+            font-weight: 600;
+            font-size: 15px;
+        }
     }
 
     .form-filtre {
+        margin-top: 100px;
+        
+        form {
+            display: flex;
+        }
+
+        .form-input {
+            height:30px;
+            font-size: 15px;
+            font-style: italic;
+        }
+
+        .form-input:focus {
+            outline: none !important;
+            border: 2px solid $orange;
+            box-shadow: none;
+        }
+
+        .form-checked {
+            box-shadow: none;
+            border-color: $gris-muted;
+        }
+        .form-checked:checked {
+            box-shadow: none;
+        }
         
         button {
             background: $orange;
             background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
             border: none; 
-            font-weight: 500;        
+            font-weight: 500;  
+            height: 30px;
+
+                &:focus {
+                    box-shadow: none;
+                }
         }
+        
+
     }
 
-    
-
-    
     //***********************************************************************//
     //******************* MISE EN PAGES DES PRODUITS (GRID) ******************//
     //***********************************************************************//
@@ -632,6 +680,18 @@ body {
                     }
 
                 }              
+                
+            }
+
+            .pagination {
+            
+                a.page-link  {
+                    color: $orange;
+                }
+                .page-item.active .page-link {
+                    border: none;
+                    background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
+                }
                 
             }
     }
