@@ -30,7 +30,11 @@ class ProductRepository extends ServiceEntityRepository
     public function findSearch(SearchData $search): PaginationInterface
     {
        $query = $this
-        ->createQueryBuilder('p');
+            ->createQueryBuilder('p')
+            ->select('p', 'sc')
+            ->join('p.subCategory', 'sc')
+            ->where('sc.label = :url_label')
+            ->setParameter('url_label', $search->url_label);
 
         if(!empty($search->getKw())) {
             $query = $query
@@ -74,7 +78,7 @@ class ProductRepository extends ServiceEntityRepository
         return $this->paginator->paginate(
             $query, 
             $search->page, /*page number*/
-            12/*limit per page*/
+            4/*limit per page*/
         );
     }
 }

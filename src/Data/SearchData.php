@@ -10,6 +10,11 @@ class SearchData
     public $page = 1;
 
     /**
+     * @var string
+     */
+    public $url_label;
+
+    /**
      * @var null|string
      */
     private $kw;

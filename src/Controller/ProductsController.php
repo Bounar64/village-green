@@ -29,10 +29,12 @@ class ProductsController extends AbstractController
     /**
      * @Route("/products/{label}", name="app_products_show") // on passe le label de la sous-catégories dans l'url pour y accéder 
      */
-    public function productsShow(Request $request, CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
+    public function productsShow(string $label, Request $request, CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository): Response
     {
         $data = new SearchData();
         $data->page = $request->get('page', 1);
+        $data->url_label = $label;
+        
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
