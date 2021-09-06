@@ -40,8 +40,8 @@ class ProductRepository extends ServiceEntityRepository
 
         if(!empty($search->getMin())) {   
             if('p.discount' != NULL) {
-                 $query = $query
-                 ->andWhere('p.price - p.discount / 100 * p.price >= :min')
+                $query = $query
+                ->where('p.price - p.discount / 100 * p.price >= :min')
                 ->setParameter('min', $search->getMin());
             }
             else {

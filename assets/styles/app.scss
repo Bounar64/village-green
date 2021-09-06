@@ -162,11 +162,8 @@ body {
                     //______Affichage du popover au survole de l'espace client______//
                     .popover-space-cli:hover .contenu-space-cli {
                         visibility: visible;
-                    }
-
-                    
-            }
-        
+                    }       
+            }    
     }
 
     // ********************* NAVBAR SERVICE (PRODUIT - SERVICE - AIDE - A PROPOS) ********************* //
@@ -183,7 +180,6 @@ body {
                 padding-bottom: 0;
                 margin-right: 80px;
             }
-
     }
 
     // ********************* NAVBAR PRODUIT (CATEGORIES) ********************* //
@@ -295,7 +291,8 @@ body {
             .cat-case:focus + .contenu-case,
             .cat-accessoires:focus + .contenu-accessoires
             {
-                visibility: visible;
+                opacity: 1;
+                pointer-events: visible;
             }
     }
 
