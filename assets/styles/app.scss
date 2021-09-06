@@ -72,6 +72,11 @@ body {
                 font-weight: 500;
                 font-size: 18px;
 
+                    &:hover {
+                        color: $orange;
+                        transition-duration: 200ms;
+                    }
+
                     &.panier {
                         margin-right: 60px;
                     }
@@ -79,8 +84,87 @@ body {
                     &.langue {
                         margin-right: 20px;
                         font-weight: 600;
+                    }       
+            }
+            
+            //______Espace client______//
+            .nav-space-cli {
+
+                    .cat-popover {
+                        padding: 13px 13px 13px 0;
                     }
 
+                    p {
+                        font-size: 12px;
+                        font-weight: 500;
+                        color: rgb(100, 100, 100);
+                            
+                        &.question {
+                            font-size: 15px;
+                            font-weight: 500;
+                            color: inherit;
+                        }
+                    }
+            
+                    .text-checkbox {
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+            
+                    .contenu-text-right {
+                        margin-bottom: 22px;
+                    }
+            
+                    input.form-control {
+                        background: rgb(204, 203, 203);
+                        height: 35px;
+                        font-size: 12px;
+                        font-weight: 500;
+                        border: none;
+                            
+                            &:focus {
+                                outline: none !important;
+                                border: 2px solid $orange;
+                                box-shadow: none;
+                            }
+                    
+                    }
+            
+                    button {
+                        background: $orange;
+                        background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
+                        border: none; 
+                        font-weight: 500; 
+                        font-size: 15px; 
+                        height: 35px;
+                        
+                        &:hover {
+                            box-shadow: none;
+                        }                    
+                    }
+             
+                    .text-bottom {
+                        color: $bleu;
+                    }
+
+                    // ********************* POPOVER ESPACE CLIENT ********************* //
+                    .contenu-space-cli {  
+                        transform: translateX(-37%);
+                        @include apparencePopoverClient;
+                        
+                            //______Triangle dessus popover______//
+                            &:before {
+                                @include apparenceTriangleClient;
+                            }
+                    
+                    }
+
+                    //______Affichage du popover au survole de l'espace client______//
+                    .popover-space-cli:hover .contenu-space-cli {
+                        visibility: visible;
+                    }
+
+                    
             }
         
     }

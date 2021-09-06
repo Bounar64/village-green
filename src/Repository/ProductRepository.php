@@ -44,8 +44,7 @@ class ProductRepository extends ServiceEntityRepository
                  ->andWhere('p.price - p.discount / 100 * p.price >= :min')
                 ->setParameter('min', $search->getMin());
             }
-            
-            if('p.discount' == NULL) {
+            else {
                 $query = $query
                 ->andWhere('p.price >= :min')
                 ->setParameter('min', $search->getMin());
@@ -59,8 +58,7 @@ class ProductRepository extends ServiceEntityRepository
                 ->andWhere('p.price - p.discount / 100 * p.price <= :max')
                ->setParameter('max', $search->getMax());
            }
-
-           if('p.disount' == NULL) {
+           else {
                $query = $query
                ->andWhere('p.price <= :max')
                ->setParameter('max', $search->getMax());

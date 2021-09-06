@@ -9,7 +9,13 @@
         {# navbar info #}
         <div class="nav-info">
             <a href="#">Infos</a>
-            <a href="#">Espace client</a>
+                <div class="navbar-nav nav-space-cli">
+                    <div class="popover-space-cli">
+                        <a href="#">Espace client</a>
+                        {# popover espace client #}
+                        {% include('/layouts/_popover_space_client.html.twig') %}                       
+                    </div>
+                </div>                
             <a class="panier" href="#"><img src="{{ asset('build/images/picto_panier.png') }}" alt="pictogramme panier"></a>
             <a class="langue" href="#"><img src="{{ asset('build/images/picto_pays.png') }}" alt="pictogramme langue">&nbsp;FR</a>
         </div>
@@ -20,11 +26,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link" href="{{ path('app_products')}}">Produits</a>
+                    <div class="navbar-nav">            
+                        <a class="nav-link" href="{{ path('app_products') }}">Produits</a>                  
                         <a class="nav-link" href="#">Service</a>
                         <a class="nav-link" href="#">Aide</a>
-                        <a class="nav-link" href="#">A propos</a>
+                        <a class="nav-link" href="#">A propos</a>           
                     </div>
                 </div>
             </div>
@@ -38,7 +44,7 @@
                         <ul class="texte-popover">
                             {% for subcategory in subcategory %} 
                                 {% if subcategory.category.id is same as (category.id) %}            
-                                    <li class="line-height "><a href="{{ path('app_products_show', {label: subcategory.label}) }}">{{ subcategory.label|nl2br }}</a></li>
+                                    <li class="line-height"><a href="{{ path('app_products_show', {label: subcategory.label}) }}">{{ subcategory.label|nl2br }}</a></li>
                                 {% endif %}
                             {% endfor %}
                         </ul>

@@ -23,6 +23,20 @@
     visibility: hidden;
     z-index: 9999;
 }
+/************************** Apparence du popover de l'espace client **************************/
+
+@mixin apparencePopoverClient {
+    width: 560px;
+    position: absolute;
+    background-color: $gris-back;
+    transform: translateX(-37%);
+    transition: all 0.3s linear;
+    margin-top: 13px;
+    border-radius: 3%;
+    box-shadow: rgba(14, 30, 37, 0.6) 0px 2px 4px 0px, rgba(14, 30, 37, 0.6) 0px 2px 16px 0px;
+    visibility: hidden;
+    z-index: 9999;
+}
 
 
 
@@ -59,7 +73,21 @@
     left: 50%;
     transform: translateX(-50%);
     border-top: 10px solid transparent;
-    border-bottom: 10px solid gainsboro;
+    border-bottom: 10px solid $gris-back;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
 }
+
+/************************** Apparence du triangle au dessus du popover de l'espace client **************************/
+@mixin apparenceTriangleClient {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid $gris-back;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
