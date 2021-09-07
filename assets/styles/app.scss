@@ -4,7 +4,6 @@
 @import "_mixins";
 @import "_generale";
 
-
 /* Mise du background */
 body {
     background-image: url("../images/background_village.png");
@@ -161,7 +160,8 @@ body {
 
                     //______Affichage du popover au survole de l'espace client______//
                     .popover-space-cli:hover .contenu-space-cli {
-                        visibility: visible;
+                        opacity: 1;
+                        pointer-events: visible;
                     }       
             }    
     }
@@ -625,6 +625,19 @@ body {
             font-weight: 600;
             font-size: 15px;
         }
+
+        //_____bouton filtre du prix desc & asc____//
+        .button-price {
+            background: $orange;
+            background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
+            border: none; 
+            font-weight: 500;  
+            height: 30px;
+
+                &:focus {
+                    box-shadow: none;
+                }
+        }
     }
 
     .card-filtre {
@@ -676,8 +689,7 @@ body {
                     box-shadow: none;
                 }
         }
-        
-
+    
     }
 
     //***********************************************************************//

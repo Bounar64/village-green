@@ -15,23 +15,25 @@
                         {# filtre de recherche #}
                         <div class="row form-filtre">
                             <div class="col d-flex justify-content-center">
-                                {% include 'products/_filter.html.twig' with {form : form}  only %}
+                                {% include 'layouts/_filter.html.twig' with {form : form}  only %}
                             </div>
                         </div> 
                     </div>
                 </div>
             </div>
             
-
             {# filtre pour le compte de résultat #}
             {% set count = 0 %} 
             {% for products in products %}
-                {% set count = count + 1 %}   
+                    {% set count = count + 1 %}   
             {% endfor %}
             {# filtre de resutlat #}
-            <div class="row resultat-filtre d-flex justify-content-start">
-                <div class="col-2 text-end">
+            <div class="row resultat-filtre d-flex justify-content-around">
+                <div class="col-5">
                     <p class="resultat-text">{{ pluralize(count, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
+                </div>
+                <div class="col-5 text-end">
+                    {{ knp_pagination_sortable(products, 'prix', 'p.price') }}
                 </div>
             </div>
     
@@ -92,7 +94,7 @@
                                         </div>
                                     </div>
                                 </div> 
-                            </a>                                                          
+                            </a>                               
                         {% endfor %}
                     </div>
                     

@@ -34,10 +34,11 @@ class ProductsController extends AbstractController
         $data = new SearchData();
         $data->page = $request->get('page', 1);
         $data->url_label = $label;
-        
+
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
+        $count = intval($productRepository->CountResult());
 
         $categories = $categoryRepository->findBy([], [], 9, null);
         $subcategory = $subcategoryRepository->findAll('category');
@@ -47,6 +48,7 @@ class ProductsController extends AbstractController
             'categories' => $categories,
             'subcategory' => $subcategory,
             'products' => $products,
+            'count' => $count,
             'form' => $form->createView()
         ]);
     }

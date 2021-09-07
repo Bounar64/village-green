@@ -45,7 +45,7 @@ class ProductRepository extends ServiceEntityRepository
         if(!empty($search->getMin())) {   
             if('p.discount' != NULL) {
                 $query = $query
-                ->where('p.price - p.discount / 100 * p.price >= :min')
+                ->andWhere('p.price - p.discount / 100 * p.price >= :min')
                 ->setParameter('min', $search->getMin());
             }
             else {
@@ -60,7 +60,7 @@ class ProductRepository extends ServiceEntityRepository
             if('p.disount' != NULL) {
                 $query = $query
                 ->andWhere('p.price - p.discount / 100 * p.price <= :max')
-               ->setParameter('max', $search->getMax());
+                ->setParameter('max', $search->getMax());
            }
            else {
                $query = $query
@@ -78,7 +78,16 @@ class ProductRepository extends ServiceEntityRepository
         return $this->paginator->paginate(
             $query, 
             $search->page, /*page number*/
-            4/*limit per page*/
+            6/*limit per page*/
         );
     }
+
+    public function countResult()
+    {
+        $query = $this->createQueryBuilder('p');
+        return $query
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }   
 }
