@@ -9,11 +9,11 @@
             {{ include('/layouts/header_navigation.html.twig') }}
 
             {# card filtre de recherche #}
-            <div class=" d-flex justify-content-center mt-5">
+            <div class=" d-flex justify-content-center mt-5 js-filter">
                 <div class="col-11 card card-filtre">
                     <div class="card-body">
                         {# filtre de recherche #}
-                        <div class="row form-filtre">
+                        <div class="row form-filtre js-filter-form">
                             <div class="col d-flex justify-content-center">
                                 {% include 'layouts/_filter.html.twig' with {form : form}  only %}
                             </div>
@@ -32,7 +32,7 @@
                 <div class="col-5">
                     <p class="resultat-text">{{ pluralize(count, 'RESULTAT', 'RESULTATS') }}</p> {# création d'une fonction twig pluriel singulier voir Twig/AppExtension #}
                 </div>
-                <div class="col-5 text-end">
+                <div class="col-5 text-end js-filter-sorting">
                     {{ knp_pagination_sortable(products, 'prix', 'p.price') }}
                 </div>
             </div>
@@ -40,7 +40,7 @@
             {# card produit #}
             <div class="contenant-page-s-cat">
                 <div class="col-11">
-                    <div class="grid">
+                    <div class="grid js-filter-content">
                         {% for products in products %}
                             <a href="{{ path('app_products_details', {label: products.subcategory.label, label_products: products.label, ref: products.reference}) }}">
                                 <div class="card">
@@ -100,7 +100,7 @@
                     
                     {# display navigation #}
                     <div class="row d-flex justify-content-start mt-5">
-                         <div class="col-4 paginator">
+                         <div class="col-4 paginator js-filter-pagination">
                         {{ knp_pagination_render(products) }}
                         </div>
                     </div>

@@ -64,4 +64,5 @@ class ProductsController extends AbstractController
 
         return $this->render('products/products_details.html.twig',  compact('categories', 'subcategory', 'products'));
     }
+       
 }

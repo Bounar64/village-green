@@ -631,7 +631,8 @@ body {
             background: $orange;
             background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
             border: none; 
-            font-weight: 500;  
+            font-weight: 500; 
+            font-size: 15px;
             height: 30px;
 
                 &:focus {
@@ -670,13 +671,18 @@ body {
             font-weight: 500;
         }
 
-        .form-checked {
-            box-shadow: none;
-            border-color: $gris-muted;
+        .container-form-check {
+            margin-top: 3px;
+
+                .form-checked {
+                    box-shadow: none;
+                    border-color: $gris-muted;
+                }
+                .form-checked:checked {
+                    box-shadow: none;
+                }
         }
-        .form-checked:checked {
-            box-shadow: none;
-        }
+       
         
         button {
             background: $orange;

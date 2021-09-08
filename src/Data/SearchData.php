@@ -2,6 +2,8 @@
 
 namespace App\Data;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class SearchData 
 {
     /**
@@ -16,16 +18,25 @@ class SearchData
 
     /**
      * @var null|string
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="cannot contain a number."
+     * )
      */
     private $kw;
 
     /**
      * @var null|integer
+     * 
+     * @Assert\PositiveOrZero
      */
     private $max;
 
     /**
      * @var null|integer
+     * 
+     * @Assert\PositiveOrZero
      */
     private $min;
 
