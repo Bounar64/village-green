@@ -52,6 +52,11 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $sex;
+
+    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -86,6 +91,11 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=50)
      */
     private $phone;
+
+     /**
+     * @ORM\Column(type="string", length=80)
+     */
+    private $degree;
 
     /**
      * @ORM\Column(type="decimal", precision=7, scale=2)
@@ -178,6 +188,18 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getSex(): ?bool
+    {
+        return $this->sex;
+    }
+
+    public function setSex(bool $sex): self
+    {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -258,6 +280,18 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getDegree(): ?string
+    {
+        return $this->degree;
+    }
+
+    public function setDegree(string $degree): self
+    {
+        $this->degree = $degree;
 
         return $this;
     }
