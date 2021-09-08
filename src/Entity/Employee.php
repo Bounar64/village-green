@@ -32,7 +32,7 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="bigint")
      */
     private $socialSecurityNumber;
 
