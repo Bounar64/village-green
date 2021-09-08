@@ -46,6 +46,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
+    private $confirm_password; // n'existe pas dans la base de données
+
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
      */
@@ -361,6 +363,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getConfirm_password(): string
+    {
+        return $this->confirm_password;
+    }
+
+    public function setConfirm_password(string $confirm_password): self
+    {
+        $this->password = $confirm_password;
 
         return $this;
     }
