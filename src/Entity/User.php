@@ -46,7 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
-    private $confirm_password; // n'existe pas dans la base de données
+    public $confirm_password; // n'existe pas dans la base de données
 
     /**
      * @ORM\Column(type="string", length=80, nullable=true)

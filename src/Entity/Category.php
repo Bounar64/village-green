@@ -34,11 +34,6 @@ class Category
      */
     private $subCategory;
 
-    /**
-     * @ORM\Column(type="string", length=80, nullable=true)
-     */
-    private $background;
-
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -118,18 +113,6 @@ class Category
                 $subCategory->setCategory(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getBackground(): ?string
-    {
-        return $this->background;
-    }
-
-    public function setBackground(?string $background): self
-    {
-        $this->background = $background;
 
         return $this;
     }
