@@ -78,7 +78,7 @@ class ProductRepository extends ServiceEntityRepository
         return $this->paginator->paginate(
             $query, 
             $search->page, /*page number*/
-            6/*limit per page*/
+            8/*limit per page*/
         );
     }
 

@@ -87,11 +87,11 @@ class ProductsFixtures extends Fixture
 
         $product= new Product();
         $product
-            ->setLabel('SOUTH STATE C100 SHINY BLACK')
+            ->setLabel('SOUTH STATE SHINY BLACK')
             ->setShortLabel('SOUTH STATE C100 BK')
             ->setDescription('Depuis leur apparition en 1958')
-            ->setReference('255728')
-            ->setColor('Amber')
+            ->setReference('258444')
+            ->setColor('Black')
             ->setMaterial('Tilleul')
             ->setService('1')
             ->setDiscount(NULL)
@@ -123,7 +123,7 @@ class ProductsFixtures extends Fixture
 
         $product= new Product();
         $product
-            ->setLabel('S521-BBS BLACKBERRY SUNBURST')
+            ->setLabel('S521-BBS BLACKBERRY')
             ->setShortLabel('S521BBS')
             ->setDescription('Depuis leur apparition en 1958')
             ->setReference('168540')
@@ -144,7 +144,7 @@ class ProductsFixtures extends Fixture
             ->setLabel('SE SANTANA YELLOW')
             ->setShortLabel('GES EC1000-VBK')
             ->setDescription('Depuis leur apparition en 1958')
-            ->setReference('255666')
+            ->setReference('255789')
             ->setColor('Yellow')
             ->setMaterial('Acajou')
             ->setService('1')

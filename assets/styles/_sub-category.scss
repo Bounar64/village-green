@@ -1,0 +1,60 @@
+//**********************************************************************************************************************************************************//
+//*************************************---------------------- PAGE SOUS-CATEGORIES (subcategory) ----------------------*************************************//
+//**********************************************************************************************************************************************************//
+
+// ********************* CONFIGURATION SWIPER ********************* //
+.contenant-page {
+    font-size: 14px;
+    color: #000;
+
+    .title-cat {
+        color: $bleu;
+        font-size: 20px;
+        margin-top: 3rem;
+        text-align: center;
+    }
+
+    .swiper {
+    width: 100%;
+    padding: 30px 0 0 10px;
+    } 
+    
+        .swiper-slide {
+            background: $gris-foncé;
+            background-position: center;
+            background-size: cover;
+            width: 300px;
+            height: 350px;
+            border-radius: 4px;
+            -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, #0006);
+        
+                a {
+                    text-decoration: none;
+                }
+                
+                img {
+                    border-radius: 3px 3px 0 0;
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                }
+
+                h2 {
+                    text-align: center;
+                    margin: 13px 0 0 0;
+                    font-size: 20px;
+                    font-weight: 400;
+                    color: $blanc;
+
+                    &.small {
+                        margin: 5px 0 0 0;
+                        font-size: 18px;
+                    }
+
+                    &:hover {
+                        color: $orange;
+                    }
+                }
+        }
+}
+
