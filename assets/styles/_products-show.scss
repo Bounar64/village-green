@@ -29,9 +29,7 @@
 
     //_____bouton filtre du prix desc & asc____//
     .button-price {
-        background: $orange;
-        background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
-        border: none; 
+        @include buttonColor; 
         font-weight: 500; 
         font-size: 15px;
         height: 30px;
@@ -86,9 +84,7 @@
     
     
     button {
-        background: $orange;
-        background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
-        border: none; 
+        @include buttonColor;
         font-weight: 500;  
         height: 30px;
 

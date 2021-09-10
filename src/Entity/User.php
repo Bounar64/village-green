@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use App\Entity\Traits\Timestampable;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -117,6 +118,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="datetime_immutable")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $phoneFixe;
+
+    /**
+     * @ORM\Column(type="string", length=80, nullable=true)
+     */
+    private $additionalAddress;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $country;
 
     public function getId(): ?int
     {
@@ -379,6 +396,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPhoneFixe(): ?string
+    {
+        return $this->phoneFixe;
+    }
+
+    public function setPhoneFixe(?string $phoneFixe): self
+    {
+        $this->phoneFixe = $phoneFixe;
+
+        return $this;
+    }
+
+    public function getAdditionalAddress(): ?string
+    {
+        return $this->additionalAddress;
+    }
+
+    public function setAdditionalAddress(?string $additionalAddress): self
+    {
+        $this->additionalAddress = $additionalAddress;
+
+        return $this;
+    }
+
      /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
@@ -397,5 +438,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
+
+        return $this;
     }
 }

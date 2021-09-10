@@ -4,23 +4,160 @@
 
 {% block body %}
 <header id="background">
-    <div class="container registration"> 
+    <div class="container registration-user"> 
         {# header navigation #} 
         {{ include('/layouts/header_navigation.html.twig') }} 
 
-        <div class="contenant-page">
-            {# card inscription #}
-            <div class=" d-flex justify-content-center mt-5 js-filter">
-                <div class="col-11 card card-filtre">
-                    <div class="card-body">
-                        <div class="row form-registration">
-                            <div class="col d-flex justify-content-center">
-                               
+        <div class="contenant-registration-user">
+            {# formulaire d'inscription #}
+            {{ form_start(form) }}
+                {# email et mdp #}   
+                <div class="row d-flex justify-content-evenly">
+                    <h2 class="text-center">Créez vos identifiants</h2>   
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input">E-mail</p>
+                            </div>
+                            <div class="col-8">
+                                {{ form_row(form.email) }}
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-3 text-end p-0">
+                                <p class="label-input">Créer votre <br> mot de passe</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.password) }}
+                            </div>
+                        </div>         
+                    </div>
+                    {# confirm mdp#}
+                    <div class="col-5">
+                            <div class="row">
+                            <div class="col-3 text-end p-0">
+                                <p class="label-input confirm">Confirmation <br> mot de passe</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.confirm_password, {attr: {class: 'input-password'}}) }}
                             </div>
                         </div> 
                     </div>
-                </div>
-            </div>   
+
+                    {# reste des infos #}
+                    <div class="row d-flex justify-content-evenly">
+                        <h2 class="text-center">Créez vos identifiants</h2>   
+                    <div class="col-5">
+                        <div class="row mt-5">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input">Prénom</p>
+                            </div>
+                            <div class="col-8">
+                                {{ form_row(form.firstName) }}
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input">Nom</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.lastName) }}
+                            </div>
+                        </div>         
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input">Adresse</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.address) }}
+                            </div>
+                        </div>         
+                        <div class="row">
+                            <div class="col-3 text-end p-0">
+                                <p class="label-input">Complément d'adresse</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.additionalAddress) }}
+                            </div>
+                        </div>         
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input">Code postal</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.zipCode) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input">Ville</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.city) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input">Pays</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.country) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {# card suivi commande par téléphone #}
+                    <div class="col-5">
+                        <div class="card">
+                            <div class="card-body card-right">
+                                <h3 class="card-title text-center mt-2">Vos numéro de téléphone</h3>
+                                {# inputs phones #}
+                                <div class="row">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-4 text-end p-0">
+                                        <p class="label-input">Numéro de portable</p>
+                                        </div>
+                                        <div class="col-7 mt-1">
+                                            {{ form_row(form.phone, {attr: {class: 'input-phone'}}) }}
+                                        </div>
+                                    </div>         
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-4 text-end p-0">
+                                        <p class="label-input">Numéro de téléphone fixe</p>
+                                        </div>
+                                        <div class="col-7 mt-1">
+                                            {{ form_row(form.phoneFixe, {attr: {class: 'input-phone'}}) }}
+                                        </div>
+                                    </div>        
+                                </div>
+                                {# image bottom card #}
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-11">
+                                        <img src="{{ asset('build/images/image-phone-suivi.png') }}" alt="texte: Suivez vos commandes par SMS">
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+
+                    {# button #}
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-2 text-center">
+                            <button type="submit" class="btn btn-primary">Valider</button>
+                        </div>
+                    </div>
+
+                </div> {# fermeture reste des infos #}
+            </div> {# fermeture form d'inscription #}
+
+                {# image nos partenaires #}
+                <div class="row bas-page-pictos">
+                    <div class="col-12 text-center">
+                        <img src="{{ asset('build/images/bas_de_page_pictos.png') }}" alt="logo de nos partenaires">
+                    </div>
+                </div> 
+            
+            {{ form_end(form) }}
         </div> {# fermeture contenant-page #}
             
         {# footer #} 

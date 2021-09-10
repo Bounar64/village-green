@@ -6,11 +6,12 @@
 
 @import "_products-show";
 @import "_products-details";
+@import "_registration";
 
 /* Mise du background */
 body {
     background-image: url("../images/background_village.png");
-    background-color: #4D4D4D;
+    background-color: $gris-semi;
     height: 100vh; /* viewport height */
     background-position: center;
     background-size: cover;
@@ -28,6 +29,19 @@ body {
         &.subcategory {
             min-height: 4550px;
         }
+
+        &.products-show {
+            min-height: 1470px;
+        }
+
+        &.products-details {
+            min-height: 960px;
+        }
+
+        &.registration-user {
+            min-height: 1810px;
+        }
+
 
     }   
     
@@ -133,9 +147,7 @@ body {
                     }
             
                     button {
-                        background: $orange;
-                        background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
-                        border: none; 
+                        @include buttonColor;
                         font-weight: 500; 
                         font-size: 15px; 
                         height: 35px;
@@ -415,9 +427,7 @@ body {
                             }
 
                         button {
-                            background: $orange;
-                            background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
-                            border: none; 
+                            @include buttonColor;
                             font-weight: 500;        
                         }
                 }
