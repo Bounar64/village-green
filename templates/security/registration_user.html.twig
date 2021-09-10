@@ -17,15 +17,16 @@
                     <div class="col-5">
                         <div class="row">
                             <div class="col-3 text-end mt-2 p-0">
-                                <p class="label-input">E-mail</p>
+                                <p class="label-input"><span>* </span>E-mail</p>
                             </div>
                             <div class="col-8">
                                 {{ form_row(form.email) }}
                             </div>
+                            
                         </div> 
                         <div class="row">
                             <div class="col-3 text-end p-0">
-                                <p class="label-input">Créer votre <br> mot de passe</p>
+                                <p class="label-input"><span>* </span>Créer votre <br> mot de passe</p>
                             </div>
                             <div class="col-8 mt-1">
                                 {{ form_row(form.password) }}
@@ -36,7 +37,7 @@
                     <div class="col-5">
                             <div class="row">
                             <div class="col-3 text-end p-0">
-                                <p class="label-input confirm">Confirmation <br> mot de passe</p>
+                                <p class="label-input confirm"><span>* </span>Confirmation <br> mot de passe</p>
                             </div>
                             <div class="col-8 mt-1">
                                 {{ form_row(form.confirm_password, {attr: {class: 'input-password'}}) }}
@@ -50,7 +51,7 @@
                     <div class="col-5">
                         <div class="row mt-5">
                             <div class="col-3 text-end mt-2 p-0">
-                                <p class="label-input">Prénom</p>
+                                <p class="label-input"><span>* </span>Prénom</p>
                             </div>
                             <div class="col-8">
                                 {{ form_row(form.firstName) }}
@@ -58,7 +59,7 @@
                         </div> 
                         <div class="row">
                             <div class="col-3 text-end mt-2 p-0">
-                                <p class="label-input">Nom</p>
+                                <p class="label-input"><span>* </span>Nom</p>
                             </div>
                             <div class="col-8 mt-1">
                                 {{ form_row(form.lastName) }}
@@ -66,7 +67,7 @@
                         </div>         
                         <div class="row">
                             <div class="col-3 text-end mt-2 p-0">
-                                <p class="label-input">Adresse</p>
+                                <p class="label-input"><span>* </span>Adresse</p>
                             </div>
                             <div class="col-8 mt-1">
                                 {{ form_row(form.address) }}
@@ -82,7 +83,7 @@
                         </div>         
                         <div class="row">
                             <div class="col-3 text-end mt-2 p-0">
-                                <p class="label-input">Code postal</p>
+                                <p class="label-input"><span>* </span>Code postal</p>
                             </div>
                             <div class="col-8 mt-1">
                                 {{ form_row(form.zipCode) }}
@@ -90,7 +91,7 @@
                         </div>
                         <div class="row">
                             <div class="col-3 text-end mt-2 p-0">
-                                <p class="label-input">Ville</p>
+                                <p class="label-input"><span>* </span>Ville</p>
                             </div>
                             <div class="col-8 mt-1">
                                 {{ form_row(form.city) }}
@@ -98,7 +99,7 @@
                         </div>
                         <div class="row">
                             <div class="col-3 text-end mt-2 p-0">
-                                <p class="label-input">Pays</p>
+                                <p class="label-input"><span>* </span>Pays</p>
                             </div>
                             <div class="col-8 mt-1">
                                 {{ form_row(form.country) }}
@@ -115,7 +116,7 @@
                                 <div class="row">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-4 text-end p-0">
-                                        <p class="label-input">Numéro de portable</p>
+                                        <p class="label-input"><span>* </span>Numéro de portable</p>
                                         </div>
                                         <div class="col-7 mt-1">
                                             {{ form_row(form.phone, {attr: {class: 'input-phone'}}) }}

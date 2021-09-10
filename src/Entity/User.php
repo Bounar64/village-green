@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use App\Entity\Traits\Timestampable;
-use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -28,7 +28,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
+     * // Un texte sans caractère spéciaux sauf "-" "_" "." un '@' obligatoire un "." obligatoire et minimum 2 et max 4 lettres exemple "fr" "com" "gouv"
+     * 
      * @ORM\Column(type="string", length=80, unique=true)
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
+     * @Assert\Regex(
+     *     pattern="/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,4})$/",
+     *     message="Veuillez saisir un e-mail valide."  
+     * )
      */
     private $email;
 
@@ -44,18 +51,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
+     * @Assert\Regex(
+     *     pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*+?&]{8,}$/",
+     *     message="Veuillez saisir au minimun 8 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial."
+     * )
      */
     private $password;
 
+    /**
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
+     * @Assert\EqualTo(propertyPath="password", message="Votre mot de passe ne correspond pas")
+     */
     public $confirm_password; // n'existe pas dans la base de données
 
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
+     * @Assert\Regex(
+     *     pattern="/^[a-zA-Z- éè]+$/",
+     *     message="Saisie invalide."
+     * )
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
+     * @Assert\Regex(
+     *     pattern="/^[a-zA-Z- éè]+$/",
+     *     message="Saisie invalide."
+     * )
      */
     private $firstName;
 
@@ -91,21 +117,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=80)
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
+     * @Assert\Regex(
+     *     pattern="/^[[:alnum:] 'éè]+$/",
+     *     message="Saisie invalide."
+     * )
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=80)
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
+     * @Assert\Regex(
+     *     pattern="/^[a-zA-Z -]+$/",
+     *     message="Saisie invalide."
+     * )
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
+     * @Assert\Regex(
+     *     pattern="/^(([0-8][0-9])|(9[0-5]))[0-9]{3}$/",
+     *     message="Saisie invalide."
+     * )
      */
     private $zipCode;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
+     * @Assert\Regex(
+     *     pattern="/^0[6-7]{1}\d{8}$/",
+     *     message="Saisie invalide."
+     * )
      */
     private $phone;
 
@@ -121,17 +167,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Regex(
+     *     pattern="/^0[3-4-2-9]{1}\d{8}$/",
+     *     message="Saisie invalide."
+     * )
      */
     private $phoneFixe;
 
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
+     * @Assert\Regex(
+     *     pattern="/^[a-zA-Z-]+$/",
+     *     message="Saisie invalide."
+     * )
      */
     private $additionalAddress;
 
     /**
      * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
      */
     private $country;
 
