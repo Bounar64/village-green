@@ -6,12 +6,12 @@
         </div>
         <div class="row d-block">
             <div class="col">
-            <form>
+            <form action="{{ path('security_login')}}" method="post">
                 <div class="mb-1">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Adresse E-mail">
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Adresse E-mail" name="_username">
                 </div>
                 <div class="mb-3">
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
+                    <input type="password" class="form-control" id="email" placeholder="Mot de passe" name="_password">
                 </div>
                 <div class="mb-3 form-check text-start text-checkbox">
                     <input type="checkbox" class="form-check-input" id="text-checkbox">

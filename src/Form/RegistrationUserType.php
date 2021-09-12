@@ -73,7 +73,7 @@ class RegistrationUserType extends AbstractType
                 'data' => 1
             ])
             ->add('reference', HiddenType::class, [
-                'data' => '#'.rand(100, 900)
+                'data' => '#' . 1 . rand(100, 900)
             ])
             ->add('coeff', HiddenType::class, [
                 'data' => 10

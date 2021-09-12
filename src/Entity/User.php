@@ -14,7 +14,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
- * @UniqueEntity(fields={"email"}, message="Cette email et déja utilisé")
+ * @UniqueEntity(
+ *      fields={"email"}, 
+ *      message="Cette e-mail et déjà utilisé")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -177,7 +179,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
      * @Assert\Regex(
-     *     pattern="/^[a-zA-Z-]+$/",
+     *     pattern="/^[a-zA-Z0-9- ]+$/",
      *     message="Saisie invalide."
      * )
      */
@@ -363,6 +365,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPhoneFixe(): ?string
+    {
+        return $this->phoneFixe;
+    }
+
+    public function setPhoneFixe(?string $phoneFixe): self
+    {
+        $this->phoneFixe = $phoneFixe;
+
+        return $this;
+    }
+
+    public function getAdditionalAddress(): ?string
+    {
+        return $this->additionalAddress;
+    }
+
+    public function setAdditionalAddress(?string $additionalAddress): self
+    {
+        $this->additionalAddress = $additionalAddress;
+
+        return $this;
+    }
+    
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -451,39 +477,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPhoneFixe(): ?string
-    {
-        return $this->phoneFixe;
-    }
-
-    public function setPhoneFixe(?string $phoneFixe): self
-    {
-        $this->phoneFixe = $phoneFixe;
-
-        return $this;
-    }
-
-    public function getAdditionalAddress(): ?string
-    {
-        return $this->additionalAddress;
-    }
-
-    public function setAdditionalAddress(?string $additionalAddress): self
-    {
-        $this->additionalAddress = $additionalAddress;
-
-        return $this;
-    }
-
      /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
      * @see UserInterface
      */
-    public function getSalt(): ?string
+    public function getSalt()
     {
-        return null;
+        // not needed when using the "bcrypt" algorithm in security.yaml équivaut -> retun null;
     }
 
     /**
