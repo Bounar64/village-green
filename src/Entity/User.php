@@ -186,7 +186,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $additionalAddress;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="country")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="Ce champ est obligatoire.")
      */

@@ -3,7 +3,7 @@
 //**********************************************************************************************************************************************************//
 
 .contenant-registration-user {
-    
+
     h2 {
         font-size: 35px;
         font-weight: 500;
@@ -23,31 +23,31 @@
         font-weight: 500;
         color: $gris-semi;
 
-            &.confirm {
-                margin-top: 55px;
-            }
+        &.confirm {
+            margin-top: 55px;
+        }
 
-            span {
-                color: $rouge;
-            }
+        span {
+            color: $rouge;
+        }
     }
 
     input {
         background: $gris-muted;
         border-color: rgb(175, 175, 175);
-        
-            &.input-password {
-                margin-top: 55px;
-            }
 
-            &.input-phone {
-                border-color: rgb(148, 148, 148);
-            }
+        &.input-password {
+            margin-top: 55px;
+        }
 
-            &:focus {
-                box-shadow: none;
-                border-color: $orange;
-            }
+        &.input-phone {
+            border-color: rgb(148, 148, 148);
+        }
+
+        &:focus {
+            box-shadow: none;
+            border-color: $orange;
+        }
     }
 
     #registration_user_country {
@@ -63,15 +63,15 @@
     .card {
         border: 2px solid $bleu;
 
-            .card-right {
-                background: #B2B2B2;
-        
-            }
+        .card-right {
+            background: #B2B2B2;
 
-            img {
-                width: 100%;
-                height: auto;
-            }
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
     }
 
     button {
@@ -85,5 +85,5 @@
     .bas-page-pictos {
         margin-top: 150px;
     }
-    
+
 }

@@ -21,7 +21,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         parent::__construct($registry, User::class);
     }
-
+    
+    /**
+     * Permet de mettre à jour  le mot de passe de l'utilisateur si l'algo venait à changer 
+     */
    public function  upgradePassword(UserInterface $user, string $newHashedPassword): void 
    {
        if(!$user instanceof User) {
@@ -29,7 +32,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
        }
 
        $user->setPassword($newHashedPassword);
-       $this->em->persist($user);
-       $this->em->flush();
+       $this->_em->persist($user);
+       $this->_em->flush();
    }
 }
