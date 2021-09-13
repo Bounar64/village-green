@@ -67,7 +67,8 @@
                 </p>
             </div>
             <div class="col">
-               <a href="{{ path('app_registration')}}"><button type="submit" class="btn btn-primary w-100 align-items-center lh-1">S'inscrire</button></a> 
+               <a href="#"><button type="submit" class="btn btn-primary w-100 align-items-center lh-1" data-bs-toggle="modal" data-bs-target="#modal">S'inscrire</button></a>
+                {% include('/layouts/modal.html.twig') %} {# choix entre part et pro type modal#}
             </div>   
         </div>
 

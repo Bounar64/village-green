@@ -154,6 +154,7 @@ body {
                         
                         &:hover {
                             box-shadow: none;
+                            border: none;
                         }                    
                     }
              
@@ -178,7 +179,33 @@ body {
                         opacity: 1;
                         pointer-events: visible;
                     }       
-            }    
+            }
+            
+            //______Modal choix particulier ou pro______//
+            #modal {
+               
+                .modal-dialog {
+                    margin-top: 124px;
+                    margin-bottom: 0px;
+                    max-width: 100%;
+                }
+
+                .modal-content {
+                    background: $gris-back;
+                    border-radius: 10px;
+                }
+
+                .title-modal {
+                    margin-left: 210px;
+                }
+
+                span {
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: $blanc;
+                }
+
+            }
     }
 
     // ********************* NAVBAR SERVICE (PRODUIT - SERVICE - AIDE - A PROPOS) ********************* //
