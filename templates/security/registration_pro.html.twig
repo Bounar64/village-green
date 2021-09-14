@@ -4,7 +4,7 @@
 
 {% block body %}
 <header id="background">
-    <div class="container registration-user"> 
+    <div class="container registration-pro"> 
         {# header navigation #} 
         {{ include('/layouts/header_navigation.html.twig') }} 
 
@@ -13,7 +13,7 @@
             {{ form_start(form) }}
                 {# email et mdp #}   
                 <div class="row d-flex justify-content-evenly">
-                    <h2 class="text-center">Créez vos identifiants</h2>   
+                    <h2 class="text-center">Créez vos identifiants professionnel</h2>   
                     <div class="col-5">
                         <div class="row">
                             <div class="col-3 text-end mt-2 p-0">
@@ -47,22 +47,30 @@
 
                     {# reste des infos #}
                     <div class="row d-flex justify-content-evenly">
-                        <h2 class="text-center">Créez vos identifiants</h2>   
+                        <h2 class="text-center">Créez vos identifiants professionnel</h2>   
                     <div class="col-5">
-                        <div class="row mt-5">
-                            <div class="col-3 text-end mt-2 p-0">
-                                <p class="label-input"><span>* </span>Prénom</p>
-                            </div>
-                            <div class="col-8">
-                                {{ form_row(form.firstName) }}
-                            </div>
-                        </div> 
                         <div class="row">
                             <div class="col-3 text-end mt-2 p-0">
-                                <p class="label-input"><span>* </span>Nom</p>
+                                <p class="label-input"><span>* </span>Société</p>
                             </div>
                             <div class="col-8 mt-1">
-                                {{ form_row(form.lastName) }}
+                                {{ form_row(form.compagny) }}
+                            </div>
+                        </div>         
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input"><span>* </span>Numéro TVA</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.vtaNumber) }}
+                            </div>
+                        </div>         
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input"><span>* </span>Numéro SIRET</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.rcsNumber) }}
                             </div>
                         </div>         
                         <div class="row">

@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class RegistrationUserType extends AbstractType
+class RegistrationProType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -31,7 +31,7 @@ class RegistrationUserType extends AbstractType
                 'label' => false,
                 'required' => false
             ])
-            ->add('lastName', TextType::class, [
+            ->add('compagny', TextType::class, [
                 'label' => false,
                 'required' => false,
                 'constraints' => [
@@ -40,7 +40,16 @@ class RegistrationUserType extends AbstractType
                     ])
                 ],
             ])
-            ->add('firstName', TextType::class, [
+            ->add('vtaNumber', TextType::class, [
+                'label' => false,
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Ce champ est obligatoire.',
+                    ])
+                ],
+            ])
+            ->add('rcsNumber', TextType::class, [
                 'label' => false,
                 'required' => false,
                 'constraints' => [
@@ -81,17 +90,14 @@ class RegistrationUserType extends AbstractType
             ])
 
             ->add('type',HiddenType::class, [
-                'data' => 1
+                'data' => 0
             ])
             ->add('reference', HiddenType::class, [
-                'data' => '#' . 1 . rand(100, 999)
+                'data' => '#' . 0 . rand(100, 999)
             ])
             ->add('coeff', HiddenType::class, [
-                'data' => 10
+                'data' => 20
             ])
-            ->add('compagny', HiddenType::class)
-            ->add('vtaNumber', HiddenType::class)
-            ->add('rcsNumber', HiddenType::class)
         ;
     }
 

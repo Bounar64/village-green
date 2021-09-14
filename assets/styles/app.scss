@@ -42,8 +42,11 @@ body {
             min-height: 1810px;
         }
 
-
-    }   
+        &.registration-pro {
+            background-color: #e4ddcc;
+        }
+    }  
+    
     
 
     p.titre-gras {

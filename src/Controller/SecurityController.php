@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationUserType;
+use App\Form\RegistrationProType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubCategoryRepository;
@@ -17,10 +18,10 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/registration", name="app_registration")
+     * @Route("/registration", name="app_registration_user")
      */
-    public function registration(Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository, 
-                                 SubCategoryRepository $subcategoryRepository, UserPasswordHasherInterface $hasher): Response
+    public function registrationUser(Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository, 
+                                SubCategoryRepository $subcategoryRepository, UserPasswordHasherInterface $hasher): Response
     {
         $categories = $categoryRepository->findBy([], [], 9, null);
         $subcategory = $subcategoryRepository->findAll('category');
@@ -38,7 +39,36 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_home'); // faudrait retourner sur une page de bienvenue
         }
 
-        return $this->render('security/registration_user.html.twig', [
+        return $this->render('security/registration_user.html.twig', [ // page d'enregistrement des utilisateurs privés
+            'categories' => $categories,
+            'subcategory' => $subcategory,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/registration-pro", name="app_registration_pro")
+     */
+    public function registrationPro(Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository, 
+                                SubCategoryRepository $subcategoryRepository, UserPasswordHasherInterface $hasher): Response
+    {
+        $categories = $categoryRepository->findBy([], [], 9, null);
+        $subcategory = $subcategoryRepository->findAll('category');
+        $user = new User();
+        $form = $this->createForm(RegistrationProType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $hash = $hasher->hashPassword($user, $user->getPassword());
+            $user->setPassword($hash);
+            
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this->redirectToRoute('app_home'); 
+        }
+
+        return $this->render('security/registration_pro.html.twig', [ // page d'enregistrement des utilisateurs professionnels
             'categories' => $categories,
             'subcategory' => $subcategory,
             'form' => $form->createView()

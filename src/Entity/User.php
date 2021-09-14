@@ -69,7 +69,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
-     * @Assert\NotBlank(message="Ce champ est obligatoire.")
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z- éè]+$/",
      *     message="Saisie invalide."
@@ -79,7 +78,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
-     * @Assert\NotBlank(message="Ce champ est obligatoire.")
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z- éè]+$/",
      *     message="Saisie invalide."
@@ -89,16 +87,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
+     * @Assert\Regex(
+     *     pattern="/^[[:alnum:] 'éè&_-]+$/",
+     *     message="Saisie invalide."
+     * )
      */
-    private $compagny;
+    private $compagny; 
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
+     * @Assert\Regex(
+     *     pattern="/^FR[0-9A-Z]{2}\d{9}$/",
+     *     message="Saisie invalide."
+     * )
      */
     private $vtaNumber;
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
+     * @Assert\Regex(
+     *     pattern="/^[0-9A-Z]{14}$/",
+     *     message="Saisie invalide."
+     * )
      */
     private $rcsNumber;
 
@@ -121,7 +131,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=80)
      * @Assert\NotBlank(message="Ce champ est obligatoire.")
      * @Assert\Regex(
-     *     pattern="/^[[:alnum:] 'éè]+$/",
+     *     pattern="/^[[:alnum:] 'éè-]+$/",
      *     message="Saisie invalide."
      * )
      */
@@ -186,11 +196,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $additionalAddress;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="country")
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="Ce champ est obligatoire.")
      */
     private $country;
+
 
     public function getId(): ?int
     {
