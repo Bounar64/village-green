@@ -1,7 +1,3 @@
-{# {% if error %}
-    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %} #}
-
 {% if not app.user %}
 <div class="row contenu-space-cli py-2">
     <div class="col-6 droite border-end border-1">
@@ -12,15 +8,15 @@
             <div class="col">
             <form action="{{ path('app_login') }} " method="post">
                 <div class="mb-1">
-                    <input type="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Adresse E-mail" name="_username">
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Adresse E-mail" name="_username">
                 </div>
                 <div class="mb-3">
                     <input type="password" class="form-control" id="email" placeholder="Mot de passe" name="_password">
                 </div>
 
                 <div class="mb-3 form-check text-start text-checkbox">
-                    <input type="checkbox" class="form-check-input" id="text-checkbox">
-                    <label class="form-check-label" for="text-checkbox">Rester connecté</label>
+                    <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me">
+                    <label class="form-check-label" for="remember_me">Rester connecté</label>
                 </div>                                                             
             </div>
 
