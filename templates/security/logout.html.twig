@@ -1,0 +1,36 @@
+<div class="row contenu-space-cli py-2">
+    <div class="col-6 droite border-end border-1">
+        <div class="row">
+            <p class="question text-center">Bienvenue <span class="fw-bold">{{ app.user.firstName }} {{ app.user.lastName }}</span></p>
+        </div>
+        <div class="row d-block">
+            <div class="col text-center mb-3">
+                <img src="{{ asset('build/images/photo_profil.png') }}" alt="photo de profil">
+            </div>
+            <div class="col">
+                <a href="#"><button type="submit" class="btn btn-primary w-100 align-items-center lh-1">Voir mon profil</button></a>
+            </div>   
+        </div>
+    </div>
+
+    <div class="col-6 droite">
+        <div class="row">
+            <p class="question text-start">N'êtes-vous pas encore client ?</p>
+             <p class="text-start contenu-text-right">
+                    En tant que client Village Green
+                    vous pouvez suivre vos envoies,
+                    lire des test produits exlusifs,
+                    évaluer des prduits, déposer
+                    des petites annonces, gérer
+                    vos chèques-cadeaux, devenir
+                    partenaire et bien plus encore.
+                </p>
+        </div>
+        <div class="row d-block">
+            <div class="col logout">
+               <a href="{{ path('app_logout') }}"><button type="submit" class="btn btn-primary w-100 align-items-center lh-1">Se déconnecter</button></a>
+            </div>   
+        </div>
+    </div>   
+</div> 
+ 

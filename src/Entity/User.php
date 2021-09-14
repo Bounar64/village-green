@@ -16,7 +16,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(
  *      fields={"email"}, 
- *      message="Cette e-mail et déjà utilisé")
+ *      message="Cette e-mail est déjà utilisé !" 
+ * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -197,6 +198,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="users")
+     * @Assert\NotBlank(message="Ce champ est obligatoire.")
      * @ORM\JoinColumn(nullable=false)
      */
     private $country;

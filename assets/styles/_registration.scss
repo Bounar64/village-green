@@ -36,6 +36,11 @@
         background: $gris-muted;
         border-color: rgb(175, 175, 175);
 
+        &:focus {
+            box-shadow: none;
+            border-color: $orange;
+        }
+
         &.input-password {
             margin-top: 55px;
         }
@@ -44,9 +49,17 @@
             border-color: rgb(148, 148, 148);
         }
 
+       
+    }
+
+    select {
+        background: $gris-muted;
+        border-color: rgb(175, 175, 175);
+
         &:focus {
             box-shadow: none;
             border-color: $orange;
+            background: $blanc;
         }
     }
 
