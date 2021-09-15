@@ -7,11 +7,13 @@ use App\Entity\Country;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class RegistrationProType extends AbstractType
@@ -87,6 +89,17 @@ class RegistrationProType extends AbstractType
             ->add('phoneFixe',TextType::class, [
                 'label' => false,
                 'required' => false
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Veuillez accepter les conditions d\'utilisation',
+                'required' => false,
+                'row_attr' => ['class' => 'agreeTerms'],
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => "Ce champ est obligatoire.",
+                    ]),
+                ],
             ])
 
             ->add('type',HiddenType::class, [

@@ -204,9 +204,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $country;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
-    private $authenticated;
+    private $isVerified = false;
 
 
     public function getId(): ?int
@@ -526,14 +526,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAuthenticated(): ?bool
+    public function isVerified(): bool
     {
-        return $this->authenticated;
+        return $this->isVerified;
     }
 
-    public function setAuthenticated(?bool $authenticated): self
+    public function setIsVerified(bool $isVerified): self
     {
-        $this->authenticated = $authenticated;
+        $this->isVerified = $isVerified;
 
         return $this;
     }

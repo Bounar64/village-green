@@ -2,7 +2,6 @@
 
 namespace App\Entity\Traits;
 
-
 trait Timestampable 
 {
 
@@ -56,4 +55,3 @@ trait Timestampable
     }
 
 }
-
