@@ -203,6 +203,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $country;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $authenticated;
+
 
     public function getId(): ?int
     {
@@ -517,6 +522,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCountry(?Country $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getAuthenticated(): ?bool
+    {
+        return $this->authenticated;
+    }
+
+    public function setAuthenticated(?bool $authenticated): self
+    {
+        $this->authenticated = $authenticated;
 
         return $this;
     }
