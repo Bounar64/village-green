@@ -1,5 +1,10 @@
-{% if not app.user %}
+{% if not app.user %}                                       
 <div class="row contenu-space-cli py-2">
+    
+    {% if error %}
+        <span class="error-login">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+    {% endif %}
+
     <div class="col-6 droite border-end border-1">
         <div class="row">
             <p class="question text-start">Êtes-vous déjà client chez nous ?</p>
@@ -13,6 +18,10 @@
                 <div class="mb-3">
                     <input type="password" class="form-control" id="email" placeholder="Mot de passe" name="_password">
                 </div>
+
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >           
 
                 <div class="mb-3 form-check text-start text-checkbox">
                     <input type="checkbox" class="form-check-input" id="remember_me" name="_remember_me">
@@ -50,7 +59,7 @@
                 </p>
             </div>
             <div class="col">
-               <a href="#"><button type="submit" class="btn btn-primary w-100 align-items-center lh-1" data-bs-toggle="modal" data-bs-target="#modal">S'inscrire</button></a>
+            <a href="#"><button type="submit" class="btn btn-primary w-100 align-items-center lh-1" data-bs-toggle="modal" data-bs-target="#modal">S'inscrire</button></a>
                 {% include('/layouts/modal.html.twig') %} {# choix entre part et pro type modal#}
             </div>   
         </div>
@@ -64,4 +73,6 @@
 </div>
 {% else %} 
     {% include('/security/logout.html.twig') %}
-{% endif %}
+{% endif %}          
+ 
+              

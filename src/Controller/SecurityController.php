@@ -2,16 +2,29 @@
 
 namespace App\Controller;
 
+use App\Security\LoginFormAuthenticator;
+use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\SubCategoryRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {  
+    private $categoryRepository;
+    private $subcategoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+        $this->subcategoryRepository = $subcategoryRepository;
+    }
+    
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils) 
+    public function login() 
     {
         // Si l'on est connecté on ne peux pas accédé à la page login
         if ($this->getUser()) {
@@ -24,14 +37,12 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_home'); // Pour évité d'accéder au script du popover login 
         }
 
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
+        $subcategory = $this->subcategoryRepository->findAll('category');
 
         return $this->render('security/login.html.twig', [
-            'error' => $error,
-            'last_username' => $lastUsername
+            'categories' => $categories, 
+            'subcategory' => $subcategory
         ]);
     }
 

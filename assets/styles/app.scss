@@ -31,7 +31,7 @@ body {
         }
 
         &.alert-danger {
-            background-color: red;
+            background-color: rgb(180, 0, 0);
         }
     }
 
@@ -201,6 +201,12 @@ body {
 
                             .logout {
                                 margin-top: 37px;
+                            }
+
+                            .error-login {
+                                font-size: 13px;
+                                font-weight: 500;
+                                color: rgb(180, 0, 0);
                             }
                     
                     }

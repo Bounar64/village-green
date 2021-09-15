@@ -82,7 +82,7 @@ class RegistrationUserType extends AbstractType
                 'required' => false
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'Veuillez accepter les conditions d\'utilisation',
+                'label' => 'Veuillez accepter nos conditions d\'utilisation et politique de confidentialité.',
                 'required' => false,
                 'row_attr' => ['class' => 'agreeTerms'],
                 'mapped' => false,
