@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import "_custom";
 @import "~bootstrap/scss/bootstrap";
 @import "_mixins";
@@ -7,6 +7,7 @@
 @import "_products-show";
 @import "_products-details";
 @import "_registration";
+@import "_profil";
 
 /* Mise du background */
 body {
@@ -62,6 +63,10 @@ body {
 
         &.registration-pro {
             background-color: #e4ddcc;
+        }
+
+        &.user {
+            min-height: 500px;
         }
     }  
     

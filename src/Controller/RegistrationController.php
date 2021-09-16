@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
@@ -31,13 +32,16 @@ class RegistrationController extends AbstractController
      * @Route("/register", name="app_register_user")
      */
     public function registerUser(Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository, 
-                                SubCategoryRepository $subcategoryRepository, UserPasswordHasherInterface $hasher): Response
+                                SubCategoryRepository $subcategoryRepository, UserPasswordHasherInterface $hasher, AuthenticationUtils $authenticationUtils): Response
     {
         $categories = $categoryRepository->findBy([], [], 9, null);
         $subcategory = $subcategoryRepository->findAll('category');
         $user = new User();
         $form = $this->createForm(RegistrationUserType::class, $user);
         $form->handleRequest($request);
+
+          // get the login error if there is one
+          $error = $authenticationUtils->getLastAuthenticationError();
 
         if($form->isSubmitted() && $form->isValid()) {
             $hash = $hasher->hashPassword($user, $user->getPassword());
@@ -57,6 +61,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register_user.html.twig', [ // page d'enregistrement des utilisateurs privés
+            'error' => $error,
             'categories' => $categories,
             'subcategory' => $subcategory,
             'form' => $form->createView()
@@ -67,13 +72,16 @@ class RegistrationController extends AbstractController
      * @Route("/register-pro", name="app_register_pro")
      */
     public function registerPro(Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository, 
-                                SubCategoryRepository $subcategoryRepository, UserPasswordHasherInterface $hasher): Response
+                                SubCategoryRepository $subcategoryRepository, UserPasswordHasherInterface $hasher, AuthenticationUtils $authenticationUtils): Response
     {
         $categories = $categoryRepository->findBy([], [], 9, null);
         $subcategory = $subcategoryRepository->findAll('category');
         $user = new User();
         $form = $this->createForm(RegistrationProType::class, $user);
         $form->handleRequest($request);
+
+         // get the login error if there is one
+         $error = $authenticationUtils->getLastAuthenticationError();
 
         if($form->isSubmitted() && $form->isValid()) {
             $hash = $hasher->hashPassword($user, $user->getPassword());
@@ -93,6 +101,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register_pro.html.twig', [ // page d'enregistrement des utilisateurs professionnels
+            'error' => $error,
             'categories' => $categories,
             'subcategory' => $subcategory,
             'form' => $form->createView()

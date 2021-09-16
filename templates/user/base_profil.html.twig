@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title 'Village-Green' %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            
+            {{ encore_entry_link_tags('app') }} {# ce tag twig récupère le css compilé #}
+        {% endblock %}
+
+    </head>
+    <body>
+        {% block body %}
+        <header id="background">
+            <div class="container user">
+                <div class="contenant-user-profil d-flex">
+                    {# bloc menu du profil (gris) #}
+                    <div class="col-4 left-profil-offcanvas"> 
+                        <div class="col text-center mt-3">
+                            <img src="{{ asset('build/images/photo_profil.png') }}" alt="photo de profil">
+                        </div>
+                        <div class="col text-center mt-4">
+                            <p class="user-name m-0">{{ app.user.firstName }} {{ app.user.lastName }}</p>
+                        </div>
+                        <div class="col text-center">
+                            <p>{{ app.user.email }}</p>
+                        </div>
+
+                        {# bloc nav-tabs #}
+                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical"> 
+                            <div class="col nav-items d-flex lh-1 link-profil" id="v-pills-order-tab" data-bs-toggle="pill" data-bs-target="#v-pills-order" type="text" role="tab" aria-controls="v-pills-order" aria-selected="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">
+                                    <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+                                </svg>
+                            <a class="m-0 d-flex align-items-end" href="#">Mes commandes</a> 
+                            </div>
+
+                            <div class="col nav-items d-flex lh-1 link-profil" id="v-pills-profil-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profil" type="text" role="tab" aria-controls="v-pills-profil" aria-selected="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                </svg>
+                            <a class="m-0 d-flex align-items-end" href="#">Mon profil</a> 
+                            </div>
+
+                            <div class="col nav-items d-flex lh-1 link-profil" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="text" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                                </svg>
+                            <a class="m-0 d-flex align-items-end" href="#">Paramètres</a> 
+                            </div>
+
+                            <div class="col nav-items d-flex lh-1 link-profil" id="v-pills-help-tab" data-bs-toggle="pill" data-bs-target="#v-pills-help" type="text" role="tab" aria-controls="v-pills-help" aria-selected="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-info-lg" viewBox="0 0 16 16">
+                                    <path d="m10.277 5.433-4.031.505-.145.67.794.145c.516.123.619.309.505.824L6.101 13.68c-.34 1.578.186 2.32 1.423 2.32.959 0 2.072-.443 2.577-1.052l.155-.732c-.35.31-.866.434-1.206.434-.485 0-.66-.34-.536-.939l1.763-8.278zm.122-3.673a1.76 1.76 0 1 1-3.52 0 1.76 1.76 0 0 1 3.52 0z"/>
+                                </svg>
+                            <a class="m-0 d-flex align-items-end" href="#">Aide & Contact</a> 
+                            </div>
+                        </div>  {# fermeture bloc nav-tabs #}
+                   </div> {# fermeture bloc menu profil gris #} 
+
+                    {# bloc contenu des liens nav-tabs (blanc) #}
+                    <div class="col right-profil-offcanvas"> 
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade" id="v-pills-order" role="tabpanel" aria-labelledby="v-pills-order-tab">
+                                <h1>Mes commandes</h1>
+                            </div>
+                            {# card mes infos personelles #}
+                            <div class="tab-pane fade" id="v-pills-profil" role="tabpanel" aria-labelledby="v-pills-profil-tab">
+                                <div class="row d-flex justify-content-center mt-5">
+                                    <div class="col-11 card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h5 class="card-title m-0">Mes données personnelles :</h5>
+                                                </div>
+                                            {# icone brush pour la modification #}
+                                            <div class="col text-end">
+                                               <a href="" data-tooltip title="modifier mes données personelles">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-brush-fill" viewBox="0 0 16 16">
+                                                    <path d="M15.825.12a.5.5 0 0 1 .132.584c-1.53 3.43-4.743 8.17-7.095 10.64a6.067 6.067 0 0 1-2.373 1.534c-.018.227-.06.538-.16.868-.201.659-.667 1.479-1.708 1.74a8.118 8.118 0 0 1-3.078.132 3.659 3.659 0 0 1-.562-.135 1.382 1.382 0 0 1-.466-.247.714.714 0 0 1-.204-.288.622.622 0 0 1 .004-.443c.095-.245.316-.38.461-.452.394-.197.625-.453.867-.826.095-.144.184-.297.287-.472l.117-.198c.151-.255.326-.54.546-.848.528-.739 1.201-.925 1.746-.896.126.007.243.025.348.048.062-.172.142-.38.238-.608.261-.619.658-1.419 1.187-2.069 2.176-2.67 6.18-6.206 9.117-8.104a.5.5 0 0 1 .596.04z"/>
+                                                </svg>
+                                               </a> 
+                                            </div>
+                                            </div>
+                                            
+                                            <hr>
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-5">
+                                                    <div class="info-user mb-2"><span class="title-info-user">Nom: </span>{{ app.user.lastName }}</div>
+                                                    <div class="info-user mb-2"><span class="title-info-user">Prénom: </span>{{ app.user.firstName }}</div>
+                                                    <div class="info-user"><span class="title-info-user">E-mail: </span>{{ app.user.email }}</div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="info-user mb-2"><span class="title-info-user">Adresse: </span>{{ app.user.address }}</div>
+                                                    {% if app.user.additionalAddress %}
+                                                    <div class="info-user mb-2"><span class="title-info-user">Complément d'adresse: </span>{{ app.user.additionalAddress }}</div>
+                                                    {% else %}
+                                                        <div class="info-user mb-2"><span class="title-info-user text-muted">Complément d'adresse: </span></div>
+                                                    {% endif %}
+                                                    <div class="info-user mb-2"><span class="title-info-user">Ville: </span>{{ app.user.city }}</div>
+                                                    <div class="info-user mb-2"><span class="title-info-user">Code postal: </span>{{ app.user.zipCode }}</div>
+                                                    <div class="info-user"><span class="title-info-user">Pays: </span>{{ app.user.country }}</div>                                                    
+                                                </div>
+                                                <div class="row d-flex justify-content-between">
+                                                    <div class="col">
+                                                        <div class="info-user mb-2"><span class="title-info-user">Numéro de portable: </span>{{ app.user.phone }}</div>
+                                                        {% if app.user.phoneFixe %}
+                                                        <div class="info-user"><span class="title-info-user">Numéro de téléphone fixe: </span>{{ app.user.phoneFixe }}</div>
+                                                        {% else %}
+                                                            <div class="info-user"><span class="title-info-user text-muted">Numéro de téléphone fixe: </span></div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+
+                                <div class="row d-flex justify-content-center mt-3">
+                                    <div class="col-11 card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <button class="btn btn-primary w-100">Modifier mon mot de passe</button>
+                                                </div>                                                    
+                                            </div>                                                    
+                                        </div>
+                                    </div> 
+                                </div>
+
+                            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                <h1>Mes paramètres</h1>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">
+                                <h1>Aides</h1>
+                            </div>
+                        </div>
+                    </div> 
+
+                </div> {# fermeture contenant-page #}
+            </div> {# fermeture container #}   
+        </header>
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }} {# ce tag twig récupère le js compilé #}  
+        {% endblock %}
+    </body>
+</html>
+
+

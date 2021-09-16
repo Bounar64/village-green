@@ -39,6 +39,10 @@ $(function(){ // équivaut à $(document).ready()
                 slideShadows: true,
             },
     });
+
+    //_____Activation des bulles-infos type tooltip_____//
+    $('[data-tooltip]').tooltip();
+
 });
 
 
@@ -70,3 +74,4 @@ if(slider) {
     })
 
 };
+

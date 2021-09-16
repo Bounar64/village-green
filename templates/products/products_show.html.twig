@@ -8,8 +8,27 @@
             {# header navigation #} 
             {{ include('/layouts/header_navigation.html.twig') }}
 
+            {# Fil d'Ariane #} 
+            {% for category in categories %}
+                {% for subcategory in subcategory %}
+                    {% if subcategory.label == app.request.get('label') and subcategory.category.id is same as (category.id) %} 
+                    <div class="row resultat-filtre d-flex justify-content-around fil-ariane">
+                        <div class="col-5">
+                            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a class="text-decoration-none text-muted fs-8" href="#">{{ category.label|replace({ 'Guit/Bass': "Guitare", 'DJ': "Deejay" }) }}</a></li>
+                                    <li class="breadcrumb-item"><a class="text-decoration-none text-muted fs-8" href="#">{{ subcategory.label }}</a></li>
+                                </ol>
+                            </nav>                
+                        </div>
+                        <div class="col-5"></div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            
             {# card filtre de recherche #}
-            <div class=" d-flex justify-content-center mt-5 js-filter">
+            <div class=" d-flex justify-content-center mt-3 js-filter">
                 <div class="col-11 card card-filtre">
                     <div class="card-body">
                         {# filtre de recherche #}
@@ -21,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            
+           
             {# filtre pour le compte de résultat #}
             {% set count = 0 %} 
             {% for products in products %}

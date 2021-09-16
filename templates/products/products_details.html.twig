@@ -9,6 +9,26 @@
         {{ include('/layouts/header_navigation.html.twig') }} 
 
         <div class="contenant-page">
+
+        {# Fil d'Ariane #} 
+        {% for category in categories %}
+            {% for subcategory in subcategory %}
+                {% if subcategory.label == app.request.get('label') and subcategory.category.id is same as (category.id) %} 
+                <div class="row resultat-filtre d-flex justify-content-around fil-ariane">
+                    <div class="col-5">
+                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">{{ category.label }}</a></li>
+                                <li class="breadcrumb-item"><a href="#">{{ subcategory.label }}</a></li>
+                            </ol>
+                        </nav>                
+                    </div>
+                    <div class="col-5"></div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
         {% for products in products %}
             {% if products.reference == (app.request.get('ref')) %}    
                 {# big-card #}

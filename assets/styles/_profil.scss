@@ -1,0 +1,98 @@
+//**********************************************************************************************************************************************************//
+//***********************************---------------------- PAGE PROFIL (profil-user & profil-pro) ----------------------**********************************//
+//**********************************************************************************************************************************************************//
+
+.contenant-user-profil {
+    //_____profil fixe de gauche_____//
+    .left-profil-offcanvas {
+        background-color: $blanc;
+        min-height: 100vh;
+
+        img {
+            width: 90%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        p {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 100px;
+
+            &.user-name {
+                font-size: 25px;
+                font-weight: 600;
+            }
+        }
+
+        .link-profil {
+            margin: 0 0 50px 30px;
+
+            a {
+                text-decoration: none;
+                color: #000;
+                font-size: 20px;
+                font-weight: 600;
+
+                    &:hover {
+                        color: $orange;
+                        transform: scale(105%);
+                    }
+            }
+
+            svg {
+                margin-right: 20px;
+                color: $orange;
+            }
+        }
+    }
+    //_____profil de droite de détails_____//
+    .right-profil-offcanvas {
+
+        .card {
+            //_____svg brush pour modifier mes données_____//
+            .bi-brush-fill {
+                color: $bleu;
+                transition: all .2s linear;
+
+                &:hover {
+                    transform: scale(130%);
+                    color: $orange;
+                }
+            }
+
+            .card-title {
+                color: $bleu;
+            }
+
+            border-radius: 10px;
+
+            hr {
+                color: $orange;
+            }
+            .info-user {
+                font-size: 15px;
+            }
+
+            .title-info-user {
+                margin-right: 5px;
+                font-size: 15px;
+                font-weight: 600;
+            }
+
+            button {
+                @include buttonColor;
+                font-weight: 500; 
+                font-size: 15px; 
+                height: 35px;
+                
+                &:hover {
+                    box-shadow: none;
+                    border: none;
+                }                    
+            }
+        }
+    }
+    
+}
+ 

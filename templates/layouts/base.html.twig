@@ -7,9 +7,9 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }} {# ce tag twig récupère le css compilé #}
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
             <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/> 
+            {{ encore_entry_link_tags('app') }} {# ce tag twig récupère le css compilé #}  
         {% endblock %}
 
     </head>

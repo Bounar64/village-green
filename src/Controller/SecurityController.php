@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Security\LoginFormAuthenticator;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
@@ -24,7 +23,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login() 
+    public function login(AuthenticationUtils $authenticationUtils) 
     {
         // Si l'on est connecté on ne peux pas accédé à la page login
         if ($this->getUser()) {
@@ -40,7 +39,14 @@ class SecurityController extends AbstractController
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
 
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render('security/login.html.twig', [
+            'error' => $error,
+            'last_username' => $lastUsername,
             'categories' => $categories, 
             'subcategory' => $subcategory
         ]);
