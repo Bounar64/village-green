@@ -7,7 +7,9 @@ use App\Entity\Country;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,11 +29,32 @@ class RegistrationUserType extends AbstractType
             ])
             ->add('password', PasswordType::class, [
                 'label' => false,
-                'required' => false
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Ce champ est obligatoire.',
+                    ]),
+                    new Length([
+                        'min' => 8,
+                        'minMessage' => 'Votre mot de passe doit faire {{ limit }} caractères.',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+                    new Regex([
+                                'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*+?&]{8,}$/',
+                                'match' => true ,
+                                'message' => 'Veuillez saisir au minimun 8 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.'
+                    ]),
+                ],
             ])
             ->add('confirm_password', PasswordType::class, [
                 'label' => false,
-                'required' => false
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Ce champ est obligatoire.',
+                    ])
+                ],
             ])
             ->add('lastName', TextType::class, [
                 'label' => false,

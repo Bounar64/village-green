@@ -18,13 +18,11 @@ import './bootstrap';
 import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 
-
 // ************************************************************************************************************************************************************************** //
 
+//_____Swiper de sous-catégorie_____//
+$(function(){ // ancienne écriture à $(document).ready(function(){
 
-$(function(){ // équivaut à $(document).ready()
-
-    //_____Swiper de sous-catégorie_____//
     const swiper = new Swiper(".mySwiper", {
         effect: "coverflow",
         grabCursor: true,
@@ -39,11 +37,16 @@ $(function(){ // équivaut à $(document).ready()
                 slideShadows: true,
             },
     });
-
-    //_____Activation des bulles-infos type tooltip_____//
-    $('[data-tooltip]').tooltip();
-
 });
+
+ //_______Afficher au click la card modifier dans le profil_____//
+ $(function(){
+
+    $('#ButtonBrush').on("click", function(){ // ancienne écriture $('#ButtonBrush').click(function(){
+        $('#EditCard').slideToggle();
+    });
+ })
+ 
 
 
 //_____Slider de prix min et max_____//

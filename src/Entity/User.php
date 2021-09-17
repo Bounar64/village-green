@@ -54,16 +54,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="Ce champ est obligatoire.")
-     * @Assert\Regex(
-     *     pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*+?&]{8,}$/",
-     *     message="Veuillez saisir au minimun 8 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial."
-     * )
+     * // NotBlank(message="Ce champ est obligatoire.") // DESACTIVER EN ANNOTATION MAIS ACTIVER DANS LE FORMTYPE POUR EVITER PROBLEME EDITION 
+     * // \Regex(
+     * //    pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*+?&]{8,}$/",
+     * //    message="Veuillez saisir au minimun 8 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial."
+     * // )
      */
     private $password;
 
     /**
-     * @Assert\NotBlank(message="Ce champ est obligatoire.")
      * @Assert\EqualTo(propertyPath="password", message="Votre mot de passe ne correspond pas")
      */
     public $confirm_password; // n'existe pas dans la base de données
@@ -139,7 +138,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=80)
+     * @ORM\Column(type="string", length=80, nullable=true)
      * @Assert\NotBlank(message="Ce champ est obligatoire.")
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z -]+$/",
@@ -149,7 +148,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\NotBlank(message="Ce champ est obligatoire.")
      * @Assert\Regex(
      *     pattern="/^(([0-8][0-9])|(9[0-5]))[0-9]{3}$/",
@@ -159,7 +158,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $zipCode;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\NotBlank(message="Ce champ est obligatoire.")
      * @Assert\Regex(
      *     pattern="/^0[6-7]{1}\d{8}$/",
@@ -339,7 +338,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
 
@@ -351,7 +350,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->city;
     }
 
-    public function setCity(string $city): self
+    public function setCity(?string $city): self
     {
         $this->city = $city;
 
@@ -363,7 +362,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->zipCode;
     }
 
-    public function setZipCode(string $zipCode): self
+    public function setZipCode(?string $zipCode): self
     {
         $this->zipCode = $zipCode;
 
@@ -375,7 +374,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->phone;
     }
 
-    public function setPhone(string $phone): self
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
 

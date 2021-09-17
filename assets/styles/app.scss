@@ -8,6 +8,7 @@
 @import "_products-details";
 @import "_registration";
 @import "_profil";
+@import "_reset-password";
 
 /* Mise du background */
 body {
@@ -66,7 +67,11 @@ body {
         }
 
         &.user {
-            min-height: 500px;
+            min-height: 1000px;
+        }
+
+        &.reset-password {
+            min-height: 100px;
         }
     }  
     

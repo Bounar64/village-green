@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +13,7 @@ class SecurityController extends AbstractController
     private $categoryRepository;
     private $subcategoryRepository;
 
-    public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository)
+    public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->subcategoryRepository = $subcategoryRepository;
