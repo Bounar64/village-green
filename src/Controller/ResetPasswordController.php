@@ -27,10 +27,15 @@ class ResetPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
+    private $categoryRepository;
+    private $subcategoryRepository;
     private $resetPasswordHelper;
 
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper)
-    {
+    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, CategoryRepository $categoryRepository, 
+                                SubCategoryRepository $subcategoryRepository)
+    {                          
+        $this->categoryRepository = $categoryRepository;
+        $this->subcategoryRepository = $subcategoryRepository;  
         $this->resetPasswordHelper = $resetPasswordHelper;
     }
 
@@ -39,10 +44,10 @@ class ResetPasswordController extends AbstractController
      *
      * @Route("", name="app_forgot_password_request")
      */
-    public function request(Request $request, MailerInterface $mailer, CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository): Response
+    public function request(Request $request, MailerInterface $mailer): Response
     {
-        $categories = $categoryRepository->findBy([], [], 9, null);
-        $subcategory = $subcategoryRepository->findAll('category');
+        $categories = $this->categoryRepository->findBy([], [], 9, null); 
+        $subcategory = $this->subcategoryRepository->findAll('category');
         
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
@@ -68,6 +73,9 @@ class ResetPasswordController extends AbstractController
      */
     public function checkEmail(): Response
     {
+        $categories = $this->categoryRepository->findBy([], [], 9, null); 
+        $subcategory = $this->subcategoryRepository->findAll('category');
+
         // Generate a fake token if the user does not exist or someone hit this page directly.
         // This prevents exposing whether or not a user was found with the given email address or not
         if (null === ($resetToken = $this->getTokenObjectFromSession())) {
@@ -76,6 +84,8 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
+            'categories' => $categories,
+            'subcategory' => $subcategory
         ]);
     }
 
