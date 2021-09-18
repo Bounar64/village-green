@@ -1,13 +1,39 @@
 {# Page ou l'on va soumettre le nouveau mot de passe #}
-{% extends '/layouts/base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title 'Village green' %}
 
 {% block body %}
-    <h1>Reset your password</h1>
+    <header id="background">
+        
+        {# message d'erreur #}
+        <div class="container reset-password">
+            {# header navigation #} 
+            {{ include('/layouts/header_navigation.html.twig') }}  
 
-    {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
-    {{ form_end(resetForm) }}
+            {# card réinitialiser le mot de passe #}
+            <div class=" d-flex justify-content-center mt-5">
+                <div class="col-5 card card-reset">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Réinitialiser votre mot de passe</h5>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-10 mt-3">
+                                {{ form_start(resetForm) }}
+                                    <div class="text-center">
+                                        {{ form_row(resetForm.PlainPassword) }}
+                                    </div>
+                                    <div class="col text-center">
+                                        <button type="submit" class="btn btn-primary w-100">Réinitialiser le mot de passe</button>
+                                    </div>
+                                {{ form_end(resetForm) }}
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+            {# footer #} 
+            {{ include('/layouts/footer.html.twig') }}
+        </div> {# fermeture du container products #}   
+    </header>
 {% endblock %}

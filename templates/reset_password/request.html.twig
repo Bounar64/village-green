@@ -4,13 +4,8 @@
 {% block title 'Village green' %}
 
 {% block body %}
-
-    {% for flashError in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-
     <header id="background">
-        <div class="container reset-password-request"> 
+        <div class="container reset-password-request">
             {# header navigation #} 
             {{ include('/layouts/header_navigation.html.twig') }}  
 
@@ -18,10 +13,20 @@
             <div class=" d-flex justify-content-center mt-5">
                 <div class="col-11 card card-reset">
                     <div class="card-body">
+                        {# message d'erreur #}
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                {% for flashError in app.flashes('reset_password_error') %}
+                                    <div class="alert alert-danger rounded mb-3 FlashError" role="alert">{{ flashError }}</div> {# envoie une erreur si le lien token est mort c'est à dire si le lien à déja était utilisé ou si le token est modifié ou si la durée limite est dépassé #}
+                                {% endfor %} 
+                            </div>  
+                        </div>
+                                        
+                        {# corp de la card de réinitialisation #}
                         <h5 class="card-title text-center">Réinitialiser votre mot de passe</h5>
                         <div class="row d-flex justify-content-center">
                             <div class="col-7 mt-3">
-                               {{ form_start(requestForm) }}
+                                {{ form_start(requestForm, {attr: {novalidate: 'novalidate'}}) }}
                                     {{ form_row(requestForm.email) }}
                                     <div class="text-center">
                                         <small>
@@ -30,7 +35,7 @@
                                         </small>
                                     </div>
                                     <div class="col text-center">
-                                        <button class="btn btn-primary w-50">Réinitialiser le mot de passe</button>
+                                        <button type="submit" class="btn btn-primary w-50">Réinitialiser le mot de passe</button>
                                     </div>
                                 {{ form_end(requestForm) }}
                             </div>
