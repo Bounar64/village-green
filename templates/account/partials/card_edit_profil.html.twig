@@ -1,0 +1,49 @@
+{# card mes infos personelles #}
+    <div class="col card edit-card">
+        <div class="card-body">
+           <div class="row mb-2">
+                <div class="col-8">
+                    <h5 class="card-title m-0">Modifier mes données personnelles :</h5>
+                </div>
+                {# bouton de validation #}
+                <div class="col text-end">
+            {{ form_start(form) }}
+                    <button type="submit" class="btn btn-primary w-50 lh-1">Valider</button>
+                </div>
+            </div>
+
+            <hr>
+            
+            <div class="row d-flex justify-content-between mt-3">
+                <div class="col-5 m-0">
+                    <div class="info-user"><span class="title-info-user">E-mail: </span>{{ form_row(form.email) }}</div>
+
+                    <div class="info-user"><span class="title-info-user">Nom: </span> {{ form_row(form.lastName) }}</div>
+
+                    <div class="info-user"><span class="title-info-user">Prénom: </span>{{ form_row(form.firstName) }} </div> 
+
+                     <div class="info-user"><span class="title-info-user">Numéro de portable: </span>{{ form_row(form.phone) }}</div>
+ 
+                    <div class="info-user"><span class="title-info-user">Numéro de téléphone fixe: </span>{{ form_row(form.phoneFixe) }}</div>    
+                </div>
+
+                <div class="col-5">
+                    <div class="info-user"><span class="title-info-user">Adresse: </span></div>
+                    <div class="info-user">{{ form_row(form.address) }}</div>
+
+                    <div class="info-user"><span class="title-info-user">Complément d'adresse: </span></div>
+                    <div class="info-user">{{ form_row(form.additionalAddress) }}</div>
+
+                    <div class="info-user"><span class="title-info-user">Ville: </span></div>
+                    <div class="info-user">{{ form_row(form.city) }}</div>
+
+                    <div class="info-user"><span class="title-info-user">Code postal: </span></div>
+                    <div class="info-user">{{ form_row(form.zipCode) }}</div>
+
+                    <div class="info-user"><span class="title-info-user">Pays: </span></div>                                                    
+                    <div class="info-user">{{ form_row(form.country) }}</div>                                                    
+                </div>
+            </div> 
+            {{ form_end(form) }}
+        </div>
+    </div> 

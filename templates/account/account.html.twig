@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+<header id="background">
+    <div class="container account"> 
+        {# header navigation #} 
+        {{ include('/layouts/header_navigation.html.twig') }} 
+
+        <div class="contenant-account">
+            <div class="text-center mx-auto">
+               <h1 class="text-center mt-5">Mon compte</h1> 
+            </div>
+            <hr>
+            {# bloc image profil & card menu #}
+            <div class="row d-flex justify-content-around">
+                {# image de profil #}  
+                <div class="col-5 d-block mt-5">
+                    <img src="{{ asset('build/images/photo_profil.png') }}" alt="photo de profil de {{ app.user.fullName }}">
+                    <p class="createdAt">Compte créer le {{ app.user.createdAt|date('d/m/Y') }}</p>
+                </div>
+                {# card menu #}
+                 <div class="col-5 d-flex mt-5">
+                    {% include('account/partials/card_menu.html.twig') %}
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-around">
+                {# card info perso #}
+                <div class="col-11 d-flex mt-5">
+                    {% include('account/partials/card_profil.html.twig') %}
+                </div>
+            </div>
+
+        </div> {# fermeture contenant-page #}
+            
+        {# footer #} 
+        {{ include('/layouts/footer.html.twig') }}
+    </div> {# fermeture du container products #}   
+</header>
+{% endblock %}
+

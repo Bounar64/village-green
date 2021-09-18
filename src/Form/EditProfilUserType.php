@@ -10,14 +10,18 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class EditProfilType extends AbstractType
+class EditProfilUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('email', EmailType::class, [
+                'label' => false,
+                'required' => false
+            ])
             ->add('lastName', TextType::class, [
                 'label' => false,
                 'required' => false,
@@ -66,8 +70,6 @@ class EditProfilType extends AbstractType
                 // On sélectionne l'entity en relation ici le pays
                 'class' => Country::class
             ])
-            ->add('Valider', SubmitType::class)
-            
             ->add('password', HiddenType::class, [
                 'mapped' => false
             ])

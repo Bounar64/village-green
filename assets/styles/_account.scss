@@ -6,88 +6,123 @@
 //***********************************************************************//
 //*************************** ACCOUNT CLIENT ****************************//
 //***********************************************************************//
-.contenant-account-user {
+.contenant-account {
     
-        h1 {
-            font-size: 45px;
-            font-weight: 500;
-            color: $bleu;
-        }
-
-        hr {
-            width: 90%;
-            margin: auto;
-            color: $orange;
-        }
-
-        //_____image de profil_____//
-        img {
-            width: auto;
-            height: 250px;
-            border-radius: 6px;
-            box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
-        }
-
-        p {
-            margin: 0px 0 5px 15px;
-            font-size: 15px;
-            font-weight: 500;
-
-                &.fullname {
-                    margin: 10px 0 5px 15px;
-                    font-size: 25px;
-                    font-weight: 500
-                }
-        }
-
-        //_____Card info_____//
-        .card {
-            border-radius: 0.25rem;
-            box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
-
-                a {
-                    text-decoration: none;
-                    color: #000;
-                    font-size: 18px;
-                    font-weight: 600;
-                    transition: all .2s linear;
-
-                        &:hover {
-                            color: $orange;
-                        }
-                }
-                svg {
-                    color: $orange;
-
-                    &.bi-brush-fill {
-                        color: $bleu;
-                        transition: all .3s linear;
-                    
-                        &:hover {
-                            color: $orange;
-                            transform: scale(130%);
-                        }
-                    }
-                    
-                }
-        
-                .card-title {
-                    font-size: 20px;
-                }
-
-                .info-user {
-                    font-size: 12px;
-                    font-weight: 500;
-
-                        .title-info-user {
-                            font-size: 14px;
-                            font-weight: 600;
-                        }
-                }
-        }
-        
-
-
+    .createdAt {
+        margin: 10px 0 0 20px;
     }
-   
- 
+
+    h1 {
+        font-size: 45px;
+        font-weight: 500;
+        color: $bleu;
+    }
+
+    hr {
+        width: 90%;
+        margin: auto;
+        color: $orange;
+    }
+
+    //_____image de profil_____//
+    img {
+        width: auto;
+        height: 250px;
+        border-radius: 6px;
+        box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+    }
+
+    p {
+        margin: 0px 0 5px 15px;
+        font-size: 15px;
+        font-weight: 500;
+
+            &.fullname {
+                margin: 10px 0 5px 15px;
+                font-size: 25px;
+                font-weight: 500
+            }
+    }
+
+    //_____Card info_____//
+    .card {
+        border-radius: 0.25rem;
+        box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+
+            a {
+                text-decoration: none;
+                color: #000;
+                font-size: 18px;
+                font-weight: 600;
+                transition: all .2s linear;
+
+                    &:hover {
+                        color: $orange;
+                    }
+            }
+            svg {
+                color: $orange;
+
+                &.bi-brush-fill {
+                    color: $bleu;
+                    transition: all .3s linear;
+                
+                    &:hover {
+                        color: $orange;
+                        transform: scale(130%);
+                    }
+                }
+                
+            }
+    
+            .card-title {
+                font-size: 20px;
+            }
+
+            .info-user {
+                font-size: 12px;
+                font-weight: 500;
+
+                    .title-info-user {
+                        font-size: 14px;
+                        font-weight: 600;
+                    }
+            }
+    }      
+}
+
+//***********************************************************************//
+//************************* EDITION DU PROFIL ***************************//
+//***********************************************************************//
+
+.contenant-account.edit {
+    
+    .edit-card {
+        background: rgb(255, 218, 149);
+    }
+    input {
+        height: 25px;
+        font-size: 13px;
+        border-color: rgb(175, 175, 175);
+        
+            &:focus {
+                box-shadow: none;
+                border-color: $orange;
+            }
+    }
+
+    select {
+        height: 25px;
+        font-size: 10px;
+    }
+
+    button {
+        @include buttonColor;
+        font-weight: 500;  
+        height: 30px;
+
+            &:focus {
+                box-shadow: none;
+            }
+    }
+}
