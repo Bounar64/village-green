@@ -1,0 +1,93 @@
+//**********************************************************************************************************************************************************//
+//***********************************---------------------- PAGE ACCOUNT (account-user & account-pro) ----------------------********************************//
+//**********************************************************************************************************************************************************//
+
+
+//***********************************************************************//
+//*************************** ACCOUNT CLIENT ****************************//
+//***********************************************************************//
+.contenant-account-user {
+    
+        h1 {
+            font-size: 45px;
+            font-weight: 500;
+            color: $bleu;
+        }
+
+        hr {
+            width: 90%;
+            margin: auto;
+            color: $orange;
+        }
+
+        //_____image de profil_____//
+        img {
+            width: auto;
+            height: 250px;
+            border-radius: 6px;
+            box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+        }
+
+        p {
+            margin: 0px 0 5px 15px;
+            font-size: 15px;
+            font-weight: 500;
+
+                &.fullname {
+                    margin: 10px 0 5px 15px;
+                    font-size: 25px;
+                    font-weight: 500
+                }
+        }
+
+        //_____Card info_____//
+        .card {
+            border-radius: 0.25rem;
+            box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+
+                a {
+                    text-decoration: none;
+                    color: #000;
+                    font-size: 18px;
+                    font-weight: 600;
+                    transition: all .2s linear;
+
+                        &:hover {
+                            color: $orange;
+                        }
+                }
+                svg {
+                    color: $orange;
+
+                    &.bi-brush-fill {
+                        color: $bleu;
+                        transition: all .3s linear;
+                    
+                        &:hover {
+                            color: $orange;
+                            transform: scale(130%);
+                        }
+                    }
+                    
+                }
+        
+                .card-title {
+                    font-size: 20px;
+                }
+
+                .info-user {
+                    font-size: 12px;
+                    font-weight: 500;
+
+                        .title-info-user {
+                            font-size: 14px;
+                            font-weight: 600;
+                        }
+                }
+        }
+        
+
+
+    }
+   
+ 
