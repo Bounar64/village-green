@@ -17,7 +17,7 @@
                         {% include('/security/login.html.twig') %} {# popover espace client #}                      
                     </div>
                 </div>                
-            <a class="panier" href="#"><img src="{{ asset('build/images/picto_panier.png') }}" alt="pictogramme panier"></a>
+            <a class="panier" href="{{ path('app_panier') }}"><img src="{{ asset('build/images/picto_panier.png') }}" alt="pictogramme panier"></a>
             <a class="langue" href="#"><img src="{{ asset('build/images/picto_pays.png') }}" alt="pictogramme langue">&nbsp;FR</a>
         </div>
 

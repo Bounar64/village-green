@@ -21,7 +21,7 @@ class ChangePasswordFormType extends AbstractType
                 ->add('currentPassword', PasswordType::class, [
                     'label' => false,
                     'required' => false,
-                    'attr' => ['placeholder' => 'Entrez votre mot de passe actuel'],
+                    'attr' => ['autocomplete' => 'off', 'placeholder' => 'Entrez votre mot de passe actuel'],
                     'constraints' => [
                         new NotBlank([
                             'message' => 'Ce champ est obligatoire.',
@@ -45,7 +45,7 @@ class ChangePasswordFormType extends AbstractType
             'type' => PasswordType::class,
             'first_options' => [
                 'label' => false,
-                'attr' => ['placeholder' => 'Entrez votre nouveau mot de passe'],
+                'attr' => ['autocomplete' => 'off', 'placeholder' => 'Entrez votre nouveau mot de passe'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Ce champ est obligatoire.',
@@ -68,7 +68,7 @@ class ChangePasswordFormType extends AbstractType
 
             'second_options' => [
                 'label' => false,
-                'attr' => ['placeholder' => 'Confirmer votre nouveau mot de passe'],
+                'attr' => ['autocomplete' => 'off', 'placeholder' => 'Confirmer votre nouveau mot de passe'],
             ],
             'invalid_message' => 'Les mots de passe doivent être identique.',
             // Instead of being set onto the object directly,

@@ -14,6 +14,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * @Route("/account")
+ */
 class AccountController extends AbstractController
 {
     private $categoryRepository;
@@ -30,7 +33,7 @@ class AccountController extends AbstractController
     /**
      * Pour afficher mon compte
      * 
-     * @Route("/account", name="app_account", methods="GET")
+     * @Route("", name="app_account", methods="GET")
      */
     public function Show(): Response
     {
@@ -46,7 +49,7 @@ class AccountController extends AbstractController
     /**
      * Pour éditer mes données personnelles
      * 
-     * @Route("account/edit", name="app_account_edit", methods={"GET", "POST"})
+     * @Route("/edit", name="app_account_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, EntityManagerInterface $manager): Response
     {
@@ -74,7 +77,7 @@ class AccountController extends AbstractController
     /**
      * Pour modifier mon mot de passe
      * 
-     * @Route("account/change-password", name="app_account_change_password", methods={"GET", "POST"})
+     * @Route("/change-password", name="app_account_change_password", methods={"GET", "POST"})
      */
     public function changePassword(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $passwordHasher): Response
     {
