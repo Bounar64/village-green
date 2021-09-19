@@ -1,0 +1,105 @@
+//**********************************************************************************************************************************************************//
+//*************************************************---------------------- PAGE PANIER  ----------------------***********************************************//
+//**********************************************************************************************************************************************************//
+
+.contenant-panier {
+    
+    h1 {
+        font-size: 45px;
+        font-weight: 500;
+        color: $bleu;
+    }
+
+    hr {
+        width: 90%;
+        margin: auto;
+        color: $orange;
+
+        &.between-products {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+
+    .panier-card {
+        border-radius: 0.25rem;
+        box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+    }
+
+    img {
+        width: 150px;
+        height: auto;
+    }
+
+    .block-info {
+        line-height: 20px;
+        margin-top: 35px;
+    }
+
+    //______style mini-nav retour achat et imprimez devis_____//
+    a {
+        color: #000;
+    }
+
+    p {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 400;
+
+        span {
+            font-weight: 600; 
+
+                &.price {
+                    color: $orange;
+                }
+        }
+
+        &.text-mini-nav {
+            font-size: 15px;
+            font-weight: 600;
+            border: 1px solid #000;
+            transition: all .2s linear;
+
+                &:hover {
+                    border: 1px solid $orange;
+                    background: $orange;
+                    color: $blanc;
+                }
+        }
+    }
+
+    .text-total {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+   svg {
+       margin-right: 5px;
+       color: #000;
+
+        &.bi-x-square-fill {
+            color: rgb(218, 9, 9);
+        }
+   }
+
+   input {
+       width: 30px;
+       height: 30px;
+       border-radius: 6px;
+       font-size: 15px;
+       font-weight: 500;
+   }
+
+   button {
+       margin-left: 10px;
+        width: 200px;
+        font-weight: 500; 
+        font-size: 15px; 
+        height: 35px;
+    
+            &:hover {
+                box-shadow: none;
+            }                    
+}
+
+}

@@ -9,6 +9,7 @@
 @import "_registration";
 @import "_account";
 @import "_reset-password";
+@import "_panier";
 
 /* Mise du background */
 body {
@@ -72,6 +73,10 @@ body {
 
         &.reset-password {
             min-height: 100px;
+        }
+
+        &.panier {
+            min-height: 1800px;
         }
     }  
     
