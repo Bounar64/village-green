@@ -20,6 +20,9 @@
                         <div class="col-3">
                            <a href="#"><p class="text-mini-nav text-center">RETOUR AUX ACHATS</p></a>  
                         </div>
+                        <div class="col-3">
+                           <a href="{{ path('app_panier_clear') }}"><p class="text-mini-nav text-center">VIDER MON PANIER</p></a>  
+                        </div>
                         <div class="col text-end">
                             <p class="text-total">TOTAL: <span class="price">{{ total|format_currency('EUR', locale='fr') }}</span>
                                 <button type="submit" class="btn btn-success">COMMANDER</button>

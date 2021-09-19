@@ -5,7 +5,8 @@ namespace App\Service\panier;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class PanierService {
+class PanierService 
+{
 
     protected $session;
     protected $productRepository;
@@ -91,5 +92,13 @@ class PanierService {
          }
 
          return $total;
+    }
+
+    /**
+     * fonction pour vider mon panier 
+     */
+    public function clearPanier()
+    {
+        $this->session->clear('panier');
     }
 }

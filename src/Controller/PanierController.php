@@ -6,10 +6,8 @@ use App\Repository\ProductRepository;
 use App\Service\panier\PanierService;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -37,13 +35,14 @@ class PanierController extends AbstractController
         $subcategory = $this->subcategoryRepository->findAll('category');
         $products = $this->productRepository->findAll();  
 
+        $panierData = $panierService->getFullPanier();
         $total = $panierService->getTotal();
 
         return $this->render('panier/panier.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
             'products' => $products,
-            'items' => $panierService->getFullPanier(),
+            'items' => $panierData,
             'total' => $total
         ]);
     }
@@ -69,6 +68,17 @@ class PanierController extends AbstractController
     {
        $panierService->delete($id);
         
+        return $this->redirectToRoute("app_panier");
+    }
+
+    /**
+     * Vider mon panier
+     *
+     * @Route("/clear", name="app_panier_clear")
+     */
+    public function clear(PanierService $panierService)
+    {    
+        $panierService->clearPanier();
         return $this->redirectToRoute("app_panier");
     }
 }
