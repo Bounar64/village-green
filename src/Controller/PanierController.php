@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Repository\ProductRepository;
+use App\Service\panier\PanierService;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/panier")
@@ -29,41 +31,19 @@ class PanierController extends AbstractController
     /**
      * @Route("", name="app_panier")
      */
-    public function index(SessionInterface $session): Response
+    public function index(PanierService $panierService): Response
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
         $products = $this->productRepository->findAll();  
 
-        $panier = $session->get('panier', []);
-        $panierData = []; // Crée une variable ou l'on stockera toutes les données du panier
-
-        foreach($panier as $id => $quantity) { // On boucle dans le panier 
-            $panierData[] = [  // On ajoute dans ce $panierData les produits en question via l'id et la quantité
-                'product' =>  $this->productRepository->find($id), // On récupère toute le infos du produits via son id
-                'quantity' => $quantity // la quantité vaut le nombre de fois l'id sélectionné
-            ];
-        }
-
-        $total = 0; // initialise le total à 0
-       // boucle pour avoir le total du panier avec réduction et sans s'il y en a pas
-        foreach($panierData as $item) {
-            $discountPrice = $item['product']->getPrice() - ($item['product']->getDiscount() / 100 * $item['product']->getPrice()); // Prix avec réduction
-
-            if($item['product']->getDiscount() == NULL) { 
-                $totalItem = $item['product']->getPrice() * $item['quantity']; // total pour les prix avec réduction
-                $total += $totalItem; 
-            } else {
-                $totalItem = $discountPrice * $item['quantity'];  // total pour les prix sans réduction
-                $total += $totalItem;
-            }  
-        }
+        $total = $panierService->getTotal();
 
         return $this->render('panier/panier.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
             'products' => $products,
-            'items' => $panierData,
+            'items' => $panierService->getFullPanier(),
             'total' => $total
         ]);
     }
@@ -73,17 +53,11 @@ class PanierController extends AbstractController
      * 
      * @Route("/add/{id}", name="app_panier_add")
      */
-    public function add($id, SessionInterface $session) // On récupère les services de la session via sessioninterface
+    public function add($id, PanierService $panierService) 
     {
-        $panier = $session->get('panier', []); // Je vérifie s'il y a une donnée 'panier' dans ma session et par défaut si c'est vide c'est un tableau vide dans la variable $panier
-        
-        if(!empty($panier[$id])) { // Si le produit existe déjà dans le panier on rajoute en plus 
-            $panier[$id]++;
-        } else {
-            $panier[$id] = 1; // Sinon on ajoute le produit 1 fois
-        }
+        $panierService->add($id);
 
-        $session->set('panier', $panier); // On sauvegarde l'état de notre panier actuel après modification
+        return $this->redirect($_SERVER['HTTP_REFERER']);
     }
 
     /**
@@ -91,15 +65,9 @@ class PanierController extends AbstractController
      *
      * @Route("/remove/{id}", name="app_panier_delete")
      */
-    public function delete($id, SessionInterface $session) 
+    public function delete($id, PanierService $panierService) 
     {
-        $panier = $session->get('panier', []);
-
-        if(!empty($panier[$id])) { // Si le produit existe déjà on le supprime
-            unset($panier[$id]);
-        }
-
-        $session->set('panier', $panier);
+       $panierService->delete($id);
         
         return $this->redirectToRoute("app_panier");
     }
