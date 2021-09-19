@@ -88,14 +88,26 @@
                         font-weight: 600;
                     }
             }
+    }
+
+    button {
+        @include buttonColor;
+        font-weight: 500;  
+        height: 40px;
+
+            &:focus {
+                box-shadow: none;
+            }
     }      
 }
 
 //***********************************************************************//
 //************************* EDITION DU PROFIL ***************************//
+//********************************* & ************************************//
+//********************** EDITION DU MOT DE PASSE ************************//
 //***********************************************************************//
 
-.contenant-account.edit {
+.contenant-account.edit, .contenant-account.change-password  {
     
     .edit-card {
         background: rgb(255, 218, 149);
@@ -126,3 +138,4 @@
             }
     }
 }
+

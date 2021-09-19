@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\EditProfilUserType;
+use App\Form\ChangePasswordFormType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AccountController extends AbstractController
 {
@@ -74,19 +76,26 @@ class AccountController extends AbstractController
      * 
      * @Route("account/change-password", name="app_account_change_password", methods={"GET", "POST"})
      */
-    public function changePassword(Request $request, EntityManagerInterface $manager): Response
+    public function changePassword(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); 
         $subcategory = $this->subcategoryRepository->findAll('category');
 
         $user = $this->getUser(); // $this->getUser() récupère l'utilisateur actuellement connecté
-        $form = $this->createForm(EditProfilUserType::class, $user); 
+        $form = $this->createForm(ChangePasswordFormType::class, $user); 
         $form->handleRequest($request);
-
+        
         if($form->isSubmitted() && $form->isValid()) {
+
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $form['PlainPassword']->getData()
+            ); // ou l'écrire $form->get('Plainpassword')->getData() == récupère le nouveau mot de passe et on le hash
             
+            $user->setPassword($hashedPassword); // on envoie le nouveau mot de passe hasher
             $manager->flush();
-            $this->addFlash('success', 'Profil mis à jour !');
+
+            $this->addFlash('success', 'Mot de passe mise à jour !');
             return $this->redirectToRoute('app_account');  
         }
 
