@@ -26,7 +26,9 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/account", name="app_account")
+     * Pour afficher mon compte
+     * 
+     * @Route("/account", name="app_account", methods="GET")
      */
     public function Show(): Response
     {
@@ -40,7 +42,9 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("account/profil/edit", name="app_account_profil_edit")
+     * Pour éditer mes données personnelles
+     * 
+     * @Route("account/edit", name="app_account_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, EntityManagerInterface $manager): Response
     {
@@ -59,6 +63,34 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/profil/edit_profil.html.twig', [
+            'categories' => $categories,
+            'subcategory' => $subcategory,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Pour modifier mon mot de passe
+     * 
+     * @Route("account/change-password", name="app_account_change_password", methods={"GET", "POST"})
+     */
+    public function changePassword(Request $request, EntityManagerInterface $manager): Response
+    {
+        $categories = $this->categoryRepository->findBy([], [], 9, null); 
+        $subcategory = $this->subcategoryRepository->findAll('category');
+
+        $user = $this->getUser(); // $this->getUser() récupère l'utilisateur actuellement connecté
+        $form = $this->createForm(EditProfilUserType::class, $user); 
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            
+            $manager->flush();
+            $this->addFlash('success', 'Profil mis à jour !');
+            return $this->redirectToRoute('app_account');  
+        }
+
+        return $this->render('account/profil/change_password.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
             'form' => $form->createView()
