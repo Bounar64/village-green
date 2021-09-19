@@ -83,7 +83,24 @@ class PanierController extends AbstractController
             $panier[$id] = 1; // Sinon on ajoute le produit 1 fois
         }
 
-        $session->set('panier', $panier); // On sauvegarde l'état de notre panier actuel 
+        $session->set('panier', $panier); // On sauvegarde l'état de notre panier actuel après modification
     }
 
+    /**
+     * Supprimer un produit du panier 
+     *
+     * @Route("/remove/{id}", name="app_panier_delete")
+     */
+    public function delete($id, SessionInterface $session) 
+    {
+        $panier = $session->get('panier', []);
+
+        if(!empty($panier[$id])) { // Si le produit existe déjà on le supprime
+            unset($panier[$id]);
+        }
+
+        $session->set('panier', $panier);
+        
+        return $this->redirectToRoute("app_panier");
+    }
 }

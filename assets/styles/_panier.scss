@@ -21,6 +21,15 @@
         }
     }
 
+    .empty-panier {
+        font-size: 30px;
+        font-weight: 600;
+        color: $orange;
+            
+            span {
+                font-size: 25px;
+            }
+    }
     .panier-card {
         border-radius: 0.25rem;
         box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
@@ -39,6 +48,7 @@
     //______style mini-nav retour achat et imprimez devis_____//
     a {
         color: #000;
+        text-decoration: none;
     }
 
     p {

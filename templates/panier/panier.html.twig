@@ -18,7 +18,7 @@
                     {# mini-nav + total price #} 
                     <div class="col-11 d-flex my-5">
                         <div class="col-3">
-                           <a href="#" class="text-decoration-none"><p class="text-mini-nav text-center">RETOUR AUX ACHATS</p></a>  
+                           <a href="#"><p class="text-mini-nav text-center">RETOUR AUX ACHATS</p></a>  
                         </div>
                         <div class="col text-end">
                             <p class="text-total">TOTAL: <span class="price">{{ total|format_currency('EUR', locale='fr') }}</span>
@@ -66,21 +66,28 @@
                                 <div class="col-5 d-flex justify-content-end align-items-center">
                                     {# supprimer le produit #}
                                     <div class="div-col">
+                                    <a href="{{ path('app_panier_delete', {'id': items.product.id}) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
                                             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
                                         </svg>
+                                    </a>
+                                        
                                     </div>
                                     {# quantité -1 #}
                                     <div class="div-col">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
-                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
-                                        </svg>                                    
+                                        <a href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
+                                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
+                                            </svg> 
+                                        </a>                                    
                                     </div>
                                     {# quantité +1 #}
                                     <div class="div-col">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-                                        </svg>
+                                        <a href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+                                            </svg>
+                                        </a>      
                                     </div>
                                     {# affichage de la quantité #}
                                     <div class="div-col">
@@ -98,8 +105,9 @@
             
             {% else %}
             <div class="text-center mt-5">
-                <p>VOTRE PANIER EST VIDE.</p>
-                <p><span>FAITES-VOUS PLAISIR, REMPLISSEZ-LE !</span></p>
+                <p class="empty-panier">VOTRE PANIER EST VIDE.</p>
+                <p class="empty-panier"><span>FAITES-VOUS PLAISIR, REMPLISSEZ-LE !</span></p>
+                <a href="{{ path('app_products') }}"><p class="text-total mt-5">Voir tout nos produits</p></a> 
             </div>
             
         {% endif %}
