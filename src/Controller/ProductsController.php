@@ -33,7 +33,7 @@ class ProductsController extends AbstractController
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
         $products = $this->productRepository->findAll();
-
+        
         return $this->render('products/subcategory.html.twig', compact('categories', 'subcategory', 'products'));
     }
 
@@ -53,8 +53,8 @@ class ProductsController extends AbstractController
 
         $categories = $this->categoryRepository->findBy([], [], 9, null);
         $subcategory = $this->subcategoryRepository->findAll('category');
-        
 
+        
         return $this->render('products/products_show.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,

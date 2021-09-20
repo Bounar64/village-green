@@ -136,7 +136,17 @@ body {
                     &.langue {
                         margin-right: 20px;
                         font-weight: 600;
-                    }       
+                    } 
+                    //_____icon count panier____//
+                    span {
+                        position: absolute;
+                        font-size: 15px;
+                        font-weight: 600;
+                        color: $blanc;
+                        width: 16px;
+                        height: 16px;
+                        background: #FF5A18;
+                    }
             }
             
             //______Espace client______//

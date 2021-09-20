@@ -38,12 +38,15 @@ class PanierController extends AbstractController
         $panierData = $panierService->getFullPanier();
         $total = $panierService->getTotal();
 
+        $TotalItemsCart = $panierService->TotalItemsCart();
+
         return $this->render('panier/panier.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
             'products' => $products,
             'items' => $panierData,
-            'total' => $total
+            'total' => $total,
+            'TotalItemsCart' => $TotalItemsCart
         ]);
     }
 
@@ -93,4 +96,14 @@ class PanierController extends AbstractController
         
         return $this->redirectToRoute("app_panier");
     }
+
+    /**
+     * fonction qui envoie dans la session le nombre total de produit dans le panier
+     */
+    public function TotalItemsCart(PanierService $panierService) 
+    {
+        $panierService->TotalItemsCart();
+        return $this->redirectToRoute("app_panier");
+    }
+
 }

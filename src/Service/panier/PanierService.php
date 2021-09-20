@@ -94,14 +94,6 @@ class PanierService
          return $total;
     }
 
-    /**
-     * fonction pour vider mon panier 
-     */
-    public function clearPanier()
-    {
-        $this->session->remove('panier');
-    }
-
      /**
      * fonction décrémenter un produit 
      *
@@ -124,4 +116,27 @@ class PanierService
         $this->session->set('panier', $panier); // On sauvegarde dans la session l'état de notre panier actuel après modification
     }
 
+     /**
+     * fonction pour vider mon panier 
+     */
+    public function clearPanier()
+    {
+        $this->session->remove('panier');
+    }
+
+    /**
+     * fonction qui récupère le nombre de produit ajouté au panier
+     *
+     */
+    public function TotalItemsCart() 
+    {
+         // Pour récupèrer le nombre total de mes produits pour afficher dans l'icône cart
+         $panierData = $this->getFullPanier();
+         $TotalItemsCart = 0; 
+         foreach($panierData as $item) { // boucle pour récupèrer le nombre total de mes produits dans le panier 
+             $TotalItemsCart += $item['quantity']; 
+         }
+
+        $this->session->set('TotalItemsCart', $TotalItemsCart); // On sauvegarde dans la session le nombre total de mes produits dans le panier
+    }
 }
