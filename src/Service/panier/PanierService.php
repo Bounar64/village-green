@@ -99,6 +99,29 @@ class PanierService
      */
     public function clearPanier()
     {
-        $this->session->clear('panier');
+        $this->session->remove('panier');
     }
+
+     /**
+     * fonction décrémenter un produit 
+     *
+     */
+    public function remove(int $id) 
+    {
+        $panier = $this->session->get('panier', []); // Je vérifie s'il y a une donnée 'panier' dans ma session et par défaut si c'est vide c'est un tableau vide dans la variable $panier
+        
+        if(!empty($panier[$id])) { 
+            if($panier[$id] > 1) { // Si le produit existe déjà et qu'il y en a plus de 1 dans le panier on enlève 1 en moins
+                $panier[$id]--;
+            } else {
+                unset($panier[$id]); // Sinon on le supprime
+            }
+            
+        } else {
+            $panier[$id] = 1; // Sinon on ajoute le produit 1 fois
+        }
+
+        $this->session->set('panier', $panier); // On sauvegarde dans la session l'état de notre panier actuel après modification
+    }
+
 }

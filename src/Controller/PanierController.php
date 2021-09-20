@@ -62,7 +62,7 @@ class PanierController extends AbstractController
     /**
      * Supprimer un produit du panier 
      *
-     * @Route("/remove/{id}", name="app_panier_delete")
+     * @Route("/delete/{id}", name="app_panier_delete")
      */
     public function delete($id, PanierService $panierService) 
     {
@@ -79,6 +79,18 @@ class PanierController extends AbstractController
     public function clear(PanierService $panierService)
     {    
         $panierService->clearPanier();
+        return $this->redirectToRoute("app_panier");
+    }
+
+    /**
+     * décrémenter un produit du panier 
+     *
+     * @Route("/remove/{id}", name="app_panier_remove")
+     */
+    public function remove($id, PanierService $panierService) 
+    {
+       $panierService->remove($id);
+        
         return $this->redirectToRoute("app_panier");
     }
 }
