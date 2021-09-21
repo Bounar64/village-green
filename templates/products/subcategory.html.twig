@@ -10,7 +10,8 @@
 
             <div class="contenant-page">
             {% for category in categories %}
-                <div class="title-cat">
+                {# je passe dans les titres les labels des catégories dans une ancre pour venir sur la page à la bonne hauteur #}
+                <div class="title-cat" id="{{ category.label }}">
                     <h1>Nos {{ category.label|replace({ 'Guit/Bass': "Guitare", 'DJ': "Deejay", 'Accessoires': "Accessoire" }) }}s</h1> 
                 </div>
                 <!-- Swiper des sous-catégories -->
@@ -18,7 +19,7 @@
                     <div class="swiper-wrapper d-flex">
                     {% for subcategory in subcategory %}
                         {% if subcategory.category.id is same as (category.id) %} 
-                        <div class="swiper-slide">
+                        <div class="swiper-slide"> 
                             <a href="{{ path('app_products_show', {label: subcategory.label}) }}">
                                 <div class="img-slide">
                                     <img src="{{ asset(subcategory.background) }}" alt="{{ subcategory.label }}">

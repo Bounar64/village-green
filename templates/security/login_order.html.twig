@@ -1,0 +1,182 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+<header id="background">
+    <div class="container registration-user"> 
+        {# header navigation #} 
+        {{ include('/layouts/header_navigation.html.twig') }} 
+
+        <div class="contenant-registration-user">
+            {# formulaire d'inscription #}
+            {{ form_start(form) }}
+                {# email et mdp #}   
+                <div class="row d-flex justify-content-evenly">
+                    <h2 class="text-center">Créez vos identifiants</h2>   
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input"><span>* </span>E-mail</p>
+                            </div>
+                            <div class="col-8">
+                                {{ form_row(form.email) }}
+                            </div>
+                            
+                        </div> 
+                        <div class="row">
+                            <div class="col-3 text-end p-0">
+                                <p class="label-input"><span>* </span>Créer votre <br> mot de passe</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.password) }}
+                            </div>
+                        </div>         
+                    </div>
+                    {# confirm mdp#}
+                    <div class="col-5">
+                            <div class="row">
+                            <div class="col-3 text-end p-0">
+                                <p class="label-input confirm"><span>* </span>Confirmation <br> mot de passe</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.confirm_password) }}
+                            </div>
+                        </div> 
+                    </div>
+
+                    {# reste des infos #}
+                    <div class="row d-flex justify-content-evenly">
+                        <h2 class="text-center">Créez vos identifiants</h2>   
+                    <div class="col-5">
+                        <div class="row mt-5">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input"><span>* </span>Prénom</p>
+                            </div>
+                            <div class="col-8">
+                                {{ form_row(form.firstName) }}
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input"><span>* </span>Nom</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.lastName) }}
+                            </div>
+                        </div>         
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input"><span>* </span>Adresse</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.address) }}
+                            </div>
+                        </div>         
+                        <div class="row">
+                            <div class="col-3 text-end p-0">
+                                <p class="label-input">Complément d'adresse</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.additionalAddress) }}
+                            </div>
+                        </div>         
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input"><span>* </span>Code postal</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.zipCode) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input"><span>* </span>Ville</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.city) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input"><span>* </span>Pays</p>
+                            </div>
+                            <div class="col-8 mt-1">
+                                {{ form_row(form.country) }}
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-3 text-end mt-2 p-0">
+                                <p class="label-input"><span>*</span></p>
+                            </div>
+                            <div class="col-9 mt-1">
+                                {{ form_row(form.agreeTerms) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {# card suivi commande par téléphone #}
+                    <div class="col-5">
+                        <div class="card">
+                            <div class="card-body card-right">
+                                <h3 class="card-title text-center mt-2">Vos numéros de téléphone</h3>
+                                {# inputs phones #}
+                                <div class="row">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-4 text-end p-0">
+                                        <p class="label-input"><span>* </span>Numéro de portable</p>
+                                        </div>
+                                        <div class="col-7 mt-1">
+                                            {{ form_row(form.phone, {attr: {class: 'input-phone'}}) }}
+                                        </div>
+                                    </div>         
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-4 text-end p-0">
+                                        <p class="label-input">Numéro de téléphone fixe</p>
+                                        </div>
+                                        <div class="col-7 mt-1">
+                                            {{ form_row(form.phoneFixe, {attr: {class: 'input-phone'}}) }}
+                                        </div>
+                                    </div>        
+                                </div>
+                                {# image bottom card #}
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-11">
+                                        <img src="{{ asset('build/images/image-phone-suivi.png') }}" alt="texte: Suivez vos commandes par SMS">
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+
+                    {# button #}
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-2 text-center">
+                            <button type="submit" class="btn btn-primary">Valider</button>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col text-center mt-3">
+                            <p class="agreeTerms">Vous recevrez l'e-mail de confirmation<br>après avoir soumis ce formulaire.</p>
+                        </div>
+                    </div>
+
+                </div> {# fermeture reste des infos #}
+            </div> {# fermeture form d'inscription #}
+
+                {# image nos partenaires #}
+                <div class="row bas-page-pictos">
+                    <div class="col-12 text-center">
+                        <img src="{{ asset('build/images/bas_de_page_pictos.png') }}" alt="logo de nos partenaires">
+                    </div>
+                </div> 
+            
+            {{ form_end(form) }}
+        </div> {# fermeture contenant-page #}
+            
+        {# footer #} 
+        {{ include('/layouts/footer.html.twig') }}
+    </div> {# fermeture du container products #}   
+</header>
+{% endblock %}
+

@@ -18,8 +18,8 @@
                     <div class="col-5">
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">{{ category.label }}</a></li>
-                                <li class="breadcrumb-item"><a href="#">{{ subcategory.label }}</a></li>
+                                <li class="breadcrumb-item"><a class="text-Ariane" href="#">{{ category.label|replace({ 'Guit/Bass': "Guitare" }) }}</a></li>
+                                <li class="breadcrumb-item"><a class="text-Ariane"  href="#">{{ subcategory.label }}</a></li>
                             </ol>
                         </nav>                
                     </div>

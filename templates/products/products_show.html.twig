@@ -16,8 +16,11 @@
                         <div class="col-5">
                             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a class="text-decoration-none text-muted fs-8" href="#">{{ category.label|replace({ 'Guit/Bass': "Guitare", 'DJ': "Deejay" }) }}</a></li>
-                                    <li class="breadcrumb-item"><a class="text-decoration-none text-muted fs-8" href="#">{{ subcategory.label }}</a></li>
+                                   <li class="breadcrumb-item">
+                                        <a class="text-Ariane" href="{{ path('app_products') }}#{{ category.label }}"> {# je passe le nom de la cétégorie dans l'ancre pour retourner sur la bonne catégorie sur la page sub_category#}
+                                            {{ category.label|replace({ 'Guit/Bass': "Guitare" }) }}
+                                        </a>
+                                   </li>
                                 </ol>
                             </nav>                
                         </div>

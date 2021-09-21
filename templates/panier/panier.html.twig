@@ -25,7 +25,7 @@
                         </div>
                         <div class="col text-end">
                             <p class="text-total">TOTAL : <span class="price">{{ total|format_currency('EUR', locale='fr') }}</span>
-                                <button type="submit" class="btn btn-success">COMMANDER</button>
+                              <a href="{{ path('app_home') }}"><button class="btn btn-success">COMMANDER</button></a> 
                             </p> 
                         </div>
                     </div>

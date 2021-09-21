@@ -79,7 +79,7 @@ class PanierService
         $panierData = $this->getFullPanier();
 
         // boucle pour avoir le total du panier avec réduction et sans réduction 
-         foreach($panierData as $item) {
+        foreach($panierData as $item) {
             $discountPrice = $item['product']->getPrice() - ($item['product']->getDiscount() / 100 * $item['product']->getPrice()); // Prix avec réduction
 
             if($item['product']->getDiscount() == NULL) { 
@@ -89,8 +89,9 @@ class PanierService
                 $totalItem = $discountPrice * $item['quantity'];  // total pour les prix sans réduction
                 $total += $totalItem;
             }  
-         }
-         return $total;
+        }
+
+        return $total;
     }
 
      /**

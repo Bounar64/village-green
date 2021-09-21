@@ -61,7 +61,8 @@ class PanierController extends AbstractController
     {
         $panierService->add($id);
 
-        return $this->redirectToRoute("app_products_show", ['label' => $session->get('label')]); // on passe la route et le paramètre label qu'on à récupérer via la session envoyé depuis le ProductController
+        //return $this->redirectToRoute("app_products_show", ['label' => $session->get('label')]); // on passe la route et le paramètre label qu'on à récupérer via la session envoyé depuis le ProductController
+        return $this->redirectToRoute("app_panier"); 
     }
 
     /**
@@ -117,6 +118,6 @@ class PanierController extends AbstractController
     public function TotalItemsCart(PanierService $panierService) 
     {
         $panierService->TotalItemsCart();
-        return $this->redirectToRoute("app_panier");
+        return $this->redirectToRoute("app_product");
     }
 }
