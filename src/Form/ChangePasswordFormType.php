@@ -15,7 +15,7 @@ class ChangePasswordFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     { 
-        //On récupère nos option configuré plus bas via $options
+        // On récupère nos option configuré plus bas via $options : Pour afficher le champ mot de passe courant
         if($options['current_password_is_required']) {
                 $builder
                 ->add('currentPassword', PasswordType::class, [

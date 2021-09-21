@@ -1,0 +1,68 @@
+//**********************************************************************************************************************************************************//
+//*******************************---------------------- PAGE DE CONNECTION OU D'INSCRIPTION (products_details) ----------------------***********************//
+//**********************************************************************************************************************************************************//
+
+
+//***********************************************************************//
+//************************ CARD DE PROGRESSION **************************//
+//***********************************************************************//
+
+.contenant-connection {
+
+    p {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    input {
+        background: $gris-muted;
+        border-color: rgb(175, 175, 175);
+        height: 30px;
+        font-size: 15px;
+
+        &:focus {
+            box-shadow: none;
+            border-color: $orange;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        font-weight: 500;
+        color: $bleu;
+
+            p {
+                font-size: 13px;
+            }
+    }
+
+    .button-connection {
+        @include buttonColor;
+        font-size: 10px;
+        font-weight: 500;
+        height: 35px;
+    }
+
+    .button-boutique {
+        color: $orange;
+        background: none;
+        border: 1px solid $orange;
+        font-size: 10px;
+        font-weight: 600;
+        height: 35px;
+        transition: all .2s linear;
+
+            &:hover {
+                background: #000;
+                border: 1px solid #000;
+                color: $blanc;
+            }
+    }
+
+    .button-registration {
+        @include buttonColor;
+        font-size: 10px;
+        font-weight: 500;
+        height: 35px;
+    }
+}

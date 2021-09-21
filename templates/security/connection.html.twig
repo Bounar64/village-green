@@ -1,0 +1,102 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+<header id="background">
+    <div class="container connection"> 
+        {# header navigation #} 
+        {{ include('/layouts/header_navigation.html.twig') }} 
+
+        <div class="contenant-connection">
+
+            <div class="col-lg card card-progress mt-5">
+                {# progress-bar #}
+                <div class="card-body">
+                    <div class="row d-flex justify-content-between">
+                        {# step connexion #}
+                        <div class="col-1">
+                            <p class="m-0">1</p>
+                        </div>
+                        {# step Livraison #}
+                        <div class="col-1">
+                            <p class="text-center m-0">2</p>
+                        </div>
+                        {# step Paiement #}
+                        <div class="col-1">
+                            <p class="text-center m-0">3</p>
+                        </div>
+                        {# step Validation #}
+                        <div class="col-1">
+                            <p class="text-end m-0">4</p>
+                        </div>    
+                    </div>    
+                </div>
+            </div>
+            {# fermeture progress-bar #}
+ 
+            {% if error %}
+                <span class="error-login">{{ error.messageKey|trans(error.messageData, 'security') }}</span> // connecter ca marche decco sa ne marche plus
+            {% endif %} 
+            <div class="row d-flex justify-content-center">
+                <div class="col-11 d-flex justify-content-between mt-5">
+                    {# client connexion #} 
+                    <div class="col-5">
+                        <p>VOUS ÊTES DÉJÀ CLIENT VILLAGE-GREEN</p>
+                            <div class="row d-block">
+                            <div class="col">
+                            <form action="{{ path('app_connection') }} " method="post">
+                                <div class="mb-4">
+                                    <label for="email">Adresse e-mail:</label>
+                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="_username">
+                                </div>
+                                <div class="col mb-2">
+                                    <label for="password">Mot de passe:</label>
+                                    <input type="password" class="form-control" id="email" name="_password">
+                                </div>
+                                <div class="col mb-4">
+                                    <a href="{{ path('app_forgot_password_request') }}"><p class="text-start text-bottom mb-0">Vous avez oublié votre mot de passe ?</p></a> 
+                                </div>
+
+                                <input type="hidden" name="_csrf_token"
+                                    value="{{ csrf_token('authenticate') }}"
+                                >                                                                      
+                            </div>
+
+                            <div class="row d-flex justify-content-between m-0 p-0">
+                                <div class="col-4">
+                                   <a href="{{ path('app_home') }}"><button class="btn btn-primary w-100 align-items-center lh-1 button-boutique">RETOUR BOUTIQUE</button></a> 
+                                </div>
+                                <div class="col-4 text-end">
+                                    <button type="submit" class="btn btn-primary w- align-items-center lh-1 button-connection">SE CONNECTER</button>
+                                </div>
+                            </div>                               
+                            </form>
+                        </div>
+                    </div>
+                    {# fermeture client connexion #} 
+
+                    {# client inscription #}
+                    <div class="col-5">
+                        <p class="mb-3">VOUS ÊTES UN NOUVEAU CLIENT</p>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                               <a href="{{ path('app_register_user') }}"><button class="btn btn-primary w-100 align-items-center lh-1 button-registration">JE CRÉE MON COMPTE PARTICULIER</button></a> 
+                            </div>
+                            <div class="col-7">
+                              <a href="{{ path('app_register_pro') }}"><button class="btn btn-primary w-100 align-items-center lh-1 button-registration">JE CRÉE MON COMPTE PROFESSIONNEL</button></a>  
+                            </div>
+                        </div>            
+                    </div>
+                    {# fermeture client inscription #}
+                </div>           
+            </div>
+            <hr>
+        </div> {# fermeture contenant-page #}
+            
+        {# footer #} 
+        {{ include('/layouts/footer.html.twig') }}
+    </div> {# fermeture du container products #}   
+</header>
+{% endblock %}
+

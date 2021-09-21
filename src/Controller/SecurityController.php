@@ -20,9 +20,9 @@ class SecurityController extends AbstractController
     }
     
     /**
-     * @Route("/login_card", name="app_login")
+     * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils) 
+    public function login() 
     {
         // Si l'on est connecté on ne peux pas accédé à la page login
         if ($this->getUser()) {
@@ -38,14 +38,7 @@ class SecurityController extends AbstractController
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
 
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
         return $this->render('security/login.html.twig', [
-            'error' => $error,
-            'last_username' => $lastUsername,
             'categories' => $categories, 
             'subcategory' => $subcategory
         ]);
@@ -61,12 +54,20 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * fonction pour se connecté ou s'inscrire lorsqu'on click sur commander
+     * fonction pour se connecter ou s'inscrire lorsqu'on click sur commander
      *
-     * @Route("/login", name="app_login_order", methods={"GET"})
+     * @Route("/connection", name="app_connection")
      */
-    public function loginOrder(AuthenticationUtils $authenticationUtils)
+    public function connection(AuthenticationUtils $authenticationUtils)
     {
+        // Si l'on est connecté on ne peux pas accédé à la page connection
+        if ($this->getUser()) {
+
+            $this->addFlash('danger', 'Vous êtes déjà connecté !');
+            
+            return $this->redirectToRoute('app_home');
+        }
+
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
 
@@ -75,7 +76,7 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login_order.html.twig', [
+        return $this->render('security/connection.html.twig', [
             'error' => $error,
             'last_username' => $lastUsername,
             'categories' => $categories, 

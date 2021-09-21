@@ -3,7 +3,15 @@
 {% block title 'Village green' %}
 
 {% block body %}
- {{ include('layouts/_flash_message.html.twig') }} {# affichage des messages d'erreur #}
+{{ include('layouts/_flash_message.html.twig') }} {# affichage des messages d'erreur #}
+    
+    {% if error %}
+    <div class="col-12 background-error text-center">
+        <span class="error-login">{{ error.messageKey|trans(error.messageData, 'security') }}</span> {# affichage des messages d'erreur de login #}
+    </div>
+        
+    {% endif %} 
+
         <div class="logo">
         <a href="{{ path('app_home') }}"><img class="img-fluid img-logo" src="{{ asset('build/images/logo_village_green.png') }}" alt="logo village green"></a> 
         </div>

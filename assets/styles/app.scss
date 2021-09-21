@@ -10,6 +10,7 @@
 @import "_account";
 @import "_reset-password";
 @import "_panier";
+@import "_connection";
 
 /* Mise du background */
 body {
@@ -20,10 +21,10 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     
-    // messages d'erreur style
+    //______messages d'erreur style______//
     .alert {
         padding: 10px;
-        color: white;
+        color: $blanc;
         text-align: center;
         margin: 0;
         border: none;
@@ -37,6 +38,16 @@ body {
             background-color: rgb(180, 0, 0);
         }
     }
+
+    //______message d'erreur de connection_______//
+    .error-login {
+        color: $blanc;
+    }
+
+    .background-error {
+        background-color: rgb(180, 0, 0);
+    }
+
 
     //**********************************************************************************************************************************************************//
     //**********************************************---------------------- PAGE HOME (home) ----------------------**********************************************//
@@ -62,10 +73,11 @@ body {
         }
 
         &.registration-user {
-            min-height: 1810px;
+            min-height: 2000px;
         }
 
         &.registration-pro {
+            min-height: 2000px;
             background-color: #e4ddcc;
         }
 
@@ -97,7 +109,7 @@ body {
    
     .logo {
         position: absolute;
-        z-index: 9999;
+        z-index: 999;
 
             img {
                 height: auto;

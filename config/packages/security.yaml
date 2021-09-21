@@ -41,6 +41,10 @@ security:
                 path:     /
            # provider: users_in_memory
 
+           # configure the maximum login attempts (per minute)
+            # login_throttling:
+            #     max_attempts: 3
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
@@ -51,4 +55,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/profil, roles: ROLE_USER }
+        # - { path: ^/profil, roles: ROLE_USER }
