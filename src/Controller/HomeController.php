@@ -32,10 +32,5 @@ class HomeController extends AbstractController
             'last_username' => $lastUsername
         ]); 
     }
-
-     /**
-     * fonction qui récupère le nombre de produit ajouté au panier
-     *
-     */
 }
 

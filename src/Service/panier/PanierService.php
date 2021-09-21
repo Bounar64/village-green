@@ -18,20 +18,20 @@ class PanierService
     }
 
     /**
-     * fonction ajout de produit au panier 
+     * fonction ajouter un produit au panier 
      *
      */
     public function add(int $id) 
     {
-        $panier = $this->session->get('panier', []); // Je vérifie s'il y a une donnée 'panier' dans ma session et par défaut si c'est vide c'est un tableau vide dans la variable $panier
+        $panier = $this->session->get('panier', []); // Je vérifie s'il y a une donnée 'panier' dans ma session et par défaut si c'est vide c'est un tableau vide
         
-        if(!empty($panier[$id])) { // Si le produit existe déjà dans le panier on rajoute en plus 
+        if(!empty($panier[$id])) { // Si le produit existe déjà dans le panier on rajoute on incrémente 
             $panier[$id]++;
         } else {
             $panier[$id] = 1; // Sinon on ajoute le produit 1 fois
         }
-
-        $this->session->set('panier', $panier); // On sauvegarde l'état de notre panier actuel après modification
+        
+        $this->session->set('panier', $panier); // On sauvegarde sans la session l'état de notre panier actuel après modification
     }
 
     /**
@@ -78,20 +78,36 @@ class PanierService
         $total = 0; // initialise le total à 0
         $panierData = $this->getFullPanier();
 
-        // boucle pour avoir le total du panier avec réduction et sans s'il y en a pas
+        // boucle pour avoir le total du panier avec réduction et sans réduction 
          foreach($panierData as $item) {
-             $discountPrice = $item['product']->getPrice() - ($item['product']->getDiscount() / 100 * $item['product']->getPrice()); // Prix avec réduction
- 
-             if($item['product']->getDiscount() == NULL) { 
-                 $totalItem = $item['product']->getPrice() * $item['quantity']; // total pour les prix avec réduction
-                 $total += $totalItem; 
-             } else {
-                 $totalItem = $discountPrice * $item['quantity'];  // total pour les prix sans réduction
-                 $total += $totalItem;
-             }  
-         }
+            $discountPrice = $item['product']->getPrice() - ($item['product']->getDiscount() / 100 * $item['product']->getPrice()); // Prix avec réduction
 
+            if($item['product']->getDiscount() == NULL) { 
+                $totalItem = $item['product']->getPrice() * $item['quantity']; // total pour les prix avec réduction
+                $total += $totalItem; 
+            } else {
+                $totalItem = $discountPrice * $item['quantity'];  // total pour les prix sans réduction
+                $total += $totalItem;
+            }  
+         }
          return $total;
+    }
+
+     /**
+     * fonction incrémenté un produit 
+     *
+     */
+    public function increase(int $id) 
+    {
+        $panier = $this->session->get('panier', []); // Je vérifie s'il y a une donnée 'panier' dans ma session et par défaut si c'est vide c'est un tableau vide dans la variable $panier
+        
+        if(!empty($panier[$id])) { // Si le produit existe déjà dans le panier on rajoute on incrémente 
+            $panier[$id]++;
+        } else {
+            $panier[$id] = 1; // Sinon on ajoute le produit 1 fois
+        }
+
+        $this->session->set('panier', $panier); // On sauvegarde dans la session l'état de notre panier actuel après modification
     }
 
      /**
@@ -103,14 +119,11 @@ class PanierService
         $panier = $this->session->get('panier', []); // Je vérifie s'il y a une donnée 'panier' dans ma session et par défaut si c'est vide c'est un tableau vide dans la variable $panier
         
         if(!empty($panier[$id])) { 
-            if($panier[$id] > 1) { // Si le produit existe déjà et qu'il y en a plus de 1 dans le panier on enlève 1 en moins
+            if($panier[$id] > 1) { // Si le produit existe déjà et qu'il y en a plus de 1 dans le panier on décrémente
                 $panier[$id]--;
             } else {
                 unset($panier[$id]); // Sinon on le supprime
-            }
-            
-        } else {
-            $panier[$id] = 1; // Sinon on ajoute le produit 1 fois
+            }    
         }
 
         $this->session->set('panier', $panier); // On sauvegarde dans la session l'état de notre panier actuel après modification

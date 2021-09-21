@@ -17,6 +17,7 @@ class ProductsController extends AbstractController
     private $categoryRepository;
     private $subcategoryRepository;
     private $productRepository;
+    private $session;
 
     public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository)
     {
@@ -45,6 +46,8 @@ class ProductsController extends AbstractController
         $data = new SearchData();
         $data->page = $request->get('page', 1);
         $data->url_label = $label;
+
+        $request->query->set('label', $label); // on set le label dans une variable de session vi la Request pour pouvoir faire la redirection de la function add() dans PanierController 
 
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);

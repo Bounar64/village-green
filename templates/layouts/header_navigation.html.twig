@@ -17,8 +17,14 @@
                         {% include('/security/login.html.twig') %} {# popover espace client #}                      
                     </div>
                 </div>   
-            {# logo caddie #}             
-            <a class="panier" href="{{ path('app_panier') }}"><img src="{{ asset('build/images/picto_panier.png') }}" alt="pictogramme panier"><span class="rounded-circle text-center lh-1">{{ app.session.get('TotalItemsCart') }}</span></a>
+            {# logo caddie #}          
+            <a class="panier" href="{{ path('app_panier') }}"><img src="{{ asset('build/images/picto_panier.png') }}" alt="pictogramme panier">
+                {% if app.session.get('TotalItemsCart') > 0 %}
+                    <span class="rounded-circle text-center lh-1">
+                        {{ app.session.get('TotalItemsCart') }}   
+                    </span>
+                {% endif %}
+            </a>
             {# logo langue pays #}
             <a class="langue" href="#"><img src="{{ asset('build/images/picto_pays.png') }}" alt="pictogramme langue">&nbsp;FR</a>
         </div>

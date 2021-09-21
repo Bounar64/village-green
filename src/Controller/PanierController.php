@@ -9,6 +9,7 @@ use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/panier")
@@ -48,6 +49,7 @@ class PanierController extends AbstractController
             'total' => $total,
             'TotalItemsCart' => $TotalItemsCart
         ]);
+
     }
 
     /**
@@ -55,11 +57,11 @@ class PanierController extends AbstractController
      * 
      * @Route("/add/{id}", name="app_panier_add")
      */
-    public function add($id, PanierService $panierService) 
+    public function add($id, PanierService $panierService, SessionInterface $session) 
     {
         $panierService->add($id);
 
-        return $this->redirect($_SERVER['HTTP_REFERER']);
+        return $this->redirectToRoute("app_products_show", ['label' => $session->get('label')]); // on passe la route et le paramètre label qu'on à récupérer via la session envoyé depuis le ProductController
     }
 
     /**
@@ -86,6 +88,18 @@ class PanierController extends AbstractController
     }
 
     /**
+     * incrémenter un produit du panier 
+     *
+     * @Route("/increase/{id}", name="app_panier_increase")
+     */
+    public function increase($id, PanierService $panierService) 
+    {
+       $panierService->increase($id);
+        
+        return $this->redirectToRoute("app_panier");
+    }
+
+    /**
      * décrémenter un produit du panier 
      *
      * @Route("/remove/{id}", name="app_panier_remove")
@@ -105,5 +119,4 @@ class PanierController extends AbstractController
         $panierService->TotalItemsCart();
         return $this->redirectToRoute("app_panier");
     }
-
 }
