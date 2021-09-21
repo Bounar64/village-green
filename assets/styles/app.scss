@@ -53,21 +53,12 @@ body {
 
         &.products-show {
             min-height: 1530px;
-                .text-Ariane {
-                    font-size: 15px;
-                    font-weight: 500;
-                    color: $gris-semi;
-                    transition: all .2s linear;
-
-                        &:hover {
-                            color: $orange;
-                        }
-    
-                }
+            @include apparenceFilAriane;
         }
 
         &.products-details {
             min-height: 960px;
+            @include apparenceFilAriane;
         }
 
         &.registration-user {

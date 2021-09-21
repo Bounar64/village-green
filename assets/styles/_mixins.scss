@@ -100,3 +100,19 @@
     border: none; 
     box-shadow: none;
 }
+
+/************************** Apparence texte Fil d'Ariane **************************/
+@mixin apparenceFilAriane {
+    .text-Ariane {
+        font-size: 15px;
+        font-weight: 500;
+        color: $gris-semi;
+        text-decoration: none;
+        transition: all .2s linear;
+
+            &:hover {
+                color: $orange;
+            }
+    }
+}
+
