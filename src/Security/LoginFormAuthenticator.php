@@ -31,7 +31,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public function supports(Request $request): bool
     {
-       return self::LOGIN_ROUTE === $request->attributes->get('_route') // vérifie si l'authenticateur supporte la requête -> l'authentification vérifie que app_login vaut la route en cours et que vaut une requête post pour continuer la vérification retourne true sinon retourne false et rien ne ce passe
+       return self::LOGIN_ROUTE === $request->attributes->get('_route') // vérifie si l'authenticateur supporte la requête -> l'authentification vérifie que app_login vaut la route en cours et que  une requête a une methode post pour continuer la vérification retourne true sinon retourne false et rien ne ce passe
             && $request->isMethod('POST');
     }
     

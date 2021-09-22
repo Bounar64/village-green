@@ -22,6 +22,7 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+            
         main:
             lazy: true
             provider: app_user_provider
@@ -39,9 +40,10 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
-           # provider: users_in_memory
+           
+            # provider: users_in_memory
 
-           # configure the maximum login attempts (per minute)
+            # configure the maximum login attempts (per minute)
             # login_throttling:
             #     max_attempts: 3
 

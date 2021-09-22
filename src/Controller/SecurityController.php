@@ -54,7 +54,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * fonction pour se connecter ou s'inscrire lorsqu'on click sur commander
+     * fonction pour se connecté ou s'inscrire lorsqu'on click sur commander
      *
      * @Route("/connection", name="app_connection")
      */

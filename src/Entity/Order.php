@@ -1,0 +1,205 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=OrderRepository::class)
+ * @ORM\Table(name="`orders`")
+ */
+class Order
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $meansPayment;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $datePayment;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $dateSent;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $shipping;
+
+    /**
+     * @ORM\Column(type="string", length=80, nullable=true)
+     */
+    private $addressSecond;
+
+    /**
+     * @ORM\Column(type="decimal", precision=7, scale=2)
+     */
+    private $total;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="order_")
+     */
+    private $orderDetails;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TypePayment::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $typePayment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    public function __construct()
+    {
+        $this->orderDetails = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getMeansPayment(): ?bool
+    {
+        return $this->meansPayment;
+    }
+
+    public function setMeansPayment(bool $meansPayment): self
+    {
+        $this->meansPayment = $meansPayment;
+
+        return $this;
+    }
+
+    public function getDatePayment(): ?\DateTimeImmutable
+    {
+        return $this->datePayment;
+    }
+
+    public function setDatePayment(\DateTimeImmutable $datePayment): self
+    {
+        $this->datePayment = $datePayment;
+
+        return $this;
+    }
+
+    public function getDateSent(): ?\DateTimeImmutable
+    {
+        return $this->dateSent;
+    }
+
+    public function setDateSent(\DateTimeImmutable $dateSent): self
+    {
+        $this->dateSent = $dateSent;
+
+        return $this;
+    }
+
+    public function getShipping(): ?bool
+    {
+        return $this->shipping;
+    }
+
+    public function setShipping(?bool $shipping): self
+    {
+        $this->shipping = $shipping;
+
+        return $this;
+    }
+
+    public function getAddressSecond(): ?string
+    {
+        return $this->addressSecond;
+    }
+
+    public function setAddressSecond(?string $addressSecond): self
+    {
+        $this->addressSecond = $addressSecond;
+
+        return $this;
+    }
+
+    public function getTotal(): ?string
+    {
+        return $this->total;
+    }
+
+    public function setTotal(string $total): self
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrderDetails[]
+     */
+    public function getOrderDetails(): Collection
+    {
+        return $this->orderDetails;
+    }
+
+    public function addOrderDetail(OrderDetails $orderDetail): self
+    {
+        if (!$this->orderDetails->contains($orderDetail)) {
+            $this->orderDetails[] = $orderDetail;
+            $orderDetail->setOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderDetail(OrderDetails $orderDetail): self
+    {
+        if ($this->orderDetails->removeElement($orderDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($orderDetail->getOrder() === $this) {
+                $orderDetail->setOrder(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTypePayment(): ?TypePayment
+    {
+        return $this->typePayment;
+    }
+
+    public function setTypePayment(?TypePayment $typePayment): self
+    {
+        $this->typePayment = $typePayment;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+}
