@@ -77,4 +77,88 @@
     //***********************************************************************//
     //*************************** PAGE LIVRAISON ****************************//
     //***********************************************************************//
+
+   p {
+
+        &.ship-title {
+                font-size:15px;
+            }
+
+        &.small {
+            font-size: 12px;
+        }
+
+        &.small-text {
+            font-size: 11px;
+        }
+
+   }
+
+   .button-edit {
+        color: $orange;
+        background: none;
+        border: 1px solid $orange;
+        font-size: 10px;
+        font-weight: 600;
+        height: 30px;
+        transition: all .2s linear;
+
+            &:hover {
+                background: #000;
+                border: 1px solid #000;
+                color: $blanc;
+            }
+   }
+
+   .button-back {
+        color: $orange;
+        background: none;
+        border: 1px solid $orange;
+        font-size: 13px;
+        font-weight: 600;
+        height: 40px;
+        transition: all .2s linear;
+
+            &:hover {
+                background: #000;
+                border: 1px solid #000;
+                color: $blanc;
+            }
+   }
+
+   .button-next {
+        font-size: 13px;
+        font-weight: 600;
+        width: 150px;
+        height: 40px;
+   }
+
+   hr {
+       color: $orange;
+       width: 95%;
+       margin: auto;
+   }
+
+   //_________card modification de l'adresse de livraison________//
+   .card.edit-shipping {
+      
+        label {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        select {
+            background: $gris-muted;
+            border-color: rgb(175, 175, 175);
+            height: 30px;
+            font-size: 14px;
+
+            &:focus {
+                font-size: 15px;
+                background-color: $blanc;
+                box-shadow: none;
+                border-color: $orange;
+            }
+        }
+   }
 }

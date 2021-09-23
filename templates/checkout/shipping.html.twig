@@ -1,0 +1,261 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+<header id="background">
+    <div class="container connection"> 
+        {# header navigation #} 
+        {{ include('/layouts/header_navigation.html.twig') }} 
+
+        <div class="contenant-connection">
+
+            <div class="col-lg card card-progress mt-5">
+                {# progress-bar #}
+                <div class="card-body">
+                    <div class="row d-flex justify-content-between">
+                        {# step connexion #}
+                        <div class="col-2">
+                            <p class="text-progress color m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
+                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                    <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z"/>
+                                </svg>
+                                Connexion
+                            </p>
+                        </div>
+                        {# step Livraison #}
+                        <div class="col-2">
+                            <p class="text-progress color text-center m-0">2 Livraison</p>
+                        </div>
+                        {# step Paiement #}
+                        <div class="col-2">
+                            <p class="text-progress text-center m-0">3 Paiement</p>
+                        </div>
+                        {# step Validation #}
+                        <div class="col-2">
+                            <p class="text-progress text-end m-0">4 Validation</p>
+                        </div>    
+                    </div>    
+                </div>
+            </div>
+            {# fermeture progress-bar #}
+  
+            <div class="row d-flex justify-content-center">
+                <div class="col-11 d-flex justify-content-between mt-5">
+                    {# choix livraison #} 
+                    <div class="col-5">
+                        <p class="ship-title fw-bold">CHOISISSEZ VOTRE LIVRAISON</p>
+                        <div class="col-12 mb-3">
+                            {# card choix livraison #}
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        {# choix 1 #}
+                                        <div class="col-12 d-flex mt-3">                              
+                                            <div class="col-7">
+                                                <p class="small-text mb-4">Livraison standard <span class="fw-bold">72h</span> <br>
+                                                    avec <span class="fw-bold">suivi</span> du lundi au vendredi
+                                                </p>  
+                                            </div>
+                                            <div class="col-3">                                              
+                                                <p class="small fw-bold mb-4 text-end">OFFERT</p>  
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <input type="checkbox" value="1">
+                                            </div>  
+                                        </div> 
+                                        {# choix 2 #}
+                                        <div class="col-12 d-flex mt-3">                              
+                                            <div class="col-7">
+                                                <p class="small-text mb-4">Livraison Premium <span class="fw-bold">24h</span> <br>
+                                                    avec <span class="fw-bold">suivi + sms</span> du lundi au vendredi
+                                                </p>  
+                                            </div>
+                                            <div class="col-3">                                              
+                                                <p class="small fw-bold mb-4 text-end">9,99 €</p>  
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <input type="checkbox" value="2">
+                                            </div>  
+                                        </div> 
+                                        {# choix 3 #}
+                                        <div class="col-12 d-flex mt-3">                              
+                                            <div class="col-7">
+                                                <p class="small-text mb-4">Retrait Village-Green <span class="fw-bold">72h</span> <br>
+                                                    avec <span class="fw-bold">suivi + sms</span> du lundi au vendredi
+                                                </p>  
+                                            </div>
+                                            <div class="col-3">                                              
+                                                <p class="small fw-bold mb-4 text-end">OFFERT</p>  
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <input type="checkbox" value="3">
+                                            </div>  
+                                        </div> 
+                                        {# choix 4 #}
+                                        <div class="col-12 d-flex mt-3">                              
+                                            <div class="col-7">
+                                                <p class="small-text mb-4">Livraison instruments volumineux <span class="fw-bold">96h</span> <br>
+                                                    avec <span class="fw-bold">suivi</span> du lundi au vendredi
+                                                </p>  
+                                            </div>
+                                            <div class="col-3">                                              
+                                                <p class="small fw-bold mb-4 text-end">OFFERT</p>  
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <input type="checkbox" value="4">
+                                            </div>  
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                    {# fermeture choix livraison #} 
+
+                    {# addresse de livraion et de facturation #}
+                    <div class="col-5">
+                        {# addresse de livraison #}
+                        <p class="mb-3 ship-title fw-bold">ADRESSE DE LIVRAISON</p>
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                               <div class="card">
+                                    <div class="card-body">
+                                        {# en-tête de la card #}
+                                        <div class="row">
+                                            {# nom user #}
+                                            <div class="col">
+                                                <p class="small fw-bold">{{ app.user.fullName }}</p>
+                                            </div>
+                                            <div class="col text-end">
+                                               <button class="btn btn-primary button-edit">MODIFIER</button>
+                                            </div>  
+                                        </div>
+                                        {# en-tête de la card #}
+                                       
+                                        {# addresse user #}
+                                        <div class="col">
+                                            <p class="small mb-0">{{ app.user.address }}</p>
+                                            <p class="small mb-0">{{ app.user.additionalAddress }}</p>
+                                            <p class="small mb-0">{{ app.user.city }}, {{ app.user.zipCode }}</p>
+                                            <p class="small mb-0">{{ app.user.country }}</p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            {# fermeture addresse de livraison #}
+                            
+                            {# modification de l'adresse de livraison #}
+                            <div class="col-12 mb-3">   
+                               <div class="card edit-shipping">
+                                    {{ form_start(form) }}
+                                    <div class="card-body">
+                                        {# en-tête de la card #}
+                                        <div class="row d-flex">
+                                            {# nom user #}                                            
+                                            <div class="col">
+                                                <label for="address">Prénom:</label>
+                                                {{ form_row(form.firstName) }}
+                                            </div>
+                                            <div class="col">
+                                                <label for="address">Nom:</label>
+                                               {{ form_row(form.lastName) }}
+                                            </div>  
+                                        </div>
+                                        {# en-tête de la card #}
+                                       
+                                        {# addresse user #}
+                                        <div class="col">
+                                            <div class="col">
+                                                <label for="address">Adresse:</label>
+                                                {{ form_row(form.address) }}
+                                            </div>
+                                            <div class="col">
+                                            <label for="address">Adresse complémentaire:</label>
+                                                {{ form_row(form.additionalAddress) }}
+                                            </div>
+                                            <div class="row d-flex">
+                                                {# ville + code postal #}                                            
+                                                <div class="col">
+                                                    <label for="address">Ville:</label>
+                                                    {{ form_row(form.city) }}
+                                                </div>
+                                                <div class="col">
+                                                    <label for="address">Code postal:</label>
+                                                {{ form_row(form.zipCode) }}
+                                                </div>  
+                                            </div>
+                                            <div class="col">
+                                            <label for="address">Pays:</label>
+                                                {{ form_row(form.country) }}
+                                            </div>
+                                        </div>
+                                         {# boutton pour valider la modification #}
+                                        <div class="col text-center mt-4">
+                                            <button class="btn btn-primary w-100 button-edit">VALIDER</button>
+                                        </div>  
+                                        {{ form_end(form) }}
+                                    </div>
+                                </div> 
+                            </div>
+                            {# fermeture modification de l'adresse de livraison #}
+
+                            {# addresse de facturation #}
+                            <p class="mb-3 ship-title fw-bold">ADRESSE DE FACTURATION</p>
+                            <div class="col-12">
+                                 <div class="card">
+                                    <div class="card-body">
+                                        {# en-tête de la card #}
+                                        <div class="row">
+                                            {# nom user #}
+                                            <div class="col">
+                                                <p class="small fw-bold">{{ app.user.fullName }}</p>
+                                            </div>
+                                            <div class="col text-end">
+                                               <button class="btn btn-primary button-edit">MODIFIER</button>
+                                            </div>  
+                                        </div>
+                                        {# en-tête de la card #}
+                                       
+                                        {# addresse user #}
+                                        <div class="col">
+                                            <p class="small mb-0">{{ app.user.address }}</p>
+                                            <p class="small mb-0">{{ app.user.additionalAddress }}</p>
+                                            <p class="small mb-0">{{ app.user.city }}, {{ app.user.zipCode }}</p>
+                                            <p class="small mb-0">{{ app.user.country }}</p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            {# fermeture addresse de facturation #}
+                            
+                            {# bloc bouton #}
+                            <div class="col-12 mt-4 mb-4">    
+                                <div class="row">
+                                    {# boutton retour #}
+                                    <div class="col">
+                                       <a href="javascript:history.back()"><button class="btn btn-primary button-back">ÉTAPE PRÉCÉDENTE</button></a> 
+                                    </div>
+                                    {# boutton continuer #}
+                                    <div class="col text-end">
+                                       <a href="#"><button class="btn btn-success button-next">CONTINUER</button></a> 
+                                    </div>  
+                                </div>   
+                            </div>
+                            {# fermeture bloc bouton #}
+
+                        </div>
+                    </div>
+                    {# fermeture addresse de livraion et de facturation #}
+                </div>           
+            </div>
+            <hr>
+        </div> {# fermeture contenant-page #}
+            
+        {# footer #} 
+        {{ include('/layouts/footer.html.twig') }}
+    </div> {# fermeture du container products #}   
+</header>
+{% endblock %}
+

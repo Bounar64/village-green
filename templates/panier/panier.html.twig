@@ -25,7 +25,13 @@
                         </div>
                         <div class="col text-end">
                             <p class="text-total">TOTAL : <span class="price">{{ total|format_currency('EUR', locale='fr') }}</span>
-                              <a href="{{ path('app_connection') }}"><button class="btn btn-success">COMMANDER</button></a> 
+                            {% if not app.user %}
+                              <a href="{{ path('app_checkout_connection') }}">  {# si l'utilisateur et connecté étape 2 livraison sinon étape 1 connection ou inscription #}
+                            {% else %}
+                                <a href="{{ path('app_checkout_shipping') }}">
+                            {% endif %}
+                                <button class="btn btn-success">COMMANDER</button>
+                              </a> 
                             </p> 
                         </div>
                     </div>

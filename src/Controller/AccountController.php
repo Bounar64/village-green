@@ -85,7 +85,7 @@ class AccountController extends AbstractController
         $subcategory = $this->subcategoryRepository->findAll('category');
 
         $user = $this->getUser(); // $this->getUser() récupère l'utilisateur actuellement connecté
-        $form = $this->createForm(ChangePasswordFormType::class, $user, [
+        $form = $this->createForm(ChangePasswordFormType::class, $user, [ // on récupère l'options pour afficher le currentPassword
             'current_password_is_required' => true
         ]); 
         $form->handleRequest($request);

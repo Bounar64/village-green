@@ -13,15 +13,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-class EditProfilUserType extends AbstractType
+class EditShippingAddressType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class, [
-                'label' => false,
-                'required' => false
-            ])
+            // ->add('email', EmailType::class, [
+            //     'label' => false,
+            //     'required' => false
+            // ])
             ->add('lastName', TextType::class, [
                 'label' => false,
                 'required' => false,
@@ -52,14 +52,14 @@ class EditProfilUserType extends AbstractType
                 'label' => false,
                 'required' => false
             ])
-            ->add('phone', TextType::class, [
-                'label' => false,
-                'required' => false
-            ])
-            ->add('phoneFixe', TextType::class, [
-                'label' => false,
-                'required' => false
-            ])
+            // ->add('phone', TextType::class, [
+            //     'label' => false,
+            //     'required' => false
+            // ])
+            // ->add('phoneFixe', TextType::class, [
+            //     'label' => false,
+            //     'required' => false
+            // ])
             ->add('additionalAddress', TextType::class, [
                 'label' => false,
                 'required' => false
@@ -69,13 +69,13 @@ class EditProfilUserType extends AbstractType
                 'required' => false,
                 // On sélectionne l'entity en relation ici le pays
                 'class' => Country::class
-            ])
-            ->add('password', HiddenType::class, [
-                'mapped' => false
-            ])
-            ->add('confirm_password', HiddenType::class, [
-                'mapped' => false
             ]);
+            // ->add('password', HiddenType::class, [
+            //     'mapped' => false
+            // ])
+            // ->add('confirm_password', HiddenType::class, [
+            //     'mapped' => false
+            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
