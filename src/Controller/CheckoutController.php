@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Repository\StatusRepository;
 use App\Form\EditShippingAddressType;
+use App\Form\StatusFormType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,20 +34,42 @@ class CheckoutController extends AbstractController
      * 
      * @Route("/checkout_shipping", name="app_checkout_shipping")
      */
-    public function shipping(Request $request): Response
+    public function shipping(Request $request, EntityManagerInterface $manager): Response
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
-        $products = $this->productRepository->findAll();
+        $status = $this->statusRepository->findAll();
 
         $user = $this->getUser(); // $this->getUser() récupère l'utilisateur actuellement connecté
-        $form = $this->createForm(EditShippingAddressType::class, $user); // on passe ce form pour éditer seulement l'adresse de livraison cela en passant l'option en plus 
+        $form = $this->createForm(EditShippingAddressType::class, $user); // on passe ce form pour éditer seulement l'adresse de livraison
+        $formStatus = $this->createForm(StatusFormType::class); // on passe ce form pour choisir son mode de livraison 
+        
         $form->handleRequest($request);
+        $formStatus->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()) {
+            
+            $manager->flush();
 
+            // dd($form->getData());
+            // $request->query->set('userLastName', $user->getLastName());
+
+            return $this->redirectToRoute('app_checkout_shipping');  
+        }
+
+        if($formStatus->isSubmitted() && $formStatus->isValid()) {
+            
+            $request->query->set('status', $formStatus->getData());
+
+            return $this->redirectToRoute('app_checkout_payment');  
+        }
+        
         return $this->render('checkout/shipping.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formStatus' => $formStatus->createView(),
+            'status' => $status
         ]);
     }
 

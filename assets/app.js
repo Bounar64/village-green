@@ -39,15 +39,25 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
     });
 });
 
- //_______Afficher au click la card modifier dans le profil_____//
+
+ //_______Afficher au click la card modifier mon adresse de livraison_____//
  $(function(){
 
-    $('#ButtonBrush').on("click", function(){ // ancienne écriture $('#ButtonBrush').click(function(){
-        $('#EditCard').slideToggle();
+    $('#ButtonEditShipping').on("click", function(){ // ancienne écriture $('#ButtonEdit').click(function(){
+        $('#CardEditShipping').slideToggle();
     });
  })
  
 
+
+
+
+
+
+
+
+
+ 
 
 //_____Slider de prix min et max_____//
 var slider = document.getElementById('priceSlider');
