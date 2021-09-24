@@ -33,6 +33,11 @@
             p {
                 font-size: 13px;
             }
+
+        &.cgv {
+            color: $orange;
+            text-decoration: underline;
+        }
     }
 
     .button-connection {
@@ -134,10 +139,15 @@
    }
 
    hr {
-       color: $orange;
-       width: 95%;
-       margin: auto;
-   }
+    width: 95%;
+    margin: auto;
+    color: $orange;
+
+    &.between-products {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
 
    //_________card modification de l'adresse de livraison________//
    .card.edit-shipping {
@@ -161,4 +171,55 @@
             }
         }
    }
+
+    //***********************************************************************//
+    //************************** PAGE DE PAIEMENT ***************************//
+    //***********************************************************************//
+
+    .btn-price-total {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    input {
+        margin-right: 20px;
+    }
+
+    img {
+        width: 100px;
+        height: auto;
+    }
+
+    .block-info {
+        padding-left: 30px;
+        line-height: 20px;
+        margin-top: 25px;
+    }
+
+    p {
+
+        &.brand {
+             margin: 0;
+            font-size: 13px;
+            font-weight: 400;
+
+            span {
+                font-weight: 600; 
+
+                    &.price {
+                        color: $orange;
+                    }
+            }
+        }
+
+        &.price {
+            color: $orange;
+        }
+       
+    }
+
+    .quantity {
+        font-weight: 500;
+        color: $orange;
+    }
 }

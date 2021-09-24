@@ -51,63 +51,80 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                        {# choix de livraison #}
-                                        {% for status in status %}
+                                        {# choix 1 #}
                                         <div class="col-12 d-flex mt-3">                              
                                             <div class="col-7">
-                                                {% if status.id == 1 %}
-                                                <p class="small-text mb-4">{{ status.type }} <span class="fw-bold">72h</span> <br>
+                                                <p class="small-text mb-4">Livraison standard <span class="fw-bold">72h</span> <br>
                                                     avec <span class="fw-bold">suivi</span> du lundi au vendredi
-                                                </p>
-                                                {% elseif status.id == 2 %}
-                                                <p class="small-text mb-4">{{ status.type }} <span class="fw-bold">24h</span> <br>
-                                                    avec <span class="fw-bold">suivi + sms</span> du lundi au vendredi
-                                                </p>
-                                                {% elseif status.id == 3 %}
-                                                <p class="small-text mb-4">{{ status.type }} <span class="fw-bold">72h</span> <br>
-                                                    avec <span class="fw-bold">suivi + sms</span> du lundi au vendredi
-                                                </p>
-                                                {% elseif status.id == 4 %}
-                                                <p class="small-text mb-4">{{ status.type }} <span class="fw-bold">96h</span> <br>
-                                                </p>
-                                                {% endif %}  
+                                                </p>  
                                             </div>
-                                            <div class="col-3"> 
-                                                {% if status.id == 2 %}                                             
-                                                <p class="small fw-bold mb-4 text-end">9.99 €</p>
-                                                {% else %}  
-                                                <p class="small fw-bold mb-4 text-end">OFFERT</p>
-                                                {% endif %}
+                                            <div class="col-3">                                              
+                                                <p class="small fw-bold mb-4 text-end">OFFERT</p>  
                                             </div>
                                             <div class="col-2 text-end">
-                                                <input type="checkbox" value="{{ status.id }}" name="{{ status.id }}">
+                                                <input type="checkbox" value="1">
                                             </div>  
-                                        </div>
-                                        {% endfor %}
+                                        </div> 
+                                        {# choix 2 #}
+                                        <div class="col-12 d-flex mt-3">                              
+                                            <div class="col-7">
+                                                <p class="small-text mb-4">Livraison Premium <span class="fw-bold">24h</span> <br>
+                                                    avec <span class="fw-bold">suivi + sms</span> du lundi au vendredi
+                                                </p>  
+                                            </div>
+                                            <div class="col-3">                                              
+                                                <p class="small fw-bold mb-4 text-end">9,99 €</p>  
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <input type="checkbox" value="2">
+                                            </div>  
+                                        </div> 
+                                        {# choix 3 #}
+                                        <div class="col-12 d-flex mt-3">                              
+                                            <div class="col-7">
+                                                <p class="small-text mb-4">Retrait Village-Green <span class="fw-bold">72h</span> <br>
+                                                    avec <span class="fw-bold">suivi + sms</span> du lundi au vendredi
+                                                </p>  
+                                            </div>
+                                            <div class="col-3">                                              
+                                                <p class="small fw-bold mb-4 text-end">OFFERT</p>  
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <input type="checkbox" value="3">
+                                            </div>  
+                                        </div> 
+                                        {# choix 4 #}
+                                        <div class="col-12 d-flex mt-3">                              
+                                            <div class="col-7">
+                                                <p class="small-text mb-4">Livraison instruments volumineux <span class="fw-bold">96h</span> <br>
+                                                    avec <span class="fw-bold">suivi</span> du lundi au vendredi
+                                                </p>  
+                                            </div>
+                                            <div class="col-3">                                              
+                                                <p class="small fw-bold mb-4 text-end">OFFERT</p>  
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <input type="checkbox" value="4">
+                                            </div>  
+                                        </div> 
                                     </div>
                                 </div>
-                            </div>
-
-                            {{ form_start(formStatus) }}
-                            <div class="div-12">
-                                {{ form_row(formStatus.status) }}
-                            </div> 
-                             {# bloc bouton #}
-                            <div class="col-12 mt-4 mb-4">    
-                                <div class="row">
-                                    {# boutton retour #}
-                                    <div class="col">
-                                    <a href="javascript:history.back()"><button class="btn btn-primary button-back">ÉTAPE PRÉCÉDENTE</button></a> 
-                                    </div>
-                                    {# boutton continuer #}
-                                    <div class="col text-end">
-                                    <a href="#"><button type="submit" class="btn btn-success button-next">CONTINUER</button></a> 
-                                    </div>  
-                                </div>   
-                            </div>
-                            {{ form_end(formStatus) }}
-                            {# fermeture bloc bouton #}   
+                            </div>    
                         </div>
+                        {# bloc bouton continuer #}
+                        <div class="col-12 mt-4 mb-4">    
+                            <div class="row">
+                                {# boutton retour #}
+                                <div class="col">
+                                    <a href="javascript:history.back()"><button class="btn btn-primary button-back">ÉTAPE PRÉCÉDENTE</button></a> 
+                                </div>
+                                {# boutton continuer #}
+                                <div class="col text-end">
+                                    <a href="{{ path('app_checkout_payment') }}"><button type="submit" class="btn btn-success button-next">CONTINUER</button></a> 
+                                </div>  
+                            </div>   
+                        </div>
+                        {# fermeture bloc bouton continuer #}   
                     </div>
                     {# fermeture choix livraison #} 
 

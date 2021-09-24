@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\StatusRepository;
 use App\Form\EditShippingAddressType;
-use App\Form\StatusFormType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,20 +11,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CheckoutController extends AbstractController
 {
     private $categoryRepository;
     private $subcategoryRepository;
     private $productRepository;
-    private $statusRepository;
 
-    public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository, StatusRepository $statusRepository)
+    public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->subcategoryRepository = $subcategoryRepository;
         $this->productRepository = $productRepository;
-        $this->statusRepository = $statusRepository;
     }
     
     /**
@@ -38,14 +35,11 @@ class CheckoutController extends AbstractController
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
-        $status = $this->statusRepository->findAll();
 
         $user = $this->getUser(); // $this->getUser() récupère l'utilisateur actuellement connecté
         $form = $this->createForm(EditShippingAddressType::class, $user); // on passe ce form pour éditer seulement l'adresse de livraison
-        $formStatus = $this->createForm(StatusFormType::class); // on passe ce form pour choisir son mode de livraison 
         
         $form->handleRequest($request);
-        $formStatus->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
             
@@ -56,20 +50,11 @@ class CheckoutController extends AbstractController
 
             return $this->redirectToRoute('app_checkout_shipping');  
         }
-
-        if($formStatus->isSubmitted() && $formStatus->isValid()) {
-            
-            $request->query->set('status', $formStatus->getData());
-
-            return $this->redirectToRoute('app_checkout_payment');  
-        }
         
         return $this->render('checkout/shipping.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
             'form' => $form->createView(),
-            'formStatus' => $formStatus->createView(),
-            'status' => $status
         ]);
     }
 
@@ -78,9 +63,23 @@ class CheckoutController extends AbstractController
      * 
      * @Route("/checkout_payment", name="app_checkout_payment")
      */
-    public function payment(): Response
+    public function payment(SessionInterface $session): Response
     {
-        return $this->render('checkout/payment.html.twig');
+        $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
+        $subcategory = $this->subcategoryRepository->findAll('category');
+        $products = $this->productRepository->findAll();  
+ 
+        $panierData =  $session->get('Data'); // on récupère le panier Complet des produits commandé
+        $total = $session->get('total'); // on récupère le prix total
+   
+        return $this->render('checkout/payment.html.twig', [
+            'categories' => $categories,
+            'subcategory' => $subcategory,
+            'products' => $products,
+            'items' => $panierData,
+            'total' => $total
+         
+        ]);
     }
 
     /**
@@ -89,6 +88,7 @@ class CheckoutController extends AbstractController
      */
     public function validation(): Response
     {
+        
         return $this->render('checkout/validation.html.twig');
     }
 }

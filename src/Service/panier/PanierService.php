@@ -55,17 +55,17 @@ class PanierService
      */
     public function getFullPanier(): array 
     {
-    $panier = $this->session->get('panier', []);
-    $panierData = []; // Crée une variable où l'on stockera toutes les données du panier
+        $panier = $this->session->get('panier', []);
+        $panierData = []; // Crée une variable où l'on stockera toutes les données du panier
 
-    foreach($panier as $id => $quantity) { // On boucle dans le panier 
-        $panierData[] = [  // On ajoute dans ce $panierData les produits en question via l'id et la quantité
-            'product' =>  $this->productRepository->find($id), // On récupère toute le infos du produits via son id
-            'quantity' => $quantity // la quantité vaut le nombre de fois l'id sélectionné
-        ];
-    }
+        foreach($panier as $id => $quantity) { // On boucle dans le panier 
+            $panierData[] = [  // On ajoute dans ce $panierData les produits en question via l'id et la quantité
+                'product' =>  $this->productRepository->find($id), // On récupère toute le infos du produits via son id
+                'quantity' => $quantity // la quantité vaut le nombre de fois l'id sélectionné
+            ];
+        }
 
-    return $panierData;
+        return $panierData;
     }
 
     /**
@@ -91,6 +91,9 @@ class PanierService
             }  
         }
 
+        // set session attributes
+        $this->session->set('total', $total); // on onvoie dans la session le total (prix) pour afficher le récapitulatif dans sur la page app_checkout_payment (CheckoutController)
+   
         return $total;
     }
 

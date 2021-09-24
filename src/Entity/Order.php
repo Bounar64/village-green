@@ -21,11 +21,6 @@ class Order
     private $id;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $meansPayment;
-
-    /**
      * @ORM\Column(type="datetime_immutable")
      */
     private $datePayment;
@@ -82,18 +77,6 @@ class Order
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMeansPayment(): ?bool
-    {
-        return $this->meansPayment;
-    }
-
-    public function setMeansPayment(bool $meansPayment): self
-    {
-        $this->meansPayment = $meansPayment;
-
-        return $this;
     }
 
     public function getDatePayment(): ?\DateTimeImmutable

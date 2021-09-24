@@ -6,10 +6,11 @@ use App\Repository\ProductRepository;
 use App\Service\panier\PanierService;
 use App\Repository\CategoryRepository;
 use App\Repository\SubCategoryRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/panier")
@@ -30,12 +31,12 @@ class PanierController extends AbstractController
     /**
      * @Route("", name="app_panier")
      */
-    public function index(PanierService $panierService): Response
+    public function index(PanierService $panierService, Request $request): Response
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
         $products = $this->productRepository->findAll();  
-
+ 
         $panierData = $panierService->getFullPanier();
         $total = $panierService->getTotal();
 
