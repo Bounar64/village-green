@@ -65,54 +65,88 @@
                                         <hr>
                                         {# choix du mode de paiement #}
                                         <p class="ship-title fw-bold mt-3">CHOISISSEZ VOTRE MODE DE PAIEMENT SÉCURISÉ</p>
+                                        <form name="payment" method="post" action="#">
                                          <div class="col-12 mb-3">
                                            <div class="card">
                                                 <div class="card-body">
                                                      <div class="row">
                                                         {# choix 1 #}
                                                         <div class="col-12 d-flex mb-3"> 
-                                                            <input class="pr-5" type="checkbox" value="1">
+                                                            <input class="pr-5 checkPayment1" type="radio" name="checkPayment" value="1">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">Carte Bancaire</p>  
                                                             </div>   
-                                                            <div class="col-5 text-end">                                              
-                                                                <button class="btn btn-success btn-price-total">PAYER {{ app.session.get('total')|format_currency('EUR', locale='fr') }}</button> {# récupération total via session twig #}
+                                                            <div class="col-5 text-end">
+                                                                <button name="buttonPayment1" class="btn btn-success btn-price-total" style="display: none;">
+                                                                    PAYER 
+                                                                    {% if shipping == 'Premium' %}
+                                                                    {% set totalPremium = total + 9.99 %}
+                                                                        {{ totalPremium|format_currency('EUR', locale='fr') }} 
+                                                                    {% else %}
+                                                                        {{ app.session.get('total')|format_currency('EUR', locale='fr') }} {# récupération total via session twig #}
+                                                                    {% endif %}
+                                                                </button>                                                 
                                                             </div>
                                                         </div>
                                                         <hr>
                                                         <div class="col-12 d-flex my-4"> 
-                                                            <input class="pr-5" type="checkbox" value="2">
+                                                            <input class="pr-5 checkPayment2" type="radio" name="checkPayment" value="2">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">PayPal</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">                                              
-                                                                <button class="btn btn-success btn-price-total">PAYER {{ total|format_currency('EUR', locale='fr') }}</button> {# récupération total via session controller #}
+                                                                <button name="buttonPayment2" class="btn btn-success btn-price-total" style="display: none;">
+                                                                    PAYER 
+                                                                    {% if shipping == 'Premium' %}
+                                                                    {% set totalPremium = total + 9.99 %}
+                                                                        {{ totalPremium|format_currency('EUR', locale='fr') }} 
+                                                                    {% else %}
+                                                                        {{ total|format_currency('EUR', locale='fr') }} {# récupération total via session controller #}
+                                                                    {% endif %}
+                                                                </button> 
                                                             </div>
                                                         </div>
                                                         <hr> 
                                                         <div class="col-12 d-flex my-4"> 
-                                                            <input class="pr-5" type="checkbox" value="3">
+                                                            <input class="pr-5 checkPayment3" type="radio" name="checkPayment" value="3">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">Virement</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">                                              
-                                                                <button class="btn btn-success btn-price-total">PAYER {{ total|format_currency('EUR', locale='fr') }}</button>  
+                                                                <button name="buttonPayment3" class="btn btn-success btn-price-total" style="display: none;">
+                                                                    PAYER 
+                                                                    {% if shipping == 'Premium' %}
+                                                                    {% set totalPremium = total + 9.99 %}
+                                                                        {{ totalPremium|format_currency('EUR', locale='fr') }} 
+                                                                    {% else %}
+                                                                        {{ total|format_currency('EUR', locale='fr') }} {# récupération total via session controller #}
+                                                                    {% endif %}
+                                                                </button>
                                                             </div>
                                                         </div>
                                                         <hr>
                                                         <div class="col-12 d-flex mt-4"> 
-                                                            <input class="pr-5" type="checkbox" value="4">
+                                                            <input class="pr-5 checkPayment4" type="radio" name="checkPayment" value="4">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">Crédit</p>  
                                                             </div>   
-                                                            <div class="col-5 text-end">                                              
-                                                                <button class="btn btn-success btn-price-total">PAYER {{ total|format_currency('EUR', locale='fr') }}</button>  
+                                                            <div class="col-5 text-end">
+                                                                <button name="buttonPayment4" class="btn btn-success btn-price-total" style="display: none;">
+                                                                    CRÉDIT
+                                                                    {% if shipping == 'Premium' %}
+                                                                    {% set totalPremium = total + 9.99 %}
+                                                                        {{ totalPremium|format_currency('EUR', locale='fr') }} 
+                                                                    {% else %}
+                                                                        {{ total|format_currency('EUR', locale='fr') }} {# récupération total via session controller #}
+                                                                    {% endif %}
+                                                                </button>                                     
                                                             </div>
                                                         </div> 
                                                     </div>
                                                 </div>
                                            </div>
-                                        </div>             
+                                        </div>
+                                        </form>            
                                         {# fermeture choix du mode de paiement #}
                                     </div>
                                     <div class="col-12">
@@ -206,10 +240,14 @@
                                             {# type de livraison #}
                                              <div class="col-12 d-flex justify-content-center">
                                                 <div class="col-6">
-                                                    <p class="small-text mb-0">Livraison</p>  
+                                                    <p class="small-text mb-0">Livraison: {{ shipping }}</p>  
                                                 </div>   
-                                                <div class="col-5 text-end">                                              
-                                                    <p class="small-text">OFFERT</p>  
+                                                <div class="col-5 text-end"> 
+                                                    {% if shipping == 'Premium' %}                                             
+                                                        <p class="small-text">9,99 €</p>
+                                                    {% else %}
+                                                        <p class="small-text">OFFERT</p>
+                                                    {% endif %}  
                                                 </div>
                                             </div> 
                                             <hr class="between-products">
@@ -218,8 +256,13 @@
                                                 <div class="col-6">
                                                     <p class="mb-0">Total :</p>  
                                                 </div>   
-                                                <div class="col-5 text-end">                                              
-                                                    <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>  
+                                                <div class="col-5 text-end">
+                                                    {% if shipping == 'Premium' %}
+                                                        {% set totalPremium = total + 9.99 %} 
+                                                        <p class="price mb-0">{{ totalPremium|format_currency('EUR', locale='fr') }}</p>
+                                                    {% else %}
+                                                        <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
+                                                    {% endif %}                                                                              
                                                 </div>
                                             </div> 
                                         </div>

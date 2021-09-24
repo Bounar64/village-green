@@ -47,6 +47,43 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
         $('#CardEditShipping').slideToggle();
     });
  })
+
+
+ //_______Afficher au check le boutton de paiement_____//
+ $(function(){
+
+    $('.checkPayment1').on("click", function() {
+       
+        $("button[name$='buttonPayment1']").show();
+        $("button[name$='buttonPayment2']").hide();
+        $("button[name$='buttonPayment3']").hide();
+        $("button[name$='buttonPayment4']").hide();
+    });
+
+    $('.checkPayment2').on("click", function() {
+       
+        $("button[name$='buttonPayment1']").hide();
+        $("button[name$='buttonPayment2']").show();
+        $("button[name$='buttonPayment3']").hide();
+        $("button[name$='buttonPayment4']").hide();
+    });
+
+    $('.checkPayment3').on("click", function() {
+       
+        $("button[name$='buttonPayment1']").hide();
+        $("button[name$='buttonPayment2']").hide();
+        $("button[name$='buttonPayment3']").show();
+        $("button[name$='buttonPayment4']").hide();
+    });
+
+    $('.checkPayment4').on("click", function() {
+       
+        $("button[name$='buttonPayment1']").hide();
+        $("button[name$='buttonPayment2']").hide();
+        $("button[name$='buttonPayment3']").hide();
+        $("button[name$='buttonPayment4']").show();
+    });
+ })
  
 
 

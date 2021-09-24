@@ -31,7 +31,7 @@ class PanierController extends AbstractController
     /**
      * @Route("", name="app_panier")
      */
-    public function index(PanierService $panierService, Request $request): Response
+    public function index(PanierService $panierService, SessionInterface $session): Response
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
@@ -39,6 +39,8 @@ class PanierController extends AbstractController
  
         $panierData = $panierService->getFullPanier();
         $total = $panierService->getTotal();
+
+        $session->set('panierData', $panierData);
 
         $TotalItemsCart = $panierService->TotalItemsCart();
 

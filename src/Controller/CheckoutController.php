@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
+use App\Entity\OrderDetails;
 use App\Form\EditShippingAddressType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
@@ -10,8 +12,8 @@ use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CheckoutController extends AbstractController
 {
@@ -31,7 +33,7 @@ class CheckoutController extends AbstractController
      * 
      * @Route("/checkout_shipping", name="app_checkout_shipping")
      */
-    public function shipping(Request $request, EntityManagerInterface $manager): Response
+    public function shipping(Request $request, EntityManagerInterface $manager, SessionInterface $session): Response
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
@@ -40,7 +42,17 @@ class CheckoutController extends AbstractController
         $form = $this->createForm(EditShippingAddressType::class, $user); // on passe ce form pour éditer seulement l'adresse de livraison
         
         $form->handleRequest($request);
+
+        $shipping = $request->request->get('checkShipping'); // équivaut à $_POST["checkShipping"]
+        $valider = $request->request->get('valider'); // équivaut à $_POST["valider"]
         
+        if(isset($valider) && !empty($valider)) {
+            
+            $session->set('shippingType', $shipping);
+
+            return $this->redirectToRoute('app_checkout_payment');  
+        }
+
         if($form->isSubmitted() && $form->isValid()) {
             
             $manager->flush();
@@ -69,16 +81,17 @@ class CheckoutController extends AbstractController
         $subcategory = $this->subcategoryRepository->findAll('category');
         $products = $this->productRepository->findAll();  
  
-        $panierData =  $session->get('Data'); // on récupère le panier Complet des produits commandé
+        $panierData =  $session->get('panierData'); // on récupère le panier Complet des produits commandé
         $total = $session->get('total'); // on récupère le prix total
-   
+        $ShippingType = $session->get('shippingType'); // on récupère le type de livraison 
+        
         return $this->render('checkout/payment.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
             'products' => $products,
             'items' => $panierData,
-            'total' => $total
-         
+            'total' => $total,
+            'shipping' =>  $ShippingType         
         ]);
     }
 
@@ -86,9 +99,18 @@ class CheckoutController extends AbstractController
      * 
      * @Route("/checkout_validation", name="app_checkout_validation")
      */
-    public function validation(): Response
+    public function validation(Request $request): Response
     {
-        
+        $order = new Order();
+        $order->setShipping('1');
+        $orderDetails = new OrderDetails();
+
+        // $formCheckout = $this->createForm(CheckoutType::class, $order);
+        // $formOrderDetails = $this->createForm(OrderDetailsType::class, $orderDetails);
+
+        // $formCheckout->handleRequest($request);
+        // $formOrderDetails->handleRequest($request);
+
         return $this->render('checkout/validation.html.twig');
     }
 }
