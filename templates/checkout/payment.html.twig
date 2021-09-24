@@ -72,7 +72,7 @@
                                                      <div class="row">
                                                         {# choix 1 #}
                                                         <div class="col-12 d-flex mb-3"> 
-                                                            <input class="pr-5 checkPayment1" type="radio" name="checkPayment" value="1">
+                                                            <input class="pr-5 checkPayment1" type="radio" name="checkPayment" value="Carte bancaire">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">Carte Bancaire</p>  
                                                             </div>   
@@ -90,7 +90,7 @@
                                                         </div>
                                                         <hr>
                                                         <div class="col-12 d-flex my-4"> 
-                                                            <input class="pr-5 checkPayment2" type="radio" name="checkPayment" value="2">
+                                                            <input class="pr-5 checkPayment2" type="radio" name="checkPayment" value="Paypal">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">PayPal</p>  
                                                             </div>   
@@ -108,7 +108,7 @@
                                                         </div>
                                                         <hr> 
                                                         <div class="col-12 d-flex my-4"> 
-                                                            <input class="pr-5 checkPayment3" type="radio" name="checkPayment" value="3">
+                                                            <input class="pr-5 checkPayment3" type="radio" name="checkPayment" value="Virement">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">Virement</p>  
                                                             </div>   
@@ -125,13 +125,33 @@
                                                             </div>
                                                         </div>
                                                         <hr>
+                                                        <div class="col-12 d-flex my-4"> 
+                                                            <input class="pr-5 checkPayment4" type="radio" name="checkPayment" value="Paiement 4X">
+                                                            <div class="col-6 d-flex align-items-center">
+                                                                <p class="small-text mb-0">Paiement en <span class="X4">4X</span> sans frais</p>  
+                                                            </div>   
+                                                            <div class="col-5 text-end">
+                                                                <button name="buttonPayment4" class="btn btn-success btn-price-total" style="display: none;">
+                                                                    PAYER
+                                                                    {% if shipping == 'Premium' %}
+                                                                    {% set totalPremium = total + 9.99 %}
+                                                                    {% set totalPremium4X = totalPremium / 4 %}
+                                                                        {{ totalPremium4X|format_currency('EUR', locale='fr') }} 
+                                                                    {% else %}
+                                                                     {% set total4X = total / 4 %}
+                                                                        {{ total4X|format_currency('EUR', locale='fr') }} {# récupération total via session controller #}
+                                                                    {% endif %}
+                                                                </button>                                     
+                                                            </div>
+                                                        </div>
+                                                        <hr> 
                                                         <div class="col-12 d-flex mt-4"> 
-                                                            <input class="pr-5 checkPayment4" type="radio" name="checkPayment" value="4">
+                                                            <input class="pr-5 checkPayment5" type="radio" name="checkPayment" value="Crédit">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">Crédit</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">
-                                                                <button name="buttonPayment4" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button name="buttonPayment5" class="btn btn-success btn-price-total" style="display: none;">
                                                                     CRÉDIT
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}
@@ -141,7 +161,7 @@
                                                                     {% endif %}
                                                                 </button>                                     
                                                             </div>
-                                                        </div> 
+                                                        </div>                                                      
                                                     </div>
                                                 </div>
                                            </div>

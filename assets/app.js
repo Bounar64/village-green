@@ -58,6 +58,7 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
         $("button[name$='buttonPayment2']").hide();
         $("button[name$='buttonPayment3']").hide();
         $("button[name$='buttonPayment4']").hide();
+        $("button[name$='buttonPayment5']").hide();
     });
 
     $('.checkPayment2').on("click", function() {
@@ -66,6 +67,7 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
         $("button[name$='buttonPayment2']").show();
         $("button[name$='buttonPayment3']").hide();
         $("button[name$='buttonPayment4']").hide();
+        $("button[name$='buttonPayment5']").hide();
     });
 
     $('.checkPayment3').on("click", function() {
@@ -74,6 +76,7 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
         $("button[name$='buttonPayment2']").hide();
         $("button[name$='buttonPayment3']").show();
         $("button[name$='buttonPayment4']").hide();
+        $("button[name$='buttonPayment5']").hide();
     });
 
     $('.checkPayment4').on("click", function() {
@@ -82,6 +85,16 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
         $("button[name$='buttonPayment2']").hide();
         $("button[name$='buttonPayment3']").hide();
         $("button[name$='buttonPayment4']").show();
+        $("button[name$='buttonPayment5']").hide();
+    });
+
+    $('.checkPayment5').on("click", function() {
+       
+        $("button[name$='buttonPayment1']").hide();
+        $("button[name$='buttonPayment2']").hide();
+        $("button[name$='buttonPayment3']").hide();
+        $("button[name$='buttonPayment4']").hide();
+        $("button[name$='buttonPayment5']").show();
     });
  })
  
