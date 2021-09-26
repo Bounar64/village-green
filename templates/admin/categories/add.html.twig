@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+    <header id="background">
+        <div class="container reset-password-request">
+            {# header navigation #} 
+            {{ include('/layouts/header_navigation.html.twig') }}  
+
+            {# card ajouter une catégorie #}
+            <div class=" d-flex justify-content-center mt-5">
+                <div class="col-7 card card-reset">
+                    <div class="card-body">
+                        <form method="post">            
+                            <h5 class="card-title text-center">Ajouter une nouvelle catégorie</h5>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-7 mt-3">
+                                    {{ form_start(form) }}
+                                        <div class="text-start mb-3">
+                                            <label for="inputEmail" class="fs-8">Nom de la catégorie</label>
+                                            {{ form_row(form.label) }}
+                                        </div>
+                                        <div class="col text-center">
+                                            <button type="submit" class="btn btn-primary w-50">Ajouter</button>
+                                        </div>
+                                    {{ form_end(form) }}
+                                </div>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {# footer #} 
+            {{ include('/layouts/footer.html.twig') }}
+        </div> {# fermeture du container products #}   
+    </header>
+{% endblock %}

@@ -2,9 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
+use App\Form\CategoryType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubCategoryRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +30,7 @@ class CategoriesController extends AbstractController
     }
     
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="list")
      */
     public function CategoriesList(): Response
     {
@@ -41,11 +45,32 @@ class CategoriesController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="admin_categories_add")
+     * @Route("/add", name="add")
      */
-    public function addCategorie()
+    public function addCategorie(Request $request, EntityManagerInterface $manager)
     {
-        return $this->render('admin/add.html.twig');
+        $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
+        $subcategory = $this->subcategoryRepository->findAll('category');
+
+        $category = new Category;
+
+        $form = $this->createForm(CategoryType::class, $category);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $manager->persist($category);
+            $manager->flush(); 
+
+            return $this->redirectToRoute('admin_categories_list');
+        }
+
+        return $this->render('admin/categories/add.html.twig', [
+            'categories' => $categories,
+            'subcategory' => $subcategory,
+            'form' => $form->createView()
+        ]);
     }
 
 
