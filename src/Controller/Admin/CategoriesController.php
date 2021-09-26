@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
-* @Route("/admin/categories", name="admin_categories_")
+* @Route("/admin/categories", name="app_admin_categories_")
  */
 class CategoriesController extends AbstractController
 {
@@ -71,6 +71,44 @@ class CategoriesController extends AbstractController
             'subcategory' => $subcategory,
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="edit")
+     */
+    public function editCategorie(Category $category, Request $request, EntityManagerInterface $manager)
+    {
+        $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
+        $subcategory = $this->subcategoryRepository->findAll('category');
+
+        $form = $this->createForm(CategoryType::class, $category);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $manager->persist($category);
+            $manager->flush(); 
+
+            return $this->redirectToRoute('admin_categories_list');
+        }
+
+        return $this->render('admin/categories/edit.html.twig', [
+            'categories' => $categories,
+            'subcategory' => $subcategory,
+            'form' => $form->createView()
+        ]);
+    }
+
+     /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function delete(Category $category, EntityManagerInterface $manager): Response 
+    {        
+            $manager->remove($category); 
+            $manager->flush();
+        
+        return $this->redirectToRoute('admin_categories_list');
     }
 
 

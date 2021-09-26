@@ -20,14 +20,66 @@
         color: $orange;
     }
 
-    button {
-        @include buttonColor;
-        font-weight: 500;  
-        height: 40px;
+    th {
+        font-size: 17px;
+        font-weight: 600;
+    }
 
-            &:focus {
-                box-shadow: none;
-            }
-    }      
+    td {
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    button {
+
+        &.add {
+            @include buttonColor;
+            font-weight: 500;  
+            height: 40px;
+
+                &:focus {
+                    box-shadow: none;
+                }
+
+        }
+
+        &.edit {
+            font-size: 12px;
+            font-weight: 500;  
+            height: 30px;
+
+                &:focus {
+                    box-shadow: none;
+                }
+        }
+
+        &.delete {
+            font-size: 12px;
+            font-weight: 500;  
+            height: 30px;
+
+                &:focus {
+                    box-shadow: none;
+                }
+        }
+        
+    }     
+    
+    //______modal______//
+
+    .modal-content {
+        background: rgb(180, 0, 0);
+
+            p {
+                color: $blanc;
+
+                    &.conf-delete {
+                        font-size: 17px;
+                        font-weight: 600;
+                    }
+                }
+
+    }
+   
 
 }
