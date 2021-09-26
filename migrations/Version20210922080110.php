@@ -14,7 +14,7 @@ final class Version20210922080110 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add orderDetails table relation between order & product';
+        return 'Add orderDetails table & relation between order & product';
     }
 
     public function up(Schema $schema): void

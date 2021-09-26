@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+    <header id="background">
+        <div class="container reset-password-request">
+            {# header navigation #} 
+            {{ include('/layouts/header_navigation.html.twig') }}  
+
+            {# card réinitialiser le mot de passe #}
+            <div class=" d-flex justify-content-center mt-5">
+                <div class="col-7 card card-reset">
+                    <div class="card-body">
+                        <form method="post">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}                  
+                        {# corp de la card de réinitialisation #}
+                        <h5 class="card-title text-center">Connexion Administrateur</h5>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-7 mt-3">
+                                <div class="text-start mb-3">
+                                    <label for="inputEmail" class="fs-8">E-mail</label>
+                                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                </div>
+                                <div class="text-start">
+                                    <label for="inputPassword" class="fs-8">Mot de passe</label>
+                                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                                    <input type="hidden" name="_csrf_token"
+                                        value="{{ csrf_token('authenticate') }}"
+                                    >
+                                </div>
+                                <div class="col text-center">
+                                    <button type="submit" class="btn btn-primary w-50">Se connecter</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </form>
+                    </div>
+                </div>
+            </div>
+
+            {# footer #} 
+            {{ include('/layouts/footer.html.twig') }}
+        </div> {# fermeture du container products #}   
+    </header>
+{% endblock %}

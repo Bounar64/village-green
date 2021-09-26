@@ -65,19 +65,20 @@
                                         <hr>
                                         {# choix du mode de paiement #}
                                         <p class="ship-title fw-bold mt-3">CHOISISSEZ VOTRE MODE DE PAIEMENT SÉCURISÉ</p>
-                                        <form name="payment" method="post" action="#">
+                                        <form name="payment" method="post" action="#"> {# formulaire de soumission choix paiement #}
                                          <div class="col-12 mb-3">
                                            <div class="card">
                                                 <div class="card-body">
                                                      <div class="row">
+                                                     {% if app.user.type == 1 %}
                                                         {# choix 1 #}
-                                                        <div class="col-12 d-flex mb-3"> 
+                                                        <div class="col-12 d-flex"> 
                                                             <input class="pr-5 checkPayment1" type="radio" name="checkPayment" value="Carte bancaire">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">Carte Bancaire</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">
-                                                                <button name="buttonPayment1" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button type="submit" name="buttonPayment1" class="btn btn-success btn-price-total" style="display: none;">
                                                                     PAYER 
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}
@@ -88,14 +89,14 @@
                                                                 </button>                                                 
                                                             </div>
                                                         </div>
-                                                        <hr>
-                                                        <div class="col-12 d-flex my-4"> 
+                                                        <hr class="my-4">
+                                                        <div class="col-12 d-flex"> 
                                                             <input class="pr-5 checkPayment2" type="radio" name="checkPayment" value="Paypal">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">PayPal</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">                                              
-                                                                <button name="buttonPayment2" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button type="submit" name="buttonPayment2" class="btn btn-success btn-price-total" style="display: none;">
                                                                     PAYER 
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}
@@ -106,14 +107,14 @@
                                                                 </button> 
                                                             </div>
                                                         </div>
-                                                        <hr> 
-                                                        <div class="col-12 d-flex my-4"> 
+                                                        <hr class="my-4"> 
+                                                        <div class="col-12 d-flex"> 
                                                             <input class="pr-5 checkPayment3" type="radio" name="checkPayment" value="Virement">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">Virement</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">                                              
-                                                                <button name="buttonPayment3" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button type="submit" name="buttonPayment3" class="btn btn-success btn-price-total" style="display: none;">
                                                                     PAYER 
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}
@@ -124,14 +125,14 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <hr>
-                                                        <div class="col-12 d-flex my-4"> 
+                                                        <hr class="my-4">       
+                                                        <div class="col-12 d-flex"> 
                                                             <input class="pr-5 checkPayment4" type="radio" name="checkPayment" value="Paiement 4X">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">Paiement en <span class="X4">4X</span> sans frais</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">
-                                                                <button name="buttonPayment4" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button type="submit" name="buttonPayment4" class="btn btn-success btn-price-total" style="display: none;">
                                                                     PAYER
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}
@@ -144,14 +145,14 @@
                                                                 </button>                                     
                                                             </div>
                                                         </div>
-                                                        <hr> 
-                                                        <div class="col-12 d-flex mt-4"> 
+                                                        {% else %}
+                                                        <div class="col-12 d-flex"> 
                                                             <input class="pr-5 checkPayment5" type="radio" name="checkPayment" value="Crédit">
                                                             <div class="col-6 d-flex align-items-center">
                                                                 <p class="small-text mb-0">Crédit</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">
-                                                                <button name="buttonPayment5" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button type="submit" name="buttonPayment5" class="btn btn-success btn-price-total" style="display: none;">
                                                                     CRÉDIT
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}
@@ -161,14 +162,17 @@
                                                                     {% endif %}
                                                                 </button>                                     
                                                             </div>
-                                                        </div>                                                      
+                                                        </div>
+                                                        {% endif %}                                                      
                                                     </div>
                                                 </div>
                                            </div>
                                         </div>
-                                        </form>            
-                                        {# fermeture choix du mode de paiement #}
+                                        </form>           
+                                        {# fermeture formulaire de soumission choix paiement #}
                                     </div>
+                                    {# fermeture choix du mode de paiement #}
+
                                     <div class="col-12">
                                        <div class="col-12">
                                            <p class="small fw-bold mb-0">CONDITIONS GÉNÉRALES DE VENTE</p> 
@@ -179,6 +183,7 @@
                                     </div>
                                 </div>
                             </div>
+
                              {# bloc bouton retour #}
                             <div class="col-12 mt-4 mb-4">    
                                 <div class="row">
@@ -207,7 +212,7 @@
                        {# card récapitulatif du panier #}
                         <div class="row">
                             <div class="col-12 mb-3">
-                            <div class="card">
+                                <div class="card">
                                     <div class="card-body">
                                         {% for items in items %}
                                         <div class="row mb-3">
@@ -285,14 +290,12 @@
                                                     {% endif %}                                                                              
                                                 </div>
                                             </div> 
-                                        </div>
-                                         
+                                        </div>                                        
                                         {# fermeture sous-total & total #}
                                     </div>
                                 </div> 
                             </div>
                             {# fermeture addresse de livraison #}
-
                         </div>
                     </div>
                     {# fermeture addresse de livraion et de facturation #}

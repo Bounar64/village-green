@@ -46,8 +46,9 @@ class CheckoutController extends AbstractController
         $shipping = $request->request->get('checkShipping'); // équivaut à $_POST["checkShipping"]
         $valider = $request->request->get('valider'); // équivaut à $_POST["valider"]
         
+        
         if(isset($valider) && !empty($valider)) {
-            
+
             $session->set('shippingType', $shipping);
 
             return $this->redirectToRoute('app_checkout_payment');  
@@ -81,7 +82,7 @@ class CheckoutController extends AbstractController
         $subcategory = $this->subcategoryRepository->findAll('category');
         $products = $this->productRepository->findAll();  
  
-        $panierData =  $session->get('panierData'); // on récupère le panier Complet des produits commandé
+        $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
         $total = $session->get('total'); // on récupère le prix total
         $ShippingType = $session->get('shippingType'); // on récupère le type de livraison 
         
@@ -91,7 +92,7 @@ class CheckoutController extends AbstractController
             'products' => $products,
             'items' => $panierData,
             'total' => $total,
-            'shipping' =>  $ShippingType         
+            'shipping' => $ShippingType         
         ]);
     }
 
@@ -99,8 +100,17 @@ class CheckoutController extends AbstractController
      * 
      * @Route("/checkout_validation", name="app_checkout_validation")
      */
-    public function validation(Request $request): Response
+    public function validation(Request $request, SessionInterface $session): Response
     {
+        $payment = $request->request->get('checkPayment'); // équivaut à $_POST["checkPayment"]
+        $valider = $request->request->get('buttonPayment1'); // équivaut à $_POST["valider"]
+        
+        if(isset($valider) && !empty($valider)) {
+            
+            $session->set('paymentType', $payment);
+            return $this->redirectToRoute('app_checkout_payment');  
+        }
+
         $order = new Order();
         $order->setShipping('1');
         $orderDetails = new OrderDetails();

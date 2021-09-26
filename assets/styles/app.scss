@@ -498,6 +498,12 @@ body {
             color: #B55400;
         }
 
+        .button-admin-secret {
+            text-decoration: none;
+            font-weight: 600;
+            color: $gris-muted;
+        }
+
         // ********************* FOOTER TOP ********************* //
         #footer {
             background-image: url('../images/background_footer_perso.png');

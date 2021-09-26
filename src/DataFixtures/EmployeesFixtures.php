@@ -28,7 +28,7 @@ class EmployeesFixtures extends Fixture
                 ->setSocialSecurityNumber($faker->numberBetween(100000000000000, 200000000000000))
                 ->setFirstName('John')
                 ->setLastName('Doe')
-                ->setEmail('JohnDoe@gmail.com')
+                ->setEmail('JohnDoeAdmin@gmail.com')
                 ->setSex(1)
                 ->setMaritalStatus('marier')
                 ->setDependentChild(1)

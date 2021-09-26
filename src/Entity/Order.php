@@ -21,6 +21,11 @@ class Order
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $ref;
+
+    /**
      * @ORM\Column(type="datetime_immutable")
      */
     private $datePayment;
@@ -46,13 +51,7 @@ class Order
     private $total;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="order_")
-     */
-    private $orderDetails;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=TypePayment::class, inversedBy="orders")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=50)
      */
     private $typePayment;
 
@@ -169,18 +168,6 @@ class Order
         return $this;
     }
 
-    public function getTypePayment(): ?TypePayment
-    {
-        return $this->typePayment;
-    }
-
-    public function setTypePayment(?TypePayment $typePayment): self
-    {
-        $this->typePayment = $typePayment;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -204,6 +191,26 @@ class Order
     public function setStatus(?Status $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ref
+     */ 
+    public function getRef()
+    {
+        return $this->ref;
+    }
+
+    /**
+     * Set the value of ref
+     *
+     * @return  self
+     */ 
+    public function setRef($ref)
+    {
+        $this->ref = $ref;
 
         return $this;
     }
