@@ -28,13 +28,20 @@ class CategoriesController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function CategoriesList(): Response
     {
-        return $this->render('admin/categories/index.html.twig');
+        $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
+        $subcategory = $this->subcategoryRepository->findAll('category');
+
+        return $this->render('admin/categories/list_categories.html.twig', [
+            'categories' => $categories,
+            'subcategory' => $subcategory,
+            'Listcategory' => $this->categoryRepository->findAll()
+        ]);
     }
 
     /**
-     * @Route("/add", name="add")
+     * @Route("/add", name="admin_categories_add")
      */
     public function addCategorie()
     {

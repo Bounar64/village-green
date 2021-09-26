@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+<header id="background">
+    <div class="container admin"> 
+        {# header navigation #} 
+        {{ include('/layouts/header_navigation.html.twig') }} 
+
+        <div class="contenant-admin">
+            <div class="text-center mx-auto">
+               <h1 class="text-center mt-5">Gérer les catégories</h1> 
+            </div>
+            <hr>
+            
+        </div> {# fermeture contenant-page #}
+            
+        {# footer #} 
+        {{ include('/layouts/footer.html.twig') }}
+    </div> {# fermeture du container products #}   
+</header>
+{% endblock %}

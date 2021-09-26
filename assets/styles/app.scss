@@ -11,6 +11,7 @@
 @import "_reset-password";
 @import "_panier";
 @import "_connection";
+@import "_admin";
 
 /* Mise du background */
 body {
@@ -91,6 +92,10 @@ body {
 
         &.panier {
             min-height: 1800px;
+        }
+
+        &.admin {
+            min-height: 1000px;
         }
     }  
     

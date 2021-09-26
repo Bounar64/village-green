@@ -1,0 +1,58 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+<header id="background">
+    <div class="container admin"> 
+        {# header navigation #} 
+        {{ include('/layouts/header_navigation.html.twig') }} 
+
+        <div class="contenant-admin">
+            <div class="text-center mx-auto">
+               <h1 class="text-center mt-5">Gérer les catégories</h1> 
+            </div>
+            <hr>
+             
+            <div class="row d-flex justify-content-center mt-5">
+                <button class="btn btn-primary w-50">Ajouter une catégorie</button>
+            </div> 
+                    
+
+            {# card liste des catégories #}
+            <div class="d-flex justify-content-center mt-5">
+                <div class="col-11 card card-admin">
+                    <div class="card-body">                              
+                        <div class="row d-flex justify-content-center">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Label</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for category in Listcategory %}
+                                    <tr>
+                                        <th scope="row">{{ category.id }}</th>
+                                            <td>{{ category.label }}</td>
+                                            <td>
+                                            
+                                            </td>
+                                        </tr>
+                                    <tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>
+                </div>
+            </div>          
+        </div> {# fermeture contenant-page #}
+            
+        {# footer #} 
+        {{ include('/layouts/footer.html.twig') }}
+    </div> {# fermeture du container products #}   
+</header>
+{% endblock %}
