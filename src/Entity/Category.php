@@ -117,4 +117,8 @@ class Category
         return $this;
     }
 
+    public function __toString() { // Ajout de cette fonction pour retourner l'objet name sous forme de string 
+        return $this->label;
+    }
+
 }

@@ -28,8 +28,7 @@ class CategoryType extends AbstractType
                         'message' => 'Saisie invalide.'
                     ])
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

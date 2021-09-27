@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Category;
-use App\Form\CategoryType;
+use App\Entity\SubCategory;
+use App\Form\SubCategoryType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,9 +14,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
-* @Route("/admin/categories", name="app_admin_categories_")
+* @Route("/admin/subcategory", name="app_admin_subcategory_")
  */
-class CategoriesController extends AbstractController
+class SubCategoryController extends AbstractController
 {
     private $categoryRepository;
     private $subcategoryRepository;
@@ -32,41 +32,41 @@ class CategoriesController extends AbstractController
     /**
      * @Route("/", name="list")
      */
-    public function CategoriesList(): Response
+    public function subCategoryList(): Response
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
 
-        return $this->render('admin/categories/list_categories.html.twig', [
+        return $this->render('admin/subcategory/list_subcategory.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
-            'Listcategories' => $this->categoryRepository->findAll()
+            'Listsubcategory' => $this->subcategoryRepository->findAll()
         ]);
     }
 
     /**
      * @Route("/add", name="add")
      */
-    public function addCategories(Request $request, EntityManagerInterface $manager)
+    public function addSubCategory(Request $request, EntityManagerInterface $manager)
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
 
-        $category = new Category;
+        $subcategory = new SubCategory;
 
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(SubCategoryType::class, $subcategory);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
 
-            $manager->persist($category);
+            $manager->persist($subcategory);
             $manager->flush(); 
 
-            return $this->redirectToRoute('admin_list_categories');
+            return $this->redirectToRoute('admin_subcategory_list');
         }
 
-        return $this->render('admin/categories/add.html.twig', [
+        return $this->render('admin/subcategory/add.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
             'form' => $form->createView()
@@ -76,24 +76,24 @@ class CategoriesController extends AbstractController
     /**
      * @Route("/edit/{id}", name="edit")
      */
-    public function editCategories(Category $category, Request $request, EntityManagerInterface $manager)
+    public function editCategory(SubCategory $subcategory, Request $request, EntityManagerInterface $manager)
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
 
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(SubCategoryType::class, $subcategory);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
 
-            $manager->persist($category);
+            $manager->persist($subcategory);
             $manager->flush(); 
 
-            return $this->redirectToRoute('admin_list_categories');
+            return $this->redirectToRoute('admin_subcategory_list');
         }
 
-        return $this->render('admin/categories/edit.html.twig', [
+        return $this->render('admin/subcategory/edit.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
             'form' => $form->createView()
@@ -103,12 +103,12 @@ class CategoriesController extends AbstractController
      /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function deleteCategories(Category $category, EntityManagerInterface $manager): Response 
+    public function deleteSubCategory(SubCategory $subcategory, EntityManagerInterface $manager): Response 
     {        
-            $manager->remove($category); 
+            $manager->remove($subcategory); 
             $manager->flush();
         
-        return $this->redirectToRoute('admin_list_categories');
+        return $this->redirectToRoute('admin_list_subcategory');
     }
 
 

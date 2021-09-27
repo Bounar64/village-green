@@ -76,7 +76,7 @@ class CheckoutController extends AbstractController
      * 
      * @Route("/checkout_payment", name="app_checkout_payment")
      */
-    public function payment(SessionInterface $session): Response
+    public function payment(Request $request, SessionInterface $session): Response
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
@@ -84,7 +84,18 @@ class CheckoutController extends AbstractController
  
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
         $total = $session->get('total'); // on récupère le prix total
-        $ShippingType = $session->get('shippingType'); // on récupère le type de livraison 
+        $ShippingType = $session->get('shippingType'); // on récupère le type de livraison
+
+        $payment = $request->request->get('checkPayment'); // équivaut à $_POST["checkPayment"]
+        $valider = $request->request->get('buttonPayment1'); // équivaut à $_POST["valider"]
+
+        if(isset($valider) && !empty($valider)) {
+            
+            
+
+            $session->set('paymentType', $payment);
+            return $this->redirectToRoute('app_checkout_payment');  
+        }
         
         return $this->render('checkout/payment.html.twig', [
             'categories' => $categories,
@@ -102,14 +113,6 @@ class CheckoutController extends AbstractController
      */
     public function validation(Request $request, SessionInterface $session): Response
     {
-        $payment = $request->request->get('checkPayment'); // équivaut à $_POST["checkPayment"]
-        $valider = $request->request->get('buttonPayment1'); // équivaut à $_POST["valider"]
-        
-        if(isset($valider) && !empty($valider)) {
-            
-            $session->set('paymentType', $payment);
-            return $this->redirectToRoute('app_checkout_payment');  
-        }
 
         $order = new Order();
         $order->setShipping('1');
