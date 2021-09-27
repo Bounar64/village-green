@@ -54,47 +54,48 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
 
     $('.checkPayment1').on("click", function() {
        
-        $("button[name$='buttonPayment1']").show();
-        $("button[name$='buttonPayment2']").hide();
-        $("button[name$='buttonPayment3']").hide();
-        $("button[name$='buttonPayment4']").hide();
-        $("button[name$='buttonPayment5']").hide();
+        $('#buttonPayment1').show();
+        $('#buttonPayment2').hide();
+        $('#buttonPayment3').hide();
+        $('#buttonPayment4').hide();
+        $('#buttonPayment5').hide();
     });
 
     $('.checkPayment2').on("click", function() {
        
-        $("button[name$='buttonPayment1']").hide();
-        $("button[name$='buttonPayment2']").show();
-        $("button[name$='buttonPayment3']").hide();
-        $("button[name$='buttonPayment4']").hide();
-        $("button[name$='buttonPayment5']").hide();
+        $('#buttonPayment1').hide();
+        $('#buttonPayment2').show();
+        $('#buttonPayment3').hide();
+        $('#buttonPayment4').hide();
+        $('#buttonPayment5').hide();
     });
 
     $('.checkPayment3').on("click", function() {
        
-        $("button[name$='buttonPayment1']").hide();
-        $("button[name$='buttonPayment2']").hide();
-        $("button[name$='buttonPayment3']").show();
-        $("button[name$='buttonPayment4']").hide();
-        $("button[name$='buttonPayment5']").hide();
+        $('#buttonPayment1').hide();
+        $('#buttonPayment2').hide();
+        $('#buttonPayment3').show();
+        
+        $('#buttonPayment4').hide();
+        $('#buttonPayment5').hide();
     });
 
     $('.checkPayment4').on("click", function() {
        
-        $("button[name$='buttonPayment1']").hide();
-        $("button[name$='buttonPayment2']").hide();
-        $("button[name$='buttonPayment3']").hide();
-        $("button[name$='buttonPayment4']").show();
-        $("button[name$='buttonPayment5']").hide();
+        $('#buttonPayment1').hide();
+        $('#buttonPayment2').hide();
+        $('#buttonPayment3').hide();
+        $('#buttonPayment4').show();
+        $('#buttonPayment5').hide();
     });
 
     $('.checkPayment5').on("click", function() {
        
-        $("button[name$='buttonPayment1']").hide();
-        $("button[name$='buttonPayment2']").hide();
-        $("button[name$='buttonPayment3']").hide();
-        $("button[name$='buttonPayment4']").hide();
-        $("button[name$='buttonPayment5']").show();
+        $('#buttonPayment1').hide();
+        $('#buttonPayment2').hide();
+        $('#buttonPayment3').hide();
+        $('#buttonPayment4').hide();
+        $('#buttonPayment5').show();
     });
  })
  

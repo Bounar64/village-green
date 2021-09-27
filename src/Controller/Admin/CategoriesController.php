@@ -63,7 +63,7 @@ class CategoriesController extends AbstractController
             $manager->persist($category);
             $manager->flush(); 
 
-            return $this->redirectToRoute('admin_list_categories');
+            return $this->redirectToRoute('app_admin_categories_list');
         }
 
         return $this->render('admin/categories/add.html.twig', [
@@ -90,7 +90,7 @@ class CategoriesController extends AbstractController
             $manager->persist($category);
             $manager->flush(); 
 
-            return $this->redirectToRoute('admin_list_categories');
+            return $this->redirectToRoute('app_admin_categories_list');
         }
 
         return $this->render('admin/categories/edit.html.twig', [
@@ -108,7 +108,7 @@ class CategoriesController extends AbstractController
             $manager->remove($category); 
             $manager->flush();
         
-        return $this->redirectToRoute('admin_list_categories');
+        return $this->redirectToRoute('app_admin_categories_list');
     }
 
 

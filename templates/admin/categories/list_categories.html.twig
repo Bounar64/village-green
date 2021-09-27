@@ -36,9 +36,9 @@
                                 <tbody>
                                 {% for category in Listcategories %}
                                     <tr>
-                                    <th scope="row">{{ category.id }}</th>
-                                        <td>{{ category.label }}</td>
-                                        <td class="text-end">
+                                    <th scope="row" class="align-middle">{{ category.id }}</th>
+                                        <td  class="align-middle">{{ category.label }}</td>
+                                        <td class="text-end align-middle">
                                             {# bouton modifier #}
                                             <a href="{{ path('app_admin_categories_edit', {id: category.id}) }}">
                                                 <button class="btn btn-warning edit">MODIFIER

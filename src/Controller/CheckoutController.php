@@ -87,13 +87,13 @@ class CheckoutController extends AbstractController
         $ShippingType = $session->get('shippingType'); // on récupère le type de livraison
 
         $payment = $request->request->get('checkPayment'); // équivaut à $_POST["checkPayment"]
-        $valider = $request->request->get('buttonPayment1'); // équivaut à $_POST["valider"]
+        $valider = $request->request->get('buttonPayment'); // équivaut à $_POST["valider"]
 
         if(isset($valider) && !empty($valider)) {
             
-            
-
+            dd($payment);
             $session->set('paymentType', $payment);
+
             return $this->redirectToRoute('app_checkout_payment');  
         }
         
@@ -113,10 +113,18 @@ class CheckoutController extends AbstractController
      */
     public function validation(Request $request, SessionInterface $session): Response
     {
+        // $user = $this->getUser();
+        // dd($user);
+        // $order = new Order();
+        // $order->setReference( '#' . rand(1000, 9999));
+        // $order->setTypePayment($session->get('paymentType'));
+        // $order->setShipping($session->get('shippingType'));
+        // $order->setTotal($session->get('total'));
+        // $order->setDatePayment(new \DateTimeImmutable);
+        // $order->
 
-        $order = new Order();
-        $order->setShipping('1');
-        $orderDetails = new OrderDetails();
+        // $order->setShipping('1');
+        // $orderDetails = new OrderDetails();
 
         // $formCheckout = $this->createForm(CheckoutType::class, $order);
         // $formOrderDetails = $this->createForm(OrderDetailsType::class, $orderDetails);

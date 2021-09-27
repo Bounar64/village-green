@@ -13,15 +13,16 @@ class CheckoutFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('meansPayment')
-            ->add('datePayment')
-            ->add('dateSent')
+            ->add('reference')
+            ->add('typePayment')
             ->add('shipping')
             ->add('addressSecond')
             ->add('total')
-            ->add('typePayment')
+            ->add('datePayment')
+            ->add('dateSent')
             ->add('user')
-            ->add('status')
+            ->add('status') 
+            
         ;
     }
 

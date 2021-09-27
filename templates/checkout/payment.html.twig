@@ -65,7 +65,7 @@
                                         <hr>
                                         {# choix du mode de paiement #}
                                         <p class="ship-title fw-bold mt-3">CHOISISSEZ VOTRE MODE DE PAIEMENT SÉCURISÉ</p>
-                                        <form name="payment" method="post" action=""> {# formulaire de soumission choix paiement #}
+                                        <form name="payment" method="post" action="#"> {# formulaire de soumission choix paiement #}
                                          <div class="col-12 mb-3">
                                            <div class="card">
                                                 <div class="card-body">
@@ -78,7 +78,7 @@
                                                                 <p class="small-text mb-0">Carte Bancaire</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">
-                                                                <button type="submit" name="buttonPayment1" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button type="submit" id="buttonPayment1" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
                                                                     PAYER 
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}
@@ -96,7 +96,7 @@
                                                                 <p class="small-text mb-0">PayPal</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">                                              
-                                                                <button type="submit" name="buttonPayment2" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button type="submit" id="buttonPayment2" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
                                                                     PAYER 
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}
@@ -114,7 +114,7 @@
                                                                 <p class="small-text mb-0">Virement</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">                                              
-                                                                <button type="submit" name="buttonPayment3" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button type="submit" id="buttonPayment3" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
                                                                     PAYER 
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}
@@ -132,7 +132,7 @@
                                                                 <p class="small-text mb-0">Paiement en <span class="X4">4X</span> sans frais</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">
-                                                                <button type="submit" name="buttonPayment4" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button type="submit" id="buttonPayment4" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
                                                                     PAYER
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}
@@ -152,7 +152,7 @@
                                                                 <p class="small-text mb-0">Crédit</p>  
                                                             </div>   
                                                             <div class="col-5 text-end">
-                                                                <button type="submit" name="buttonPayment5" class="btn btn-success btn-price-total" style="display: none;">
+                                                                <button type="submit" id="buttonPayment5" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
                                                                     CRÉDIT
                                                                     {% if shipping == 'Premium' %}
                                                                     {% set totalPremium = total + 9.99 %}

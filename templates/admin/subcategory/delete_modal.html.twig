@@ -1,11 +1,10 @@
 <!-- Modal confirmation suppression -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop{{ subcategory.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-    {% for subcategory in Listsubcategory %}
         <div class="modal-content">
             <div class="modal-body">
                 <div class="col text-center">
-                    <p class="conf-delete">Êtes-vous sûr de vouloir supprimer {{ subcategory.label }}</p>
+                    <p class="conf-delete">Êtes-vous sûr de vouloir supprimer la sous-catégorie {{ subcategory.label }}</p>
                     <p class="danger">Attention cette action est irréversible !</p>
                  </div>
             </div>
@@ -20,6 +19,5 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
     </div> 
 </div>

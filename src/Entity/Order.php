@@ -23,7 +23,7 @@ class Order
     /**
      * @ORM\Column(type="string", length=10)
      */
-    private $ref;
+    private $reference;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -31,7 +31,7 @@ class Order
     private $datePayment;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $dateSent;
 
@@ -196,21 +196,41 @@ class Order
     }
 
     /**
-     * Get the value of ref
+     * Get the value of typePayment
      */ 
-    public function getRef()
+    public function getTypePayment()
     {
-        return $this->ref;
+        return $this->typePayment;
     }
 
     /**
-     * Set the value of ref
+     * Set the value of typePayment
      *
      * @return  self
      */ 
-    public function setRef($ref)
+    public function setTypePayment($typePayment)
     {
-        $this->ref = $ref;
+        $this->typePayment = $typePayment;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of reference
+     */ 
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Set the value of reference
+     *
+     * @return  self
+     */ 
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
 
         return $this;
     }
