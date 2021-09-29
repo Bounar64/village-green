@@ -29,35 +29,109 @@
 
                     {# bloc champ ajout de produit #}
                     {{ form_start(form) }}
-                    <div class="row mt-5">
-                        {# bloc gauche haut #}
-                        <div class="col-6">
-                            <label for="label">Label:</label>
-                            {{ form_row(form.label )}}
-                        </div>
+                    {# bloc haut #}
+                    <div class="col-12">
+                        <div class="row mt-5 d-flex justify-content-evenly">
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Label:</label>
+                                {{ form_row(form.label) }}
+                            </div>
 
-                        {# bloc droite  haut #}
-                        <div class="col-6">
-                            gauche
-                        </div>
-                    </div> 
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Label court:</label>
+                                {{ form_row(form.shortLabel) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Marque:</label>
+                                {{ form_row(form.brand) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Référence:</label>
+                                {{ form_row(form.reference) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Sélectionner une catégorie:</label>
+                                {{ form_row(form.category) }}
+                            </div>
+                            
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Sélectionner une sous-catégorie:</label>
+                                {{ form_row(form.subCategory) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Couleur:</label>
+                                {{ form_row(form.color) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Matériaux:</label>
+                                {{ form_row(form.material) }}
+                            </div>
+                        </div>                         
+                    </div>
                     
-                     {# bloc milieu #}
-                    <div class="row">
-                        <div class="col-12 text-center">
-                        milieu
+                    {# bloc milieu #}
+                     <div class="col-12">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-9">
+                                <label for="label"><span class="red">* </span>Description:</label>
+                                {{ form_row(form.description) }}
+                            </div>    
                         </div>    
                     </div>
 
-                    <div class="row">
-                        {# bloc gauche bas #}
-                        <div class="col-6">
-                            droite
-                        </div>
+                    {# bloc bas #}
+                    <div class="col-12">
+                        <div class="row d-flex justify-content-evenly">
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Prix HT:</label>
+                                {{ form_row(form.price) }}
+                            </div>
 
-                        {# bloc droite bas #}
-                        <div class="col-6">
-                            gauche
+                            <div class="col-5">
+                                <label for="label">Promotion:</label>
+                                {{ form_row(form.discount) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Stock:</label>
+                                {{ form_row(form.stock) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Stock d'alerte:</label>
+                                {{ form_row(form.stockAlert) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Sélectionner un service:</label>
+                                {{ form_row(form.service) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Ajouter une image:</label>
+                                {{ form_row(form.image) }}
+                            </div>
+
+                            <div class="col-5 mt-3">
+                                {{ form_row(form.actived) }}
+                                <small>Désactivé le produit si vous ne voulez pas qu'il apparaisse dans le catalogue</small>
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"></label>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-2 mt-3 mb-5">
+                            <button type="submit" class="btn btn-primary w-100 submit lh-1">Ajouter</button>
                         </div>
                     </div>
                     {{ form_end(form) }} 

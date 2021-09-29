@@ -316,5 +316,46 @@
             color: $blanc;
         }
     }
+
+    //***********************************************************************//
+    //********************** PAGE AJOUTER UN PRODUIT ************************//
+    //***********************************************************************//
+
+    label {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    textarea {
+        resize : none;
+        min-height: 200px;
+        font-size: 15px;
+        border-color: rgb(175, 175, 175);
+        
+            &:focus {
+                box-shadow: none;
+                border-color: $orange;
+            }
+    }
+
+    select {
+        border-color: rgb(175, 175, 175);
+         
+            &:focus {
+                box-shadow: none;
+                border-color: $orange;
+            }
+    }
+
+    small {
+        font-size: 12px;
+        font-weight: 500;
+        color: $orange-pur;
+    }
+
+    button.submit {
+        font-size: 18px;
+    }
+
 }
 

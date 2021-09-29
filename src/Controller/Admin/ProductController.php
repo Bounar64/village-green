@@ -11,6 +11,7 @@ use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -53,6 +54,7 @@ class ProductController extends AbstractController
             $manager->persist($product);
             $manager->flush(); 
 
+            $this->addFlash('success', 'Nouveau produit ajouté !');
             return $this->redirectToRoute('admin_list_product');
         }
 
