@@ -6,6 +6,7 @@
     <header id="background">
         <div class="container-fluid container-admin-dashboard">
             <div class="row">
+                {# faux fond menu pour décaler #}
                   <div class="col-3 false-back-menu">
                     <div class="col text-Dashboard">
                         <a href="#">    
@@ -40,7 +41,7 @@
                         </a>         
                     </div>
                     <div class="col mb-2">
-                        <a href="#">    
+                        <a href="{{ path('app_admin_product_list') }}">    
                             <p class="text-menu">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="shop" viewBox="-5 -5 30 30">
                                     <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
@@ -85,7 +86,7 @@
                         </a>         
                     </div>
                     <div class="col">
-                        <a href="#">    
+                        <a href="{{ path('app_home') }}">    
                             <p class="text-menu back-site">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-globe" viewBox="-5 -5 30 30">
                                     <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
@@ -126,7 +127,7 @@
                     {# fermeture navbar #}
 
                     <!-- Main -->
-                    <main role="main" class="col-md-10 main pr-0 tableau_prod ml-sm-auto col-lg-12 px-2">
+                    <main role="main" class="col-md-10 main pr-0 tableau_prod ml-sm-auto col-lg-12">
                         {# titre du champs + boutton ajouter #}
                         <div class="row mt-5">
                             <div class="col-5 d-flex">
@@ -153,9 +154,10 @@
                                         <th class="pb-3 text-start" scope="col">Label court</th>
                                         <th class="pb-3 text-start" scope="col">Prix HT</th>
                                         <th class="pb-3 text-start" scope="col">Stock</th>
-                                        <th class="pb-3 text-start" scope="col">Date d'ajout</th>
-                                        <th class="pb-3 text-start" scope="col">Date de modification</th>
+                                        <th class="pb-3 text-center" scope="col">Date d'ajout</th>
+                                        <th class="pb-3 text-center" width="40px" scope="col">Date de modification</th>
                                         <th class="pb-3 text-start" scope="col">Activé</th>
+                                        <th class="pb-3 text-start" scope="col">Service</th>
                                         <th class="pb-3 text-start" scope="col"></th>
                                     </tr>
                                 </thead>
@@ -166,24 +168,38 @@
                                         <td class="align-middle text-start">{{ (product.id) }}</td>
                                         <td class="align-middle text-start"><span class="important">{{ (product.reference) }}</span></td>
                                         <td class="align-middle text-start">{{ (product.brand) }}</td>
-                                        <td class="align-middle text-start"><span class="important">{{ (product.label)}}</span></td>
+                                        
+                                        <td class="align-middle text-start">
+                                            <span class="important">{{ (product.label) }}</span>
+                                            <a href="{{ path('app_admin_product_details', {id: product.id}) }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                                </svg>
+                                            </a>
+                                        </td>
+                                        
                                         <td class="align-middle text-start">{{ (product.shortLabel) }}</td>
                                         <td class="align-middle text-start"><span class="important">{{ (product.price) }} €</span></td>
                                         <td class="align-middle">{{ (product.stock) }}</td>
                                         <td class="align-middle">{{ (product.createdAt|date("m/d/Y")) }}</td>
                                         <td class="align-middle">{{ (product.updatedAt|date("m/d/Y")) }}</td>
                                         {% if product.actived == 1 %}
-                                            <td class="align-middle">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill circle-green" viewBox="0 0 16 16">
-                                                    <circle cx="8" cy="8" r="8"/>
-                                                </svg>
-                                            </td>
+                                        <td class="align-middle">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill circle-green" viewBox="0 0 16 16">
+                                                <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                        </td>
                                         {% else %}
-                                            <td class="align-middle">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill circle-red" viewBox="0 0 16 16">
-                                                    <circle cx="8" cy="8" r="8"/>
-                                                </svg>
-                                            </td>
+                                        <td class="align-middle">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill circle-red" viewBox="0 0 16 16">
+                                                <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                        </td>
+                                        {% endif %}
+                                        {% if product.service == 1 %}
+                                        <td class="align-middle">En vente</td>
+                                        {% else %}
+                                        <td class="align-middle">En location</td>
                                         {% endif %}
                                         <td class="align-middle">
                                             <div class="col">

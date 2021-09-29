@@ -71,7 +71,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/edit/{id}", name="edit")
      */
-    public function editCategories(Product $product, Request $request, EntityManagerInterface $manager)
+    public function editProduct(Product $product, Request $request, EntityManagerInterface $manager)
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
@@ -98,12 +98,22 @@ class ProductController extends AbstractController
      /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function deleteCategories(Product $product, EntityManagerInterface $manager): Response 
+    public function deleteProduct(Product $product, EntityManagerInterface $manager): Response 
     {        
             $manager->remove($product); 
             $manager->flush();
         
         return $this->redirectToRoute('admin_list_product');
+    }
+
+     /**
+     * @Route("/detail/{id}", name="details")
+     */
+    public function detailsProduct(): Response 
+    {           
+        $product = $this->productRepository->findAll();
+
+        return $this->render('admin/product/details.html.twig', compact('product'));
     }
 
 

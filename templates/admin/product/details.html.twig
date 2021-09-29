@@ -1,0 +1,319 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+    <header id="background">
+        <div class="container-fluid container-admin-dashboard">
+            <div class="row">
+                {# faux fond menu pour décaler #}
+                  <div class="col-3 false-back-menu">
+                    <div class="col text-Dashboard">
+                        <a href="#">    
+                            <p class="text-title-menu">
+                                
+                            </p> 
+                        </a>         
+                        </div>
+                    </div>
+                {# -----gauche menu----- #}
+                <div class="col-3 menu" id="menu">
+                    <img class="logo" src="{{ asset('build/images/logo_village_green.png') }}" alt="logo village-green">
+                    <div class="col mb-5 text-Dashboard">
+                        <a href="#">    
+                            <p class="text-title-menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="clipboard" viewBox="-5 -5 30 30">
+                                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                </svg>
+                            Dashboard
+                            </p> 
+                        </a>         
+                    </div>
+                    <div class="col mb-2">
+                        <a href="#">    
+                            <p class="text-menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="people" viewBox="-5 -5 30 30">
+                                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                                </svg>
+                            Client
+                            </p> 
+                        </a>         
+                    </div>
+                    <div class="col mb-2">
+                        <a href="{{ path('app_admin_product_list') }}">    
+                            <p class="text-menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="shop" viewBox="-5 -5 30 30">
+                                    <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
+                                </svg>
+                            Produit
+                            </p> 
+                        </a>         
+                    </div>
+                    <div class="col mb-2">
+                        <a href="#">    
+                            <p class="text-menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="cart" viewBox="-5 -5 30 30">
+                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                            </svg>
+                            Commande
+                            </p> 
+                        </a>         
+                    </div>
+                    <div class="col mb-2">
+                        <a href="#">    
+                            <p class="text-menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="journal" viewBox="-5 -5 30 30">
+                                    <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                                </svg>
+                            Inventaire
+                            </p> 
+                        </a>         
+                    </div>
+                    <div class="col">
+                        <a href="#">    
+                            <p class="text-menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="cash" viewBox="-5 -5 30 30">
+                                    <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
+                                    <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
+                                    <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
+                                    <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
+                                </svg>
+                            Compte
+                            </p> 
+                        </a>         
+                    </div>
+                    <div class="col">
+                        <a href="{{ path('app_home') }}">    
+                            <p class="text-menu back-site">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-globe" viewBox="-5 -5 30 30">
+                                    <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+                                </svg>
+                            Accéder au site web
+                            </p> 
+                        </a>         
+                    </div>
+                    <div class="col">
+                        <a href="#">    
+                            <p class="text-menu logout">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="power" viewBox="-5 -5 30 30">
+                                    <path d="M7.5 1v7h1V1h-1z"/><path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+                                </svg>
+                            Déconnexion
+                            </p> 
+                        </a>         
+                    </div>
+                </div>
+                {# ------fermeture gauche menu----- #}
+         
+                {# -----droite corps----- #}
+                <div class="col body mt-3" id="body">
+                    {# navbar #}
+                    <div class="row border-bottom border-dark">
+                        <div class="col-7 d-flex justify-content-center">
+                            <form class="d-flex col-7">
+                                <input class="form-control mb-3" type="search" placeholder="Rechercher.." aria-label="Search">
+                            </form>
+                        </div>
+                        <div class="col d-flex justify-content-end align-items-center">
+                            <p class="m-0 text-end">
+                                Connecté sous 
+                               <span class="fw-bold">AdminName</span> 
+                            </p>
+                        </div>
+                    </div>
+                    {# fermeture navbar #}
+
+                    <!-- Main -->
+                    {% for product in product %}
+                    {% if product.id == (app.request.get('id')) %}
+                    <main role="main" class="col-md-10 main pr-0 tableau_prod ml-sm-auto col-lg-12">
+                        {# titre du champs + boutton modifier #}
+                        <div class="row mt-5">
+                            <div class="col-5 d-flex">
+                                <form class="col-7">
+                                    <h2 class="m-0">Détails du produit <span class="important">{{ product.brand ~ product.label }}</span></h2>
+                                </form>
+                            </div>
+                            <div class="col d-flex justify-content-end align-items-center">
+                                <a href="#">
+                                    <button type="button" class="btn btn-primary mb-3">Modifier le produit</button>
+                                </a> 
+                            </div>
+                        </div>
+                        <hr>
+                            
+                        {# big-card #}
+                        <div class="row content-big-cards">                 
+                            <div class="col-10">
+                                <div class="card big-card mb-3">  
+                                    <div class="row g-0">
+                                        {# image big-card #}
+                                        <div class="col-md-5">
+                                            <div class="row d-flex justify-content-end">
+                                                <div class="col-2">                                      
+                                                    <p class="text-end text-center discount">
+                                                        {% if product.discount is not null %}
+                                                            -{{ product.discount }}%
+                                                        {% endif %}
+                                                    </p>                                        
+                                                </div>
+                                            </div> 
+                                            <img src="{{ asset(product.image) }}" class="img-fluid rounded-start" alt="{{ product.label }}">
+                                        </div>
+                                        {# contenu big-card #}
+                                        <div class="col-md-7"> 
+                                            {# card-body en-tête #} 
+                                            <div class="card-body entete"> 
+                                                <div class="row">
+                                                    {% if product.discount is not null %}
+                                                        <div class="col-4">                                       
+                                                            <p class="economie m-0"><span class="fw-bold">ÉCONOMISEZ </span>{{ (10 * product.price / 100)|round|format_currency('EUR', locale='fr') }}</p>                                         
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="col-2 d-flex align-items-center">
+                                                        <p class="ref m-0"><span class="fw-bold">RÉF: </span>{{ product.reference }}</p>      
+                                                    </div>
+                                                </div>
+                                                <h2 class="card-title mt-2 mb-0 h5">{{ product.brand ~ ' ' ~ product.label }}</h2>
+                                                <hr> 
+                                            </div>
+                                            {# card-body contenu #}
+                                            <div class="card-body contenu">
+                                                <div class="row">
+                                                    {# card-body contenu gauche #}
+                                                    <div class="col-6">
+                                                        <div class="row contenu-gauche">
+                                                            <div class="col">
+                                                                <p class="title"><span class="title">DISPONIBILITÉ</span></p>
+                                                                <div class="row">
+                                                                    <div class="col-1">
+                                                                    {% if product.stock <= product.stockAlert %}
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle-fill red" viewBox="0 0 16 20"><circle cx="8" cy="8" r="8"/></svg>
+                                                                    </div>                                               
+                                                                    <div class="col p-0">
+                                                                        <p>Stock Internet: <span>disponible prochainement !</span> </p>
+                                                                    {% else %}
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle-fill green " viewBox="0 0 16 20"><circle cx="8" cy="8" r="8"/></svg>
+                                                                    </div>                                               
+                                                                    <div class="col p-0">
+                                                                        <p>Stock Internet: <span>disponible immédiatement !</span> </p>
+                                                                    {% endif %}
+                                                                        <p>Commandé avant 12h, expédié aujourd'hui. <span>(+)</span></p>
+                                                                    </div>  
+                                                                </div>                                                         
+                                                            </div>
+                                                            <div class="col">
+                                                                <p class="title"><span class="title">LIVRAISON</span></p>
+                                                                <p>Livraison: <span>gratuite</span> </p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p class="title"><span class="title">GARANTIE</span></p>
+                                                                <p>Cet article est garanti <span>3 ans</span></p>
+                                                                <p>Satisfait ou remboursé <span>30 jours d'essai</span></p>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p class="text-muted mt-3 d-flex align-items-end lh-1">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>                                                           
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>                                                            
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>                                                            
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-half star" viewBox="0 0 16 16"><path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z"/></svg>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/></svg>
+                                                                    &ensp;28 avis 
+                                                                </p>
+                                                            </div>
+                                                            <a href="#" class="text-decoration-none">
+                                                                <div class="col-5 encart-description">
+                                                                    <p class="title mt-1"><span class="title">DESCRIPTION</span></p>                                                      
+                                                                </div>
+                                                            </a>                                                  
+                                                        </div>  
+                                                    </div>
+                                                    {# card-body contenu droite #}
+                                                    <div class="col-6">
+                                                            <div class="row contenu-droite">
+                                                            <div class="col pl-0">
+                                                                <div class="d-grid gap-2">
+                                                                    {% if  product.stock <= product.stockAlert %}
+                                                                        <button class="btn btn-secondary" type="button" disabled>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart2 icon-caddie" viewBox="0 0 18 18"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg>
+                                                                            AJOUTER
+                                                                        </button>
+                                                                    {% else %}
+                                                                        <a href="{{ path('app_panier_add', {'id': product.id}) }}"> {# on passe dans la route id du produit qui correspondra à l'id demandé dans le Paniercontroller #}
+                                                                        <button class="btn btn-success w-100" type="button">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart2 icon-caddie" viewBox="0 0 18 18"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/></svg>
+                                                                            AJOUTER
+                                                                        </button>
+                                                                        </a> 
+                                                                    {% endif %}                                                       
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <p class="title"><span class="title">PRIX VILLAGE GREEN</span></p>
+                                                                <p class="price">
+                                                                    {% set DiscountPrice = product.price - (product.discount / 100 * product.price) %} {# varible qui stock le prix après réduction #}
+                                                                    {{ DiscountPrice|format_currency('EUR', locale='fr') }} 
+                                                                </p>
+                                                            </div>
+                                                            {% if product.discount is not null %}
+                                                                <div class="col">
+                                                                    <p class="title"><span class="title">PRIX CONSEILLÉ</span></p>
+                                                                    <p>{{ product.price|abs|format_currency('EUR', locale='fr') }}</p>                                                       
+                                                                </div>
+                                                                <div class="col">
+                                                                    <p class="title"><span class="title">ÉCONOMISEZ</span></p>
+                                                                    <p>{{ (10 * product.price / 100)|round|format_currency('EUR', locale='fr') }}</p>                                                       
+                                                                </div>
+                                                            {% endif %}
+                                                            <div class="col">
+                                                                <p class="title"><span class="title">ÉCO-PARTICIPATION</span></p>
+                                                                <p>{{ 0.5 |format_currency('EUR', locale='fr') }}</p>                                                       
+                                                            </div>
+                                                            <div class="col-11 encart-financement">
+                                                                <p class="title mt-3"><span class="title">FINANCEZ À VOTRE RYTHME:</span></p>
+                                                                <p><span class="X4">4X {{ (DiscountPrice / 4)|format_currency('EUR', locale='fr') }}</span> sans frais par CB</p>                                                       
+                                                            </div>
+                                                        </div>        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                               
+                                </div> 
+                            </div> {# fermeture de big-card #}              
+                            
+                            {# card description #}
+                            <div class="col-10">
+                                <div class="card card-desc mb-3">  
+                                    <div class="row g-0">
+                                        {# contenu card desc#}
+                                        <div class="col-md-7"> 
+                                            {# card-body contenu #}
+                                            <div class="card-body contenu">
+                                                <section>
+                                                    <h2 class="title description">DESCRIPTION</h2>
+                                                    <p>{{ product.description|nl2br }}</p>
+                                                </section>                                                                               
+                                            </div>                                               
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <h2 class="ref">RÉFÉRENCE MARQUE: <span>{{ product.shortLabel }}</span></h2>
+                                    </div>                                                 
+                                </div> 
+                            </div> {# fermeture de card description #}
+                        
+                        </div>  {# fermeture de content-big-card #}
+                    </main>
+                    {% endif %}
+                    {% endfor %}  
+                </div>
+                {# -------fermeture droite corps------ #}               
+            </div>         
+        </div>
+    </header>
+{% endblock %}
