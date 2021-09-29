@@ -19,13 +19,13 @@
                     <!-- Main -->
                     {% for product in product %}
                     {% if product.id == (app.request.get('id')) %}
-                    <main role="main" class="col-md-10 main pr-0 tableau_prod ml-sm-auto col-lg-12">
+                    <main role="main" class="col-md-10 main pr-0 ml-sm-auto col-lg-12">
                         {# titre du champs + boutton modifier #}
                         <div class="row mt-5">
                             <div class="col-10 d-flex">
-                                <form class="col-10">
+                                <div class="col-10">
                                     <h2 class="m-0">Détails du produit <span class="important title-product">{{ product.brand  ~ " " ~ product.label }}</span></h2>
-                                </form>
+                                </div>
                             </div>
                             <div class="col d-flex justify-content-end align-items-center">
                                 <a href="#">
@@ -34,6 +34,15 @@
                             </div>
                         </div>
                         <hr>
+
+                        {# message d'erreur #}
+                        {% if product.stock < product.stockAlert %}
+                        <div class="row alert-stock mt-2">
+                            <div class="col-12 my-3">
+                                <p class="text-center m-0">ATTENTION VOUS-ÊTES EN DESSOUS DU STOCK D'ALERTE VEUILLEZ RÉAPROVISIONER LE STOCK !</p>
+                            </div>
+                        </div>
+                        {% endif %}
                             
                         {# details du produit #}
                         <div class="row content-card-details mt-5">                 
@@ -146,7 +155,11 @@
                                                    <p>Promotion :</p>
                                                 </div>
                                                 <div class="col-8">
+                                                {% if product.discount == null %}
+                                                    <p class="text-end"><span class="color">Aucune</span></p> 
+                                                {% else %}
                                                     <p class="text-end"><span class="color">{{ product.discount }}%</span></p> 
+                                                {% endif %}
                                                 </div>
                                             </div>
                                             {# bloc stock #}
@@ -155,7 +168,11 @@
                                                    <p>Stock :</p>
                                                 </div>
                                                 <div class="col-8">
-                                                    <p class="text-end"><span class="color">{{ product.stock }}</span></p> 
+                                                 {% if product.stock < product.stockAlert %}
+                                                    <p class="text-end"><span class="red fw-bold">{{ product.stock }}</span></p>
+                                                {% else %}
+                                                     <p class="text-end"><span class="color">{{ product.stock }}</span></p>
+                                                {% endif %}
                                                 </div>
                                             </div>
                                             {# bloc stock d'alerte #}

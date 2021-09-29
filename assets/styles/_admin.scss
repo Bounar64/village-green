@@ -270,6 +270,10 @@
         &.important {
             color: $orange-pur;
         }
+
+        &.red {
+            color: $rouge;
+        }
     }
 
     a {
@@ -301,6 +305,16 @@
 
     span.color {
         color: $orange-pur;
+    }
+
+    .alert-stock {
+        background: $rouge;
+
+        p {
+            font-size: 18px;
+            font-weight: 600;
+            color: $blanc;
+        }
     }
 }
 

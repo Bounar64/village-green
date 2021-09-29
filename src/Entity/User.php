@@ -72,7 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
      * @Assert\Regex(
-     *     pattern="/^[a-zA-Z- éè]+$/",
+     *     pattern="/^[a-zA-Z- áâãäåçèéêëìíîïðòóôõöùúûüýÿ]+$/",
      *     message="Saisie invalide."
      * )
      */
@@ -81,7 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
      * @Assert\Regex(
-     *     pattern="/^[a-zA-Z- éè]+$/",
+     *     pattern="/^[a-zA-Z- áâãäåçèéêëìíîïðòóôõöùúûüýÿ]+$/",
      *     message="Saisie invalide."
      * )
      */
@@ -90,7 +90,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=80, nullable=true)
      * @Assert\Regex(
-     *     pattern="/^[[:alnum:] 'éè&_-]+$/",
+     *     pattern="/^[[:alnum:] 'áâãäåçèéêëìíîïðòóôõöùúûüýÿ&_-]+$/",
      *     message="Saisie invalide."
      * )
      */
@@ -133,7 +133,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=80)
      * @Assert\NotBlank(message="Ce champ est obligatoire.")
      * @Assert\Regex(
-     *     pattern="/^[[:alnum:] 'éè-]+$/",
+     *     pattern="/^[[:alnum:] 'áâãäåçèéêëìíîïðòóôõöùúûüýÿ-]+$/",
      *     message="Saisie invalide."
      * )
      */

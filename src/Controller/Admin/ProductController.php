@@ -44,13 +44,8 @@ class ProductController extends AbstractController
      */
     public function addProduct(Request $request, EntityManagerInterface $manager)
     {
-        $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
-        $subcategory = $this->subcategoryRepository->findAll('category');
-
         $product = new Product;
-
         $form = $this->createForm(ProductType::class, $product);
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -62,8 +57,6 @@ class ProductController extends AbstractController
         }
 
         return $this->render('admin/product/add.html.twig', [
-            'categories' => $categories,
-            'subcategory' => $subcategory,
             'form' => $form->createView()
         ]);
     }
