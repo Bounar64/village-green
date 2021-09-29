@@ -1,0 +1,23 @@
+<!-- Modal confirmation suppression -->
+<div class="modal fade" id="staticBackdrop{{ product.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="col text-center">
+                    <p class="conf-delete">Êtes-vous sûr de vouloir supprimer le produit {{ product.brand }} {{ product.label }}</p>
+                    <p class="danger">Attention cette action est irréversible !</p>
+                 </div>
+            </div>
+            <div class="modal-footer row d-flex justify-content-between">
+                <div class="col-5 text-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ANNULER</button>
+                </div>
+                <div class="col-5 text-center">
+                    <a href="{{ path('app_admin_product_delete', {id: product.id}) }}">
+                        <button type="button" class="btn btn-danger">SUPPRIMER</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>

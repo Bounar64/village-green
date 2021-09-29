@@ -2,6 +2,56 @@
 //****************************************************---------------------- ADMIN ----------------------***************************************************//
 //**********************************************************************************************************************************************************//
 
+//***********************************************************************//
+//**************************** PAGE LOGIN  ******************************//
+//***********************************************************************//
+.container-admin-log {
+    background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 0%, rgba(222,104,0,1) 50%);
+    height: 100vh;
+    width: 100wh;
+
+    h1 {
+        margin-top: 50%;
+        font-weight: 500;
+        color: $bleu;
+    }
+
+    label {
+        color: $bleu;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    input {
+        height: 40px;
+        font-size: 15px;
+        font-weight: 500;
+        border: none;
+            
+            &:focus {
+                outline: none !important;
+                border: 2px solid $orange;
+                box-shadow: none;
+            }
+    
+    }
+
+    button {
+        background: $bleu;
+        background: linear-gradient(0deg, $bleu 0%, $bleu 20%, rgb(33, 33, 197) 80%);
+        border: none; 
+        box-shadow: none;
+        height: 40px;
+        font-weight: 500; 
+
+        &:hover {
+            box-shadow: none;
+            border: none;
+        }                    
+    }
+}
+
+
 .contenant-admin {
 
     //***********************************************************************//
@@ -92,7 +142,133 @@
             height: auto;
         }
     }
-
-   
-
 }
+
+ //***********************************************************************//
+//**************************** PAGE PRODUCT *****************************//
+//***********************************************************************//
+.container-admin-dashboard {
+    background: $blanc;
+    height: 100%;
+
+    h2 {
+        font-size: 30px;
+        font-weight: 500;
+    }
+
+    th {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    td {
+        font-size: 13px;
+        font-weight: 500;
+        background: rgb(243, 243, 243);
+    }
+
+    img {
+
+        &.logo {
+            width: 353px;
+            height: auto;
+            left: 0px;
+        }
+
+        &.product {
+            width: 80px;
+            height: auto;
+            border-radius: 6px;
+        }
+        
+    }
+
+    .circle-green {
+        color: green;
+    }
+
+    .circle-red {
+        color: $rouge;
+    }
+
+    input {
+        font-size: 15px;
+        border-color: rgb(175, 175, 175);
+        
+            &:focus {
+                box-shadow: none;
+                border-color: $orange;
+            }
+    }
+
+    .false-back-menu {
+        width: 350px;
+    }
+
+    .menu {
+        position: fixed;
+        width: 350px;
+        background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 0%, rgba(222,104,0,1) 50%);
+        height: 100vh;
+    }
+
+    hr {
+        width: 99%;
+        margin: auto;
+    }
+
+    button {
+        @include buttonColor;
+        font-size: 16px;
+        height: 40px;
+        font-weight: 500;
+
+        &:hover {
+            box-shadow: none;
+            border: none;
+        }  
+        
+        &.delete {
+            background: $rouge;
+            font-size: 13px;
+            height: 30px;
+            font-weight: 500;
+        }
+
+        &.edit {
+            font-size: 13px;
+            height: 30px;
+            font-weight: 500;
+        }
+    }
+
+    p {
+        
+        &.important {
+            color: $orange-pur;
+        }
+
+        &.text-title-menu {
+            margin-top: 250px;
+            color: $rouge;
+            font-size: 40px;
+            font-weight: 500;
+        }
+
+        &.text-menu {
+            font-size: 25px;
+            font-weight: 500;
+
+            &.back-site {
+                margin-top: 100px;
+                color: $yellow-500; 
+            }
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+}
+

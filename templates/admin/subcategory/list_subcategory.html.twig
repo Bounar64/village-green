@@ -41,7 +41,7 @@
                                     <th scope="row" class="align-middle">{{ subcategory.id }}</th>
                                         <td class="align-middle">{{ subcategory.label }}</td>
                                         <td class="align-middle">{{ subcategory.category.label }}</td>
-                                        <td class="align-middle"><img class="imageList" src="{{ asset(subcategory.background) }}" alt="image"></td>
+                                        <td class="align-middle"><img class="imageList" src="{{ asset(subcategory.background) }}" alt="image {{ subcategory.label }}"></td>
                                         <td class="text-end align-middle">
                                             {# bouton modifier #}
                                             <a href="{{ path('app_admin_subcategory_edit', {id: subcategory.id}) }}">

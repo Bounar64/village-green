@@ -1,0 +1,45 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+    <header id="background">
+        <div class="container reset-password-request">
+            {# header navigation #} 
+            {{ include('/layouts/header_navigation.html.twig') }}  
+
+           {# card modifier le produit #}
+            <div class=" d-flex justify-content-center mt-5">
+                <div class="col-11 card card-reset">
+                    <div class="card-body">
+                        <form method="post">            
+                            <h5 class="card-title text-center">Modifier le produit</h5>
+                            {{ form_start(form) }}
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-6 mt-3">
+                                    <div class="text-start mb-3">
+                                        <label for="subcategory" class="fs-8">Nom du produit</label>
+                                        {{ form_row(form.label) }}
+                                    </div>
+                                </div>
+                                <div class="col-6 mt-3">
+                                    <div class="text-start mb-3">
+                                        <label for="subcategory" class="fs-8">Nom du produit</label>
+                                        {{ form_row(form.shortLabel) }}
+                                    </div>                                 
+                                </div>
+                                {{ form_end(form) }}
+                                <div class="col text-center">
+                                    <button type="submit" class="btn btn-primary w-50">Modifier</button>
+                                </div>  
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {# footer #} 
+            {{ include('/layouts/footer.html.twig') }}
+        </div> {# fermeture du container products #}   
+    </header>
+{% endblock %}

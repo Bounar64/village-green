@@ -98,14 +98,6 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
         $('#buttonPayment5').show();
     });
  })
- 
-
-
-
-
-
-
-
 
 
  

@@ -34,12 +34,7 @@ class ProductController extends AbstractController
      */
     public function ProductList(): Response
     {
-        $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
-        $subcategory = $this->subcategoryRepository->findAll('category');
-
         return $this->render('admin/product/list_product.html.twig', [
-            'categories' => $categories,
-            'subcategory' => $subcategory,
             'Listproduct' => $this->productRepository->findAll()
         ]);
     }
@@ -81,7 +76,7 @@ class ProductController extends AbstractController
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
 
-        $form = $this->createForm(CategoryType::class, $product);
+        $form = $this->createForm(ProductType::class, $product);
 
         $form->handleRequest($request);
 
@@ -93,7 +88,7 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('admin_list_product');
         }
 
-        return $this->render('admin/prodcut/edit.html.twig', [
+        return $this->render('admin/product/edit.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
             'form' => $form->createView()
