@@ -48,6 +48,14 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
     });
  })
 
+ //_______Afficher au click du boutton description la card description_____//
+ $(function(){
+
+    $('#ButtonDescription').on("click", function(){ // ancienne écriture $('#ButtonEdit').click(function(){
+        $('#CardDescription').slideToggle();
+    });
+ })
+
 
  //_______Afficher au check le boutton de paiement_____//
  $(function(){
