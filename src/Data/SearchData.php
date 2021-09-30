@@ -24,7 +24,7 @@ class SearchData
      *     message="cannot contain a number."
      * )
      */
-    private $kw;
+    private $keyword;
 
     /**
      * @var null|integer
@@ -46,14 +46,14 @@ class SearchData
     private $discount = false;
 
 
-    public function getKw(): ?string
+    public function getKeyword(): ?string
     {
-        return $this->kw;
+        return $this->keyword;
     }
 
-    public function setKw(string $kw): self
+    public function setKeyword(string $keyword): self
     {
-        $this->kw = $kw;
+        $this->keyword = $keyword;
 
         return $this;
     }

@@ -147,6 +147,14 @@
 //**************************** PAGE PRODUCT *****************************//
 //***********************************************************************//
 .container-admin-dashboard {
+
+
+    //**************Filtre icone**************\\
+    svg.dots {
+        color: $orange-pur;
+        font-weight: 500;
+    }
+
     background: $blanc;
     height: 100%;
 

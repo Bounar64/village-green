@@ -1,14 +1,66 @@
- {# navbar admin #}
-<div class="row border-bottom border-dark navbar-admin">
-    <div class="col-7 d-flex justify-content-center">
-        <form class="d-flex col-7">
-            <input class="form-control mb-3" type="search" placeholder="Rechercher.." aria-label="Search">
-        </form>
+{# navbar admin #}
+    <div class="row border-bottom border-dark navbar-admin">
+        <div class="col-4">
+            <div>
+                <input class="form-control mb-3" type="search" placeholder="Rechercher.." aria-label="Search">
+            </div>
+        </div>
+        <div class="col-2 d-flex align-items-center mb-3 filtre-icon">
+            <a href="#" id="ButtonFilterAdmin">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-three-dots-vertical dots" viewBox="0 0 16 16">
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                </svg>
+            </a>
+        <p class="m-0 text-muted">Plus</p>
+        </div>
+        <div class="col-6 d-flex justify-content-end align-items-center mb-3">
+            <p class="m-0 text-end">
+                Connecté sous 
+                <span class="fw-bold">AdminName</span> 
+            </p>
+        </div>   
     </div>
-    <div class="col d-flex justify-content-end align-items-center">
-        <p class="m-0 text-end">
-            Connecté sous 
-            <span class="fw-bold">AdminName</span> 
-        </p>
+
+    <div class="row mt-3" style="display: none;" id="CardFilterAdmin">
+        <div class="col-2">
+            <div class="card">
+                <div class="card-header">
+                    Trier par catégories
+                </div>
+                <div class="card-body">
+                <form id="filters">  
+                    {% for category in categories %}
+                        <p class="m-0">
+                            <input type="radio" name="categories" id="cat{{ category.id }}" value="{{ category.id}}">
+                            <label for="cat{{ category.id }}">{{ category.label }}</label>
+                        </p>
+                    {% endfor %}    
+                </form>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="card">
+            <div class="card-header">
+                    Trier par sous-catégories
+                </div>
+                <div class="card-body">
+            
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="card">
+                <div class="card-header">
+                    Trier par prix
+                </div>
+                
+            </div>
+        </div>
     </div>
-</div>
+
+
+
+
+

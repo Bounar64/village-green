@@ -47,7 +47,7 @@ class ProductsController extends AbstractController
         $data->page = $request->get('page', 1);
         $data->url_label = $label;
 
-        $request->query->set('label', $label); // on set le label dans une variable de session vi la Request pour pouvoir faire la redirection de la function add() dans PanierController 
+        $request->query->set('label', $label); // on set le label dans une variable de session via la Request pour pouvoir faire la redirection de la function add() dans PanierController 
 
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);

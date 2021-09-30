@@ -16,7 +16,7 @@ class SearchForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('kw', TextType::class, [
+            ->add('keyword', TextType::class, [
                 'label' => false,
                 'required' => false,
                 'attr' => [

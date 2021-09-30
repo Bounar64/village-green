@@ -37,7 +37,8 @@ class ProductController extends AbstractController
     public function ProductList(): Response
     {
         return $this->render('admin/product/list_product.html.twig', [
-            'Listproduct' => $this->productRepository->findAll()
+            'Listproduct' => $this->productRepository->findAll(),
+            'categories' => $this->categoryRepository->findAll()
         ]);
     }
 

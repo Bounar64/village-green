@@ -56,6 +56,14 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
     });
  })
 
+ //_______Afficher au click du boutton filtre la card des filtres dans Admin_____//
+ $(function(){
+
+    $('#ButtonFilterAdmin').on("click", function(){ // ancienne écriture $('#ButtonEdit').click(function(){
+        $('#CardFilterAdmin').slideToggle();
+    });
+ })
+
 
  //_______Afficher au check le boutton de paiement_____//
  $(function(){
@@ -136,7 +144,38 @@ if(slider) {
         }
 
     })
-
 };
+
+// //_______filtre produit catégories Admin_______//
+
+// const FilterForm = document.querySelector('#filters');
+
+// // On boulce sur les inputs
+// document.querySelectorAll('#filters input').forEach(input => {
+//     input.addEventListener("change", () => {
+//         // On intercepte les clics
+//         // On récupère les données du formulaire
+//         const Form = new FormData(FilterForm);
+
+//         // On fabrique la "queryString" pour notre requête ajax
+//         const Params = new URLSearchParams();
+
+//         Form.forEach((value, key) => {
+//             Params.append(key, value);
+//         });
+
+//         //On récupère l'url active
+//         const url = new URL(window.location.href);
+
+//         // On lance la requête ajax
+//         fetch(url.pathname + '?' + Params.toString() + '&ajax=1', {
+//             headers: {
+//                 'x-Requested-With': 'XMLHttpRequest'
+//             }
+//         }).then(response => {
+//             console.log(response)
+//         }).catch(e => alert(e));
+//     })
+// })
 
 

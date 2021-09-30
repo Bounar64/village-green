@@ -36,10 +36,10 @@ class ProductRepository extends ServiceEntityRepository
             ->where('sc.label = :url_label')
             ->setParameter('url_label', $search->url_label);
 
-        if(!empty($search->getKw())) {
+        if(!empty($search->getKeyword())) {
             $query = $query
-                ->andWhere('p.brand LIKE :kw or p.label LIKE :kw') // recherche par marque ou modèle
-                ->setParameter('kw', "%{$search->getKw()}%");
+                ->andWhere('p.brand LIKE :keyword or p.label LIKE :keyword') // recherche par marque ou modèle
+                ->setParameter('keyword', "%{$search->getKeyword()}%");
         }
 
         if(!empty($search->getMin())) {   
