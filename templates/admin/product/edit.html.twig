@@ -4,42 +4,142 @@
 
 {% block body %}
     <header id="background">
-        <div class="container reset-password-request">
-            {# header navigation #} 
-            {{ include('/layouts/header_navigation.html.twig') }}  
+        <div class="container-fluid container-admin-dashboard">
+            <div class="row">
+                {# -----gauche menu----- #}
+                {% include('admin/layouts/menu_admin.html.twig') %}
+                {# ------fermeture gauche menu----- #}
+         
+                {# -----droite corps----- #}
+                <div class="col body mt-3" id="body">
+                    {# navbar #}
+                    {% include('admin/layouts/navbar_admin.html.twig') %}
+                    {# fermeture navbar #}
 
-           {# card modifier le produit #}
-            <div class=" d-flex justify-content-center mt-5">
-                <div class="col-11 card card-reset">
-                    <div class="card-body">
-                        <form method="post">            
-                            <h5 class="card-title text-center">Modifier le produit</h5>
-                            {{ form_start(form) }}
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-6 mt-3">
-                                    <div class="text-start mb-3">
-                                        <label for="subcategory" class="fs-8">Nom du produit</label>
-                                        {{ form_row(form.label) }}
-                                    </div>
-                                </div>
-                                <div class="col-6 mt-3">
-                                    <div class="text-start mb-3">
-                                        <label for="subcategory" class="fs-8">Nom du produit</label>
-                                        {{ form_row(form.shortLabel) }}
-                                    </div>                                 
-                                </div>
-                                {{ form_end(form) }}
-                                <div class="col text-center">
-                                    <button type="submit" class="btn btn-primary w-50">Modifier</button>
-                                </div>  
-                            </div> 
-                        </form>
+                    {# titre du champs + boutton modifier #}
+                    <div class="row mt-5">
+                        <div class="col-10 d-flex">
+                            <div class="col-10">
+                                <h2 class="mb-3">Modifier le produit</h2>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            {# footer #} 
-            {{ include('/layouts/footer.html.twig') }}
-        </div> {# fermeture du container products #}   
+                    <hr>
+
+                    {# bloc champ modification de produit #}
+                    {{ form_start(form) }}
+                    {# bloc haut #}
+                    <div class="col-12">
+                        <div class="row mt-5 d-flex justify-content-evenly">
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Label:</label>
+                                {{ form_row(form.label) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Label court:</label>
+                                {{ form_row(form.shortLabel) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Marque:</label>
+                                {{ form_row(form.brand) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Référence:</label>
+                                {{ form_row(form.reference) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Sélectionner une catégorie:</label>
+                                {{ form_row(form.category) }}
+                            </div>
+                            
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Sélectionner une sous-catégorie:</label>
+                                {{ form_row(form.subCategory) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Couleur:</label>
+                                {{ form_row(form.color) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Matériaux:</label>
+                                {{ form_row(form.material) }}
+                            </div>
+                        </div>                         
+                    </div>
+                    
+                    {# bloc milieu #}
+                     <div class="col-12">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-9">
+                                <label for="label"><span class="red">* </span>Description:</label>
+                                {{ form_row(form.description) }}
+                            </div>    
+                        </div>    
+                    </div>
+
+                    {# bloc bas #}
+                    <div class="col-12">
+                        <div class="row d-flex justify-content-evenly">
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Prix HT:</label>
+                                {{ form_row(form.price) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label">Promotion:</label>
+                                {{ form_row(form.discount) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Stock:</label>
+                                {{ form_row(form.stock) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Stock d'alerte:</label>
+                                {{ form_row(form.stockAlert) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Sélectionner un service:</label>
+                                {{ form_row(form.service) }}
+                            </div>
+
+                            <div class="col-5">
+                                <label for="label"><span class="red">* </span>Modifier l'image:</label>
+                                {{ form_row(form.image_file) }}
+                            </div>
+
+                            <div class="col-5 mt-3">
+                                {{ form_row(form.actived) }}
+                                <small>Désactivé le produit si vous ne voulez pas qu'il apparaisse dans le catalogue</small>
+                            </div>
+
+                            <div class="col-5">
+                                {% for product in product %}
+                                {% if product.id == (app.request.get('id')) %}
+                                    <img src="{{ asset('build/images/' ~ product.image) }}" class="img-fluid rounded-start" alt="{{ product.label }}">
+                                {% endif %}    
+                                {% endfor %}    
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-2 mt-3 mb-5">
+                            <button type="submit" class="btn btn-primary w-100 submit lh-1">Modifier</button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }} 
+                    {# fermeture bloc champ modification de produit #}              
+            </div>         
+        </div>
     </header>
 {% endblock %}

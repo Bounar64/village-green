@@ -233,7 +233,7 @@
         }  
         
         &.delete {
-            background: $rouge;
+            @include buttonColorRouge;
             font-size: 13px;
             height: 30px;
             font-weight: 500;
@@ -355,6 +355,11 @@
 
     button.submit {
         font-size: 18px;
+    }
+
+    span.description {
+        font-size: 12px;
+        font-weight: 500;
     }
 
 }

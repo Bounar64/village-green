@@ -2,13 +2,13 @@
 
 namespace App\Form;
 
-use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Category;
 use App\Entity\SubCategory;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -16,13 +16,37 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        // On récupère nos option configuré plus bas via $options : Pour rendre non obligatoire la modification de l'image
+        if($options['image_file_no_required']) {
+            $builder
+             // n'existe que dans le form 
+             ->add('image_file', FileType::class, [
+                'mapped' => false,
+                'label' => false,
+                'multiple' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        "maxSize" => "5M",
+                        "mimeTypes" => [
+                            "image/png",
+                            "image/jpg",
+                            "image/jpeg"
+                        ],
+                        "mimeTypesMessage" => "Veuillez envoyer une image au format png, jpg ou jpeg, de 5 Mo maximum"
+                    ])
+                ]
+            ]);
+        }
+
         $builder
             ->add('label', TextType::class, [
                 'label' => false,
@@ -60,13 +84,13 @@ class ProductType extends AbstractType
                         'message' => 'Ce champ est obligatoire.',
                     ]),
                     new Regex([
-                        'pattern' => '/^[a-zA-Z0-9-\'"áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._ ()\/\s]+$/',
+                        'pattern' => '/^[a-zA-Z0-9-\'":áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._ ()\/\s]+$/',
                         'match' => true,
                         'message' => 'Saisie invalide.'
                     ]),
                     new Length( [
                         'min' => 5,
-                        'max'=> 1000,
+                        'max'=> 5000,
                         'minMessage' => 'Veuillez saisir au minimum {{ limit }} caractères',
                         'maxMessage' => 'Veuillez saisir au maximum {{ limit }} caractères'
                     ])
@@ -139,12 +163,24 @@ class ProductType extends AbstractType
                     ])
                 ]
             ])
-            ->add('image', FileType::class, [
+            // n'existe que dans le form 
+            ->add('image_file', FileType::class, [
+                'mapped' => false,
                 'label' => false,
+                'multiple' => false,
                 'required' => false,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Ce champ est obligatoire.',
+                    // new NotBlank([
+                    //     'message' => 'Ce champ est obligatoire.',
+                    // ]),
+                    new File([
+                        "maxSize" => "5M",
+                        "mimeTypes" => [
+                            "image/png",
+                            "image/jpg",
+                            "image/jpeg"
+                        ],
+                        "mimeTypesMessage" => "Veuillez envoyer une image au format png, jpg ou jpeg, de 5 Mo maximum"
                     ])
                 ]
             ])
@@ -230,9 +266,7 @@ class ProductType extends AbstractType
                         'message' => 'Ce champ est obligatoire.',
                     ]),
                 ]
-            ])
-            ->add('createdAt', HiddenType::class)
-            ->add('updatedAt', HiddenType::class)   
+            ])   
         ;
     }
 
@@ -240,6 +274,7 @@ class ProductType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Product::class,
+            'image_file_no_required' => false
         ]);
     }
 }

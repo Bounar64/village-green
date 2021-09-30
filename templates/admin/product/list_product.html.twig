@@ -9,11 +9,22 @@
                 {# -----gauche menu----- #}
                 {% include('admin/layouts/menu_admin.html.twig') %}
                 {# ------fermeture gauche menu----- #}
-         
+
                 {# -----droite corps----- #}
-                <div class="col body mt-3" id="body">
+                <div class="col body" id="body"> 
+
+                 {# message flash ajout produit avec succès #}
+                    {% for message in app.flashes('add_success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %} 
+
                     {# navbar #}
-                    {% include('admin/layouts/navbar_admin.html.twig') %}
+                    <div class="col mt-3">
+                        {% include('admin/layouts/navbar_admin.html.twig') %}
+                    </div>
+                    
                     {# fermeture navbar #}
 
                         {# titre du champs + boutton modifier #}
@@ -24,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="col d-flex justify-content-end align-items-center">
-                                <a href="{{ path('app_admin_product_add')}}">
+                                <a href="{{ path('app_admin_product_add') }}">
                                     <button type="button" class="btn btn-primary mb-3">Ajouter un produit</button>
                                 </a> 
                             </div>
@@ -53,7 +64,7 @@
                                 <tbody>
                                 {% for product in Listproduct %}
                                     <tr>
-                                        <td><img class="product" src="{{ asset(product.image) }}"></td>
+                                        <td><img class="product" src="{{ asset('build/images/' ~ product.image) }}"></td>
                                         <td class="align-middle text-start">{{ (product.id) }}</td>
                                         <td class="align-middle text-start"><span class="important">{{ (product.reference) }}</span></td>
                                         <td class="align-middle text-start">{{ (product.brand) }}</td>
@@ -76,8 +87,8 @@
                                             <span>{{ (product.stock) }}</span>
                                         {% endif %}
                                         </td>
-                                        <td class="align-middle">{{ (product.createdAt|date("m/d/Y")) }}</td>
-                                        <td class="align-middle">{{ (product.updatedAt|date("m/d/Y")) }}</td>
+                                        <td class="align-middle">{{ (product.createdAt|date("d/m/Y")) }}</td>
+                                        <td class="align-middle">{{ (product.updatedAt|date("d/m/Y")) }}</td>
                                         {% if product.actived == 1 %}
                                         <td class="align-middle">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill circle-green" viewBox="0 0 16 16">
@@ -96,7 +107,10 @@
                                                 <button class="btn btn-primary w-100 delete mb-3">SUPPRIMER</button>
                                             </div>
                                             <div class="col">
+                                            <a href="{{ path('app_admin_product_edit', {id: product.id}) }}">
                                                 <button class="btn btn-primary w-100 edit">MODIFIER</button>
+                                            </a>
+                                                
                                             </div>
                                         </td>
                                     </tr>

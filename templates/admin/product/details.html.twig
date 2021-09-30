@@ -11,9 +11,19 @@
                 {# ------fermeture gauche menu----- #}
          
                 {# -----droite corps----- #}
-                <div class="col body mt-3" id="body">
+                <div class="col body" id="body">
+                    {# message flash ajoutmodifié avec succès #}
+                    {% for message in app.flashes('edit_success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
                     {# navbar #}
-                    {% include('admin/layouts/navbar_admin.html.twig') %}
+                    <div class="col mt-3">
+                        {% include('admin/layouts/navbar_admin.html.twig') %}
+                    </div>
+                    
                     {# fermeture navbar #}
 
                     <!-- Main -->
@@ -27,12 +37,18 @@
                                     <h2 class="m-0">Détails du produit <span class="important title-product">{{ product.brand  ~ " " ~ product.label }}</span></h2>
                                 </div>
                             </div>
-                            <div class="col d-flex justify-content-end align-items-center">
+                            <div class="col-1 d-flex justify-content-end align-items-center">
+                                <a href="{{ path('app_admin_product_edit', {id: product.id}) }}">
+                                    <button type="button" class="btn btn-primary mb-3 w-100 edit px-4">Modifier</button>
+                                </a> 
+                            </div>
+                            <div class="col-1 d-flex justify-content-end align-items-center">
                                 <a href="#">
-                                    <button type="button" class="btn btn-primary mb-3">Modifier le produit</button>
+                                    <button type="button" class="btn btn-primary mb-3 w-100 delete">Supprimer</button>
                                 </a> 
                             </div>
                         </div>
+                        
                         <hr>
 
                         {# message d'erreur #}
@@ -50,7 +66,7 @@
                                 <div class="row">
                                     {# image produit #}
                                     <div class="col-3 border-end">
-                                        <img src="{{ asset(product.image) }}" class="img-fluid rounded-start" alt="{{ product.label }}">
+                                        <img src="{{ asset('build/images/' ~ product.image) }}" class="img-fluid rounded-start" alt="{{ product.label }}">
                                     </div>
                                     {# bloc details gauche #}
                                     <div class="col-9 d-flex p-0">
@@ -240,7 +256,7 @@
                                         <p>Description:</p>
                                     </div>
                                     <div class="col-12">
-                                        <p><span>{{ product.description }}</span></p>
+                                        <p><span class="description">{{ product.description|nl2br }}</span></p>
                                     </div>    
                                 </div>
 

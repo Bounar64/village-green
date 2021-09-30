@@ -95,7 +95,15 @@
 
 /************************** Apparence couleur du boutton **************************/
 @mixin buttonColor {
+    background: rgba(222,104,0,1);
     background: linear-gradient(0deg, $orange 0%, rgba(164,77,0,1) 20%, rgba(222,104,0,1) 80%);
+    border: none; 
+    box-shadow: none;
+}
+
+@mixin buttonColorRouge {
+    background: rgb(171,0,0);
+    background: linear-gradient(0deg, rgba(171,0,0,1) 0%, rgba(195,0,0,1) 20%, rgba(218,0,0,1) 50%, rgba(195,0,0,1) 80%, rgba(171,0,0,1) 100%);
     border: none; 
     box-shadow: none;
 }
