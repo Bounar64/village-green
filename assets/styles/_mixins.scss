@@ -3,9 +3,8 @@
 
 @mixin apparenceContainer {
     max-width: 1200px;
-    min-height: 1850px;
+    min-height: 100vh;
     background-color: $gris-back;
-    height: 100vh;
     box-shadow: -7px 5px 7px rgba(0, 0, 0, 0.5);
     padding: 0;
 }

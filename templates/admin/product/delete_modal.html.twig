@@ -5,16 +5,19 @@
             <div class="modal-body">
                 <div class="col text-center">
                     <p class="conf-delete">Êtes-vous sûr de vouloir supprimer le produit {{ product.brand }} {{ product.label }}</p>
-                    <p class="danger">Attention cette action est irréversible !</p>
+                    <img src="{{ asset('build/images/' ~ product.image) }}" alt="{{ product.label }}" width="400" height="auto">
+                    <p class="danger mt-3">Attention cette action est irréversible !</p>
                  </div>
             </div>
             <div class="modal-footer row d-flex justify-content-between">
                 <div class="col-5 text-center">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ANNULER</button>
+                <a href="#">
+                    <button type="button" class="btn btn-secondary secondary" data-bs-dismiss="modal">ANNULER</button>
+                </a>   
                 </div>
                 <div class="col-5 text-center">
                     <a href="{{ path('app_admin_product_delete', {id: product.id}) }}">
-                        <button type="button" class="btn btn-danger">SUPPRIMER</button>
+                        <button type="button" class="btn btn-danger danger">SUPPRIMER</button>
                     </a>
                 </div>
             </div>

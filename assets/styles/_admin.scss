@@ -116,7 +116,6 @@
     }     
     
     //______modal______//
-
     .modal-content {
         background: rgb(180, 0, 0);
 
@@ -318,7 +317,7 @@
     }
 
     //***********************************************************************//
-    //********************** PAGE AJOUTER UN PRODUIT ************************//
+    //***************** PAGE AJOUTER ET EDITER UN PRODUIT *******************//
     //***********************************************************************//
 
     label {
@@ -357,9 +356,42 @@
         font-size: 18px;
     }
 
+    button.secondary {
+        background: $gray-600;
+    }
+
+    button.danger {
+        background: $rouge;
+    }
+
+    button.red {
+        @include buttonColorRouge;
+    }
+
     span.description {
         font-size: 12px;
         font-weight: 500;
+    }
+
+    img.edit {
+        width: 300px;
+        height: auto;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+
+    //______modal______//
+    .modal-content {
+        background: rgb(180, 0, 0);
+
+            p {
+                color: $blanc;
+
+                    &.conf-delete {
+                        font-size: 17px;
+                        font-weight: 600;
+                    }
+                }
+
     }
 
 }

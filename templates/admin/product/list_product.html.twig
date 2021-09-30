@@ -104,7 +104,9 @@
                                         {% endif %}
                                         <td class="align-middle">
                                             <div class="col">
-                                                <button class="btn btn-primary w-100 delete mb-3">SUPPRIMER</button>
+                                                <button type="button" class="btn btn-primary w-100 delete mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ product.id }}">SUPPRIMER</button>
+                                                {# le modal de confirmation de suppression #}
+                                                {% include('admin/product/delete_modal.html.twig') %}
                                             </div>
                                             <div class="col">
                                             <a href="{{ path('app_admin_product_edit', {id: product.id}) }}">

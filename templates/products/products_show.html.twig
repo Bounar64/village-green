@@ -75,7 +75,7 @@
                                     {% else %}
                                         <p class="text-end discount back">&emsp;</p>
                                     {% endif %}        
-                                    <img src="{{ asset(products.image) }}" alt="{{ products.label }}" class="card-img-top mb-3">
+                                    <img src="{{ asset('build/images/' ~ products.image) }}" alt="{{ products.label }}" class="card-img-top mb-3">
                                     <hr>
                                     <div class="card-body">
                                         <h2 class="text-brand">{{ products.brand }}</h2>

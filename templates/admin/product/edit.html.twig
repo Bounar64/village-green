@@ -122,10 +122,10 @@
                                 <small>Désactivé le produit si vous ne voulez pas qu'il apparaisse dans le catalogue</small>
                             </div>
 
-                            <div class="col-5">
-                                {% for product in product %}
+                            <div class="col-5 text-end">
+                                {% for product in products %}
                                 {% if product.id == (app.request.get('id')) %}
-                                    <img src="{{ asset('build/images/' ~ product.image) }}" class="img-fluid rounded-start" alt="{{ product.label }}">
+                                    <img src="{{ asset('build/images/' ~ product.image) }}" class="img-fluid rounded edit" alt="{{ product.label }}">
                                 {% endif %}    
                                 {% endfor %}    
                             </div>

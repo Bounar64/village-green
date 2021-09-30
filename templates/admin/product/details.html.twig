@@ -39,12 +39,14 @@
                             </div>
                             <div class="col-1 d-flex justify-content-end align-items-center">
                                 <a href="{{ path('app_admin_product_edit', {id: product.id}) }}">
-                                    <button type="button" class="btn btn-primary mb-3 w-100 edit px-4">Modifier</button>
+                                    <button type="button" class="btn btn-primary mb-3 w-100 px-4">Modifier</button>
                                 </a> 
                             </div>
                             <div class="col-1 d-flex justify-content-end align-items-center">
                                 <a href="#">
-                                    <button type="button" class="btn btn-primary mb-3 w-100 delete">Supprimer</button>
+                                    <button type="button" class="btn btn-primary mb-3 w-100 red" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ product.id }}">Supprimer</button>
+                                    {# le modal de confirmation de suppression #}
+                                    {% include('admin/product/delete_modal.html.twig') %}
                                 </a> 
                             </div>
                         </div>

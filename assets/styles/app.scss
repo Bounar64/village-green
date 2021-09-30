@@ -60,42 +60,20 @@ body {
         @include apparenceContainer;
 
         &.subcategory {
-            min-height: 4550px;
+            height: 4550px;
         }
 
         &.products-show {
-            min-height: 1530px;
+            height: 1530px;
             @include apparenceFilAriane;
         }
 
         &.products-details {
-            min-height: 960px;
             @include apparenceFilAriane;
         }
 
-        &.registration-user {
-            min-height: 2000px;
-        }
-
         &.registration-pro {
-            min-height: 2000px;
             background-color: #e4ddcc;
-        }
-
-        &.account {
-            min-height: 1080px;
-        }
-
-        &.reset-password {
-            min-height: 100px;
-        }
-
-        &.panier {
-            min-height: 1800px;
-        }
-
-        &.admin {
-            min-height: 1500px;
         }
     }  
     

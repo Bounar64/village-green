@@ -81,9 +81,9 @@ class ProductController extends AbstractController
     /**
      * @Route("/edit/{id}", name="edit")
      */
-    public function editProduct(Product $product, Request $request, EntityManagerInterface $manager)
+    public function editProduct(Product $product, ProductRepository $productRepository, Request $request, EntityManagerInterface $manager)
     {
-        $id = $product->getId();
+        $products = $productRepository->findAll();
         $form = $this->createForm(ProductType::class, $product, [
             'image_file_no_required' => true // on récupère l'option configuré dans ProductType pour rendre la modification d'image non obligatoire
         ]);
@@ -91,15 +91,29 @@ class ProductController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
 
+            $file = $form->get('image_file')->getData(); // On récupère les données de l'image téléchargé
+            // fileName = md5(uniqid()).'.'.$file->guessExtension() // pour sécuriser le nom du fichier 
+            $fileName = $file->getClientOriginalName(); // pour récupérer le nom original de l'image
+            // Move the file to the directory where brochures are stored
+            try {
+                $file->move(
+                    $this->getParameter('images_directory'), // le dossier d'enregistrement
+                    $fileName // le fichier à stocker ('nom')
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+
+            $product->setImage($fileName);
             $manager->persist($product);
             $manager->flush(); 
 
             $this->addFlash('edit_success', 'Produit modifié !');
-            return $this->redirectToRoute('app_admin_product_details', ['id' => $id]);
+            return $this->redirectToRoute('app_admin_product_details', ['id' => $product->getId()]); // on passe en paramètre l'id du produit 
         }
 
         return $this->render('admin/product/edit.html.twig', [
-            'product' => $product,
+            'products' => $products,
             'form' => $form->createView()
         ]);
     }
