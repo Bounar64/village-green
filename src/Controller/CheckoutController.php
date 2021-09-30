@@ -46,14 +46,18 @@ class CheckoutController extends AbstractController
         $shipping = $request->request->get('checkShipping'); // équivaut à $_POST["checkShipping"]
         $valider = $request->request->get('valider'); // équivaut à $_POST["valider"]
         
-        
-        if(isset($valider) && !empty($valider)) {
+        $error = false;
+        if(isset($valider) && !empty($shipping)) {
 
             $session->set('shippingType', $shipping);
-
-            return $this->redirectToRoute('app_checkout_payment');  
+            return $this->redirectToRoute('app_checkout_payment');   
+        
+        }elseif(isset($valider) && empty($shipping)) {
+            
+            $error = true;
         }
 
+        // validation pour la modification de l'addresse de l'utilisateur
         if($form->isSubmitted() && $form->isValid()) {
             
             $manager->flush();
@@ -68,6 +72,7 @@ class CheckoutController extends AbstractController
             'categories' => $categories,
             'subcategory' => $subcategory,
             'form' => $form->createView(),
+            'error' => $error
         ]);
     }
 
@@ -88,10 +93,9 @@ class CheckoutController extends AbstractController
 
         $payment = $request->request->get('checkPayment'); // équivaut à $_POST["checkPayment"]
         $valider = $request->request->get('buttonPayment'); // équivaut à $_POST["valider"]
-
-        if(isset($valider) && !empty($valider)) {
+        
+        if(isset($valider)) {
             
-            dd($payment);
             $session->set('paymentType', $payment);
 
             return $this->redirectToRoute('app_checkout_payment');  
@@ -103,7 +107,7 @@ class CheckoutController extends AbstractController
             'products' => $products,
             'items' => $panierData,
             'total' => $total,
-            'shipping' => $ShippingType         
+            'shipping' => $ShippingType,
         ]);
     }
 

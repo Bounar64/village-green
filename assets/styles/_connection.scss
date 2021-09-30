@@ -95,8 +95,12 @@
 
         &.small-text {
             font-size: 11px;
-        }
 
+                &.error {
+                    font-weight: 500;
+                    color: $rouge;
+                }
+        }
    }
 
    .button-edit {

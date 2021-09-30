@@ -46,8 +46,8 @@
                     {# choix livraison #} 
                     <div class="col-5">
                         <p class="ship-title fw-bold">CHOISISSEZ VOTRE LIVRAISON</p>
-                        <form name="shipping" method="post" action="#">
-                        <div class="col-12 mb-3">
+                        <form name="shipping" method="post">
+                        <div class="col-12 mb-2">
                             {# card choix livraison #}  
                             <div class="card">
                                 <div class="card-body">
@@ -108,22 +108,23 @@
                                                 <input type="radio" name="checkShipping" value="Volumineux">
                                             </div>  
                                         </div> 
+                                    </div>  
+                                    {# bloc erreur choix de livraison #}
+                                    {% if error == true %}
+                                    <div class="col-12 text-center">    
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="small-text error m-0">Veuillez choisir un mode de livraison</p>
+                                            </div>
+                                        </div>   
                                     </div>
+                                    {% endif %}
+                                    {# bloc erreur choix de livraison #}
                                 </div>
                             </div>    
                         </div>
 
-                        {# bloc erreur choix de livraison #}
-                        {# {% if error == true %}
-                        <div class="col-12 mt-4 mb-4">    
-                            <div class="row">
-                                <div class="col">
-                                    <p class="error">Veuillez choisir un mode de livraison</p>
-                                </div>
-                            </div>   
-                        </div>
-                        {% endif %} #}
-                        {# bloc erreur choix de livraison #}
+                        
                         
                         {# bloc bouton continuer #}
                         <div class="col-12 mt-4 mb-4">    

@@ -65,7 +65,7 @@
                                         <hr>
                                         {# choix du mode de paiement #}
                                         <p class="ship-title fw-bold mt-3">CHOISISSEZ VOTRE MODE DE PAIEMENT SÉCURISÉ</p>
-                                        <form name="payment" method="post" action="#"> {# formulaire de soumission choix paiement #}
+                                        <form name="payment" method="post"> {# formulaire de soumission choix paiement #}
                                          <div class="col-12 mb-3">
                                            <div class="card">
                                                 <div class="card-body">
@@ -218,7 +218,7 @@
                                         <div class="row mb-3">
                                             {# info du produit #}
                                             <div class="col-2">
-                                                <img src="{{ asset(items.product.image) }}" alt="{{ asset(items.product.image) }}">
+                                                <img src="{{ asset('build/images/' ~ items.product.image) }}" alt="{{ asset(items.product.image) }}">
                                             </div>
                                             <div class="col-8 block-info">
                                             {# marque label du produit #}
