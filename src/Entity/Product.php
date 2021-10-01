@@ -10,7 +10,7 @@ use App\Repository\ProductRepository;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
- * @ORM\Table(name="products")
+ * @ORM\Table(name="products", indexes={@ORM\Index(columns={"label", "short_label", "brand", "reference"}, flags={"fulltext"})}) // création d'un index fulltext pour la recherche
  * @ORM\HasLifecycleCallbacks
  */
 class Product

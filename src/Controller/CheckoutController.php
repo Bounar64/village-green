@@ -170,7 +170,7 @@ class CheckoutController extends AbstractController
         $products = $this->productRepository->findAll();   
         $order = $this->productRepository->findBy(['user' == $this->getUser()], [], null, null);   
 
-        return $this->render('checkout/order.html.twig', [
+        return $this->render('checkout/order_details.check.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
             'products' => $products,
