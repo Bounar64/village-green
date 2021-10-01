@@ -36,7 +36,7 @@ class Order
     private $dateSent;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=30)
      */
     private $shipping;
 
@@ -107,12 +107,12 @@ class Order
         return $this;
     }
 
-    public function getShipping(): ?bool
+    public function getShipping(): ?string
     {
         return $this->shipping;
     }
 
-    public function setShipping(?bool $shipping): self
+    public function setShipping(?string $shipping): self
     {
         $this->shipping = $shipping;
 

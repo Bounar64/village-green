@@ -3,11 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Order;
-use App\Entity\OrderDetails;
+use App\Repository\StatusRepository;
 use App\Form\EditShippingAddressType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -98,10 +97,9 @@ class CheckoutController extends AbstractController
         $payment = $request->request->get('checkPayment'); // équivaut à $_POST["checkPayment"]
         $valider = $request->request->get('buttonPayment'); // équivaut à $_POST["valider"]
         
-        if(isset($valider)) {
-            
+        if(isset($valider) && !empty($payment)) {
+        
             $session->set('paymentType', $payment);
-
             return $this->redirectToRoute('app_checkout_validation');
         }
         
@@ -119,41 +117,36 @@ class CheckoutController extends AbstractController
      * 
      * @Route("/checkout_validation", name="app_checkout_validation")
      */
-    public function validation(Request $request, SessionInterface $session): Response
+    public function validation(SessionInterface $session, EntityManagerInterface $manager): response
     {
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
         $products = $this->productRepository->findAll();   
-        $status = $this->statusRepository->findAll();   
+        $status = $this->statusRepository->findBy(['id' => 1], [], null, null);   
 
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
         $total = $session->get('total'); // on récupère le prix total
         $shippingType = $session->get('shippingType'); // on récupère le type de livraison
-        $paymentType = $session->get('checkPayment'); // on récupère le type de paiement 
+        $paymentType = $session->get('paymentType'); // on récupère le type de paiement 
+        $reference = ('#' . rand(1000, 9999)); // création d'un numéro de commande (référence) 
+        $statusType = $status[0]; // on récupère l'objet de type app\entity\status, par défaut ce sera toujours cette valeur "en cours de traitement" id="1"
         
-
-        dd($status);
+        // Création de la commande
         $order = new Order();
-        $order->setReference( '#' . rand(1000, 9999));
-        $order->setTypePayment($session->get('paymentType'));
-        $order->setShipping($session->get('shippingType'));
-        $order->setTotal($session->get('total'));
+        $order->setReference($reference);
+        $order->setTypePayment($paymentType);
+        $order->setShipping($shippingType);
+        $order->setTotal($total);
         $order->setDatePayment(new \DateTimeImmutable);
-        $order->setDateSent(new \DateTimeImmutable);
-        $order->setUser($this->getUser()->getId());
-        $order->setUser($this->getUser()->getId());
-        $order->
+        $order->setUser($this->getUser());
+        $order->setStatus($statusType);
+        //Création du détail de la commande
 
-        $order->setShipping('1');
-        $orderDetails = new OrderDetails();
+        
+        $manager->persist($order);
+        $manager->flush();
 
-        $formCheckout = $this->createForm(CheckoutType::class, $order);
-        $formOrderDetails = $this->createForm(OrderDetailsType::class, $orderDetails);
-
-        $formCheckout->handleRequest($request);
-        $formOrderDetails->handleRequest($request);
-
-        //header( "Refresh:8; url=https://127.0.0.1:8000/", true, 303); // pour un effet de redirection avec un délai
+        header( "Refresh:8; url=https://127.0.0.1:8000/", true, 303); // pour un effet de redirection avec un délai
 
         return $this->render('checkout/validation.html.twig', [
             'categories' => $categories,
@@ -163,6 +156,25 @@ class CheckoutController extends AbstractController
             'total' => $total,
             'shipping' => $shippingType,
             'payment' => $paymentType,
+        ]);
+    }
+
+    /**
+     * 
+     * @Route("/checkout_validation", name="app_checkout_order_details")
+     */
+    public function OrderDetailsCheck(SessionInterface $session, EntityManagerInterface $manager): response
+    {
+        $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
+        $subcategory = $this->subcategoryRepository->findAll('category');
+        $products = $this->productRepository->findAll();   
+        $order = $this->productRepository->findBy(['user' == $this->getUser()], [], null, null);   
+
+        return $this->render('checkout/order.html.twig', [
+            'categories' => $categories,
+            'subcategory' => $subcategory,
+            'products' => $products,
+            'order' => $order
         ]);
     }
 }
