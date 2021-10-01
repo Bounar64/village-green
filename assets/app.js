@@ -18,6 +18,8 @@ import './bootstrap';
 import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 
+import Typed from 'typed.js';
+
 // ************************************************************************************************************************************************************************** //
 
 //_____Swiper de sous-catégorie_____//
@@ -115,7 +117,20 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
     });
  })
 
-
+ //________Ajout du typing placeholder recherche admin_________//
+$(function() {
+    
+    // typing animation script
+    var typed = new Typed('#search', {
+        strings: ['Rechercher par Label', 'Rechercher par Label court', 'Rechercher par Marque', 'Rechercher par Référence'],
+        typeSpeed: 50,
+        backSpeed: 20,
+        attr: 'placeholder',
+        //fadeOut: true,
+        bindInputFocusEvents: true,
+        loop: true
+      });
+})
  
 
 //_____Slider de prix min et max_____//
@@ -146,36 +161,5 @@ if(slider) {
     })
 };
 
-// //_______filtre produit catégories Admin_______//
-
-// const FilterForm = document.querySelector('#filters');
-
-// // On boulce sur les inputs
-// document.querySelectorAll('#filters input').forEach(input => {
-//     input.addEventListener("change", () => {
-//         // On intercepte les clics
-//         // On récupère les données du formulaire
-//         const Form = new FormData(FilterForm);
-
-//         // On fabrique la "queryString" pour notre requête ajax
-//         const Params = new URLSearchParams();
-
-//         Form.forEach((value, key) => {
-//             Params.append(key, value);
-//         });
-
-//         //On récupère l'url active
-//         const url = new URL(window.location.href);
-
-//         // On lance la requête ajax
-//         fetch(url.pathname + '?' + Params.toString() + '&ajax=1', {
-//             headers: {
-//                 'x-Requested-With': 'XMLHttpRequest'
-//             }
-//         }).then(response => {
-//             console.log(response)
-//         }).catch(e => alert(e));
-//     })
-// })
 
 
