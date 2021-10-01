@@ -7,6 +7,7 @@ use App\Entity\OrderDetails;
 use App\Form\EditShippingAddressType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +21,15 @@ class CheckoutController extends AbstractController
     private $categoryRepository;
     private $subcategoryRepository;
     private $productRepository;
+    private $statusRepository;
 
-    public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository, ProductRepository $productRepository)
+    public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository,
+                                 ProductRepository $productRepository, StatusRepository $statusRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->subcategoryRepository = $subcategoryRepository;
         $this->productRepository = $productRepository;
+        $this->statusRepository = $statusRepository;
     }
     
     /**
@@ -45,8 +49,8 @@ class CheckoutController extends AbstractController
 
         $shipping = $request->request->get('checkShipping'); // équivaut à $_POST["checkShipping"]
         $valider = $request->request->get('valider'); // équivaut à $_POST["valider"]
-        
-        $error = false;
+        $error = false; // error vaut false par défaut 
+
         if(isset($valider) && !empty($shipping)) {
 
             $session->set('shippingType', $shipping);
@@ -54,7 +58,7 @@ class CheckoutController extends AbstractController
         
         }elseif(isset($valider) && empty($shipping)) {
             
-            $error = true;
+            $error = true; // s'il l'utilisateur ne coche pas un choix de livraison une erreur lui sera affiché dans twig via error
         }
 
         // validation pour la modification de l'addresse de l'utilisateur
@@ -89,7 +93,7 @@ class CheckoutController extends AbstractController
  
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
         $total = $session->get('total'); // on récupère le prix total
-        $ShippingType = $session->get('shippingType'); // on récupère le type de livraison
+        $shippingType = $session->get('shippingType'); // on récupère le type de livraison
 
         $payment = $request->request->get('checkPayment'); // équivaut à $_POST["checkPayment"]
         $valider = $request->request->get('buttonPayment'); // équivaut à $_POST["valider"]
@@ -98,7 +102,7 @@ class CheckoutController extends AbstractController
             
             $session->set('paymentType', $payment);
 
-            return $this->redirectToRoute('app_checkout_payment');  
+            return $this->redirectToRoute('app_checkout_validation');
         }
         
         return $this->render('checkout/payment.html.twig', [
@@ -107,7 +111,7 @@ class CheckoutController extends AbstractController
             'products' => $products,
             'items' => $panierData,
             'total' => $total,
-            'shipping' => $ShippingType,
+            'shipping' => $shippingType,
         ]);
     }
 
@@ -117,25 +121,48 @@ class CheckoutController extends AbstractController
      */
     public function validation(Request $request, SessionInterface $session): Response
     {
-        // $user = $this->getUser();
-        // dd($user);
-        // $order = new Order();
-        // $order->setReference( '#' . rand(1000, 9999));
-        // $order->setTypePayment($session->get('paymentType'));
-        // $order->setShipping($session->get('shippingType'));
-        // $order->setTotal($session->get('total'));
-        // $order->setDatePayment(new \DateTimeImmutable);
-        // $order->
+        $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
+        $subcategory = $this->subcategoryRepository->findAll('category');
+        $products = $this->productRepository->findAll();   
+        $status = $this->statusRepository->findAll();   
 
-        // $order->setShipping('1');
-        // $orderDetails = new OrderDetails();
+        $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
+        $total = $session->get('total'); // on récupère le prix total
+        $shippingType = $session->get('shippingType'); // on récupère le type de livraison
+        $paymentType = $session->get('checkPayment'); // on récupère le type de paiement 
+        
 
-        // $formCheckout = $this->createForm(CheckoutType::class, $order);
-        // $formOrderDetails = $this->createForm(OrderDetailsType::class, $orderDetails);
+        dd($status);
+        $order = new Order();
+        $order->setReference( '#' . rand(1000, 9999));
+        $order->setTypePayment($session->get('paymentType'));
+        $order->setShipping($session->get('shippingType'));
+        $order->setTotal($session->get('total'));
+        $order->setDatePayment(new \DateTimeImmutable);
+        $order->setDateSent(new \DateTimeImmutable);
+        $order->setUser($this->getUser()->getId());
+        $order->setUser($this->getUser()->getId());
+        $order->
 
-        // $formCheckout->handleRequest($request);
-        // $formOrderDetails->handleRequest($request);
+        $order->setShipping('1');
+        $orderDetails = new OrderDetails();
 
-        return $this->render('checkout/validation.html.twig');
+        $formCheckout = $this->createForm(CheckoutType::class, $order);
+        $formOrderDetails = $this->createForm(OrderDetailsType::class, $orderDetails);
+
+        $formCheckout->handleRequest($request);
+        $formOrderDetails->handleRequest($request);
+
+        //header( "Refresh:8; url=https://127.0.0.1:8000/", true, 303); // pour un effet de redirection avec un délai
+
+        return $this->render('checkout/validation.html.twig', [
+            'categories' => $categories,
+            'subcategory' => $subcategory,
+            'products' => $products,
+            'items' => $panierData,
+            'total' => $total,
+            'shipping' => $shippingType,
+            'payment' => $paymentType,
+        ]);
     }
 }

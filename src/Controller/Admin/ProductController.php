@@ -75,7 +75,9 @@ class ProductController extends AbstractController
         }
 
         return $this->render('admin/product/add.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'categories' => $this->categoryRepository->findAll()
+
         ]);
     }
 
@@ -115,7 +117,9 @@ class ProductController extends AbstractController
 
         return $this->render('admin/product/edit.html.twig', [
             'products' => $products,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'categories' => $this->categoryRepository->findAll()
+
         ]);
     }
 
@@ -136,8 +140,10 @@ class ProductController extends AbstractController
     public function detailsProduct(): Response 
     {           
         $product = $this->productRepository->findAll();
+        $categories = $this->categoryRepository->findAll();
 
-        return $this->render('admin/product/details.html.twig', compact('product'));
+
+        return $this->render('admin/product/details.html.twig', compact('product', 'categories'));
     }
 
 

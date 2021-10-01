@@ -31,7 +31,7 @@
                 <form id="filters">  
                     {% for category in categories %}
                         <p class="m-0">
-                            <input type="radio" name="categories" id="cat{{ category.id }}" value="{{ category.id}}">
+                            <input type="radio" name="categories" id="cat{{ category.id }}" value="{{ category.id }}">
                             <label for="cat{{ category.id }}">{{ category.label }}</label>
                         </p>
                     {% endfor %}    
