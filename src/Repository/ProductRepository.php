@@ -89,5 +89,23 @@ class ProductRepository extends ServiceEntityRepository
             ->select('count(p.id)')
             ->getQuery()
             ->getSingleScalarResult();
-    }   
+    } 
+
+    /**
+     * Affiche les produits en fonction des mots clés (admin)
+     *
+     * @return void
+     */
+    public function searchFulltext($key)
+    {
+        $query = $this
+            ->createQueryBuilder('p');
+            if($key != null) {
+                $query = $query
+                    ->where('MATCH_AGAINST(p.label, p.shortLabel, p.brand, p.reference) AGAINST (:key boolean) > 0') // boolean > 0 = l'extension de doctrine existe dans la documentation officiel pour vérifier si on a une réponse à notre requête
+                        ->setParameter('key', '*'.$key.'*'); // ajout des * pour une recherche approximative comme pour %
+                }
+
+                return $query->getQuery()->getResult();
+    }
 }

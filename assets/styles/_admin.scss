@@ -148,6 +148,11 @@
 //***********************************************************************//
 .container-admin-dashboard {
 
+    #select1, #select2 {
+        padding-top: 4px;
+        font-size: 14px;
+        height: 30px;
+    }
 
     //**************Filtre icone**************\\
     svg.dots {

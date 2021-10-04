@@ -3,10 +3,9 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 
 class SearchFulltextType extends AbstractType
 {
@@ -17,11 +16,9 @@ class SearchFulltextType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Rechercher par..'
+                    'class' => 'form-control mb-3',
                 ]
             ])
-            ->add('Rechercher', SubmitType::class)
         ;
     }
 

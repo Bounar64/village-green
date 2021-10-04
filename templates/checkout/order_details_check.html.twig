@@ -35,273 +35,148 @@
                         </div>
                         {# step Paiement #}
                         <div class="col-2">
-                            <p class="text-progress color text-center m-0">3 Paiement</p>
+                            <p class="text-progress color text-center m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
+                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                    <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z"/>
+                                </svg>
+                                Paiement
+                            </p>
                         </div>
                         {# step Validation #}
                         <div class="col-2">
-                            <p class="text-progress text-end m-0">4 Validation</p>
+                            <p class="text-progress color text-end m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
+                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                    <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z"/>
+                                </svg>
+                                Validation
+                            </p>
                         </div>    
                     </div>    
                 </div>
             </div>
             {# fermeture progress-bar #}
   
-            <div class="row d-flex justify-content-center">
-                <div class="col-11 d-flex justify-content-between mt-5">
-                    {# choix livraison #} 
-                    <div class="col-5">
-                        <p class="ship-title fw-bold">UTILISEZ UN CODE</p>
-                        <div class="col-12 mb-3">
-                            {# card de paiement #}
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        {# entre un code de promotion #}
-                                        <div class="col-12 mb-3">
-                                            <p class="small fw-bold">Entrez un code de réduction</p>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                         {# fermeture entre un code de promotion #}
-                                        <hr>
-                                        {# choix du mode de paiement #}
-                                        <p class="ship-title fw-bold mt-3">CHOISISSEZ VOTRE MODE DE PAIEMENT SÉCURISÉ</p>
-                                        <form name="payment" method="post"> {# formulaire de soumission choix paiement #}
-                                         <div class="col-12 mb-3">
-                                           <div class="card">
-                                                <div class="card-body">
-                                                     <div class="row">
-                                                     {% if app.user.type == 1 %}
-                                                        {# choix 1 #}
-                                                        <div class="col-12 d-flex"> 
-                                                            <input class="pr-5 checkPayment1" type="radio" name="checkPayment" value="Carte bancaire">
-                                                            <div class="col-6 d-flex align-items-center">
-                                                                <p class="small-text mb-0">Carte Bancaire</p>  
-                                                            </div>   
-                                                            <div class="col-5 text-end">
-                                                                <button type="submit" id="buttonPayment1" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
-                                                                    PAYER 
-                                                                    {% if shipping == 'Premium' %}
-                                                                    {% set totalPremium = total + 9.99 %}
-                                                                        {{ totalPremium|format_currency('EUR', locale='fr') }} 
-                                                                    {% else %}
-                                                                        {{ app.session.get('total')|format_currency('EUR', locale='fr') }} {# récupération total via session twig #}
-                                                                    {% endif %}
-                                                                </button>                                                 
-                                                            </div>
-                                                        </div>
-                                                        <hr class="my-4">
-                                                        <div class="col-12 d-flex"> 
-                                                            <input class="pr-5 checkPayment2" type="radio" name="checkPayment" value="Paypal">
-                                                            <div class="col-6 d-flex align-items-center">
-                                                                <p class="small-text mb-0">PayPal</p>  
-                                                            </div>   
-                                                            <div class="col-5 text-end">                                              
-                                                                <button type="submit" id="buttonPayment2" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
-                                                                    PAYER 
-                                                                    {% if shipping == 'Premium' %}
-                                                                    {% set totalPremium = total + 9.99 %}
-                                                                        {{ totalPremium|format_currency('EUR', locale='fr') }} 
-                                                                    {% else %}
-                                                                        {{ total|format_currency('EUR', locale='fr') }} {# récupération total via session controller #}
-                                                                    {% endif %}
-                                                                </button> 
-                                                            </div>
-                                                        </div>
-                                                        <hr class="my-4"> 
-                                                        <div class="col-12 d-flex"> 
-                                                            <input class="pr-5 checkPayment3" type="radio" name="checkPayment" value="Virement">
-                                                            <div class="col-6 d-flex align-items-center">
-                                                                <p class="small-text mb-0">Virement</p>  
-                                                            </div>   
-                                                            <div class="col-5 text-end">                                              
-                                                                <button type="submit" id="buttonPayment3" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
-                                                                    PAYER 
-                                                                    {% if shipping == 'Premium' %}
-                                                                    {% set totalPremium = total + 9.99 %}
-                                                                        {{ totalPremium|format_currency('EUR', locale='fr') }} 
-                                                                    {% else %}
-                                                                        {{ total|format_currency('EUR', locale='fr') }} {# récupération total via session controller #}
-                                                                    {% endif %}
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <hr class="my-4">       
-                                                        <div class="col-12 d-flex"> 
-                                                            <input class="pr-5 checkPayment4" type="radio" name="checkPayment" value="Paiement 4X">
-                                                            <div class="col-6 d-flex align-items-center">
-                                                                <p class="small-text mb-0">Paiement en <span class="X4">4X</span> sans frais</p>  
-                                                            </div>   
-                                                            <div class="col-5 text-end">
-                                                                <button type="submit" id="buttonPayment4" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
-                                                                    PAYER
-                                                                    {% if shipping == 'Premium' %}
-                                                                    {% set totalPremium = total + 9.99 %}
-                                                                    {% set totalPremium4X = totalPremium / 4 %}
-                                                                        {{ totalPremium4X|format_currency('EUR', locale='fr') }} 
-                                                                    {% else %}
-                                                                     {% set total4X = total / 4 %}
-                                                                        {{ total4X|format_currency('EUR', locale='fr') }} {# récupération total via session controller #}
-                                                                    {% endif %}
-                                                                </button>                                     
-                                                            </div>
-                                                        </div>
-                                                        {% else %}
-                                                        <div class="col-12 d-flex"> 
-                                                            <input class="pr-5 checkPayment5" type="radio" name="checkPayment" value="Crédit">
-                                                            <div class="col-6 d-flex align-items-center">
-                                                                <p class="small-text mb-0">Crédit</p>  
-                                                            </div>   
-                                                            <div class="col-5 text-end">
-                                                                <button type="submit" id="buttonPayment5" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
-                                                                    CRÉDIT
-                                                                    {% if shipping == 'Premium' %}
-                                                                    {% set totalPremium = total + 9.99 %}
-                                                                        {{ totalPremium|format_currency('EUR', locale='fr') }} 
-                                                                    {% else %}
-                                                                        {{ total|format_currency('EUR', locale='fr') }} {# récupération total via session controller #}
-                                                                    {% endif %}
-                                                                </button>                                     
-                                                            </div>
-                                                        </div>
-                                                        {% endif %}                                                      
-                                                    </div>
-                                                </div>
-                                           </div>
-                                        </div>
-                                        </form>           
-                                        {# fermeture formulaire de soumission choix paiement #}
-                                    </div>
-                                    {# fermeture choix du mode de paiement #}
-
-                                    <div class="col-12">
-                                       <div class="col-12">
-                                           <p class="small fw-bold mb-0">CONDITIONS GÉNÉRALES DE VENTE</p> 
-                                       </div> 
-                                        <div class="col-12">
-                                           <p class="small-text mb-0">En validant ma commande, je déclare avoir pris connaissance et accepté sans réserve les <a class="cgv" href="#">conditions générales de vente</a> de Village-Green.com.</p> 
-                                        </div>  
-                                    </div>
-                                </div>
-                            </div>
-
-                             {# bloc bouton retour #}
-                            <div class="col-12 mt-4 mb-4">    
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="javascript:history.back()"><button class="btn btn-primary button-back">ÉTAPE PRÉCÉDENTE</button></a> 
-                                    </div>
-                                </div>   
-                            </div>
-                            {# fermeture bloc bouton retour #}   
+            <div class="row d-flex justify-content-center my-5">
+                <div class="col-11 d-flex justify-content-center"> 
+                    <div class="col-10 card">
+                         <div class="card-header text-center">
+                            Détails de votre commande <span> {{ app.session.get('orderReference') }}</span>
                         </div>
-                    </div>
-                    {# fermeture choix paiement #} 
+                        <div class="card">
+                            <div class="card-body">
+                                {% for items in items %}
+                                <div class="row mb-3">
+                                    {# info du produit #}
+                                    <div class="col-2">
+                                        <img src="{{ asset('build/images/' ~ items.product.image) }}" alt="{{ asset(items.product.image) }}">
+                                    </div>
+                                    <div class="col-8 block-info">
+                                        {# marque label du produit #}
+                                        <p class="brand"><span>{{ items.product.brand }} </span>{{ items.product.label }}</p>                        
 
-                    {# Panier #}
-                    <div class="col-5">
-                        {# retour au panier #}
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="mb-3 ship-title fw-bold">PANIER</p>
-                            </div>      
-                            <div class="col-6 text-end">
-                              <a href="{{ path('app_panier') }}"><button class="btn btn-primary button-edit">MODIFIER MON PANIER</button></a>  
-                            </div>  
-                        </div>
-                       
-                       {# card récapitulatif du panier #}
-                        <div class="row">
-                            <div class="col-12 mb-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        {% for items in items %}
-                                        <div class="row mb-3">
-                                            {# info du produit #}
-                                            <div class="col-2">
-                                                <img src="{{ asset('build/images/' ~ items.product.image) }}" alt="{{ asset(items.product.image) }}">
-                                            </div>
-                                            <div class="col-8 block-info">
-                                            {# marque label du produit #}
-                                            <p class="brand"><span>{{ items.product.brand }} </span>{{ items.product.label }}</p>                        
-                                            
-                                            {# prix du produit #}
+                                        {# prix du produit HT #}
+                                        <p class="brand">
+                                           <span>Montant HT: </span>{{ items.product.price|abs|format_currency('EUR', locale='fr') }}
+                                        </p> 
+
+                                        {# TVA #}
+                                        <p class="brand"><span>Taux TVA: </span>20 %</p> 
+
+                                        {# Promotion #}
+                                        {% if  items.product.discount != null %}
                                             <p class="brand">
-                                                <span class="price">
-                                                {% if items.product.discount != null %}
-                                                    {% set DiscountPrice = items.product.price - (items.product.discount / 100 * items.product.price) %} {# varible qui stock le prix après réduction #}
-                                                    {{ DiscountPrice|format_currency('EUR', locale='fr') }}
-                                                {% else %}
-                                                    {{ items.product.price|format_currency('EUR', locale='fr') }}
-                                                {% endif %}
-                                                </span>
-                                                {% if items.product.discount != null %}
-                                                <strike>{{ items.product.price|abs|format_currency('EUR', locale='fr') }}</strike>
-                                            </p>             
-                                            
-                                            {# économie du prix #}
-                                            <p class="brand"><span>Économisez {{ (10 * items.product.price / 100)|round|format_currency('EUR', locale='fr') }}</span></p>
-                                            {% endif %}                                     
-                                            </div> 
-                                            
-                                            <div class="col-2 text-end quantity">
-                                                {{ items.quantity }}       
-                                            </div>
-                                            {# fin info du produit #}                            
-                                        </div>
-                                        <hr class="between-products">
-                                        {% endfor %}
+                                                <span>Remise de </span>{{ items.product.discount }}% </span>
+                                                <span>soit </span>{{ (10 * items.product.price / 100)|round|format_currency('EUR', locale='fr') }}
+                                            </p>
+                                        {% endif %}
 
-                                        {# sous-total & total #}
-                                        <div class="col-row">
-                                            {# sous-total #}
-                                             <div class="col-12 d-flex justify-content-center">
-                                                <div class="col-6">
-                                                    <p class="small-text mb-0">Sous-total:</p>  
-                                                </div>   
-                                                <div class="col-5 text-end">                                              
-                                                    <p class="small-text">{{ total|format_currency('EUR', locale='fr') }}</p>  
-                                                </div>
-                                            </div> 
-                                            {# type de livraison #}
-                                             <div class="col-12 d-flex justify-content-center">
-                                                <div class="col-6">
-                                                    <p class="small-text mb-0">Livraison: {{ shipping }}</p>  
-                                                </div>   
-                                                <div class="col-5 text-end"> 
-                                                    {% if shipping == 'Premium' %}                                             
-                                                        <p class="small-text">9,99 €</p>
-                                                    {% else %}
-                                                        <p class="small-text">OFFERT</p>
-                                                    {% endif %}  
-                                                </div>
-                                            </div> 
-                                            <hr class="between-products">
-                                            {# total #}
-                                             <div class="col-12 d-flex justify-content-center">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Total :</p>  
-                                                </div>   
-                                                <div class="col-5 text-end">
-                                                    {% if shipping == 'Premium' %}
-                                                        {% set totalPremium = total + 9.99 %} 
-                                                        <p class="price mb-0">{{ totalPremium|format_currency('EUR', locale='fr') }}</p>
-                                                    {% else %}
-                                                        <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
-                                                    {% endif %}                                                                              
-                                                </div>
-                                            </div> 
-                                        </div>                                        
-                                        {# fermeture sous-total & total #}
+                                        {# prix du produit après réduction #}
+                                        <p class="brand">
+                                            {% if items.product.discount != null %}
+                                            <span>Montant TTC: </span>
+                                            <span class="price">
+                                                {% set DiscountPrice = items.product.price - (items.product.discount / 100 * items.product.price) %} {# varible qui stock le prix après réduction #}
+                                                {{ DiscountPrice|format_currency('EUR', locale='fr') }}
+                                            {% else %}
+                                                <span>Montant TTC: </span>
+                                                <span class="price">
+                                                    {{ items.product.price|format_currency('EUR', locale='fr') }}
+                                                </span>   
+                                            </span>
+                                            {% endif %}
+                                        </p>                                               
+                                    </div> 
+                                    
+                                    <div class="col-2 text-end">
+                                       <span class="quant-text">Quantité: </span> <span class="quantity">{{ items.quantity }}</span>       
                                     </div>
-                                </div> 
+                                    {# fin info du produit #}                            
+                                </div>
+                                <hr class="between-products">
+                                {% endfor %}
+
+                                {# sous-total & total TTC #}
+                                <div class="col-row">
+                                    {# sous-total #}
+                                        <div class="col-12 d-flex justify-content-center">
+                                        <div class="col-6">
+                                            <p class="small-text mb-0">Sous-total TTC:</p>  
+                                        </div>   
+                                        <div class="col-5 text-end">                                              
+                                            <p class="small-text">{{ total|format_currency('EUR', locale='fr') }}</p>  
+                                        </div>
+                                    </div> 
+                                    {# type de livraison #}
+                                        <div class="col-12 d-flex justify-content-center">
+                                        <div class="col-6">
+                                            <p class="small-text mb-0">Livraison: <span class="quantity">{{ shipping }}</span></p>  
+                                        </div>   
+                                        <div class="col-5 text-end"> 
+                                            {% if shipping == 'Premium' %}                                             
+                                                <p class="small-text">9,99 €</p>
+                                            {% else %}
+                                                <p class="small-text">OFFERT</p>
+                                            {% endif %}  
+                                        </div>
+                                    </div> 
+                                    <hr class="between-products">
+                                    {# total TTC #}
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <div class="col-6">
+                                            <p class="mb-0">Total TTC:</p>  
+                                        </div>   
+                                        <div class="col-5 text-end">
+                                            {% if shipping == 'Premium' %}
+                                                {% set totalPremium = total + 9.99 %} 
+                                                <p class="price mb-0">{{ totalPremium|format_currency('EUR', locale='fr') }}</p>
+                                            {% else %}
+                                                <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
+                                            {% endif %}                                                                              
+                                        </div>
+                                    </div> 
+                                </div>                                        
+                                {# fermeture sous-total & total #}
                             </div>
-                            {# fermeture addresse de livraison #}
-                        </div>
-                    </div>
-                    {# fermeture addresse de livraion et de facturation #}
+                        </div> 
+                    </div> 
                 </div>
             </div>
+
+            {# facture PDF + QR CODE #}
+            <div class="row d-flex justify-content-center">
+                <div class="col-10 d-flex justify-content-center">
+                    <div class="col-5 my-3">
+                       <a href="#"><p class="pdf text-center">TELECHARGER MA FACTURE</p></a> 
+                    </div>   
+                    <div class="col-5 text-end">
+                       QR CODE                                                                    
+                    </div>
+                </div> 
+            </div>
             <hr>
+           
         </div> {# fermeture contenant-page #}
             
         {# footer #} 

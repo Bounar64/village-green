@@ -2,17 +2,22 @@
     <div class="row border-bottom border-dark navbar-admin">
         <div class="col-4">
             <div>
-                <input id="search" class="form-control mb-3" type="search" aria-label="Search">
+            {% if app.request.attributes.get('_route') ==  "app_admin_product_list" %}
+                {{ form(Fulltextform) }}
+            {% endif %}
             </div>
         </div>
         <div class="col-2 d-flex align-items-center mb-3 filtre-icon">
+            {% if app.request.attributes.get('_route') ==  "app_admin_product_list" %}
             <a href="#" id="ButtonFilterAdmin">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-three-dots-vertical dots" viewBox="0 0 16 16">
                     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                 </svg>
             </a>
-        <p class="m-0 text-muted">Plus</p>
+            <p class="m-0 text-muted">Plus</p>
+            {% endif %}
         </div>
+        
         <div class="col-6 d-flex justify-content-end align-items-center mb-3">
             <p class="m-0 text-end">
                 Connecté sous 
@@ -21,44 +26,30 @@
         </div>   
     </div>
 
+    {% if app.request.attributes.get('_route') ==  "app_admin_product_list" %}
     <div class="row mt-3" style="display: none;" id="CardFilterAdmin">
-        <div class="col-2">
-            <div class="card">
-                <div class="card-header">
-                    Trier par catégories
-                </div>
-                <div class="card-body">
-                <form id="filters">  
-                    {% for category in categories %}
-                        <p class="m-0">
-                            <input type="radio" name="categories" id="cat{{ category.id }}" value="{{ category.id }}">
-                            <label for="cat{{ category.id }}">{{ category.label }}</label>
-                        </p>
-                    {% endfor %}    
-                </form>
-                   
-                </div>
+        <div class="col-12 d-flex">   
+            <div class="col-3">
+                <label for="select1">Trier par catégorie</label>
+                <select id="select1" class="form-select" aria-label="form-select-lg example">
+                    <option selected>Choississez une catégorie</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.label }}</option>
+                        {% endfor %}
+                </select>
             </div>
-        </div>
-        <div class="col-2">
-            <div class="card">
-            <div class="card-header">
-                    Trier par sous-catégories
-                </div>
-                <div class="card-body">
-            
-                </div>
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="card">
-                <div class="card-header">
-                    Trier par prix
-                </div>
-                
+            <div class="col-3">
+                <label for="select2">Trier par sous-catégories</label>
+                <select id="select2" class="form-select" aria-label="form-select-lg example">
+                    <option selected>Choississez une sous-catégorie</option>
+                        {% for subCategory in subCategories %}
+                            <option value="{{ subCategory.id }}">{{ subCategory.label }}</option>
+                        {% endfor %}
+                </select>
             </div>
         </div>
     </div>
+    {% endif %}
 
 
 

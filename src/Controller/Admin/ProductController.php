@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Form\SearchFulltextType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,11 +35,26 @@ class ProductController extends AbstractController
     /**
      * @Route("/", name="list")
      */
-    public function ProductList(): Response
+    public function ProductList(Request $request): Response
     {
+        $categories =  $this->categoryRepository->findAll();
+        $subcategories =  $this->subcategoryRepository->findAll();
+
+        $product = $this->productRepository->findAll();
+        $form = $this->createForm(SearchFulltextType::class); // récupère le form du input search
+        $search =$form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            // on recherche les produits correspondant au mots clés
+            $product = $this->productRepository->searchFulltext($search->get('key')->getData());
+        }
+
         return $this->render('admin/product/list_product.html.twig', [
-            'Listproduct' => $this->productRepository->findAll(),
-            'categories' => $this->categoryRepository->findAll()
+            'Listproduct' => $product,
+            'categories' => $this->categoryRepository->findAll(),
+            'Fulltextform' => $form->createView(),
+            'categories' => $categories,
+            'subCategories' => $subcategories,
         ]);
     }
 
@@ -77,7 +93,6 @@ class ProductController extends AbstractController
         return $this->render('admin/product/add.html.twig', [
             'form' => $form->createView(),
             'categories' => $this->categoryRepository->findAll()
-
         ]);
     }
 
@@ -97,7 +112,7 @@ class ProductController extends AbstractController
             $file = $form->get('image_file')->getData(); // On récupère les données de l'image téléchargé
             // fileName = md5(uniqid()).'.'.$file->guessExtension() // pour sécuriser le nom du fichier 
             $fileName = $file->getClientOriginalName(); // pour récupérer le nom original de l'image
-            // Move the file to the directory where brochures are stored
+            // Move the file to the directory where fileName are stored
             try {
                 $file->move(
                     $this->getParameter('images_directory'), // le dossier d'enregistrement

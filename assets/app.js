@@ -45,7 +45,7 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
  //_______Afficher au click la card modifier mon adresse de livraison_____//
  $(function(){
 
-    $('#ButtonEditShipping').on("click", function(){ // ancienne écriture $('#ButtonEdit').click(function(){
+    $('#ButtonEditShipping').on("click", function(){ 
         $('#CardEditShipping').slideToggle();
     });
  })
@@ -53,7 +53,7 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
  //_______Afficher au click du boutton description la card description_____//
  $(function(){
 
-    $('#ButtonDescription').on("click", function(){ // ancienne écriture $('#ButtonEdit').click(function(){
+    $('#ButtonDescription').on("click", function(){ 
         $('#CardDescription').slideToggle();
     });
  })
@@ -61,11 +61,10 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
  //_______Afficher au click du boutton filtre la card des filtres dans Admin_____//
  $(function(){
 
-    $('#ButtonFilterAdmin').on("click", function(){ // ancienne écriture $('#ButtonEdit').click(function(){
+    $('#ButtonFilterAdmin').on("click", function(){ 
         $('#CardFilterAdmin').slideToggle();
     });
  })
-
 
  //_______Afficher au check le boutton de paiement_____//
  $(function(){
@@ -121,7 +120,7 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
 $(function() {
     
     // typing animation script
-    var typed = new Typed('#search', {
+    var typed = new Typed('#search_fulltext_key', {
         strings: ['Rechercher par Label', 'Rechercher par Label court', 'Rechercher par Marque', 'Rechercher par Référence'],
         typeSpeed: 50,
         backSpeed: 20,
