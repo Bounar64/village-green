@@ -111,6 +111,12 @@ class Product
      */
     private $orderDetails;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Supplier::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $supplier;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -346,5 +352,17 @@ class Product
     public function __toString() // Ajout de cette fonction pour retourner l'objet name sous forme de string
     {  
         return $this->label;
+    }
+
+    public function getSupplier(): ?Supplier
+    {
+        return $this->supplier;
+    }
+
+    public function setSupplier(?Supplier $supplier): self
+    {
+        $this->supplier = $supplier;
+
+        return $this;
     }
 }
