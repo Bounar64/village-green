@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-           
+
             {# filtre pour le compte de résultat #}
             {% set count = 0 %} 
             {% for products in products %}
@@ -64,12 +64,15 @@
                 <div class="col-11">
                     <div class="grid">
                         {% for products in products %}
+                         {% set productsDiscount = (products.discount + app.user.coeff) %} {# promotion par rapport au type d'utilisateur #}
                             <a href="{{ path('app_products_details', {label: products.subcategory.label, label_products: products.label, ref: products.reference}) }}">
                                 <div class="card">
                                     {% if products.discount is not null %}
                                     <div class="row d-flex justify-content-end">
                                         <div class="col-3">
-                                            <p class="text-end text-center discount">-{{ products.discount }}%</p>
+                                            <p class="text-end text-center discount">
+                                                -{{ productsDiscount }}%
+                                            </p>
                                         </div>
                                     </div>
                                     {% else %}
@@ -84,7 +87,7 @@
 
                                         <div class="card-title price mb-0">
                                             {% set PriceTTC = products.price + ( 20 / 100 * products.price) %} {# prix TTC #}
-                                            {% set DiscountPrice =  PriceTTC - (products.discount / 100 * PriceTTC) %} {# varible qui stock le prix après réduction #}
+                                            {% set DiscountPrice =  PriceTTC - (productsDiscount / 100 * PriceTTC) %} {# varible qui stock le prix après réduction #}
                                             {{ DiscountPrice|format_currency('EUR', locale='fr') }} 
                                         </div>
 

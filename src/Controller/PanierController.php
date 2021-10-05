@@ -38,7 +38,8 @@ class PanierController extends AbstractController
         $products = $this->productRepository->findAll();  
  
         $panierData = $panierService->getFullPanier();
-        $total = $panierService->getTotal();
+        $total = $panierService->getTotalTTC();
+        $totalHT =  $panierService->getTotalHT();
 
         $session->set('panierData', $panierData);
 
@@ -50,6 +51,7 @@ class PanierController extends AbstractController
             'products' => $products,
             'items' => $panierData,
             'total' => $total,
+            'totalHT' => $total,
             'TotalItemsCart' => $TotalItemsCart
         ]);
 
@@ -60,11 +62,10 @@ class PanierController extends AbstractController
      * 
      * @Route("/add/{id}", name="app_panier_add")
      */
-    public function add($id, PanierService $panierService, SessionInterface $session) 
+    public function add($id, PanierService $panierService) 
     {
         $panierService->add($id);
 
-        //return $this->redirectToRoute("app_products_show", ['label' => $session->get('label')]); // on passe la route et le paramètre label qu'on à récupérer via la session envoyé depuis le ProductController
         return $this->redirectToRoute("app_panier"); 
     }
 

@@ -122,7 +122,7 @@ class RegistrationUserType extends AbstractType
                 'data' => '#' . 1 . rand(100, 999)
             ])
             ->add('coeff', HiddenType::class, [
-                'data' => 10
+                'data' => 3
             ])
             ->add('compagny', HiddenType::class)
             ->add('vtaNumber', HiddenType::class)

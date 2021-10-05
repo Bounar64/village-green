@@ -4,8 +4,9 @@ namespace App\Service\panier;
 
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class PanierService 
+class PanierService extends AbstractController
 {
 
     protected $session;
@@ -69,32 +70,65 @@ class PanierService
     }
 
     /**
-     * fonction qui calcul le total (prix) du panier
+     * fonction qui calcul le total (prix) du panier TTC
      *
      * @return float
      */
-    public function getTotal() 
+    public function getTotalTTC() 
     {
         $total = 0; // initialise le total à 0
         $panierData = $this->getFullPanier();
 
-        // boucle pour avoir le total du panier avec réduction et sans réduction 
+        // boucle pour avoir le total du panier avec réduction et sans réduction TTC
         foreach($panierData as $item) {
-            $discountPrice = $item['product']->getPrice() - ($item['product']->getDiscount() / 100 * $item['product']->getPrice()); // Prix avec réduction
+
+            $priceTTC = $item['product']->getPrice() + ( 20 / 100 * $item['product']->getPrice()); // prix TTC
 
             if($item['product']->getDiscount() == NULL) { 
-                $totalItem = $item['product']->getPrice() * $item['quantity']; // total pour les prix avec réduction
+                $totalItem = $priceTTC * $item['quantity']; // total pour les prix sans réduction TTC
                 $total += $totalItem; 
             } else {
-                $totalItem = $discountPrice * $item['quantity'];  // total pour les prix sans réduction
+                $discountType = $item['product']->getDiscount() + $this->getUser()->getCoeff(); // remise en fonction de l'utilisateur 
+                $discountPrice = $priceTTC - ($discountType / 100 * $priceTTC); // Prix avec réduction TTC
+                $totalItem = $discountPrice * $item['quantity'];  // total pour les prix avec réduction TTC
                 $total += $totalItem;
             }  
         }
 
         // set session attributes
-        $this->session->set('total', $total); // on onvoie dans la session le total (prix) pour afficher le récapitulatif dans sur la page app_checkout_payment (CheckoutController)
+        $this->session->set('total', $total); // on onvoie dans la session le totalTTC (prix) pour afficher le récapitulatif dans sur la page app_checkout_payment (CheckoutController)
    
         return $total;
+    }
+    
+    /**
+     * fonction qui calcul le total (prix) du panier TTC
+     *
+     * @return float
+     */
+    public function getTotalHT() 
+    {
+        $totalHT = 0; // initialise le total à 0
+        $panierData = $this->getFullPanier();
+
+        // boucle pour avoir le total du panier avec réduction et sans réduction TTC
+        foreach($panierData as $item) {
+
+            if($item['product']->getDiscount() == NULL) { 
+                $totalItem = $item['product']->getPrice() * $item['quantity']; // total pour les prix sans réduction HT
+                $totalHT += $totalItem; 
+            } else {
+                $discountType = $item['product']->getDiscount() + $this->getUser()->getCoeff(); // remise en fonction de l'utilisateur 
+                $discountPrice = $item['product']->getPrice() - ($discountType / 100 * $item['product']->getPrice()); // Prix avec réduction HT
+                $totalItem = $discountPrice * $item['quantity'];  // total pour les prix avec réduction HT
+                $totalHT += $totalItem;
+            }  
+        }
+
+        // set session attributes
+        $this->session->set('totalHT', $totalHT); // on onvoie dans la session le totalHT (prix) pour afficher le récapitulatif dans sur la page app_checkout_payment (CheckoutController)
+   
+        return $totalHT;
     }
 
      /**

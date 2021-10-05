@@ -67,6 +67,10 @@
                         <div class="card">
                             <div class="card-body">
                                 {% for items in items %}
+
+                                    {% set PriceTTC = items.product.price + ( 20 / 100 * items.product.price) %} {# prix TTC #}
+                                    {% set productsDiscount = (items.product.discount + app.user.coeff) %} {# promotion par rapport au type d'utilisateur #} 
+
                                 <div class="row mb-3">
                                     {# info du produit #}
                                     <div class="col-2">
@@ -76,30 +80,33 @@
                                         {# marque label du produit #}
                                         <p class="brand"><span>{{ items.product.brand }} </span>{{ items.product.label }}</p>                        
 
-                                        {# prix du produit HT #}
+                                        {# prix du produit ttc sans réduction #}
                                         <p class="brand">
-                                           <span>Montant HT: </span>{{ items.product.price|abs|format_currency('EUR', locale='fr') }}
-                                        </p> 
+                                            <span>Prix avant: </span>
+                                            <span class="price">
+                                                {{ PriceTTC|format_currency('EUR', locale='fr') }}
+                                            </span>
+                                        </p>     
 
-                                        {# Promotion #}
+                                        {# réduction #}
                                         {% if  items.product.discount != null %}
                                             <p class="brand">
-                                                <span>Remise de </span>{{ items.product.discount }}% </span>
-                                                <span>soit </span>{{ (10 * items.product.price / 100)|round|format_currency('EUR', locale='fr') }}
+                                                <span>Remise de </span>{{ productsDiscount }}% </span>
+                                                <span>soit </span>{{ (PriceTTC * (productsDiscount / 100))|round|format_currency('EUR', locale='fr') }}
                                             </p>
                                         {% endif %}
 
-                                        {# prix du produit après réduction #}
+                                        {# prix du produit après réduction ttc #}
                                         <p class="brand">
                                             {% if items.product.discount != null %}
-                                            <span>Montant TTC: </span>
+                                            <span>Prix après: </span>
                                             <span class="price">
-                                                {% set DiscountPrice = items.product.price - (items.product.discount / 100 * items.product.price) %} {# varible qui stock le prix après réduction #}
+                                                {% set DiscountPrice = PriceTTC - (productsDiscount / 100 * PriceTTC) %} {# varible qui stock le prix après réduction #}
                                                 {{ DiscountPrice|format_currency('EUR', locale='fr') }}
                                             {% else %}
-                                                <span>Montant TTC: </span>
+                                                <span>Prix après: </span>
                                                 <span class="price">
-                                                    {{ items.product.price|format_currency('EUR', locale='fr') }}
+                                                    {{ PriceTTC|format_currency('EUR', locale='fr') }}
                                                 </span>   
                                             </span>
                                             {% endif %}
@@ -119,7 +126,7 @@
                                     {# sous-total #}
                                         <div class="col-12 d-flex justify-content-center">
                                         <div class="col-6">
-                                            <p class="small-text mb-0">Sous-total TTC:</p>  
+                                            <p class="small-text mb-0">Sous-total:</p>  
                                         </div>   
                                         <div class="col-5 text-end">                                              
                                             <p class="small-text">{{ total|format_currency('EUR', locale='fr') }}</p>  
@@ -142,7 +149,7 @@
                                     {# total TTC #}
                                     <div class="col-12 d-flex justify-content-center">
                                         <div class="col-6">
-                                            <p class="mb-0">Total TTC:</p>  
+                                            <p class="mb-0">Total: <span class="griso">(taxe incluse)</span></p>  
                                         </div>   
                                         <div class="col-5 text-end">
                                             {% if shipping == 'Premium' %}
@@ -163,13 +170,13 @@
 
             {# facture PDF + QR CODE #}
             <div class="row d-flex justify-content-center">
-                <div class="col-10 d-flex justify-content-center">
-                    <div class="col-5 my-3">
-                       <a href="{{ path('app_checkout_order_invoice') }}"><p class="pdf text-center">TELECHARGER MA FACTURE</p></a> 
+                <div class="col-10 d-flex justify-content-between">
+                    <div class="col-5 my-3 d-flex justify-content-center">
+                       <a href="{{ path('app_download_invoice') }}"><p class="pdf text-center">TELECHARGER MA FACTURE</p></a> 
                     </div>   
-                    <div class="col-5 text-end">
-                       QR CODE                                                                    
-                    </div>
+                    <div class="col-5 my-3 d-flex justify-content-center">
+                       <a href="{{ path('app_print_invoice') }}"><p class="pdf text-center">IMPRIMER MA FACTURE</p></a> 
+                    </div>   
                 </div> 
             </div>
             <hr>

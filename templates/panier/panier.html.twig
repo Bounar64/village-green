@@ -41,6 +41,9 @@
                     <div class="col card panier-card">
                         <div class="card-body">
                             {% for items in items %}
+                            
+                            {% set PriceTTC = items.product.price + ( 20 / 100 * items.product.price) %} {# prix TTC #} 
+                            
                             <div class="row mb-3">
                                 {# info du produit #}
                                 <div class="col-2">
@@ -54,18 +57,19 @@
                                    <p>
                                     <span class="price">
                                     {% if items.product.discount != null %}
-                                        {% set DiscountPrice = items.product.price - (items.product.discount / 100 * items.product.price) %} {# varible qui stock le prix après réduction #}
+                                        {% set productDiscount = (items.product.discount + app.user.Coeff) %}
+                                        {% set DiscountPrice = PriceTTC - (productDiscount / 100 * PriceTTC) %} {# varible qui stock le prix après réduction #}
                                         {{ DiscountPrice|format_currency('EUR', locale='fr') }}
                                     {% else %}
-                                        {{ items.product.price|format_currency('EUR', locale='fr') }}
+                                        {{ PriceTTC|format_currency('EUR', locale='fr') }}
                                     {% endif %}
                                     </span>
                                     {% if items.product.discount != null %}
-                                    <strike>{{ items.product.price|abs|format_currency('EUR', locale='fr') }}</strike>
+                                    <strike>{{ PriceTTC|abs|format_currency('EUR', locale='fr') }}</strike>
                                    </p>             
                                    
                                    {# économie du prix #}
-                                   <p><span>Économisez {{ (10 * items.product.price / 100)|round|format_currency('EUR', locale='fr') }}</span></p>
+                                   <p><span>Économisez {{ (PriceTTC * (items.product.discount / 100))|round|format_currency('EUR', locale='fr') }}</span></p>
                                    {% endif %}                                 
                                    <p>Commandé avant 12h, expédié aujourd'hui.</p>
                                 </div> 

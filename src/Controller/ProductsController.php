@@ -54,7 +54,7 @@ class ProductsController extends AbstractController
         $products = $this->productRepository->findSearch($data);
         $count = intval($this->productRepository->CountResult());
 
-        $PriceTTC = $this->productRepository->priceTTC();
+        $PriceTTC = $this->productRepository->priceTTC(); // Utiliser le ttc avec twig 
 
         $categories = $this->categoryRepository->findBy([], [], 9, null);
         $subcategory = $this->subcategoryRepository->findAll('category');

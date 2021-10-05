@@ -131,7 +131,7 @@ class RegistrationProType extends AbstractType
                 'data' => '#' . 0 . rand(100, 999)
             ])
             ->add('coeff', HiddenType::class, [
-                'data' => 20
+                'data' => 5
             ])
         ;
     }

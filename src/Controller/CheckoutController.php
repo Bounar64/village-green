@@ -170,8 +170,20 @@ class CheckoutController extends AbstractController
         $order->setStatus($statusType);
         //Création du détail de la commande
 
+        // on récupère les id des produits dans le panier
+        foreach( $panierData as $key) {
+
+            $id = $key['product']->getId();
+            
+            return $id;
+        }
+
+        $productStock = $this->productRepository->productStock($id);        
+
         // Annulation de la transaction si un problème survient
         // $manager->getConnection()->rollBack();
+
+        
 
         $manager->persist($order);
         $manager->flush();
@@ -196,7 +208,7 @@ class CheckoutController extends AbstractController
      * 
      * @Route("/checkout_orders_details", name="app_checkout_order_details")
      */
-    public function OrderDetailsCheck(SessionInterface $session): response
+    public function OrderDetailsCheck(SessionInterface $session): Response
     {
         if (!$this->getUser()) {
             
@@ -229,13 +241,15 @@ class CheckoutController extends AbstractController
     /**
      * fonction pour télécharger la facture au format pdf
      *
-    * @Route("/invoice", name="app_checkout_order_invoice", methods={"GET"})
+     * @Route("/invoice_download", name="app_download_invoice", methods={"GET"})
      */
     public function downloadInvoicePDF(SessionInterface $session)
     {
         $order = $this->orderRepository->findBy(['reference' => $session->get('orderReference')], [], null, null);
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
-        $total = $session->get('total'); // on récupère le prix total
+        $total = $session->get('total'); // on récupère le prix total TTC
+        $totalHT = $session->get('totalHT'); // on récupère le prix total HT
+        $shippingType = $session->get('shippingType');
         // // Configure Dompdf according to your needs
         // $pdfOptions = new Options();
         // $pdfOptions->set('isHtml5ParserEnabled', true);
@@ -246,7 +260,11 @@ class CheckoutController extends AbstractController
         // $dompdf = new Dompdf($pdfOptions);
         
         // // Retrieve the HTML generated in our twig file
-        // $html = $this->renderView('checkout/pdf/invoice.html.twig');
+        // $html = $this->renderView('checkout/pdf/invoice.html.twig', [
+        //         'order' => $order,
+        //         'items' => $panierData,
+        //         'total' => $total
+        // ]);
         
         // // Load HTML to Dompdf
         // $dompdf->loadHtml($html);
@@ -258,8 +276,8 @@ class CheckoutController extends AbstractController
         // $dompdf->render();
 
         // // Output the generated PDF to Browser (force download)
-        // $dompdf->stream("mypdf.pdf", [
-        //     "Attachment" => false
+        // $dompdf->stream("facture.pdf", [
+        //     "Attachment" => true
         // ]);
 
         // return new Response('', 200, [
@@ -269,7 +287,59 @@ class CheckoutController extends AbstractController
         return $this->render('checkout/pdf/invoice.html.twig', [
                 'order' => $order,
                 'items' => $panierData,
-                'total' => $total
+                'total' => $total,
+                'totalHT' => $totalHT,
+                'shipping' => $shippingType
+        ]);
+    }
+
+    /**
+     * fonction pour affiché ("imprimer") la facture au format pdf
+     *
+     * @Route("/invoice_print", name="app_print_invoice", methods={"GET"})
+     */
+    public function printInvoicePDF(SessionInterface $session)
+    {
+        $order = $this->orderRepository->findBy(['reference' => $session->get('orderReference')], [], null, null);
+        $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
+        $total = $session->get('total'); // on récupère le prix total TTC
+        $totalHT = $session->get('totalHT'); // on récupère le prix total HT
+        $shippingType = $session->get('shippingType');
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('isHtml5ParserEnabled', true);
+        $pdfOptions->set('isRemoteEnabled', true);
+        $pdfOptions->set('defaultFont', 'Montserrat');
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('checkout/pdf/invoice.html.twig', [
+                'order' => $order,
+                'items' => $panierData,
+                'total' => $total,
+                'totalHT' => $totalHT,
+                'shipping' => $shippingType
+
+        ]);
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("FACTURE.pdf", [
+            "Attachment" => false
+        ]);
+
+        return new Response('', 200, [
+            'Content-Type' => 'application/pdf',
         ]);
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Example 1</title>
+        <title>FACTURE {{ app.session.get('orderReference') }}</title>
     </head>
     <body>
         {# header #}
@@ -80,11 +80,15 @@
                         <th>QUANTITE</th>
                         <th>P.U HT</th>
                         <th>REMISE</th>
-                        <th>TOTAL HT</th>
+                        <th class="end">TOTAL HT</th>
                     </tr>
             </thead>
             <tbody>
             {% for items in items %}
+
+                {% set PriceTTC = items.product.price + ( 20 / 100 * items.product.price) %} {# prix TTC #}
+                {% set productsDiscount = (items.product.discount + app.user.coeff) %} {# promotion par rapport au type d'utilisateur #} 
+                
                 <tr>
                     {# image #}
                     <td class="left"><img src="{{ asset('build/images/' ~ items.product.image) }}" alt="{{ asset(items.product.image) }}"></td>
@@ -99,13 +103,13 @@
                     {# remise #}
                     <td class="ctr">
                         {% if  items.product.discount != null %}
-                            {{ items.product.discount }}%
+                            {{ productsDiscount }}%
                         {% endif %}
                     </td>
                     {# prix total d'un ou plusieur même produit HT #}
-                    <td class="total">
+                    <td class="total end">
                     {% if items.product.discount != null %}
-                        {% set DiscountPrice = (items.product.price * items.quantity) - (items.product.discount / 100 * items.product.price) %}
+                        {% set DiscountPrice = (items.product.price * items.quantity) - (productsDiscount / 100 * items.product.price) %}
                             {{ DiscountPrice|abs|format_currency('EUR', locale='fr') }}
                         {% else %}
                             {{ (items.product.price * items.quantity)|format_currency('EUR', locale='fr') }}
@@ -115,22 +119,34 @@
             {% endfor %}
                 <tr>
                     <td colspan="6">SOUS-TOTAL HT:</td>
-                    <td class="total">
-                        {{ total|format_currency('EUR', locale='fr') }}
+                    <td class="total end">
+                        {{ totalHT|format_currency('EUR', locale='fr') }}
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6">TVA 20%</td>
-                    <td class="total">
-                        {% set TVAMarge = ( 20 * total / 100 ) %}
+                    <td class="total end">
+                        {% set TVAMarge = ( 20 * totalHT / 100 ) %}
                         {{ TVAMarge|abs|format_currency('EUR', locale='fr') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6">LIVRAISON :</td>                                                                             
+                    <td class="total end">
+                        {% if shipping == 'Premium' %}
+                            9,99 €
+                        {% else %}
+                            OFFERT
+                        {% endif %} 
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="total bold">TOTAL TTC:</td>
                     <td class="total ttc">
-                        {% set PriceTTC = total + ( 20 / 100 * total) %}
-                        {{ PriceTTC|abs|format_currency('EUR', locale='fr') }}
+                        {% if shipping == 'Premium' %}
+                        {% set totalPremium = total + 9.99 %} 
+                            {{ totalPremium|format_currency('EUR', locale='fr') }}
+                        {% endif %}                                                                              
                     </td>
                 </tr>
             </tbody>
@@ -289,6 +305,10 @@ table th {
     text-align: left;
 }
 
+table th.end {
+    text-align: end;
+}
+
 table td {
     text-align: center;
 }
@@ -333,6 +353,10 @@ table td.total.ttc {
     font-size: 1.4em;
     font-weight: 500;
     color: rgba(222,104,0,0.7);
+}
+
+table td.total.end {
+    text-align: end;
 }
 
 table td span.label {

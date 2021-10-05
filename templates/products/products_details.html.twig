@@ -9,7 +9,7 @@
         {{ include('/layouts/header_navigation.html.twig') }} 
 
         <div class="contenant-page">
-
+        
         {# Fil d'Ariane #} 
         {% for category in categories %}
             {% for subcategory in subcategory %}
@@ -38,7 +38,11 @@
         {% endfor %}
 
         {% for products in products %}
-            {% if products.reference == (app.request.get('ref')) %}    
+            {% if products.reference == (app.request.get('ref')) %}
+
+            {% set PriceTTC = products.price + ( 20 / 100 * products.price) %} {# prix TTC #}
+            {% set productsDiscount = (products.discount + app.user.coeff) %} {# promotion par rapport au type d'utilisateur #} 
+
             {# big-card #}
             <div class="row content-big-cards">                 
                 <div class="col-10">
@@ -50,7 +54,7 @@
                                     <div class="col-2">                                      
                                         <p class="text-end text-center discount">
                                             {% if products.discount is not null %}
-                                                -{{ products.discount }}%
+                                                -{{ productsDiscount }}%
                                             {% endif %}
                                         </p>                                        
                                     </div>
@@ -64,7 +68,7 @@
                                     <div class="row">
                                         {% if products.discount is not null %}
                                             <div class="col-4">                                       
-                                                <p class="economie m-0"><span class="fw-bold">ÉCONOMISEZ </span>{{ (10 * products.price / 100)|round|format_currency('EUR', locale='fr') }}</p>                                         
+                                                <p class="economie m-0"><span class="fw-bold">ÉCONOMISEZ </span>{{ (PriceTTC * (productsDiscount / 100))|round|format_currency('EUR', locale='fr') }}</p>                                         
                                             </div>
                                         {% endif %}
                                         <div class="col-2 d-flex align-items-center">
@@ -148,18 +152,18 @@
                                                 <div class="col">
                                                     <p class="title"><span class="title">PRIX VILLAGE GREEN</span></p>
                                                     <p class="price">
-                                                        {% set DiscountPrice = products.price - (products.discount / 100 * products.price) %} {# varible qui stock le prix après réduction #}
+                                                        {% set DiscountPrice = PriceTTC - (productsDiscount / 100 * PriceTTC) %} {# varible qui stock le prix après réduction #}
                                                         {{ DiscountPrice|format_currency('EUR', locale='fr') }} 
                                                     </p>
                                                 </div>
                                                 {% if products.discount is not null %}
                                                     <div class="col">
                                                         <p class="title"><span class="title">PRIX CONSEILLÉ</span></p>
-                                                        <p>{{ products.price|abs|format_currency('EUR', locale='fr') }}</p>                                                       
+                                                        <p>{{ PriceTTC|abs|format_currency('EUR', locale='fr') }}</p>                                                       
                                                     </div>
                                                     <div class="col">
                                                         <p class="title"><span class="title">ÉCONOMISEZ</span></p>
-                                                        <p>{{ (10 * products.price / 100)|round|format_currency('EUR', locale='fr') }}</p>                                                       
+                                                        <p>{{ (PriceTTC * (productsDiscount / 100))|round|format_currency('EUR', locale='fr') }}</p>                                                       
                                                     </div>
                                                 {% endif %}
                                                 <div class="col">
