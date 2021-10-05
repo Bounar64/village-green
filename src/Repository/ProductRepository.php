@@ -91,6 +91,16 @@ class ProductRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     } 
 
+
+    public function priceTTC()
+    {
+        $query = $this->createQueryBuilder('p');
+        return $query
+            ->select('(p.price + (20 / 100 * p.price))')
+            ->getQuery()
+            ->getResult();
+    } 
+
     /**
      * Affiche les produits en fonction des mots clés (admin)
      *

@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Order;
+use App\Repository\OrderRepository;
 use App\Repository\StatusRepository;
 use App\Form\EditShippingAddressType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -221,6 +223,53 @@ class CheckoutController extends AbstractController
             'total' => $total,
             'shipping' => $shippingType,
             'payment' => $paymentType
+        ]);
+    }
+
+    /**
+     * fonction pour télécharger la facture au format pdf
+     *
+    * @Route("/invoice", name="app_checkout_order_invoice", methods={"GET"})
+     */
+    public function downloadInvoicePDF(SessionInterface $session)
+    {
+        $order = $this->orderRepository->findBy(['reference' => $session->get('orderReference')], [], null, null);
+        $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
+        $total = $session->get('total'); // on récupère le prix total
+        // // Configure Dompdf according to your needs
+        // $pdfOptions = new Options();
+        // $pdfOptions->set('isHtml5ParserEnabled', true);
+        // $pdfOptions->set('isRemoteEnabled', true);
+        // $pdfOptions->set('defaultFont', 'Montserrat');
+        
+        // // Instantiate Dompdf with our options
+        // $dompdf = new Dompdf($pdfOptions);
+        
+        // // Retrieve the HTML generated in our twig file
+        // $html = $this->renderView('checkout/pdf/invoice.html.twig');
+        
+        // // Load HTML to Dompdf
+        // $dompdf->loadHtml($html);
+        
+        // // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        // $dompdf->setPaper('A4', 'portrait');
+
+        // // Render the HTML as PDF
+        // $dompdf->render();
+
+        // // Output the generated PDF to Browser (force download)
+        // $dompdf->stream("mypdf.pdf", [
+        //     "Attachment" => false
+        // ]);
+
+        // return new Response('', 200, [
+        //     'Content-Type' => 'application/pdf',
+        // ]);
+
+        return $this->render('checkout/pdf/invoice.html.twig', [
+                'order' => $order,
+                'items' => $panierData,
+                'total' => $total
         ]);
     }
 }

@@ -54,6 +54,8 @@ class ProductsController extends AbstractController
         $products = $this->productRepository->findSearch($data);
         $count = intval($this->productRepository->CountResult());
 
+        $PriceTTC = $this->productRepository->priceTTC();
+
         $categories = $this->categoryRepository->findBy([], [], 9, null);
         $subcategory = $this->subcategoryRepository->findAll('category');
 
@@ -63,6 +65,7 @@ class ProductsController extends AbstractController
             'subcategory' => $subcategory,
             'products' => $products,
             'count' => $count,
+            'PriceTTC' => $PriceTTC,
             'form' => $form->createView()
         ]);
     }

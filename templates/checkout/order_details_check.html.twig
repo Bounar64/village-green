@@ -81,9 +81,6 @@
                                            <span>Montant HT: </span>{{ items.product.price|abs|format_currency('EUR', locale='fr') }}
                                         </p> 
 
-                                        {# TVA #}
-                                        <p class="brand"><span>Taux TVA: </span>20 %</p> 
-
                                         {# Promotion #}
                                         {% if  items.product.discount != null %}
                                             <p class="brand">
@@ -168,7 +165,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-10 d-flex justify-content-center">
                     <div class="col-5 my-3">
-                       <a href="#"><p class="pdf text-center">TELECHARGER MA FACTURE</p></a> 
+                       <a href="{{ path('app_checkout_order_invoice') }}"><p class="pdf text-center">TELECHARGER MA FACTURE</p></a> 
                     </div>   
                     <div class="col-5 text-end">
                        QR CODE                                                                    

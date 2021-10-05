@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Example 1</title>
+    </head>
+    <body>
+        {# header #}
+        <header class="village-green">
+            <div>
+                <img class="logo "src="{{ asset('build/images/logo_village_green.png') }}" alt="logo village-green">
+            </div>
+            <div class="compagny">
+                <div>Village-Green</div>
+                <div>182 avenue Jean Jaurès,<br /> 75019, Paris</div> 
+                <div>(0033) 2 40 38 50 50</div>
+                <div><a href="mailto:villagegreen@gmail.com">villagegreen@gmail.com</a></div>
+            </div>
+        </header>
+        {# fermeture header #}
+
+        <h1>FACTURE <span>{{ app.session.get('orderReference') }}</span></h1>        
+
+    
+        <div class="block-user">
+            {# info user #}
+            <div id="project">
+                <div class="info"><span>CLIENT: </span>{{ app.user.fullName }}</div>
+                <div class="info"><span>RÉF. CLIENT: </span>{{ app.user.reference }}</div>
+                <div class="info"><span>ADDRESSE: </span>{{ app.user.address ~ ', ' ~ app.user.city ~ ', ' ~ app.user.zipCode ~ ', ' ~ app.user.country.codeISO }}</div>
+                <div class="info"><span>EMAIL: </span> <a href="mailto:{{ app.user.email }}">{{ app.user.email }}</a></div>
+                {% for order in order %}
+                    <div class="info"><span>DATE DE COMMANDE: </span>{{ order.datePayment|date("d/m/Y") }}</div>
+                    <div class="info"><span>DATE DE PAIEMENT: </span>{{ order.datePayment|date("d/m/Y") }}</div>
+                {% endfor %}
+            </div>
+            {# fermeture info user #}
+
+            {# info commande #}
+            <div id="order">
+                {% for order in order %}
+                    <div class="info"><span>COMMANDE: </span>{{ app.session.get('orderReference') }}</div>
+                    <div class="info"><span>LIVRAISON: </span>{{ order.shipping }}</div>
+                    <div class="info"><span>PAIEMENT: </span>{{ order.typePayment }}</div>
+                {% endfor %}
+            </div>
+            {# fermeture info commande #}
+        </div>
+
+        <div class="block-user-address">
+            {# info user #}
+            <div id="shipping-address">
+            <div><span>ADRESSE DE LIVRAISON:</span></div>
+                <div>{{ app.user.address }},</div>
+                <div>{{ app.user.zipCode ~ ', ' ~ app.user.city }}</div>
+                <div>{{ app.user.country }}</div>
+            </div>
+            {# fermeture info user #}
+
+            {# info commande #}
+            <div id="invoice-address">
+                <div><span>ADRESSE DE FACTURATION:</span></div>
+                <div>{{ app.user.address }},</div>
+                <div>{{ app.user.zipCode ~ ', ' ~ app.user.city }}</div>
+                <div>{{ app.user.country }}</div>
+            </div>
+            </div>
+            {# fermeture info commande #}
+        </div>
+        
+        <hr>
+
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="service">PRODUIT</th>
+                        <th class="desc">DESIGNATION</th>
+                        <th class="service">REFERENCE</th>    
+                        <th>QUANTITE</th>
+                        <th>P.U HT</th>
+                        <th>REMISE</th>
+                        <th>TOTAL HT</th>
+                    </tr>
+            </thead>
+            <tbody>
+            {% for items in items %}
+                <tr>
+                    {# image #}
+                    <td class="left"><img src="{{ asset('build/images/' ~ items.product.image) }}" alt="{{ asset(items.product.image) }}"></td>
+                    {# designation #}
+                    <td class="left"><span class="label">{{ items.product.brand }} </span><br>{{ items.product.label }}</td>
+                    {# reference #}
+                    <td class="ctr">{{ items.product.reference }}</td>
+                    {# quantité #}
+                    <td class="ctr">{{ items.quantity }}</td>
+                    {# prix unitaire HT #}
+                    <td class="total">{{ items.product.price|abs|format_currency('EUR', locale='fr') }}</td>
+                    {# remise #}
+                    <td class="ctr">
+                        {% if  items.product.discount != null %}
+                            {{ items.product.discount }}%
+                        {% endif %}
+                    </td>
+                    {# prix total d'un ou plusieur même produit HT #}
+                    <td class="total">
+                    {% if items.product.discount != null %}
+                        {% set DiscountPrice = (items.product.price * items.quantity) - (items.product.discount / 100 * items.product.price) %}
+                            {{ DiscountPrice|abs|format_currency('EUR', locale='fr') }}
+                        {% else %}
+                            {{ (items.product.price * items.quantity)|format_currency('EUR', locale='fr') }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+                <tr>
+                    <td colspan="6">SOUS-TOTAL HT:</td>
+                    <td class="total">
+                        {{ total|format_currency('EUR', locale='fr') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6">TVA 20%</td>
+                    <td class="total">
+                        {% set TVAMarge = ( 20 * total / 100 ) %}
+                        {{ TVAMarge|abs|format_currency('EUR', locale='fr') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="total bold">TOTAL TTC:</td>
+                    <td class="total ttc">
+                        {% set PriceTTC = total + ( 20 / 100 * total) %}
+                        {{ PriceTTC|abs|format_currency('EUR', locale='fr') }}
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+            
+            {% if app.user.type == 0 %}
+            <hr> 
+            
+            <div id="notices">
+                <div>NOTICE:</div>
+                <div class="notice">Des frais financiers de 1,5% seront prélevés sur les soldes impayés après 30 jours.</div>
+            </div>
+            {% endif %}
+        </main>
+
+        <footer>
+            La facture a été créée sur un ordinateur et est valide sans la signature et le sceau.
+        </footer>
+    </body>
+</html>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.village-green {
+    display: flex;
+    justify-content: space-between;
+}
+
+.compagny {
+    text-align: right;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+header {
+    padding: 10px 0;
+}
+
+h1 {
+    border-top: 1px solid  #000;
+    border-bottom: 1px solid  #000;
+    background: rgba(222,104,0);
+    color: #FFF; 
+    font-size: 2.4em;
+    line-height: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+a {
+    color: #5D6975;
+    text-decoration: underline;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;  
+    position: relative;
+    width: 21cm;  
+    height: 29.7cm; 
+    margin: 0 auto; 
+    color: #001028;
+    background: #FFFFFF; 
+    font-size: 12px; 
+}
+
+h1 span {
+    font-weight: 500;
+    color: #000;
+}
+
+.block-user {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#project {
+    border: 1px solid rgba(222,104,0,0.7);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#project span {
+    color: #5D6975;
+    width: 50px;
+    margin-right: 5px;
+    font-size: 0.8em;
+}
+
+#order {
+    text-align: left;
+    border: 1px solid rgba(222,104,0,0.7);
+    border-radius: 5px;
+    padding: 10px;
+    width: 190px;
+}
+
+#order span {
+    color: #5D6975;
+    margin-right: 5px;
+    font-size: 0.8em;
+}
+
+.block-user-address {
+    display: flex;
+    justify-content: space-between;
+}
+
+#shipping-address {
+    border: 1px solid rgba(222,104,0,0.7);
+    border-radius: 5px;
+    padding: 10px 50px 10px 10px;
+}
+
+#shipping-address .info {
+    font-size: 0.7em;
+}
+
+#shipping-address span {
+    color: #5D6975;
+    font-size: 1em;
+}
+
+#invoice-address {
+    border: 1px solid rgba(222,104,0,0.7);
+    text-align: left;
+    border-radius: 5px;
+    padding: 10px 30px 10px 10px;
+}
+
+#invoice-address span {
+    color: #5D6975;
+    font-size: 1em;
+}
+
+hr {
+    margin: 20px 0 20px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+table tr:nth-child(2n-1) td {
+  background: #F5F5F5;
+}
+
+table th {
+    text-align: left;
+}
+
+table td {
+    text-align: center;
+}
+
+table th {
+    padding: 5px 10px;
+    color: #5D6975;
+    border-bottom: 1px solid #C1CED9;
+    white-space: nowrap;        
+    font-weight: normal;
+}
+
+table.left {
+    text-align: left;
+}
+
+table td {
+    padding: 10px;
+    text-align: left;
+}
+
+table td.left {
+    vertical-align: center;
+}
+
+table td.ctr {
+    text-align: center;
+    font-size: 1.2em
+}
+
+table td.qty,
+table td.total {
+    font-size: 1.2em;
+}
+
+table td.total.bold {
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+table td.total.ttc {
+    font-size: 1.4em;
+    font-weight: 500;
+    color: rgba(222,104,0,0.7);
+}
+
+table td span.label {
+    font-weight: 600;
+}
+
+table td.grand {
+    border-top: 1px solid #5D6975;;
+}
+
+img {
+    width: 100px;
+    height: auto;
+    border-radius: 6px;
+}
+
+img.logo {
+     width: 220px;
+    height: auto;
+}
+
+#notices .notice {
+    color: #5D6975;
+    font-size: 1.2em;
+}
+
+footer {
+    position: absolute;
+    color: #5D6975;
+    width: 100%;
+    height: 30px;
+    bottom: 0;
+    border-top: 1px solid #C1CED9;
+    padding: 8px 0;
+    text-align: center;
+}
+</style>
