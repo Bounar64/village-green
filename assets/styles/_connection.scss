@@ -185,6 +185,28 @@
         font-weight: 500;
     }
 
+    .btn-promo {
+        @include buttonColor;
+        font-weight: 500;  
+        height: 30px;
+
+            &:focus {
+                box-shadow: none;
+            }
+    }
+
+    small.error {
+        font-size: 12px;
+        font-weight: 500;
+        color: $rouge;
+    }
+
+    small.trueCode {
+        font-size: 12px;
+        font-weight: 500;
+        color: green;
+    }
+
     input {
         margin-right: 20px;
     }

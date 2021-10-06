@@ -1,0 +1,24 @@
+ {% if error %}
+    {% if shipping == 'Premium' %}
+        {% set totalPremium = total + 9.99 %}
+        {{ totalPremium|format_currency('EUR', locale='fr') }} 
+    {% else %}
+        {{ app.session.get('total')|format_currency('EUR', locale='fr') }} {# récupération total via session twig #}
+    {% endif %}
+{% elseif errorExp and error == false %}
+    {% if shipping == 'Premium' %}
+        {% set totalPremium = total + 9.99 %}
+        {{ totalPremium|format_currency('EUR', locale='fr') }} 
+    {% else %}
+        {{ total|format_currency('EUR', locale='fr') }} {# récupération total via session twig #}
+    {% endif %}
+{% else %}
+    {% if shipping == 'Premium' %}
+        {% set totalPremium = total + 9.99 %}
+        {% set totalPremium = totalPremium - ( codePromoValue / 100 * totalPremium) %}
+            {{ totalPremium|format_currency('EUR', locale='fr') }}
+    {% else %}
+        {% set total = total - ( codePromoValue / 100 * total) %}
+        {{ total|format_currency('EUR', locale='fr') }}
+    {% endif %}                                                                   
+{% endif %}          

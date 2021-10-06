@@ -5,11 +5,14 @@ namespace App\Controller;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Order;
+use App\Form\CodePromoType;
+use App\Entity\OrderDetails;
 use App\Repository\OrderRepository;
 use App\Repository\StatusRepository;
 use App\Form\EditShippingAddressType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\CodePromoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,15 +28,18 @@ class CheckoutController extends AbstractController
     private $productRepository;
     private $statusRepository;
     private $orderRepository;
+    private $codepromoRepository;
 
     public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository,
-                                 ProductRepository $productRepository, StatusRepository $statusRepository, OrderRepository $orderRepository)
+                                    ProductRepository $productRepository, StatusRepository $statusRepository, OrderRepository $orderRepository,
+                                    CodePromoRepository $codepromoRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->subcategoryRepository = $subcategoryRepository;
         $this->productRepository = $productRepository;
         $this->statusRepository = $statusRepository;
         $this->orderRepository = $orderRepository;
+        $this->codepromoRepository = $codepromoRepository;
     }
     
     /**
@@ -52,8 +58,8 @@ class CheckoutController extends AbstractController
         $subcategory = $this->subcategoryRepository->findAll('category');
 
         $user = $this->getUser(); // $this->getUser() récupère l'utilisateur actuellement connecté
+       
         $form = $this->createForm(EditShippingAddressType::class, $user); // on passe ce form pour éditer seulement l'adresse de livraison
-        
         $form->handleRequest($request);
 
         $shipping = $request->request->get('checkShipping'); // équivaut à $_POST["checkShipping"]
@@ -104,7 +110,28 @@ class CheckoutController extends AbstractController
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
         $products = $this->productRepository->findAll();  
- 
+
+        $form = $this->createForm(CodePromoType::class);
+        $form->handleRequest($request);
+        $error = false; // error vaut false par défaut
+        $errorExp = false; // errorExp vaut false par défaut
+
+        if($form->isSubmitted() && $form->isValid()) {
+            
+            $codeUser = strtoupper($form->getData()['codepromo']); // on récupère le code promo de entré par l'utilisateur en majuscule ("strtoupper")
+            $codepromo = $this->codepromoRepository->findBy(['codePromo' => $codeUser], [], null, null); // on récupère le code promo de la base s'il correspond au code user
+
+            if($codepromo === []) { // si la correspondance n'existe on aura un tableau vide donc une erreur $error = ce code n'existe pas
+                $error = true;
+            } elseif($codepromo[0]->getActived() == false) { // si cela correspond mais que le code est désactivé au aura une erreur $errorExp = ce code a expiré.
+                $errorExp = true;
+            }else{
+                $error = false; // Sinon error vaut false donc message = Code valide
+                $codepromo = $codepromo[0]; // on récupère le code promo
+                $session->set('codepromo', $codepromo); // on set ce code promo
+            }
+        }
+
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
         $total = $session->get('total'); // on récupère le prix total
         $shippingType = $session->get('shippingType'); // on récupère le type de livraison
@@ -117,11 +144,15 @@ class CheckoutController extends AbstractController
             // On commence la transaction au moment du paiement 
             // $manager->beginTransaction();
             // $manager->getConnection()->setAutoCommit(false); // désactive l'auto-commit par défaut à true
-            
+
             $session->set('paymentType', $payment);
             return $this->redirectToRoute('app_checkout_validation');
         }
         
+        $codepromo = $session->get('codepromo');
+        $codePromoName = $codepromo->getCodePromo(); 
+        $codePromoValue = intval($codepromo->getCodeValue());
+
         return $this->render('checkout/payment.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
@@ -129,6 +160,11 @@ class CheckoutController extends AbstractController
             'items' => $panierData,
             'total' => $total,
             'shipping' => $shippingType,
+            'formPromo' => $form->createView(),
+            'error' => $error,
+            'errorExp' => $errorExp,
+            'codePromoName' => $codePromoName,
+            'codePromoValue' => $codePromoValue,
         ]);
     }
 
@@ -149,16 +185,22 @@ class CheckoutController extends AbstractController
         $status = $this->statusRepository->findBy(['id' => 1], [], null, null);   
 
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
-        $total = $session->get('total'); // on récupère le prix total
+        $total = $session->get('total'); // on récupère le prix total TTC
         $shippingType = $session->get('shippingType'); // on récupère le type de livraison
         $paymentType = $session->get('paymentType'); // on récupère le type de paiement 
         
         $reference = ('#' . rand(1000, 9999)); // création d'un numéro de commande (référence) 
         $statusType = $status[0]; // on récupère l'objet de type app\entity\status, par défaut ce sera toujours cette valeur "en cours de traitement" id="1"
-        
         $session->set('orderReference', $reference); // on set la référence de la commande
         
-
+        // foreach($panierData as $value) {
+            
+        //     $productsOrder = $value['product'];
+        //     $quantitiesOrder = $value['quantity'];
+            
+        //     dump($productsOrder);
+        // }
+        
         // Création de la commande
         $order = new Order();
         $order->setReference($reference);
@@ -168,25 +210,32 @@ class CheckoutController extends AbstractController
         $order->setDatePayment(new \DateTimeImmutable);
         $order->setUser($this->getUser());
         $order->setStatus($statusType);
-        //Création du détail de la commande
 
-        // on récupère les id des produits dans le panier
-        foreach( $panierData as $key) {
+        // // Création du détail de la commande
+        // $orderDetails = new OrderDetails();
+        // $orderDetails->setOrders($order);
+        // $orderDetails->setProduct($productsOrder);
+        // $orderDetails->setQuantity($quantitiesOrder);
 
-            $id = $key['product']->getId();
+        //$order->addOrderDetail($orderDetails);
+
+        // // on récupère les id des produits dans le panier
+        // foreach( $panierData as $key) {
+
+        //     $id = $key['product']->getId();
             
-            return $id;
-        }
+        //     return $id;
+        // }
 
-        $productStock = $this->productRepository->productStock($id);        
+        // $productStock = $this->productRepository->productStock($id);        
 
         // Annulation de la transaction si un problème survient
         // $manager->getConnection()->rollBack();
 
-        
-
         $manager->persist($order);
+        //$manager->persist($orderDetails);
         $manager->flush();
+
 
         // sleep(8); // pour un effet de chargement
         //return $this->redirectToRoute('app_checkout_order_details'); 
@@ -215,11 +264,15 @@ class CheckoutController extends AbstractController
             return $this->redirectToRoute('app_checkout_connection');
         }
 
+        $codepromo = $session->get( 'codepromo');
+
+        dd($codepromo);
+
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
         $products = $this->productRepository->findAll();
-        $status = $this->statusRepository->findBy(['id' => 1], [], null, null);   
-
+        $status = $this->statusRepository->findBy(['id' => 1], [], null, null); 
+    
         $statusType = $status[0];
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
         $total = $session->get('total'); // on récupère le prix total

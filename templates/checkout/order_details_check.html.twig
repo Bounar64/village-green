@@ -82,16 +82,13 @@
 
                                         {# prix du produit ttc sans réduction #}
                                         <p class="brand">
-                                            <span>Prix avant: </span>
-                                            <span class="price">
-                                                {{ PriceTTC|format_currency('EUR', locale='fr') }}
-                                            </span>
+                                            <span>Prix base: </span>{{ PriceTTC|format_currency('EUR', locale='fr') }}   
                                         </p>     
 
                                         {# réduction #}
                                         {% if  items.product.discount != null %}
                                             <p class="brand">
-                                                <span>Remise de </span>{{ productsDiscount }}% </span>
+                                                <span>Remise de </span>{{ productsDiscount }}%
                                                 <span>soit </span>{{ (PriceTTC * (productsDiscount / 100))|round|format_currency('EUR', locale='fr') }}
                                             </p>
                                         {% endif %}
@@ -99,12 +96,12 @@
                                         {# prix du produit après réduction ttc #}
                                         <p class="brand">
                                             {% if items.product.discount != null %}
-                                            <span>Prix après: </span>
+                                            <span>Prix remisé: </span>
                                             <span class="price">
                                                 {% set DiscountPrice = PriceTTC - (productsDiscount / 100 * PriceTTC) %} {# varible qui stock le prix après réduction #}
                                                 {{ DiscountPrice|format_currency('EUR', locale='fr') }}
                                             {% else %}
-                                                <span>Prix après: </span>
+                                                <span>Prix village green: </span>
                                                 <span class="price">
                                                     {{ PriceTTC|format_currency('EUR', locale='fr') }}
                                                 </span>   

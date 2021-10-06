@@ -1,0 +1,62 @@
+ {% if error %}
+<hr class="between-products">
+{# total #}
+<div class="col-12 d-flex justify-content-center">
+    <div class="col-6">
+        <p>Total : <span class="griso">(taxe incluse)</span></p>  
+    </div>   
+    <div class="col-5 text-end">
+        {% if shipping == 'Premium' %}
+            {% set totalPremium = total + 9.99 %}
+            {% set total = totalPremium %} 
+            <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
+        {% else %}
+            <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
+        {% endif %}                                                                              
+    </div>
+</div> 
+{% elseif errorExp and error == false %}
+<hr class="between-products"> 
+{# total #}
+<div class="col-12 d-flex justify-content-center">
+    <div class="col-6">
+        <p>Total : <span class="griso">(taxe incluse)</span></p>  
+    </div>   
+    <div class="col-5 text-end">
+        {% if shipping == 'Premium' %}
+            {% set totalPremium = total + 9.99 %}
+            {% set total = totalPremium %} 
+            <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
+        {% else %}
+            <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
+        {% endif %}                                                                              
+    </div>
+</div> 
+{% else %}
+<hr class="between-products">
+{# code promotion #}
+<div class="col-12 d-flex justify-content-center">
+    <div class="col-6">
+        <p class="small-text mb-0">Code promo: {{ codePromoName }}</p>  
+    </div>   
+    <div class="col-5 text-end"> 
+        <p class="small-text"> -{{ codePromoValue }} %</p>          
+    </div>
+</div>
+<div class="col-12 d-flex justify-content-center">
+    <div class="col-6">
+        <p>Total : <span class="griso">(taxe incluse)</span></p>  
+    </div>   
+    <div class="col-5 text-end">
+        {% if shipping == 'Premium' %}
+            {% set totalPremium = total + 9.99 %} 
+            {% set totalPremium = totalPremium - ( codePromoValue / 100 * totalPremium) %}
+            {% set total = totalPremium %}
+            <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
+        {% else %}
+             {% set total = total - ( codePromoValue / 100 * total) %}
+            <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
+        {% endif %}                                                                                 
+    </div>
+</div>
+{% endif %}    

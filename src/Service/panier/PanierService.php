@@ -102,7 +102,7 @@ class PanierService extends AbstractController
     }
     
     /**
-     * fonction qui calcul le total (prix) du panier TTC
+     * fonction qui calcul le total (prix) du panier HT
      *
      * @return float
      */
