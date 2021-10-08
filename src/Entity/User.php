@@ -441,24 +441,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-     /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier instead
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
-    }
-
     /**
      * @see UserInterface
      */
@@ -503,6 +485,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->password = $confirm_password;
 
         return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
     }
 
      /**
@@ -589,6 +589,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString() {
         
-        return $this->lastName;
+        return $this->email;
     }
 }

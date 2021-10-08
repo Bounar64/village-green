@@ -42,7 +42,7 @@
                         <p>VOUS ÊTES DÉJÀ CLIENT VILLAGE-GREEN</p>
                             <div class="row d-block">
                             <div class="col">
-                            <form method="post">
+                            <form method="post"  action="/login">
                                 <div class="mb-4">
                                     <label for="email">Adresse e-mail:</label>
                                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp" value="{{ last_username }}" name="_username">
@@ -66,7 +66,7 @@
                                 </div>
                             </form>
                                 <div class="col-4">
-                                   <a href="{{ path('app_home') }}"><button class="btn btn-primary w-100 align-items-center lh-1 button-boutique">RETOUR BOUTIQUE</button></a> 
+                                    <a href="{{ path('app_home') }}"><button class="btn btn-primary w-100 align-items-center lh-1 button-boutique">RETOUR BOUTIQUE</button></a> 
                                 </div>
                             </div>                               
                         </div>

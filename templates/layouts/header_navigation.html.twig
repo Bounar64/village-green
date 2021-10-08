@@ -20,7 +20,11 @@
             <a href="#">Infos</a>
                 <div class="navbar-nav nav-space-cli">
                     <div class="popover-space-cli">
+                    {% if app.user %}
+                        <a href="#">Mon espace</a>
+                    {% else %}
                         <a href="#">Espace client</a>
+                    {% endif %}
                         {% include('/security/login.html.twig') %} {# popover espace client #}                      
                     </div>
                 </div>   

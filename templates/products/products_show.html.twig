@@ -64,7 +64,11 @@
                 <div class="col-11">
                     <div class="grid">
                         {% for products in products %}
-                         {% set productsDiscount = (products.discount + app.user.coeff) %} {# promotion par rapport au type d'utilisateur #}
+                        {% if app.user %}
+                            {% set productsDiscount = (products.discount + app.user.coeff) %} {# promotion par rapport au type d'utilisateur #}
+                        {% else %}
+                            {% set productsDiscount = (products.discount) %} {# promotion par rapport au type d'utilisateur #}
+                        {% endif %}
                             <a href="{{ path('app_products_details', {label: products.subcategory.label, label_products: products.label, ref: products.reference}) }}">
                                 <div class="card">
                                     {% if products.discount is not null %}

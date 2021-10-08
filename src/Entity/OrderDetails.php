@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Order;
+use App\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OrderDetailsRepository;
 

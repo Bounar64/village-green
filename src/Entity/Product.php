@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\Timestampable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Category;
+use App\Entity\Supplier;
+use App\Entity\SubCategory;
+use App\Entity\OrderDetails;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\Timestampable;
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)

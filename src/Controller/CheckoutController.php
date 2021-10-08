@@ -43,7 +43,7 @@ class CheckoutController extends AbstractController
     }
     
     /**
-     * fonction pour choix de la livraison et modification adresse
+     * fonction pour le choix de la livraison et modification de l'adresse
      * 
      * @Route("/checkout_shipping", name="app_checkout_shipping")
      */
@@ -113,24 +113,24 @@ class CheckoutController extends AbstractController
 
         $form = $this->createForm(CodePromoType::class);
         $form->handleRequest($request);
-        $error = false; // error vaut false par défaut
-        $errorExp = false; // errorExp vaut false par défaut
+        $error = 0; // error vaut 0 par défaut
 
         if($form->isSubmitted() && $form->isValid()) {
             
-            $codeUser = strtoupper($form->getData()['codepromo']); // on récupère le code promo de entré par l'utilisateur en majuscule ("strtoupper")
+            $codeUser = strtoupper($form['codepromo']->getData()); // on récupère le code promo de entré par l'utilisateur en majuscule ("strtoupper")
             $codepromo = $this->codepromoRepository->findBy(['codePromo' => $codeUser], [], null, null); // on récupère le code promo de la base s'il correspond au code user
 
             if($codepromo === []) { // si la correspondance n'existe on aura un tableau vide donc une erreur $error = ce code n'existe pas
-                $error = true;
-            } elseif($codepromo[0]->getActived() == false) { // si cela correspond mais que le code est désactivé au aura une erreur $errorExp = ce code a expiré.
-                $errorExp = true;
-            }else{
-                $error = false; // Sinon error vaut false donc message = Code valide
+                $error = 1;
+            }elseif($codepromo[0]->getActived() == false) { // si cela correspond mais que le code est désactivé au aura une erreur $errorExp = ce code a expiré.
+                $error = 3;
+            }
+            else{
+                $error = 2; // Sinon error vaut 2 donc message = Code valide
                 $codepromo = $codepromo[0]; // on récupère le code promo
                 $session->set('codepromo', $codepromo); // on set ce code promo
             }
-        }
+        } 
 
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
         $total = $session->get('total'); // on récupère le prix total
@@ -149,10 +149,17 @@ class CheckoutController extends AbstractController
             return $this->redirectToRoute('app_checkout_validation');
         }
         
-        $codepromo = $session->get('codepromo');
-        $codePromoName = $codepromo->getCodePromo(); 
-        $codePromoValue = intval($codepromo->getCodeValue());
-
+        $codepromo = $session->get('codepromo'); // on récupère le l'entité codePromo utilisé 
+        
+        // au chargement de la page code codePromoName et codePromoValue sont null (pas de get sur null)
+        if($codepromo != null) {
+            $codePromoName = $codepromo->getCodePromo(); 
+            $codePromoValue = intval($codepromo->getCodeValue());
+        }else {
+            $codePromoName = ''; 
+            $codePromoValue = '';
+        }
+        
         return $this->render('checkout/payment.html.twig', [
             'categories' => $categories,
             'subcategory' => $subcategory,
@@ -161,10 +168,9 @@ class CheckoutController extends AbstractController
             'total' => $total,
             'shipping' => $shippingType,
             'formPromo' => $form->createView(),
-            'error' => $error,
-            'errorExp' => $errorExp,
             'codePromoName' => $codePromoName,
             'codePromoValue' => $codePromoValue,
+            'error' => $error
         ]);
     }
 
@@ -193,13 +199,10 @@ class CheckoutController extends AbstractController
         $statusType = $status[0]; // on récupère l'objet de type app\entity\status, par défaut ce sera toujours cette valeur "en cours de traitement" id="1"
         $session->set('orderReference', $reference); // on set la référence de la commande
         
-        // foreach($panierData as $value) {
+        foreach($panierData as $value) {
             
-        //     $productsOrder = $value['product'];
-        //     $quantitiesOrder = $value['quantity'];
-            
-        //     dump($productsOrder);
-        // }
+                  
+        }
         
         // Création de la commande
         $order = new Order();
@@ -211,14 +214,21 @@ class CheckoutController extends AbstractController
         $order->setUser($this->getUser());
         $order->setStatus($statusType);
 
-        // // Création du détail de la commande
-        // $orderDetails = new OrderDetails();
-        // $orderDetails->setOrders($order);
-        // $orderDetails->setProduct($productsOrder);
-        // $orderDetails->setQuantity($quantitiesOrder);
+        foreach($panierData as $value) {
+        // Création du détail de la commande
+        $productsOrder = $value['product'];
+        $quantitiesOrder = $value['quantity'];
+        $orderDetails = new OrderDetails();
+        //$orderDetails->setOrders($order);
+        $orderDetails->setProduct($productsOrder);
+        $orderDetails->setQuantity($quantitiesOrder);
 
-        //$order->addOrderDetail($orderDetails);
+        $order->addOrderDetail($orderDetails);
+        $manager->persist($orderDetails);
+            dump($orderDetails);
+        }
 
+        dd($order);
         // // on récupère les id des produits dans le panier
         // foreach( $panierData as $key) {
 
@@ -233,7 +243,6 @@ class CheckoutController extends AbstractController
         // $manager->getConnection()->rollBack();
 
         $manager->persist($order);
-        //$manager->persist($orderDetails);
         $manager->flush();
 
 
@@ -263,10 +272,6 @@ class CheckoutController extends AbstractController
             
             return $this->redirectToRoute('app_checkout_connection');
         }
-
-        $codepromo = $session->get( 'codepromo');
-
-        dd($codepromo);
 
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');

@@ -57,7 +57,11 @@
                                    <p>
                                     <span class="price">
                                     {% if items.product.discount != null %}
-                                        {% set productDiscount = (items.product.discount + app.user.Coeff) %}
+                                        {% if app.user %}
+                                            {% set productDiscount = (items.product.discount + app.user.coeff) %} {# promotion par rapport au type d'utilisateur #}
+                                        {% else %}
+                                            {% set productDiscount = (items.product.discount) %} {# promotion par rapport au type d'utilisateur #}
+                                        {% endif %}
                                         {% set DiscountPrice = PriceTTC - (productDiscount / 100 * PriceTTC) %} {# varible qui stock le prix après réduction #}
                                         {{ DiscountPrice|format_currency('EUR', locale='fr') }}
                                     {% else %}

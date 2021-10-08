@@ -20,23 +20,24 @@ class SecurityController extends AbstractController
     }
     
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/", name="app_login", methods={"GET", "POST"})
      */
-    public function login() 
+    public function login(AuthenticationUtils $authenticationUtils) 
     {
-        // Si l'on est connecté on ne peux pas accédé à la page login
-        if ($this->getUser()) {
+        // // Si l'on est connecté on ne peux pas accédé à la page login
+        // if ($this->getUser()) {
 
-            $this->addFlash('danger', 'Vous êtes déjà connecté !');
-            
-            return $this->redirectToRoute('app_home');
-        }
-        else {
-            return $this->redirectToRoute('app_home'); // Pour évité d'accéder au script du popover login 
-        }
+        //     $this->addFlash('danger', 'Vous êtes déjà connecté !');  
+        //     return $this->redirectToRoute('app_home');
+        // }
 
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
+
+        // // get the login error if there is one
+        // $error = $authenticationUtils->getLastAuthenticationError();
+        // // last username entered by the user
+        // $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
             'categories' => $categories, 
@@ -54,7 +55,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * fonction pour se connecté ou s'inscrire lorsqu'on click sur commander
+     * fonction pour se connecté ou s'inscrire lorsqu'on click sur commander sans être logé
      *
      * @Route("/checkout_connection", name="app_checkout_connection")
      */
@@ -63,8 +64,7 @@ class SecurityController extends AbstractController
         // Si l'on est connecté on ne peux pas accédé à la page connection
         if ($this->getUser()) {
 
-            $this->addFlash('danger', 'Vous êtes déjà connecté !');
-            
+            $this->addFlash('danger', 'Vous êtes déjà connecté !'); 
             return $this->redirectToRoute('app_home');
         }
 

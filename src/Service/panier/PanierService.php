@@ -88,7 +88,12 @@ class PanierService extends AbstractController
                 $totalItem = $priceTTC * $item['quantity']; // total pour les prix sans réduction TTC
                 $total += $totalItem; 
             } else {
-                $discountType = $item['product']->getDiscount() + $this->getUser()->getCoeff(); // remise en fonction de l'utilisateur 
+                if($this->getUser()) {
+                    $discountType = $item['product']->getDiscount() + $this->getUser()->getCoeff(); // remise en fonction de l'utilisateur 
+                }
+                else {
+                    $discountType = $item['product']->getDiscount(); // remise en fonction de l'utilisateur 
+                }
                 $discountPrice = $priceTTC - ($discountType / 100 * $priceTTC); // Prix avec réduction TTC
                 $totalItem = $discountPrice * $item['quantity'];  // total pour les prix avec réduction TTC
                 $total += $totalItem;
@@ -118,7 +123,12 @@ class PanierService extends AbstractController
                 $totalItem = $item['product']->getPrice() * $item['quantity']; // total pour les prix sans réduction HT
                 $totalHT += $totalItem; 
             } else {
-                $discountType = $item['product']->getDiscount() + $this->getUser()->getCoeff(); // remise en fonction de l'utilisateur 
+                if($this->getUser()) {
+                    $discountType = $item['product']->getDiscount() + $this->getUser()->getCoeff(); // remise en fonction de l'utilisateur 
+                }
+                else {
+                    $discountType = $item['product']->getDiscount(); // remise en fonction de l'utilisateur 
+                }
                 $discountPrice = $item['product']->getPrice() - ($discountType / 100 * $item['product']->getPrice()); // Prix avec réduction HT
                 $totalItem = $discountPrice * $item['quantity'];  // total pour les prix avec réduction HT
                 $totalHT += $totalItem;

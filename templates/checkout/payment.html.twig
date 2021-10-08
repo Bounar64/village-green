@@ -62,12 +62,12 @@
                                         <div class="col-12 mb-3 d-flex justify-content-between">
                                             <div class="col-10">  
                                                 {{ form_row(formPromo.codepromo) }} 
-                                                {% if error %}
+                                                {% if error == 1 %}
                                                     <small class="error">Ce code n'existe pas.</small>
-                                                {% elseif errorExp and error == false %}
-                                                    <small class="error">Ce code a expiré.</small>
-                                                {% else %}
+                                                {% elseif error == 2 %}
                                                     <small class="trueCode">Code valide.</small>
+                                                {% elseif error == 3 %}
+                                                    <small class="error">Ce code a expiré.</small>
                                                 {% endif %}
                                             </div>
                                             <div class="col-2 text-end">
@@ -133,7 +133,7 @@
                                                         <div class="col-5 text-end">
                                                             <button type="submit" id="buttonPayment4" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
                                                                 PAYER
-                                                                {% if error %}
+                                                                {% if error == 1 %}
                                                                     {% if shipping == 'Premium' %}
                                                                         {% set totalPremium = total + 9.99 %}
                                                                         {% set totalPremium = totalPremium / 4 %}
@@ -142,16 +142,7 @@
                                                                         {% set totalPremium = total / 4 %}
                                                                             {{ totalPremium|format_currency('EUR', locale='fr') }} {# récupération total via session controller #}
                                                                     {% endif %}
-                                                                {% elseif errorExp and error == false %}
-                                                                    {% if shipping == 'Premium' %}
-                                                                        {% set totalPremium = total + 9.99 %}
-                                                                        {% set totalPremium = totalPremium / 4 %}
-                                                                            {{ totalPremium|format_currency('EUR', locale='fr') }} 
-                                                                    {% else %}
-                                                                        {% set totalPremium = total / 4 %}
-                                                                            {{ totalPremium|format_currency('EUR', locale='fr') }} {# récupération total via session controller #}
-                                                                    {% endif %}
-                                                                {% else %}
+                                                                {% elseif error == 2 %} 
                                                                     {% if shipping == 'Premium' %}
                                                                         {% set totalPremium = total + 9.99 %}
                                                                         {% set totalPremium  = (totalPremium - ( codePromoValue / 100 * totalPremium)) / 4 %}
@@ -159,8 +150,8 @@
                                                                     {% else %}
                                                                         {% set totalPremium  = (total - ( codePromoValue / 100 * total)) / 4 %}
                                                                             {{ totalPremium|format_currency('EUR', locale='fr') }}
-                                                                    {% endif %}                                                                   
-                                                                {% endif %}          
+                                                                    {% endif %}   
+                                                                {% endif %}
                                                             </button>                                     
                                                         </div>
                                                     </div>

@@ -41,8 +41,11 @@
             {% if products.reference == (app.request.get('ref')) %}
 
             {% set PriceTTC = products.price + ( 20 / 100 * products.price) %} {# prix TTC #}
-            {% set productsDiscount = (products.discount + app.user.coeff) %} {# promotion par rapport au type d'utilisateur #} 
-
+             {% if app.user %}
+                {% set productsDiscount = (products.discount + app.user.coeff) %} {# promotion par rapport au type d'utilisateur #}
+            {% else %}
+                {% set productsDiscount = (products.discount) %} {# promotion par rapport au type d'utilisateur #}
+            {% endif %}
             {# big-card #}
             <div class="row content-big-cards">                 
                 <div class="col-10">

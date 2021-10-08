@@ -6,15 +6,15 @@
         </div>
         <div class="row d-block">
             <div class="col">
-            <form action="{{ path('app_login') }}" method="post">
+            <form method="post">
                 <div class="mb-1">
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Adresse E-mail" name="_username">
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Adresse E-mail" name="email">
                 </div>
                 <div class="mb-3">
-                    <input type="password" class="form-control" id="email" placeholder="Mot de passe" name="_password">
+                    <input type="password" class="form-control" id="email" placeholder="Mot de passe" name="password">
                 </div>
 
-                <input type="hidden" name="_csrf_token"
+                <input type="hidden" name="csrf_token"
                     value="{{ csrf_token('authenticate') }}"
                 >           
 
@@ -25,7 +25,7 @@
             </div>
 
             <div class="col">
-                <button type="submit" class="btn btn-primary w-100 align-items-center lh-1">Se connecter maintenant</button>
+                <button type="submit" class="btn btn-primary w-100 align-items-center lh-1" name="valider">Se connecter maintenant</button>
             </div>   
             </form>
         </div>

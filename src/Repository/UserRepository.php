@@ -23,9 +23,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     
     /**
-     * Permet de mettre à jour  le mot de passe de l'utilisateur si l'algo venait à changer 
+     * Permet de mettre à jour le mot de passe de l'utilisateur si l'algo venait à changer 
      */
-   public function  upgradePassword(UserInterface $user, string $newHashedPassword): void 
+   public function upgradePassword(UserInterface $user, string $newHashedPassword): void 
    {
        if(!$user instanceof User) {
            throw new UnsupportedUserException(sprintf('Instance of "%s" are not supported.', \get_class($user)));
