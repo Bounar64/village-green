@@ -51,6 +51,17 @@
     }
 }
 
+.retour {
+    font-size: 20px;
+    font-weight: 500;
+    color: $bleu;
+    transition: all .3s ease;
+
+        &:hover {
+            font-size: 21px
+        }
+}
+
 
 .contenant-admin {
 

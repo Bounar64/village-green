@@ -3,6 +3,9 @@ security:
         App\Entity\User:
             algorithm: auto # En auto symfony prendra le meilleur algo dispo, mais on peut choisir nous même bcrypt, sodium(argon2, argon2id)...
             cost: 12 # est une valeur entre 4 et 31
+        App\Entity\Employee:
+            algorithm: bcrypt # En auto symfony prendra le meilleur algo dispo, mais on peut choisir nous même bcrypt, sodium(argon2, argon2id)...
+            cost: 12 # est une valeur entre 4 et 31
 
     # https://symfony.com/doc/current/security/experimental_authenticators.html
     enable_authenticator_manager: true # à true pour pouvoir utiliser le nouveau systeme d'authentification
@@ -14,47 +17,36 @@ security:
     providers:
         users_in_memory: { memory: null }
         
+        # all_users:
+        #     chain:
+        #         providers: ['app_user_provider', 'app_employee_provider'] 
+
         app_user_provider:
             entity: # dans l'entity
                 class: App\Entity\User # User
                 property: email # récupère l'e-mail pour faire la vérification 
         
-        # app_employee_provider:
-        #     entity: # dans l'entity
-        #         class: App\Entity\Employee # Employee
-        #         property: email # récupère l'e-mail pour faire la vérification 
+        app_employee_provider:
+            entity: # dans l'entity
+                class: App\Entity\Employee # Employee
+                property: email # récupère l'e-mail pour faire la vérification
+        
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
             
-        main:
-            lazy: true
-            provider: app_user_provider
-            # form_login:
-            #     login_path: app_login
-            #     check_path: app_login
-            custom_authenticators: 
-                - App\Security\LoginFormAuthenticator
-            
-            logout:
-                path: app_logout
-                target: app_home
-                # where to redirect after logout
-                # target: app_any_route
-            
-            remember_me:
-                secret:   '%kernel.secret%'
-                lifetime: 604800 # 1 week in seconds
-                path:     /
-
-        # emp:
+        # main:
         #     lazy: true
-        #     provider: app_employee_provider
-        #     form_login:
-        #         login_path: app_login_admin
-        #         check_path: app_login_admin
+        #     provider: app_user_provider
+        #     # form_login:
+        #     #     login_path: app_login
+        #     #     check_path: app_login
+        #     custom_authenticators: 
+        #         - App\Security\LoginFormAuthenticator
+        #         - App\Security\LoginFormConnectionAuthenticator
+            
         #     logout:
         #         path: app_logout
         #         target: app_home
@@ -62,14 +54,30 @@ security:
         #         # target: app_any_route
             
         #     remember_me:
-        #         secret:   '%kernel.secret%'
+        #         secret: '%kernel.secret%'
         #         lifetime: 604800 # 1 week in seconds
-        #         path:     /
+        #         path: / 
+
+        admin_main:
+            lazy: true
+            provider: app_employee_provider
+            custom_authenticators: 
+                - App\Security\LoginFormAdminAuthenticator
+            logout:
+                path: app_logout_admin
+                target: app_login_admin
+                # where to redirect after logout
+                # target: app_any_route
+            
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
                 
            
             # provider: users_in_memory
 
-            # configure the maximum login attempts (per minute)
+            # # configure the maximum login attempts (per minute)
             # login_throttling:
             #     max_attempts: 3
 
@@ -82,5 +90,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profil, roles: ROLE_USER }

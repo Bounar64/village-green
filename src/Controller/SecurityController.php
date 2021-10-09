@@ -34,14 +34,16 @@ class SecurityController extends AbstractController
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
 
-        // // get the login error if there is one
-        // $error = $authenticationUtils->getLastAuthenticationError();
-        // // last username entered by the user
-        // $lastUsername = $authenticationUtils->getLastUsername();
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
             'categories' => $categories, 
-            'subcategory' => $subcategory
+            'subcategory' => $subcategory,
+            'error' => $error,
+            'last_username' => $lastUsername
         ]);
     }
 
@@ -59,26 +61,12 @@ class SecurityController extends AbstractController
      *
      * @Route("/checkout_connection", name="app_checkout_connection")
      */
-    public function connection(AuthenticationUtils $authenticationUtils)
+    public function connection()
     {
-        // Si l'on est connecté on ne peux pas accédé à la page connection
-        if ($this->getUser()) {
-
-            $this->addFlash('danger', 'Vous êtes déjà connecté !'); 
-            return $this->redirectToRoute('app_home');
-        }
-
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
 
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
         return $this->render('security/connection.html.twig', [
-            'error' => $error,
-            'last_username' => $lastUsername,
             'categories' => $categories, 
             'subcategory' => $subcategory
         ]);

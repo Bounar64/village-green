@@ -2,10 +2,13 @@
 
 namespace App\Security;
 
-use App\Repository\UserRepository;
+use App\Repository\EmployeeRepository;
+use App\Controller\AdminSecurityController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
@@ -19,18 +22,17 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\PasswordUpgradeBadge;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 
 
-class LoginFormAuthenticator extends AbstractAuthenticator
+class LoginFormAdminAuthenticator extends AbstractAuthenticator
 {
-    private $userRepository;
+    private $employeeRepository;
     private $urlGenerator;
     
-    public function __construct(UserRepository $userRepository, UrlGeneratorInterface $urlGenerator)
+    public function __construct(EmployeeRepository $employeeRepository, UrlGeneratorInterface $urlGenerator)
     {
-        $this->userRepository = $userRepository;  
+        $this->employeeRepository = $employeeRepository;  
         $this->urlGenerator = $urlGenerator;  
     }
 
@@ -43,8 +45,7 @@ class LoginFormAuthenticator extends AbstractAuthenticator
      */
     public function supports(Request $request): ?bool
     {
-       return $request->attributes->get('_route') === 'app_home' && $request->isMethod('POST'); // cette fonction supports est appelé sur toute les pages (à chaque requête) elle vérifie que la page actuel vaut la page nommé et que la method et POST et envoie true puis passe à la fonction authenticate si elle retourne false on passera au prochain authentificateur dans security.yaml
-        
+        return $request->attributes->get('_route') === 'app_login_admin' && $request->isMethod('POST'); // cette fonction supports est appelé sur toute les pages (à chaque requête) elle vérifie que la page actuel vaut la page nommé et que la method et POST et envoie true puis passe à la fonction authenticate si elle retourne false on passera au prochain authentificateur dans security.yaml  
     }
 
     /**
@@ -62,14 +63,15 @@ class LoginFormAuthenticator extends AbstractAuthenticator
      */
     public function authenticate(Request $request): PassportInterface
     {
-        // find a user based on an "email" form field
-        $user = $this->userRepository->findOneByEmail($request->get('email')); // ou ->findOneBy(['email' => $request->get('email')])
+        // find a employee based on an "email" form field
+        $employee = $this->employeeRepository->findOneByEmail($request->get('_email')); // ou ->findOneBy(['email' => $request->get('email')])
         
-        $email = $request->request->get('email');
-        $request->getSession()->set('email', $email);
-        $password = $request->request->get('password'); 
+        $request->getSession()->set(AdminSecurityController::LAST_EMAIL, $request->get('_email'));
+
+        $email = $request->request->get('_email');
+        $password = $request->request->get('_password');
         $valider = $request->request->get('valider');
-    
+                
         if(isset($valider) && empty($email) && empty($password)) {
             
             throw new CustomUserMessageAuthenticationException('Pour vous connecter, vous devez entrer votre email et votre mot de passe.');
@@ -82,19 +84,17 @@ class LoginFormAuthenticator extends AbstractAuthenticator
             
             throw new CustomUserMessageAuthenticationException('Pour vous connecter vous devez entrer votre mot de passe.');
         }
-        if (!$user) {
+        if (!$employee) {
             // throw new UserNotFoundException; // exeption de base par defaut
-            throw new CustomUserMessageAuthenticationException('Cette email n\'existe pas !'); // exception personnalisé
+            throw new CustomUserMessageAuthenticationException('Erreur de login ! vous n\'avez droit qu\'à 3 tentatives'); // exception personnalisé
         }
-    
+
+
         return new Passport(
-            new UserBadge($user->getEmail()), 
-            new PasswordCredentials($request->get('password')), [
+            new UserBadge($employee->getEmail()), 
+            new PasswordCredentials($request->get('_password')), [
                 // and CSRF protection using a "csrf_token" field
-                new CsrfTokenBadge('authenticate', $request->get('csrf_token')),
-                new RememberMeBadge,
-                // and add support for upgrading the password hash
-                new PasswordUpgradeBadge($request->get('password'), $this->userRepository)
+                new CsrfTokenBadge('authenticate', $request->get('_csrf_token'))
             ]
         );
     }
@@ -110,10 +110,8 @@ class LoginFormAuthenticator extends AbstractAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        $user = $this->userRepository->findOneByEmail($request->get('email')); // ou ->findOneBy(['email' => $request->get('email')])
-
-        $request->getSession()->getFlashBag()->add('success', 'Bienvenue' . ' ' . $user->getFullName());
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        $request->getSession()->remove(AdminSecurityController::LAST_EMAIL);
+        return new RedirectResponse($this->urlGenerator->generate('app_admin_product_list'));
     }
 
     /**
@@ -130,6 +128,6 @@ class LoginFormAuthenticator extends AbstractAuthenticator
         $exception = $exception->getMessage();
         
         $request->getSession()->getFlashBag()->add('danger', $exception);
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        return new RedirectResponse($this->urlGenerator->generate('app_login_admin'));
     }
 }

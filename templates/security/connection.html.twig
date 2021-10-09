@@ -42,27 +42,27 @@
                         <p>VOUS ÊTES DÉJÀ CLIENT VILLAGE-GREEN</p>
                             <div class="row d-block">
                             <div class="col">
-                            <form method="post"  action="/login">
+                            <form method="post">
                                 <div class="mb-4">
                                     <label for="email">Adresse e-mail:</label>
-                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" value="{{ last_username }}" name="_username">
+                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" value="{{ app.session.get('email') }}">
                                 </div>
                                 <div class="col mb-2">
                                     <label for="password">Mot de passe:</label>
-                                    <input type="password" class="form-control" id="email" name="_password">
+                                    <input type="password" class="form-control" id="password" name="password">
                                 </div>
                                 <div class="col mb-4">
                                     <a href="{{ path('app_forgot_password_request') }}"><p class="text-start text-bottom mb-0">Vous avez oublié votre mot de passe ?</p></a> 
                                 </div>
 
-                                <input type="hidden" name="_csrf_token"
+                                <input type="hidden" name="csrf_token"
                                     value="{{ csrf_token('authenticate') }}"
-                                >                                                                      
+                                >                                                                     
                             </div>
 
                             <div class="row d-flex justify-content-between m-0 p-0">
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-primary w- align-items-center lh-1 button-connection">SE CONNECTER</button>
+                                    <button type="submit" name="valider" class="btn btn-primary w- align-items-center lh-1 button-connection">SE CONNECTER</button>
                                 </div>
                             </form>
                                 <div class="col-4">
@@ -75,7 +75,7 @@
 
                     {# client inscription #}
                     <div class="col-5 mb">
-                        <p class="mb-3">VOUS ÊTES UN NOUVEAU CLIENT</p>
+                        <p class="mb-4">VOUS ÊTES UN NOUVEAU CLIENT</p>
                         <div class="row">
                             <div class="col-6 mb-3">
                                <a href="{{ path('app_register_user') }}"><button class="btn btn-primary w-100 align-items-center lh-1 button-registration">JE CRÉE MON COMPTE PARTICULIER</button></a> 

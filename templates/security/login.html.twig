@@ -8,10 +8,10 @@
             <div class="col">
             <form method="post">
                 <div class="mb-1">
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Adresse E-mail" name="email">
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Adresse E-mail" name="email" value="{{ app.session.get('email') }}">
                 </div>
                 <div class="mb-3">
-                    <input type="password" class="form-control" id="email" placeholder="Mot de passe" name="password">
+                    <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="password">
                 </div>
 
                 <input type="hidden" name="csrf_token"

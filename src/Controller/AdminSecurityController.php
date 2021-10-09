@@ -5,32 +5,24 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminSecurityController extends AbstractController
 {
+    public const LAST_EMAIL = 'login_last_email';
     /**
-     * @Route("/login_admin", name="app_login_admin")
+     * @Route("/login_admin", name="app_login_admin", methods={"GET", "POST"})
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
 
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('security/login_admin.html.twig', [
-            'last_username' => $lastUsername, 
-            'error' => $error
-        ]);
+        return $this->render('security/login_admin.html.twig');
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout_admin", name="app_logout_admin", methods={"GET"})
      */
     public function logout()
     {

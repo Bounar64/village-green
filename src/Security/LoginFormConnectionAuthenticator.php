@@ -4,8 +4,11 @@ namespace App\Security;
 
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
@@ -19,19 +22,22 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\PasswordUpgradeBadge;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 
 
-class LoginFormAuthenticator extends AbstractAuthenticator
+class LoginFormConnectionAuthenticator extends AbstractAuthenticator
 {
     private $userRepository;
     private $urlGenerator;
+    private $translator;
+    private $session;
     
-    public function __construct(UserRepository $userRepository, UrlGeneratorInterface $urlGenerator)
+    public function __construct(UserRepository $userRepository, SessionInterface $session, UrlGeneratorInterface $urlGenerator, TranslatorInterface $translator)
     {
         $this->userRepository = $userRepository;  
         $this->urlGenerator = $urlGenerator;  
+        $this->translator = $translator;  
+        $this->session = $session;  
     }
 
     /**
@@ -43,7 +49,7 @@ class LoginFormAuthenticator extends AbstractAuthenticator
      */
     public function supports(Request $request): ?bool
     {
-       return $request->attributes->get('_route') === 'app_home' && $request->isMethod('POST'); // cette fonction supports est appelé sur toute les pages (à chaque requête) elle vérifie que la page actuel vaut la page nommé et que la method et POST et envoie true puis passe à la fonction authenticate si elle retourne false on passera au prochain authentificateur dans security.yaml
+       return $request->attributes->get('_route') === 'app_checkout_connection' && $request->isMethod('POST'); // cette fonction supports est appelé sur toute les pages (à chaque requête) elle vérifie que la page actuel vaut la page nommé et que la method et POST et envoie true puis passe à la fonction authenticate si elle retourne false on passera au prochain authentificateur dans security.yaml
         
     }
 
@@ -64,12 +70,12 @@ class LoginFormAuthenticator extends AbstractAuthenticator
     {
         // find a user based on an "email" form field
         $user = $this->userRepository->findOneByEmail($request->get('email')); // ou ->findOneBy(['email' => $request->get('email')])
-        
+
         $email = $request->request->get('email');
-        $request->getSession()->set('email', $email);
-        $password = $request->request->get('password'); 
+        $password = $request->request->get('password');
+        $this->session->set('email', $email);
         $valider = $request->request->get('valider');
-    
+                
         if(isset($valider) && empty($email) && empty($password)) {
             
             throw new CustomUserMessageAuthenticationException('Pour vous connecter, vous devez entrer votre email et votre mot de passe.');
@@ -86,13 +92,13 @@ class LoginFormAuthenticator extends AbstractAuthenticator
             // throw new UserNotFoundException; // exeption de base par defaut
             throw new CustomUserMessageAuthenticationException('Cette email n\'existe pas !'); // exception personnalisé
         }
-    
+
+
         return new Passport(
             new UserBadge($user->getEmail()), 
             new PasswordCredentials($request->get('password')), [
                 // and CSRF protection using a "csrf_token" field
                 new CsrfTokenBadge('authenticate', $request->get('csrf_token')),
-                new RememberMeBadge,
                 // and add support for upgrading the password hash
                 new PasswordUpgradeBadge($request->get('password'), $this->userRepository)
             ]
@@ -110,10 +116,7 @@ class LoginFormAuthenticator extends AbstractAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        $user = $this->userRepository->findOneByEmail($request->get('email')); // ou ->findOneBy(['email' => $request->get('email')])
-
-        $request->getSession()->getFlashBag()->add('success', 'Bienvenue' . ' ' . $user->getFullName());
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        return new RedirectResponse($this->urlGenerator->generate('app_checkout_shipping'));
     }
 
     /**
@@ -130,6 +133,6 @@ class LoginFormAuthenticator extends AbstractAuthenticator
         $exception = $exception->getMessage();
         
         $request->getSession()->getFlashBag()->add('danger', $exception);
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        return new RedirectResponse($this->urlGenerator->generate('app_checkout_connection'));
     }
 }

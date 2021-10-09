@@ -66,13 +66,10 @@ class ResetPasswordController extends AbstractController
             );
         }
 
-        $error = '';
-
         return $this->render('reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
             'categories' => $categories,
-            'subcategory' => $subcategory,
-            'error' => $error
+            'subcategory' => $subcategory
         ]);
     }
 
@@ -92,12 +89,10 @@ class ResetPasswordController extends AbstractController
             $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
         }
 
-        $error = '';
         return $this->render('reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
             'categories' => $categories,
-            'subcategory' => $subcategory,
-            'error' => $error
+            'subcategory' => $subcategory
         ]);
     }
 
@@ -159,14 +154,11 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $error = '';
-
         return $this->render('reset_password/reset.html.twig', [
             'resetForm' => $form->createView(),
             'categories' => $categories,
-            'subcategory' => $subcategory,
-            'error' => $error
-        ]);
+            'subcategory' => $subcategory
+                ]);
     }
 
     private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
