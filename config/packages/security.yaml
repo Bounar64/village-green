@@ -37,42 +37,42 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
             
-        # main:
-        #     lazy: true
-        #     provider: app_user_provider
-        #     # form_login:
-        #     #     login_path: app_login
-        #     #     check_path: app_login
-        #     custom_authenticators: 
-        #         - App\Security\LoginFormAuthenticator
-        #         - App\Security\LoginFormConnectionAuthenticator
-            
-        #     logout:
-        #         path: app_logout
-        #         target: app_home
-        #         # where to redirect after logout
-        #         # target: app_any_route
-            
-        #     remember_me:
-        #         secret: '%kernel.secret%'
-        #         lifetime: 604800 # 1 week in seconds
-        #         path: / 
-
-        admin_main:
+        main:
             lazy: true
-            provider: app_employee_provider
+            provider: app_user_provider
+            # form_login:
+            #     login_path: app_login
+            #     check_path: app_login
             custom_authenticators: 
-                - App\Security\LoginFormAdminAuthenticator
+                - App\Security\LoginFormAuthenticator
+                - App\Security\LoginFormConnectionAuthenticator
+            
             logout:
-                path: app_logout_admin
-                target: app_login_admin
+                path: app_logout
+                target: app_home
                 # where to redirect after logout
                 # target: app_any_route
             
             remember_me:
-                secret:   '%kernel.secret%'
+                secret: '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
-                path:     /
+                path: / 
+
+        # admin_main:
+        #     lazy: true
+        #     provider: app_employee_provider
+        #     custom_authenticators: 
+        #         - App\Security\LoginFormAdminAuthenticator
+        #     logout:
+        #         path: app_logout_admin
+        #         target: app_login_admin
+        #         # where to redirect after logout
+        #         # target: app_any_route
+            
+        #     remember_me:
+        #         secret:   '%kernel.secret%'
+        #         lifetime: 604800 # 1 week in seconds
+        #         path:     /
                 
            
             # provider: users_in_memory
@@ -91,4 +91,9 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profil, roles: ROLE_USER }
+        - { path: ^/account, roles: ROLE_USER }
+        - { path: ^/products, roles: PUBLIC_ACCESS }
+
+    role_hierarchy:
+        ROLE_EDITOR: ROLE_USER
+        ROLE_ADMIN: ROLE_EDITOR

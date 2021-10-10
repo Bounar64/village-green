@@ -116,6 +116,20 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
     });
  })
 
+ //_______Afficher au click du boutton client pro ou part la liste des utilisateurs_____//
+ $(function(){
+
+    $('#ButtonPartFiltre').on("click", function(){ 
+        $('#ListUserPart').slideToggle();
+        $('#ListUserPro').hide();
+    });
+
+    $('#ButtonProFiltre').on("click", function(){ 
+        $('#ListUserPro').slideToggle();
+        $('#ListUserPart').hide();
+    });
+ })
+
  //________Ajout du typing placeholder recherche admin_________//
 $(function() {
     
