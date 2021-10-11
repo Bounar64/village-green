@@ -116,19 +116,39 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
     });
  })
 
- //_______Afficher au click du boutton client pro ou part la liste des utilisateurs_____//
+ //_______Afficher au click du boutton les différents tableau asocciés (commande : -en cours de livraison, -particulier, -professionnel, toutes)_____//
  $(function(){
 
     $('#ButtonPartFiltre').on("click", function(){ 
         $('#ListUserPart').slideToggle();
         $('#ListUserPro').hide();
+        $('#ListCommandeEnCoursLivraison').hide();
+        $('#ListCommandeAll').hide();
     });
 
     $('#ButtonProFiltre').on("click", function(){ 
         $('#ListUserPro').slideToggle();
         $('#ListUserPart').hide();
+        $('#ListCommandeEnCoursLivraison').hide();
+        $('#ListCommandeAll').hide();
+    });
+
+    $('#ButtonEnCoursLivraison').on("click", function(){ 
+        $('#ListCommandeEnCoursLivraison').slideToggle();
+        $('#ListUserPro').hide();
+        $('#ListUserPart').hide();
+        $('#ListCommandeAll').hide();
+    });
+ 
+
+    $('#ButtonCommandeAll').on("click", function(){ 
+        $('#ListCommandeAll').slideToggle();
+        $('#ListUserPro').hide();
+        $('#ListUserPart').hide();
+        $('#ListCommandeEnCoursLivraison').hide();
     });
  })
+
 
  //________Ajout du typing placeholder recherche admin_________//
 $(function() {

@@ -83,7 +83,7 @@
                                                    <p>Date de payment :</p>
                                                 </div>
                                                 <div class="col-8">
-                                                    <p class="text-end"><span class="color">{{ order.datePayment|date("d/m/Y à h:m:s") }}</span></p> 
+                                                    <p class="text-end"><span class="color">{{ order.datePayment|date("d/m/Y à H:m:s") }}</span></p> 
                                                 </div>
                                             </div>
                                             {# bloc type de livraison #}
@@ -117,10 +117,10 @@
                                             {% if order.dateSent != null %}
                                             <div class="row d-flex justify-content-between">
                                                 <div class="col-4">
-                                                   <p>Date d'envoie :</p>
+                                                   <p>Date d'envoi :</p>
                                                 </div>
                                                 <div class="col-8">
-                                                    <p class="text-end"><span class="color">{{ order.dateSent|date("d/m/Y à h:m:s") }}</span></p> 
+                                                    <p class="text-end"><span class="color">{{ order.dateSent|date("d/m/Y à H:m:s") }}</span></p> 
                                                 </div>
                                             </div>
                                             {% endif %}

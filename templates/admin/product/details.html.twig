@@ -173,7 +173,7 @@
                                                    <p>Prix HT :</p> 
                                                 </div>
                                                 <div class="col-8">
-                                                    <p class="text-end"><span class="color">{{ product.price }} €</span></p> 
+                                                    <p class="text-end"><span class="color">{{ product.price|format_currency('EUR', locale='fr') }}</span></p> 
                                                 </div>
                                             </div>
                                             {# bloc promotion #}
@@ -243,7 +243,7 @@
                                                    <p>Date de création :</p> 
                                                 </div>
                                                 <div class="col-5">
-                                                    <p class="text-end"><span class="color">{{ product.createdAt|date("m/d/Y à h:m:s")  }}</span></p> 
+                                                    <p class="text-end"><span class="color">{{ product.createdAt|date("m/d/Y à H:m:s")  }}</span></p> 
                                                 </div>
                                             </div>
                                             {# bloc date de modification #}
@@ -252,7 +252,7 @@
                                                    <p>Dernière modification :</p>
                                                 </div>
                                                 <div class="col-5">
-                                                    <p class="text-end"><span class="color">{{ product.updatedAt|date("m/d/Y à h:m:s") }}</span></p> 
+                                                    <p class="text-end"><span class="color">{{ product.updatedAt|date("m/d/Y à H:m:s") }}</span></p> 
                                                 </div>
                                             </div>
                                         </div> 

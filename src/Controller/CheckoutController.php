@@ -199,11 +199,6 @@ class CheckoutController extends AbstractController
         $statusType = $status[0]; // on récupère l'objet de type app\entity\status, par défaut ce sera toujours cette valeur "en cours de traitement" id="1"
         $session->set('orderReference', $reference); // on set la référence de la commande
         
-        foreach($panierData as $value) {
-            
-                  
-        }
-        
         // Création de la commande
         $order = new Order();
         $order->setReference($reference);

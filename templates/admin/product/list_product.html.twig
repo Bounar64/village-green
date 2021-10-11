@@ -52,10 +52,10 @@
                                         <th class="py-3 text-start" scope="col">Marque</th>
                                         <th class="py-3 text-start" scope="col">Label</th>
                                         <th class="py-3 text-start" scope="col">Label court</th>
-                                        <th class="py-3 text-start" scope="col" width="100px">Prix HT</th>
+                                        <th class="py-3 text-start" scope="col">Prix HT</th>
                                         <th class="py-3 text-start" scope="col">Stock</th>
                                         <th class="py-3 text-center" scope="col">Date d'ajout</th>
-                                        <th class="py-3 text-center" scope="col">Date de modification</th>
+                                        <th class="py-3 text-center" scope="col" width="100px">Date de modification</th>
                                         <th class="py-3 text-start" scope="col">Activé</th>
                                         <th class="py-3 text-start" scope="col">Fournisseur</th>
                                         <th class="py-3 text-start" scope="col"></th>
@@ -79,7 +79,7 @@
                                         </td>
                                         
                                         <td class="align-middle text-start">{{ (product.shortLabel) }}</td>
-                                        <td class="align-middle text-start"><span class="important">{{ (product.price) }} €</span></td>
+                                        <td class="align-middle text-start"><span class="important">{{ (product.price|format_currency('EUR', locale='fr') ) }}</span></td>
                                         <td class="align-middle">
                                         {% if product.stock < product.stockAlert %}
                                             <span class="red fw-bold">{{ (product.stock) }}</span>

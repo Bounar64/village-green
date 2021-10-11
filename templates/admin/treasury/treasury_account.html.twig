@@ -28,84 +28,89 @@
                     </div>
 
                     <hr>
-
+                    
+                    <main>
                     <div class="row mt-5">
-                        <div class="col-12 d-flex justify-content-between">
+                        <div class="col-12 d-flex justify-content-evenly">
                             <div class="col-5">
                                 <div class="card">
-                                    <div class="card-header">
-                                        Chiffre d'affaire Particulier
+                                    <div class="card-header text-center">
+                                        Chiffre d'affaire Particulier HT
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body text-center">
                                         {# Chiffre d’affaires = nombre de produits vendus x prix unitaire #}
-                                        {{ turnoverPart|format_currency('EUR', locale='fr') }}
+                                       <span class="color fw-bold">{{ turnoverPartHT|format_currency('EUR', locale='fr') }}</span> 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-5">
                                <div class="card">
-                                <div class="card-header">
-                                    Chiffre d'affaire Professionnel
+                                <div class="card-header text-center">
+                                    Chiffre d'affaire Professionnel HT
                                 </div>    
-                                    <div class="card-body">
+                                    <div class="card-body text-center">
                                         {# Chiffre d’affaires = nombre de produits vendus x prix unitaire #}
-                                        {{ turnoverPro|format_currency('EUR', locale='fr') }}
+                                        <span class="color fw-bold">{{ turnoverProHT|format_currency('EUR', locale='fr') }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-12 d-flex justify-content-between mt-5">
+                        <div class="col-12 d-flex justify-content-evenly mt-5">
                             <div class="col-5">
                                 <div class="card">
-                                    <div class="card-header">
-                                        Chiffre d'affaire Total
+                                    <div class="card-header text-center">
+                                        Chiffre d'affaire Total HT
                                     </div>
-                                    <div class="card-body">
-
-                                        {% set turnoverTotal = turnoverPart + turnoverPro %}
-                                        {{ turnoverTotal|format_currency('EUR', locale='fr') }}
+                                    <div class="card-body text-center">
+                                        {% set turnoverTotalHT = turnoverPartHT + turnoverProHT %}
+                                        <span class="color fw-bold">{{ turnoverTotalHT|format_currency('EUR', locale='fr') }}</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-5">
-                                
+                                <div class="card">
+                                    <div class="card-header text-center">
+                                        Chiffre d'affaire Total TTC
+                                    </div>
+                                    <div class="card-body text-center">
+                                        {% set turnoverTotalTTC = turnoverPartTTC + turnoverProTTC %}
+                                        <span class="color fw-bold">{{ turnoverTotalTTC|format_currency('EUR', locale='fr') }}</span>
+                                    </div>
+                                </div>
                             </div>      
                         </div>
 
-                        <div class="col-12 d-flex justify-content-between mt-5">
+                        <div class="col-12 d-flex justify-content-evenly mt-5">
 
                             <div class="col-5">
                                <div class="card">
-                                <div class="card-header">
+                                <div class="card-header text-center">
                                     {# Bénéfice brut = prix de vente du produit ou service - coût de revient #}
                                     Bénéfice brut 
                                 </div>    
-                                    <div class="card-body">
-                                        {% set profitBrut = (turnoverTotal) - (turnoverTotal - (40 / 100 * turnoverTotal)) %}
-                                        {{ profitBrut|format_currency('EUR', locale='fr') }}
+                                    <div class="card-body text-center">
+                                        {% set profitBrut = (turnoverTotalTTC) - (turnoverTotalHT - (40 / 100 * turnoverTotalHT)) %}
+                                        <span class="color fw-bold">{{ profitBrut|format_currency('EUR', locale='fr') }}</span>
                                     </div>
                                 </div>
                             </div>      
 
                             <div class="col-5">
                                 <div class="card">
-                                    <div class="card-header">
+                                    <div class="card-header text-center">
                                         {# Bénéfice net = bénéfice brut - (charges + amortissement de l’actif + provisions) - impôt #}
                                         Bénéfice net
                                     </div>
-                                    <div class="card-body">
-                                        {% set profitNet = profitBrut - (50000 + 200000 + 100000) - 200000 %}
-                                        {{ profitNet|format_currency('EUR', locale='fr') }}
+                                    <div class="card-body text-center">
+                                        {% set profitNet = profitBrut - (100000 + 90000 + 60000) - 200000 %}
+                                        <span class="color fw-bold">{{ profitNet|format_currency('EUR', locale='fr') }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <main>
-
                     </main>
                 </div>
                 {# -------fermeture droite corps------ #}               

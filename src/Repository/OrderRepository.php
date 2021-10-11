@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Order;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Order|null find($id, $lockMode = null, $lockVersion = null)
@@ -29,13 +29,13 @@ class OrderRepository extends ServiceEntityRepository
         $query = $this
             ->createQueryBuilder('o');
         return $query
-            ->select('sum(o.total)')
+            ->select('sum(o.total * 400)')
             ->join('o.user', 'u')
             ->where('u.type = 1')
             ->getQuery()
             ->getResult();
     }
-    
+
     /**
      * Chiffre d'affaire HT Professionnel
      *
@@ -46,7 +46,42 @@ class OrderRepository extends ServiceEntityRepository
         $query = $this
             ->createQueryBuilder('o');
         return $query
-            ->select('sum(o.total)')
+            ->select('sum(o.total * 200)')
+            ->join('o.user', 'u')
+            ->where('u.type = 0')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Calcul du délai moyen des commandes particulier
+     *
+     * @return void
+     */
+    public function AverageTimePart()
+    {
+        $query = $this
+            ->createQueryBuilder('o');
+        return $query
+            ->select('sum(DATE_DIFF(o.dateSent, o.datePayment)) / count(DATE_DIFF(o.dateSent, o.datePayment))')
+            ->join('o.user', 'u')
+            ->where('u.type = 1')   
+            ->getQuery()
+            ->getResult();
+
+    }
+
+    /**
+     * Calcul du délai moyen des commandes professionnel
+     *
+     * @return void
+     */
+    public function AverageTimePro()
+    {
+        $query = $this
+            ->createQueryBuilder('o');
+        return $query
+            ->select('sum(DATE_DIFF(o.dateSent, o.datePayment)) / count(DATE_DIFF(o.dateSent, o.datePayment))')
             ->join('o.user', 'u')
             ->where('u.type = 0')
             ->getQuery()
