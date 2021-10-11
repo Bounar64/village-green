@@ -1,0 +1,115 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+    <header id="background">
+        <div class="container-fluid container-admin-dashboard">
+            <div class="row">
+                {# -----gauche menu----- #}
+                {% include('admin/layouts/menu_admin.html.twig') %}
+                {# ------fermeture gauche menu----- #}
+
+                {# -----droite corps----- #}
+                <div class="col body" id="body"> 
+                    {# navbar #}
+                    <div class="col mt-3">
+                        {% include('admin/layouts/navbar_admin.html.twig') %}
+                    </div>
+                    {# fermeture navbar #}
+
+                    {# titre du champs + boutton modifier #}
+                    <div class="row mt-5">
+                        <div class="col-10 d-flex">
+                            <div class="col-10">
+                                <h2 class="m-0">Compte</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mt-5">
+                        <div class="col-12 d-flex justify-content-between">
+                            <div class="col-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Chiffre d'affaire Particulier
+                                    </div>
+                                    <div class="card-body">
+                                        {# Chiffre d’affaires = nombre de produits vendus x prix unitaire #}
+                                        {{ turnoverPart|format_currency('EUR', locale='fr') }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                               <div class="card">
+                                <div class="card-header">
+                                    Chiffre d'affaire Professionnel
+                                </div>    
+                                    <div class="card-body">
+                                        {# Chiffre d’affaires = nombre de produits vendus x prix unitaire #}
+                                        {{ turnoverPro|format_currency('EUR', locale='fr') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-between mt-5">
+                            <div class="col-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Chiffre d'affaire Total
+                                    </div>
+                                    <div class="card-body">
+
+                                        {% set turnoverTotal = turnoverPart + turnoverPro %}
+                                        {{ turnoverTotal|format_currency('EUR', locale='fr') }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-5">
+                                
+                            </div>      
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-between mt-5">
+
+                            <div class="col-5">
+                               <div class="card">
+                                <div class="card-header">
+                                    {# Bénéfice brut = prix de vente du produit ou service - coût de revient #}
+                                    Bénéfice brut 
+                                </div>    
+                                    <div class="card-body">
+                                        {% set profitBrut = (turnoverTotal) - (turnoverTotal - (40 / 100 * turnoverTotal)) %}
+                                        {{ profitBrut|format_currency('EUR', locale='fr') }}
+                                    </div>
+                                </div>
+                            </div>      
+
+                            <div class="col-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        {# Bénéfice net = bénéfice brut - (charges + amortissement de l’actif + provisions) - impôt #}
+                                        Bénéfice net
+                                    </div>
+                                    <div class="card-body">
+                                        {% set profitNet = profitBrut - (50000 + 200000 + 100000) - 200000 %}
+                                        {{ profitNet|format_currency('EUR', locale='fr') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <main>
+
+                    </main>
+                </div>
+                {# -------fermeture droite corps------ #}               
+            </div>         
+        </div>
+    </header>
+{% endblock %}

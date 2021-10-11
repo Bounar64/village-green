@@ -160,7 +160,5 @@ class ProductController extends AbstractController
 
         return $this->render('admin/product/details.html.twig', compact('product', 'categories'));
     }
-
-
 }
     

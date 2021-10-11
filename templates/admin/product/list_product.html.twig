@@ -52,11 +52,12 @@
                                         <th class="py-3 text-start" scope="col">Marque</th>
                                         <th class="py-3 text-start" scope="col">Label</th>
                                         <th class="py-3 text-start" scope="col">Label court</th>
-                                        <th class="py-3 text-start" scope="col">Prix HT</th>
+                                        <th class="py-3 text-start" scope="col" width="100px">Prix HT</th>
                                         <th class="py-3 text-start" scope="col">Stock</th>
                                         <th class="py-3 text-center" scope="col">Date d'ajout</th>
                                         <th class="py-3 text-center" scope="col">Date de modification</th>
                                         <th class="py-3 text-start" scope="col">Activé</th>
+                                        <th class="py-3 text-start" scope="col">Fournisseur</th>
                                         <th class="py-3 text-start" scope="col"></th>
                                     </t
                                 </thead>
@@ -102,14 +103,21 @@
                                         </td>
                                         {% endif %}
                                         <td class="align-middle">
+                                            {{ product.supplier.compagny }}
+                                        </td>
+                                        <td class="align-middle">
                                             <div class="col">
-                                                <button type="button" class="btn btn-primary w-100 delete mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ product.id }}">SUPPRIMER</button>
+                                                <button type="button" class="btn btn-primary w-100 delete mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ product.id }}">
+                                                    SUPPRIMER
+                                                </button>
                                                 {# le modal de confirmation de suppression #}
                                                 {% include('admin/product/delete_modal.html.twig') %}
                                             </div>
                                             <div class="col">
                                             <a href="{{ path('app_admin_product_edit', {id: product.id}) }}">
-                                                <button class="btn btn-primary w-100 edit">MODIFIER</button>
+                                                <button class="btn btn-primary w-100 edit">
+                                                    MODIFIER
+                                                </button>
                                             </a>
                                                 
                                             </div>

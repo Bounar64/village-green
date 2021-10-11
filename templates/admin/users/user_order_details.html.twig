@@ -1,0 +1,155 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+    <header id="background">
+        <div class="container-fluid container-admin-dashboard">
+            <div class="row">
+                {# -----gauche menu----- #}
+                {% include('admin/layouts/menu_admin.html.twig') %}
+                {# ------fermeture gauche menu----- #}
+         
+                {# -----droite corps----- #}
+                <div class="col body" id="body">
+                    {# navbar #}
+                    <div class="col mt-3">
+                        {% include('admin/layouts/navbar_admin.html.twig') %}
+                    </div>
+                    
+                    {# fermeture navbar #}
+
+                    <!-- Main -->
+                    {% for user in Listuser %}
+                    {% for order in Order %}
+                    {% if user.id == (app.request.get('id')) and user.id == order.user.id %}
+                    <main role="main" class="col-md-10 main pr-0 ml-sm-auto col-lg-12">
+                        {# titre du champs + boutton modifier #}
+                        <div class="row mt-5">
+                            <div class="col-10 d-flex">
+                                <div class="col-10">
+                                    <h2 class="m-0">Commande <span class="important title-product">{{ order.reference }}</span></h2>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr>
+                            
+                        {# details de la commande #}
+                        <div class="row content-card-details mt-5">                 
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-9 d-flex p-0">
+                                        <div class="col-6 p-2 border-end">
+                                            {# bloc id #}
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-4">
+                                                    <p>ID :</p>
+                                                </div>
+                                                <div class="col-8">
+                                                   <span class="color"><p class="text-end">{{ order.id }}</p></span>  
+                                                </div>
+                                            </div>
+                                            {# bloc client #}
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-4">
+                                                    <p>Référence client :</p>
+                                                </div>
+                                                <div class="col-8">
+                                                   <span class="color"><p class="text-end">{{ user.reference }}</p></span>  
+                                                </div>
+                                            </div>
+                                            {# bloc reference #}
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-5">
+                                                   <p>Référence commande :</p>
+                                                </div>
+                                                <div class="col-7">
+                                                    <p class="text-end"><span class="color">{{ order.reference }}</span></p> 
+                                                </div>
+                                            </div>
+                                            {# bloc type de paiement #}
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-4">
+                                                    <p>Type de payement :</p>
+                                                </div>
+                                                <div class="col-8">
+                                                   <p class="text-end"><span class="color">{{ order.typePayment }}</span></p>
+                                                </div>
+                                            </div>
+                                            {# bloc date de paiement #}
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-4">
+                                                   <p>Date de payment :</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-end"><span class="color">{{ order.datePayment|date("d/m/Y à h:m:s") }}</span></p> 
+                                                </div>
+                                            </div>
+                                            {# bloc type de livraison #}
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-4">
+                                                    <p>Type de livraison :</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-end"><span class="color">{{ order.shipping }}</span></p> 
+                                                </div>
+                                            </div>
+                                            {# bloc total #}
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-4">
+                                                    <p>Total :</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-end"><span class="color">{{ order.total }}€</span></p> 
+                                                </div>
+                                            </div>
+                                            {# bloc status de la commande #}
+                                            <div class="row d-flex justify-content-between mt-5">
+                                                <div class="col-4">
+                                                   <p>Status :</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-end"><span class="color">{{ order.status.type }}</span></p> 
+                                                </div>
+                                            </div>
+                                            {# bloc date d'envoie #}
+                                            {% if order.dateSent != null %}
+                                            <div class="row d-flex justify-content-between">
+                                                <div class="col-4">
+                                                   <p>Date d'envoie :</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-end"><span class="color">{{ order.dateSent|date("d/m/Y à h:m:s") }}</span></p> 
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        </div> 
+                                    </div>
+                                </div>
+
+                                <hr>
+             
+                                {# bloc description produit de la commande #}
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <p>Détails de la commande {{ order.reference }} :</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p><span class="description"></span></p>
+                                    </div>    
+                                </div>
+
+                                                                             
+                            </div>              
+                        </div> {# fermeture details de la commande #}
+                    </main>
+                    {% endif %}
+                    {% endfor %}  
+                    {% endfor %}  
+                </div>
+                {# -------fermeture droite corps------ #}               
+            </div>         
+        </div>
+    </header>
+{% endblock %}

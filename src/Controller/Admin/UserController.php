@@ -6,6 +6,8 @@ use App\Repository\UserRepository;
 use App\Form\SearchFulltextType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\OrderRepository;
+use App\Repository\StatusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +21,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     private $userRepository;
+    private $orderRepository;
+    private $statusRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, OrderRepository $orderRepository, StatusRepository $statusRepository)
     {
         $this->userRepository = $userRepository;
+        $this->orderRepository = $orderRepository;
+        $this->statusRepository = $statusRepository;
     }
     
     /**
@@ -32,6 +38,21 @@ class UserController extends AbstractController
     {
         return $this->render('admin/users/list_user.html.twig', [
             'Listuser' => $this->userRepository->findAll()
+        ]);
+        
+    }
+
+    /**
+     * @Route("/order_details", name="order_details")
+     */
+    public function UserOrderDetails(): Response
+    {
+
+        return $this->render('admin/users/user_order_details.html.twig', [
+            'Listuser' => $this->userRepository->findAll(),
+            'Order' => $this->orderRepository->findAll(),
+            'Status' => $this->statusRepository->findAll()
+            
         ]);
         
     }

@@ -158,10 +158,8 @@ class Order
         return $this;
     }
 
-    /**
-     * @return Collection|Status[]
-     */
-    public function getStatus(): Collection
+   
+    public function getStatus()
     {
         return $this->status;
     }
@@ -241,5 +239,9 @@ class Order
         }
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->status;
     }
 }

@@ -19,32 +19,37 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
-    // /**
-    //  * @return Order[] Returns an array of Order objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Chiffre d'affaire HT Particulier
+     *
+     * @return void
+     */
+    public function TurnoverPart()
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
+        $query = $this
+            ->createQueryBuilder('o');
+        return $query
+            ->select('sum(o.total)')
+            ->join('o.user', 'u')
+            ->where('u.type = 1')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Order
+    
+    /**
+     * Chiffre d'affaire HT Professionnel
+     *
+     * @return void
+     */
+    public function TurnoverPro()
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
+        $query = $this
+            ->createQueryBuilder('o');
+        return $query
+            ->select('sum(o.total)')
+            ->join('o.user', 'u')
+            ->where('u.type = 0')
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }
