@@ -66,7 +66,7 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
     });
  })
 
- //_______Afficher au check le boutton de paiement_____//
+ //_______Afficher au click le boutton de paiement_____//
  $(function(){
 
     $('.checkPayment1').on("click", function() {
@@ -116,7 +116,7 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
     });
  })
 
- //_______Afficher au click du boutton les différents tableau asocciés (commande : -en cours de livraison, -particulier, -professionnel, toutes)_____//
+ //_______Afficher au click du boutton les différents tableau associés (commande : -en cours de livraison, -particulier, -professionnel, toutes)_____//
  $(function(){
 
     $('#ButtonPartFiltre').on("click", function(){ 
@@ -150,7 +150,7 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
  })
 
 
- //________Ajout du typing placeholder recherche admin_________//
+ //________Ajout du typing placeholder recherche produit admin_________//
 $(function() {
     
     // typing animation script
