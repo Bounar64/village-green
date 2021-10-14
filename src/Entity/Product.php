@@ -111,7 +111,7 @@ class Product
     private $brand;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="product")
+     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="product", cascade={"persist"})
      */
     private $orderDetails;
 

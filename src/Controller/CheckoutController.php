@@ -209,21 +209,22 @@ class CheckoutController extends AbstractController
         $order->setUser($this->getUser());
         $order->setStatus($statusType);
 
-        foreach($panierData as $value) {
-        // Création du détail de la commande
-        $productsOrder = $value['product'];
-        $quantitiesOrder = $value['quantity'];
-        $orderDetails = new OrderDetails();
-        //$orderDetails->setOrders($order);
-        $orderDetails->setProduct($productsOrder);
-        $orderDetails->setQuantity($quantitiesOrder);
+        $manager->persist($order);
 
-        $order->addOrderDetail($orderDetails);
-        $manager->persist($orderDetails);
-            dump($orderDetails);
+        foreach($panierData as $value) {
+            // Création du détail de la commande
+            $productsOrder = $value['product'];
+            $quantitiesOrder = $value['quantity'];
+            $orderDetails = new OrderDetails();
+            $orderDetails->setOrders($order);
+            $orderDetails->setProduct($productsOrder);
+            $orderDetails->setQuantity($quantitiesOrder);
+
+            //$order->addOrderDetail($orderDetails);
+            $manager->persist($orderDetails);
         }
 
-        dd($order);
+        //dd($order);
         // // on récupère les id des produits dans le panier
         // foreach( $panierData as $key) {
 
@@ -237,7 +238,6 @@ class CheckoutController extends AbstractController
         // Annulation de la transaction si un problème survient
         // $manager->getConnection()->rollBack();
 
-        $manager->persist($order);
         $manager->flush();
 
 

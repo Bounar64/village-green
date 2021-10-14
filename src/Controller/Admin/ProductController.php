@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Form\SelectFormType;
 use App\Form\SearchFulltextType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
@@ -41,20 +42,29 @@ class ProductController extends AbstractController
         $subcategories =  $this->subcategoryRepository->findAll();
 
         $product = $this->productRepository->findAll();
-        $form = $this->createForm(SearchFulltextType::class); // récupère le form du input search
-        $search =$form->handleRequest($request);
+        $formFullText = $this->createForm(SearchFulltextType::class); // récupère le form du input search
+        $search = $formFullText->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if($formFullText->isSubmitted() && $formFullText->isValid()) {
             // on recherche les produits correspondant au mots clés
             $product = $this->productRepository->searchFulltext($search->get('key')->getData());
+        }
+
+        $formSelect = $this->createForm(SelectFormType::class); // récupère le form du select catégorie et sous-catégorie
+        $formSelect->handleRequest($request);
+
+        if($formSelect->isSubmitted() && $formSelect->isValid()) {
+
+            $product = $this->productRepository->findby(['subCategory' => $formSelect->getData()->getsubCategory()->getId()], [], null, null);   
         }
 
         return $this->render('admin/product/list_product.html.twig', [
             'Listproduct' => $product,
             'categories' => $this->categoryRepository->findAll(),
-            'Fulltextform' => $form->createView(),
+            'Fulltextform' => $formFullText->createView(),
             'categories' => $categories,
             'subCategories' => $subcategories,
+            'formSelect' => $formSelect->createView()
         ]);
     }
 

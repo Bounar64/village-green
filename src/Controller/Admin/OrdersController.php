@@ -19,10 +19,10 @@ class OrdersController extends AbstractController
     {
         $orders = $orderRepository->findBy([], ['datePayment' => 'DESC'], null, null);
 
-        $averageTimePart = $orderRepository->AverageTimePart();
-        $averageTimePro = $orderRepository->AverageTimePro();
+        $averageTimePart = $orderRepository->AverageTimePart(); // récupère fonction délai moyen particulier
+        $averageTimePro = $orderRepository->AverageTimePro(); // récupère fonction délai moyen professionnel
 
-        $averageTimeAll = (($averageTimePart[0][1] + $averageTimePro[0][1]) / 2);
+        $averageTimeAll = (($averageTimePart[0][1] + $averageTimePro[0][1]) / 2); // délai moyen total 
 
         return $this->render('admin/orders/orders_list.html.twig', [
             'Order' => $orders,

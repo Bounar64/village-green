@@ -71,7 +71,7 @@ class Order
     private $status;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="orders")
+     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="orders" , cascade={"persist"}) 
      */
     private $orderDetails;
 

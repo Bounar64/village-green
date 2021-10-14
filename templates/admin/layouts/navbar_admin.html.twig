@@ -26,28 +26,24 @@
         </div>   
     </div>
 
-    {% if app.request.attributes.get('_route') ==  "app_admin_product_list" %}
+    {% if app.request.attributes.get('_route') == "app_admin_product_list" %}
     <div class="row mt-3" style="display: none;" id="CardFilterAdmin">
+        {{ form_start(formSelect) }}
         <div class="col-12 d-flex">   
             <div class="col-3">
                 <label for="select1">Trier par catégorie</label>
-                <select id="select1" class="form-select" aria-label="form-select-lg example">
-                    <option selected>Choississez une catégorie</option>
-                        {% for category in categories %}
-                            <option value="{{ category.id }}">{{ category.label }}</option>
-                        {% endfor %}
-                </select>
+                {{ form_row(formSelect.category, {'id': 'select1'}) }}
             </div>
             <div class="col-3">
-                <label for="select2">Trier par sous-catégories</label>
-                <select id="select2" class="form-select" aria-label="form-select-lg example">
-                    <option selected>Choississez une sous-catégorie</option>
-                        {% for subCategory in subCategories %}
-                            <option value="{{ subCategory.id }}">{{ subCategory.label }}</option>
-                        {% endfor %}
-                </select>
+                <label for="select2">Trier par sous-catégorie</label>
+                {{ form_row(formSelect.subCategory, {'id': 'select2'}) }}
             </div>
         </div>
+
+        <div class="col-2">
+            <button type="submit" class="btn btn-primary w-50" height="20px">Rechercher</button>
+        </div>
+        {{ form_end(formSelect) }}
     </div>
     {% endif %}
 

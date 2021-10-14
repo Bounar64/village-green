@@ -113,9 +113,25 @@ class ProductRepository extends ServiceEntityRepository
             if($key != null) {
                 $query = $query
                     ->where('MATCH_AGAINST(p.label, p.shortLabel, p.brand, p.reference) AGAINST (:key boolean) > 0') // boolean > 0 = l'extension de doctrine existe dans la documentation officiel pour vérifier si on a une réponse à notre requête
-                        ->setParameter('key', '*'.$key.'*'); // ajout des * pour une recherche approximative comme pour %
-                }
+                    ->setParameter('key', '*'.$key.'*'); // ajout des * pour une recherche approximative comme pour %
+            }
 
-                return $query->getQuery()->getResult();
+            return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Affiche les produits en de la catégorie et ou la sous-catégorie sélectionné
+     *
+     * @return void
+     */
+    public function AjaxSelect()
+    {
+        $query = $this
+            ->createQueryBuilder('p');
+            return $query
+                ->join('p.category', 'c')
+                //->where('c.id' == )
+                ->getQuery()
+                ->getResult();
     }
 }
