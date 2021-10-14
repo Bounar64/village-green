@@ -15,6 +15,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\CodePromoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubCategoryRepository;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,9 +31,8 @@ class CheckoutController extends AbstractController
     private $orderRepository;
     private $codepromoRepository;
 
-    public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository,
-                                    ProductRepository $productRepository, StatusRepository $statusRepository, OrderRepository $orderRepository,
-                                    CodePromoRepository $codepromoRepository)
+    public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository,ProductRepository $productRepository, 
+                                StatusRepository $statusRepository, OrderRepository $orderRepository,CodePromoRepository $codepromoRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->subcategoryRepository = $subcategoryRepository;
@@ -140,10 +140,6 @@ class CheckoutController extends AbstractController
         $valider = $request->request->get('buttonPayment'); // équivaut à $_POST["valider"]
         
         if(isset($valider) && !empty($payment)) {
-        
-            // On commence la transaction au moment du paiement 
-            // $manager->beginTransaction();
-            // $manager->getConnection()->setAutoCommit(false); // désactive l'auto-commit par défaut à true
 
             $session->set('paymentType', $payment);
             return $this->redirectToRoute('app_checkout_validation');
@@ -199,6 +195,9 @@ class CheckoutController extends AbstractController
         $statusType = $status[0]; // on récupère l'objet de type app\entity\status, par défaut ce sera toujours cette valeur "en cours de traitement" id="1"
         $session->set('orderReference', $reference); // on set la référence de la commande
         
+        // On commence la transaction au moment du paiement 
+        $manager->beginTransaction();
+
         // Création de la commande
         $order = new Order();
         $order->setReference($reference);
@@ -211,38 +210,31 @@ class CheckoutController extends AbstractController
 
         $manager->persist($order);
 
+        // Création du détail de la commande
         foreach($panierData as $value) {
-            // Création du détail de la commande
-            $productsOrder = $value['product'];
-            $quantitiesOrder = $value['quantity'];
+            $product = $value['product']; // On récupère le produit du panier, mais le supplier via le proxy affiche que l'id (problème de sessions)
+            $ProductOrder = $this->productRepository->find($product->getId());  // on re récupère toute les infos du produit en question
+            $quantitiesOrder = $value['quantity']; // on récupère la quantité
+            
             $orderDetails = new OrderDetails();
             $orderDetails->setOrders($order);
-            $orderDetails->setProduct($productsOrder);
+            $orderDetails->setProduct($ProductOrder);
             $orderDetails->setQuantity($quantitiesOrder);
 
-            //$order->addOrderDetail($orderDetails);
             $manager->persist($orderDetails);
         }
 
-        //dd($order);
-        // // on récupère les id des produits dans le panier
-        // foreach( $panierData as $key) {
-
-        //     $id = $key['product']->getId();
-            
-        //     return $id;
-        // }
-
-        // $productStock = $this->productRepository->productStock($id);        
-
-        // Annulation de la transaction si un problème survient
-        // $manager->getConnection()->rollBack();
-
-        $manager->flush();
-
-
-        // sleep(8); // pour un effet de chargement
-        //return $this->redirectToRoute('app_checkout_order_details'); 
+        try {
+            // faire un commit avant le flush
+            $manager->getConnection()->commit();
+            $manager->flush();
+            $manager->clear();    
+        } catch(Exception $e) {
+            //Annulation de la transaction si un problème survient
+            $manager->getConnection()->rollBack();
+            $manager->close();
+            throw $e;
+        }
 
         header( "Refresh:8; /checkout_orders_details", true, 303); // pour un effet de chargement
 

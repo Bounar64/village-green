@@ -94,13 +94,13 @@ class Product
     private $actived;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=SubCategory::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=SubCategory::class, inversedBy="products", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $subCategory;
@@ -111,7 +111,7 @@ class Product
     private $brand;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="product", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="product")
      */
     private $orderDetails;
 
