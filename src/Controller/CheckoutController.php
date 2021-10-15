@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Order;
@@ -15,7 +16,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\CodePromoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubCategoryRepository;
-use Exception;
+use App\Repository\OrderDetailsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,9 +31,11 @@ class CheckoutController extends AbstractController
     private $statusRepository;
     private $orderRepository;
     private $codepromoRepository;
+    private $orderdetailsRepository;
 
     public function __construct(CategoryRepository $categoryRepository, SubCategoryRepository $subcategoryRepository,ProductRepository $productRepository, 
-                                StatusRepository $statusRepository, OrderRepository $orderRepository,CodePromoRepository $codepromoRepository)
+                                StatusRepository $statusRepository, OrderRepository $orderRepository,CodePromoRepository $codepromoRepository,
+                                OrderDetailsRepository $orderdetailsRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->subcategoryRepository = $subcategoryRepository;
@@ -40,6 +43,8 @@ class CheckoutController extends AbstractController
         $this->statusRepository = $statusRepository;
         $this->orderRepository = $orderRepository;
         $this->codepromoRepository = $codepromoRepository;
+        $this->codepromoRepository = $codepromoRepository;
+        $this->orderdetailsRepository = $orderdetailsRepository;
     }
     
     /**
@@ -145,7 +150,7 @@ class CheckoutController extends AbstractController
             return $this->redirectToRoute('app_checkout_validation');
         }
         
-        $codepromo = $session->get('codepromo'); // on récupère le l'entité codePromo utilisé 
+        $codepromo = $session->get('codepromo'); // on récupère l'entité codePromo utilisé 
         
         // au chargement de la page code codePromoName et codePromoValue sont null (pas de get sur null)
         if($codepromo != null) {
@@ -263,13 +268,19 @@ class CheckoutController extends AbstractController
         $categories = $this->categoryRepository->findBy([], [], 9, null); // findBy($where, $orderBy, $limit, $offset);
         $subcategory = $this->subcategoryRepository->findAll('category');
         $products = $this->productRepository->findAll();
-        $status = $this->statusRepository->findBy(['id' => 1], [], null, null); 
+        $status = $this->statusRepository->findBy(['id' => 1], [], null, null);
+
+        // $lastOrder = $this->orderRepository->findBy(['reference' => $session->get('orderReference')], [], null, null);
+        // $orderdetails = $this->orderdetailsRepository->findBy(['orders' => $lastOrder ], [], null, null); 
+
+        //dd($orderdetails);
     
         $statusType = $status[0];
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
         $total = $session->get('total'); // on récupère le prix total
         $shippingType = $session->get('shippingType'); // on récupère le type de livraison
         $paymentType = $session->get('paymentType'); // on récupère le type de paiement
+        $codepromo = $session->get('codepromo');
 
         return $this->render('checkout/order_details_check.html.twig', [
             'categories' => $categories,
@@ -279,7 +290,8 @@ class CheckoutController extends AbstractController
             'items' => $panierData,
             'total' => $total,
             'shipping' => $shippingType,
-            'payment' => $paymentType
+            'payment' => $paymentType,
+            'codepromo' => $codepromo
         ]);
     }
 

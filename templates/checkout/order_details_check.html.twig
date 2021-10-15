@@ -121,7 +121,7 @@
                                 {# sous-total & total TTC #}
                                 <div class="col-row">
                                     {# sous-total #}
-                                        <div class="col-12 d-flex justify-content-center">
+                                    <div class="col-12 d-flex justify-content-center">
                                         <div class="col-6">
                                             <p class="small-text mb-0">Sous-total:</p>  
                                         </div>   
@@ -130,7 +130,7 @@
                                         </div>
                                     </div> 
                                     {# type de livraison #}
-                                        <div class="col-12 d-flex justify-content-center">
+                                    <div class="col-12 d-flex justify-content-center">
                                         <div class="col-6">
                                             <p class="small-text mb-0">Livraison: <span class="quantity">{{ shipping }}</span></p>  
                                         </div>   
@@ -142,21 +142,64 @@
                                             {% endif %}  
                                         </div>
                                     </div> 
-                                    <hr class="between-products">
-                                    {# total TTC #}
+                                    {# le code promo #}
                                     <div class="col-12 d-flex justify-content-center">
                                         <div class="col-6">
-                                            <p class="mb-0">Total: <span class="griso">(taxe incluse)</span></p>  
+                                            <p class="small-text mb-0">Total: <span class="griso">(taxe incluse)</span></p>  
                                         </div>   
                                         <div class="col-5 text-end">
                                             {% if shipping == 'Premium' %}
                                                 {% set totalPremium = total + 9.99 %} 
-                                                <p class="price mb-0">{{ totalPremium|format_currency('EUR', locale='fr') }}</p>
+                                                <p class="small-text">{{ totalPremium|format_currency('EUR', locale='fr') }}</p>
+                                            {% else %}
+                                                <p class="small-text">{{ total|format_currency('EUR', locale='fr') }}</p>
+                                            {% endif %}                                                                              
+                                        </div>
+                                    </div> 
+                                    <hr class="between-products">
+                                    {# code promo #}
+                                    {% if codepromo %}
+                                     <div class="col-12 d-flex justify-content-center">
+                                        <div class="col-6">
+                                            <p class="small-text mb-0">Code promo: {{ codepromo.codePromo }}</p>  
+                                        </div>   
+                                        <div class="col-5 text-end"> 
+                                            <p class="small-text"> -{{ codepromo.codeValue }} %</p>          
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <div class="col-6">
+                                            <p>Total : <span class="griso">(taxe incluse)</span></p>  
+                                        </div>   
+                                        <div class="col-5 text-end">
+                                            {% if shipping == 'Premium' %}
+                                                {% set totalPremium = total + 9.99 %} 
+                                                {% set totalPremium = totalPremium - ( codepromo.codeValue  / 100 * totalPremium) %}
+                                                {% set total = totalPremium %}
+                                                <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
+                                            {% else %}
+                                                {% set total = total - ( codepromo.codeValue / 100 * total) %}
+                                                <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
+                                            {% endif %}                                                                                 
+                                        </div>
+                                    </div>
+                                    {% else %} 
+                                    {# total #}
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <div class="col-6">
+                                            <p>Total : <span class="griso">(taxe incluse)</span></p>  
+                                        </div>   
+                                        <div class="col-5 text-end">
+                                            {% if shipping == 'Premium' %}
+                                                {% set totalPremium = total + 9.99 %}
+                                                {% set total = totalPremium %} 
+                                                <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
                                             {% else %}
                                                 <p class="price mb-0">{{ total|format_currency('EUR', locale='fr') }}</p>
                                             {% endif %}                                                                              
                                         </div>
                                     </div> 
+                                    {% endif %}
                                 </div>                                        
                                 {# fermeture sous-total & total #}
                             </div>
