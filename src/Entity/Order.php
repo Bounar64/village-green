@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\User;
 use App\Entity\Status;
+use App\Entity\CodePromo;
 use App\Entity\OrderDetails;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OrderRepository;
@@ -71,9 +72,14 @@ class Order
     private $status;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="orders" , cascade={"persist"}) 
+     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="orders", cascade={"persist"}) 
      */
     private $orderDetails;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=CodePromo::class, inversedBy="orders", cascade={"persist"})
+     */
+    private $promo;
 
     public function __construct()
     {
@@ -241,7 +247,20 @@ class Order
         return $this;
     }
 
+    public function getPromo(): ?codePromo
+    {
+        return $this->promo;
+    }
+
+    public function setPromo(?codePromo $promo): self
+    {
+        $this->promo = $promo;
+
+        return $this;
+    }
+    
     public function __toString() {
         return $this->status;
     }
+
 }

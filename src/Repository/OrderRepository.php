@@ -87,4 +87,22 @@ class OrderRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Récupère toute les commandes et détails de commande par utilisateur 
+     *
+     * @return void
+     */
+    public function OrderDetails($user)
+    {
+        $query = $this
+            ->createQueryBuilder('o');
+        return $query
+            ->select()
+            ->join('o.orderDetails', 'od')
+            ->join('o.user', 'u')
+            ->where('u.id =' . $user)
+            ->getQuery()
+            ->getResult();
+    }
 }

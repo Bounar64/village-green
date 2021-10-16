@@ -2,22 +2,28 @@
     {% if shipping == 'Premium' %}
         {% set totalPremium = total + 9.99 %}
         {{ totalPremium|format_currency('EUR', locale='fr') }} 
+        {{ app.session.set('newTotal', totalPremium) }} 
     {% else %}
         {{ app.session.get('total')|format_currency('EUR', locale='fr') }} {# récupération total via session twig #}
+        {{ app.session.set('newTotal', app.session.get('total')) }} 
     {% endif %}
 {% elseif error == 2 %}
     {% if shipping == 'Premium' %}
         {% set totalPremium = total + 9.99 %}
         {% set totalPremium = totalPremium - ( codePromoValue / 100 * totalPremium) %}
-        {{ totalPremium|format_currency('EUR', locale='fr') }} 
+        {{ totalPremium|format_currency('EUR', locale='fr') }}
+        {{ app.session.set('newTotal', totalPremium) }} 
     {% else %}
         {{ total|format_currency('EUR', locale='fr') }} {# récupération total via session twig #}
+        {{ app.session.set('newTotal', app.session.get('total')) }}
     {% endif %}
 {% else %}
     {% if shipping == 'Premium' %}
         {% set totalPremium = total + 9.99 %}
-        {{ totalPremium|format_currency('EUR', locale='fr') }} 
+        {{ totalPremium|format_currency('EUR', locale='fr') }}
+        {{ app.session.set('newTotal', totalPremium) }} 
     {% else %}
         {{ app.session.get('total')|format_currency('EUR', locale='fr') }} {# récupération total via session twig #}
+        {{ app.session.set('newTotal', app.session.get('total')) }}
     {% endif %}                                                                   
 {% endif %}          

@@ -118,20 +118,4 @@ class ProductRepository extends ServiceEntityRepository
 
             return $query->getQuery()->getResult();
     }
-
-    /**
-     * Affiche les produits en de la catégorie et ou la sous-catégorie sélectionné
-     *
-     * @return void
-     */
-    public function AjaxSelect()
-    {
-        $query = $this
-            ->createQueryBuilder('p');
-            return $query
-                ->join('p.category', 'c')
-                //->where('c.id' == )
-                ->getQuery()
-                ->getResult();
-    }
 }

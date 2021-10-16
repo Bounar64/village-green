@@ -1,0 +1,100 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Village green' %}
+
+{% block body %}
+<header id="background">
+    <div class="container account-orders"> 
+        {# header navigation #} 
+        {{ include('/layouts/header_navigation.html.twig') }} 
+
+        <div class="contenant-orders">
+            <div class="text-center mx-auto">
+               <h1 class="text-center mt-5">Mes commandes</h1> 
+            </div>
+            
+            <hr>
+
+            {# boutton fitre commande #}
+            <div class="row d-flex justify-content-between mt-5">
+                <div class="col-5 text-center">
+                    <button class="btn btn-primary w-50">Commande en cours</button> 
+                </div>
+                <div class="col-5 text-center">
+                    <button class="btn btn-primary w-50">Commande annulée</button>
+                </div>
+            </div>
+
+            {% for order in order %}
+            <div class="row d-flex justify-content-between mt-5">
+                <div class="col-5">
+                    <p class="text-uppercase date">{{ order.datePayment|format_date('long', locale='fr') }}</p>
+                </div>
+            </div>
+
+            {% for orderdetails in orderdetails %}
+            {% if orderdetails.orders.id == order.id %}
+            <div class="row d-flex justify-content-around">
+                {# card mes commandes en cours #}
+                <div class="col-12 d-flex">
+                    <div class="col card">
+                        <div class="card-body">
+                            <div class="row"> 
+                                <div class="col-6">
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p class="date-medium">{{ order.datePayment|format_date('medium', locale='fr') }}</p>                                                                                                                                                                                
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-between">
+                                <p class="price">{{ orderdetails.orders.total|format_currency('EUR', locale='fr') }}</p>
+                                <p class="status">Statut : {{ orderdetails.orders.status.type }}</p>                                                               
+                                <p class="grey">TOTAL : {{ orderdetails.quantity }} ARTICLE{% if orderdetails.quantity > 1 %}S{% endif %}</p> {# petite condition pour le plusieur/singulier #}
+                                <p class="grey">N° {{ orderdetails.orders.reference }}</p> 
+                            </div>
+                            <div class="row"> 
+                                <div class="col-6">
+                                </div>
+                                <div class="col-6 text-end">
+                                    <a href="#" class="IconDetailOrder">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                                        </svg>
+                                    </a>                                                               
+                                </div>
+                            </div>
+                            <div class="row mt-3 ContentDetailOrder" style="display: none;">
+                                <hr>
+                                <div class="col-7 d-flex">
+                                    <img src="{{ asset('build/images/' ~ orderdetails.product.image) }}" alt="{{ asset(orderdetails.product.image) }}">
+                                   <div class="desc-prod">
+                                        <p>{{ orderdetails.product.brand }}</p>
+                                        <p>{{ orderdetails.product.label }}</p>    
+                                        <p>Couleur : {{ orderdetails.product.color }}</p> 
+                                        <p>Quantité : {{ orderdetails.quantity }}</p> 
+                                    </div> 
+                                </div>
+                                <div class="col-5">
+                                {% set PriceUnitTTC = orderdetails.product.price + (20 / 100 * orderdetails.product.price) %}
+                                    <p>SOUS-TOTAL : {{ (PriceUnitTTC * orderdetails.quantity)|format_currency('EUR', locale='fr') }}</p>                                                         
+                                    <p>LIVRAIONS : {{ orderdetails.orders.shipping }}</p>
+                                {% if orderdetails.orders.promo != null %}                                                         
+                                    <p>CODE-PROMO : {{ orderdetails.orders.promo }} {{ orderdetails.orders.promo.codeValue }}%</p>
+                                {% endif %}                                                         
+                                    <p>TOTAL <span>(TVA incluse)</span> : {{ orderdetails.orders.total|format_currency('EUR', locale='fr') }}</p>                                                         
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>{# fermeture contenant-page #}
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </div>        
+        {# footer #} 
+        {{ include('/layouts/footer.html.twig') }}
+    </div> {# fermeture du container products #}   
+</header>
+{% endblock %}
+

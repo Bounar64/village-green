@@ -162,7 +162,7 @@
                                                             <p class="small-text mb-0">Crédit</p>  
                                                         </div>   
                                                         <div class="col-5 text-end">
-                                                            <button type="submit" id="buttonPayment5" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;">
+                                                            <button type="submit" id="buttonPayment5" name="buttonPayment" class="btn btn-success btn-price-total" style="display: none;" value="{{ app.session.get('newTotal') }}">
                                                                 CRÉDIT
                                                                 {% include('checkout/partial/total_price_payment.html.twig') %}
                                                             </button>                                     

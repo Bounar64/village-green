@@ -124,11 +124,15 @@ class CheckoutController extends AbstractController
             
             $codeUser = strtoupper($form['codepromo']->getData()); // on récupère le code promo de entré par l'utilisateur en majuscule ("strtoupper")
             $codepromo = $this->codepromoRepository->findBy(['codePromo' => $codeUser], [], null, null); // on récupère le code promo de la base s'il correspond au code user
-
+            
             if($codepromo === []) { // si la correspondance n'existe on aura un tableau vide donc une erreur $error = ce code n'existe pas
                 $error = 1;
+                $codepromo = null; // le codepromo faudra donc null 
+                $session->set('codepromo', $codepromo); // on set cet valeur null
             }elseif($codepromo[0]->getActived() == false) { // si cela correspond mais que le code est désactivé au aura une erreur $errorExp = ce code a expiré.
                 $error = 3;
+                $codepromo = null;
+                $session->set('codepromo', $codepromo);
             }
             else{
                 $error = 2; // Sinon error vaut 2 donc message = Code valide
@@ -144,14 +148,16 @@ class CheckoutController extends AbstractController
         $payment = $request->request->get('checkPayment'); // équivaut à $_POST["checkPayment"]
         $valider = $request->request->get('buttonPayment'); // équivaut à $_POST["valider"]
         
+
         if(isset($valider) && !empty($payment)) {
 
+
             $session->set('paymentType', $payment);
+            $session->set('newTotal', $valider);
             return $this->redirectToRoute('app_checkout_validation');
         }
         
-        $codepromo = $session->get('codepromo'); // on récupère l'entité codePromo utilisé 
-        
+        $codepromo = $session->get('codepromo'); // on récupère l'entité codePromo utilisé
         // au chargement de la page code codePromoName et codePromoValue sont null (pas de get sur null)
         if($codepromo != null) {
             $codePromoName = $codepromo->getCodePromo(); 
@@ -193,26 +199,30 @@ class CheckoutController extends AbstractController
 
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
         $total = $session->get('total'); // on récupère le prix total TTC
+        $newTotal = $session->get('newTotal'); // on récupère le prix total TTC
         $shippingType = $session->get('shippingType'); // on récupère le type de livraison
         $paymentType = $session->get('paymentType'); // on récupère le type de paiement 
         
         $reference = ('#' . rand(1000, 9999)); // création d'un numéro de commande (référence) 
         $statusType = $status[0]; // on récupère l'objet de type app\entity\status, par défaut ce sera toujours cette valeur "en cours de traitement" id="1"
         $session->set('orderReference', $reference); // on set la référence de la commande
+        $codepromo = $session->get('codepromo');
+        
         
         // On commence la transaction au moment du paiement 
         $manager->beginTransaction();
-
+                
         // Création de la commande
         $order = new Order();
         $order->setReference($reference);
         $order->setTypePayment($paymentType);
         $order->setShipping($shippingType);
-        $order->setTotal($total);
+        $order->setTotal($newTotal);
         $order->setDatePayment(new \DateTimeImmutable);
         $order->setUser($this->getUser());
         $order->setStatus($statusType);
-
+        $order->setPromo($codepromo);
+        
         $manager->persist($order);
 
         // Création du détail de la commande
@@ -226,14 +236,16 @@ class CheckoutController extends AbstractController
             $orderDetails->setProduct($ProductOrder);
             $orderDetails->setQuantity($quantitiesOrder);
 
-            $manager->persist($orderDetails);
+            //$order->addOrderDetail($orderDetails);
         }
+
+        $manager->persist($orderDetails);
 
         try {
             // faire un commit avant le flush
             $manager->getConnection()->commit();
             $manager->flush();
-            $manager->clear();    
+            $manager->clear();
         } catch(Exception $e) {
             //Annulation de la transaction si un problème survient
             $manager->getConnection()->rollBack();
@@ -272,15 +284,13 @@ class CheckoutController extends AbstractController
 
         // $lastOrder = $this->orderRepository->findBy(['reference' => $session->get('orderReference')], [], null, null);
         // $orderdetails = $this->orderdetailsRepository->findBy(['orders' => $lastOrder ], [], null, null); 
-
-        //dd($orderdetails);
     
         $statusType = $status[0];
         $panierData =  $session->get('panierData'); // on récupère le panier complet avec les produits commandés
         $total = $session->get('total'); // on récupère le prix total
         $shippingType = $session->get('shippingType'); // on récupère le type de livraison
         $paymentType = $session->get('paymentType'); // on récupère le type de paiement
-        $codepromo = $session->get('codepromo');
+        $codepromo = $session->get('codepromo'); 
 
         return $this->render('checkout/order_details_check.html.twig', [
             'categories' => $categories,

@@ -19,7 +19,7 @@
     }
 
     hr {
-        width: 90%;
+        width: 95%;
         margin: auto;
         color: $orange;
     }
@@ -103,7 +103,7 @@
 
 //***********************************************************************//
 //************************* EDITION DU PROFIL ***************************//
-//********************************* & ************************************//
+//********************************* & ***********************************//
 //********************** EDITION DU MOT DE PASSE ************************//
 //***********************************************************************//
 
@@ -139,3 +139,76 @@
     }
 }
 
+
+//***********************************************************************//
+//************************* PAGE MES COMMANDES **************************//
+//***********************************************************************//
+.contenant-orders {
+    
+    h1 {
+        font-size: 45px;
+        font-weight: 500;
+        color: $bleu;
+    }
+
+    hr {
+        color: $orange;
+    }
+
+    p {
+        margin: 0px 0 5px 10px;
+        font-size: 15px;
+        font-weight: 500;
+
+        &.date {
+            margin-left: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        &.date-medium {
+            font-weight: 600;
+            color: $blue-500;
+        }
+
+        &.price {
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        &.grey {
+            color: $gris-muted;
+        }
+    }
+
+    img {
+        width: auto;
+        height: 150px;
+    }
+
+    .card {
+
+        svg {
+            color: $orange-pur;
+
+            &.bi-arrow-down-circle {
+                transition: all .3s linear;
+            
+                &:hover {
+                    transform: scale(110%);
+                }
+            }
+            
+        }
+    }
+
+    button {
+        @include buttonColor;
+        font-weight: 500;  
+        height: 40px;
+
+            &:focus {
+                box-shadow: none;
+            }
+    }      
+}

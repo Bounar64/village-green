@@ -150,6 +150,14 @@ $(function(){ // ancienne écriture à $(document).ready(function(){
     });
  })
 
+ //_______Afficher au click du boutton les différents tableau associés (commande : -en cours de livraison, -particulier, -professionnel, toutes)_____//
+ $(function(){
+
+    $('.IconDetailOrder').on("click", function(){ 
+        $('.ContentDetailOrder').slideToggle();
+    });
+ })
+
  //_______Afficher au click du boutton filtre la card des filtres dans Admin_____//
  $(function(){
 
@@ -238,34 +246,34 @@ if(slider) {
 };
 
 
-//_______Afficher la sous-catégorie si catégorie sélectionnée dans Admin_____// 
-window.onload = () => {
+// //_______Afficher la sous-catégorie si catégorie sélectionnée dans Admin_____// 
+// window.onload = () => {
 
-    // on récupère la categorie
-    let cat = document.querySelector('#select1');
+//     // on récupère la categorie
+//     let cat = document.querySelector('#select1');
     
-    cat.addEventListener('change', function() {
-        let form = this.closest('form'); // récupère le formulaire complet, (closest récupère la balise 'form' la plus proche de mon élément donc son parent)
-        let data = this.name + '=' + this.value;
+//     cat.addEventListener('change', function() {
+//         let form = this.closest('form'); // récupère le formulaire complet, (closest récupère la balise 'form' la plus proche de mon élément donc son parent)
+//         let data = this.name + '=' + this.value;
 
-        // ajax
-        fetch(form.action, { // j'envoi à mon action de mon formulaire 
-            method: form.getAttribute('method'), // je récupère ma methode
-            body: data, // on envoi data en donnée
-            headers: { 
-                'Content-Type': 'application/x-www-form-urlencoded; charset:utf-8' // envoi nos données sous forme de query string clé -> valeur
-            }
-        })
-        .then(response => response.text()) // je traite ma response 
-        .then(html => {  // on traite le contenu de ma reponse html
-           let content = document.createElement('html'); // je crée un élément html
-           content.innerHTML = html; // je met en innerHTML ce que j'ai reçu (pour pouvoir faire un querySelector dessus)
-           let newSelect = content.querySelector('#select2'); // je créer un nouveau select2 (vide) et l'implemente avec les nouvelles données
-           document.querySelector('#select2').replaceWith(newSelect); // on remplace le select2 par le nouveau select2
-        })
-        .catch(error => {
-            console.log(error);
-        })
-    });
- }
+//         // ajax
+//         fetch(form.action, { // j'envoi à mon action de mon formulaire 
+//             method: form.getAttribute('method'), // je récupère ma methode
+//             body: data, // on envoi data en donnée
+//             headers: { 
+//                 'Content-Type': 'application/x-www-form-urlencoded; charset:utf-8' // envoi nos données sous forme de query string clé -> valeur
+//             }
+//         })
+//         .then(response => response.text()) // je traite ma response 
+//         .then(html => {  // on traite le contenu de ma reponse html
+//            let content = document.createElement('html'); // je crée un élément html
+//            content.innerHTML = html; // je met en innerHTML ce que j'ai reçu (pour pouvoir faire un querySelector dessus)
+//            let newSelect = content.querySelector('#select2'); // je créer un nouveau select2 (vide) et l'implemente avec les nouvelles données
+//            document.querySelector('#select2').replaceWith(newSelect); // on remplace le select2 par le nouveau select2
+//         })
+//         .catch(error => {
+//             console.log(error);
+//         })
+//     });
+//  }
 
