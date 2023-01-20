@@ -1,9 +1,8 @@
 # village-green 
 
-![choix des produits](https://user-images.githubusercontent.com/79086040/213589530-e5ea48ce-b766-4c24-90ff-f0bba449c399.png)
-
-
 Village Green est une entreprise qui distribue des équipements musicaux à titre de grossiste.
+
+![choix des produits](https://user-images.githubusercontent.com/79086040/213589530-e5ea48ce-b766-4c24-90ff-f0bba449c399.png)
 
 Cette entreprise souhaite étendre ses activités aux particuliers.
 Via un site de vente en ligne permettant aux clients de consulter
