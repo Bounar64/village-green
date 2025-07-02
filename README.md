@@ -10,7 +10,7 @@ l’ensemble du catalogue est de passer des commandes en ligne.
 
 Voici les principaux éléments attendus par Village Green.
 
-- Permettre aux clients de s'inscrire et de commander des produits.
+- Permettre aux clients (client-pro) de s'inscrire et de commander des produits.
 - Générer des factures au format PDF suite au payement.
 - Un catalogue des produits détaillés, classés par catégories et sous-catégories.
 - Qu'il puisse y avoir des réductions pour fidéliser le client.
@@ -47,7 +47,7 @@ Tables des matières
 - Update.....................................................................................32
 - Delete.....................................................................................33
 - Commande................................................................................34-35
-- Recherche full-tex......................................................................36-37
+- Recherche full-text.....................................................................36-37
 - Recherche par catégorie et sous-catégorie...............................................38-41
 
 - Mon compte
